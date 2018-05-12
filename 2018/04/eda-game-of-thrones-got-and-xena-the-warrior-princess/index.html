@@ -1,0 +1,926 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.40.3 with theme Tranquilpeak 0.4.3-BETA">
+    <title>EDA Game of Thrones (GOT) and Xena the Warrior Princess</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="Análise exploratória de dados do IMDB sobre as séries Game of Thrones e Xena The Warrior Princess.
+ Conjunto de dados utilizado Os dados originais e as variáveis vêm deste repositorio . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.
+ Conjunto de dados de análise Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:
+ Game of Thrones Xena The Warrior Princess   Panorama dos dados episodes = read_csv(here(&quot;/data/series_from_imdb.">
+    <meta property="og:description" content="Análise exploratória de dados do IMDB sobre as séries Game of Thrones e Xena The Warrior Princess.
+ Conjunto de dados utilizado Os dados originais e as variáveis vêm deste repositorio . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.
+ Conjunto de dados de análise Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:
+ Game of Thrones Xena The Warrior Princess   Panorama dos dados episodes = read_csv(here(&quot;/data/series_from_imdb.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="EDA Game of Thrones (GOT) and Xena the Warrior Princess">
+    <meta property="og:url" content="/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+    <meta property="og:site_name" content="Me, Coffe and Data: a Love Triangle">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me, Coffe and Data: a Love Triangle">
+    <meta name="twitter:description" content="Análise exploratória de dados do IMDB sobre as séries Game of Thrones e Xena The Warrior Princess.
+ Conjunto de dados utilizado Os dados originais e as variáveis vêm deste repositorio . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.
+ Conjunto de dados de análise Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:
+ Game of Thrones Xena The Warrior Princess   Panorama dos dados episodes = read_csv(here(&quot;/data/series_from_imdb.">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me, Coffe and Data: a Love Triangle</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      EDA Game of Thrones (GOT) and Xena the Warrior Princess
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-26T00:00:00Z">
+        
+  April 26, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Análise exploratória de dados do <a href="https://www.imdb.com/">IMDB</a> sobre as séries Game of Thrones e Xena The Warrior Princess.</p>
+<!--more-->
+<h1 id="table-of-contents">Table of Contents</h1>
+<hr />
+<div id="conjunto-de-dados-utilizado" class="section level2">
+<h2>Conjunto de dados utilizado</h2>
+<p>Os dados originais e as variáveis vêm <a href="https://github.com/nazareno/imdb-series">deste repositorio</a> . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.</p>
+</div>
+<div id="conjunto-de-dados-de-analise" class="section level2">
+<h2>Conjunto de dados de análise</h2>
+<p>Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:</p>
+<ul>
+<li>Game of Thrones</li>
+<li>Xena The Warrior Princess</li>
+</ul>
+<hr />
+</div>
+<div id="panorama-dos-dados" class="section level2">
+<h2>Panorama dos dados</h2>
+<pre class="r"><code>episodes = read_csv(here(&quot;/data/series_from_imdb.csv&quot;), 
+                    progress = FALSE,
+                    col_types = cols(.default = col_double(), 
+                                     series_name = col_character(), 
+                                     episode = col_character(), 
+                                     url = col_character(),
+                                     season = col_character())) %&gt;% 
+           filter(series_name %in% c(&quot;Game of Thrones&quot;,&quot;Xena a Princesa Guerreira&quot;)) 
+
+episodes %&gt;%
+           glimpse()</code></pre>
+<pre><code>## Observations: 194
+## Variables: 18
+## $ series_name &lt;chr&gt; &quot;Xena a Princesa Guerreira&quot;, &quot;Xena a Princesa Guer...
+## $ episode     &lt;chr&gt; &quot;Sins of the Past&quot;, &quot;Chariots of War&quot;, &quot;Dreamworke...
+## $ series_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,...
+## $ season      &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, ...
+## $ season_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,...
+## $ url         &lt;chr&gt; &quot;http://www.imdb.com/title/tt0394990/&quot;, &quot;http://ww...
+## $ user_rating &lt;dbl&gt; 7.9, 7.4, 7.7, 7.4, 7.5, 7.7, 7.5, 8.0, 7.8, 7.6, ...
+## $ user_votes  &lt;dbl&gt; 440, 339, 318, 297, 288, 282, 270, 303, 278, 287, ...
+## $ r1          &lt;dbl&gt; 0.003623188, 0.025641026, 0.064516129, 0.023474178...
+## $ r2          &lt;dbl&gt; 0.04347826, 0.03846154, 0.03548387, 0.02347418, 0....
+## $ r3          &lt;dbl&gt; 0.010869565, 0.038461538, 0.029032258, 0.004694836...
+## $ r4          &lt;dbl&gt; 0.007246377, 0.034188034, 0.022580645, 0.023474178...
+## $ r5          &lt;dbl&gt; 0.018115942, 0.042735043, 0.019354839, 0.046948357...
+## $ r6          &lt;dbl&gt; 0.02536232, 0.12393162, 0.03870968, 0.06103286, 0....
+## $ r7          &lt;dbl&gt; 0.08695652, 0.16239316, 0.05161290, 0.11267606, 0....
+## $ r8          &lt;dbl&gt; 0.1086957, 0.1666667, 0.1354839, 0.2112676, 0.1804...
+## $ r9          &lt;dbl&gt; 0.15579710, 0.09829060, 0.17096774, 0.18309859, 0....
+## $ r10         &lt;dbl&gt; 0.5398551, 0.2692308, 0.4322581, 0.3098592, 0.3383...</code></pre>
+<div id="em-geral-quantos-votos-um-episodio-tem-em-uma-temporada-da-serie" class="section level3">
+<h3>Em geral quantos votos um episódio tem em uma temporada da série?</h3>
+<pre class="r"><code>episodes %&gt;% 
+    filter(series_name %in% c(&quot;Xena a Princesa Guerreira&quot;)) %&gt;%
+    ggplot(aes(x = season_ep, y = user_votes))  + 
+    geom_line() +
+    facet_wrap(~ season) +
+    ggtitle(&quot;Distribuição de votação por episódios a cada temporada (Xena)&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>A série Xena teve em geral centenas de votos para os episódios da série ao longo de suas seis temporadas.</p>
+<pre class="r"><code>episodes %&gt;% 
+    filter(series_name %in% c(&quot;Game of Thrones&quot;)) %&gt;%
+    filter(season != 6) %&gt;%
+    ggplot(aes(x = season_ep, y = user_votes))  + 
+    geom_line() +
+    facet_wrap(~ season) + 
+    ggtitle(&quot;Distribuição de votação por episódios a cada temporada (GOT)&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>A série GOT teve dezenas de milhares de votos para seus episódios ao longo de suas cinco primeiras temporadas.<br />
+Além disso, tem alguns poucos episódios com muito mais avaliações do que outros.</p>
+<pre class="r"><code>episodes %&gt;% 
+    filter(series_name %in% c(&quot;Game of Thrones&quot;)) %&gt;%
+    filter(season == 6) %&gt;%
+    ggplot(aes(x = season_ep, y = user_votes))  + 
+    geom_line() +
+    facet_wrap(~ season) + 
+    ggtitle(&quot;Distribuição de votação por episódios a cada temporada (GOT)&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Na sua sexta temporada GOT teve um aumento considerável de votos, chegando à escala de centena de milhares de votos.</p>
+</div>
+<div id="quantos-episodios-cada-serie-tem-por-temporada" class="section level3">
+<h3>Quantos episódios cada série tem por temporada?</h3>
+<pre class="r"><code>episodes %&gt;% 
+    ggplot(aes(season, fill=series_name))  + 
+    geom_bar(position=&quot;dodge&quot;) +
+    ggtitle(&quot;Número de episódios por temporada&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>A série Xena tem entre 20 e 25 episódios por temporada enquanto GOT mantém o número de 10 episódios por temporada.</p>
+<hr />
+</div>
+</div>
+<div id="qual-das-series-e-mais-bem-avaliada-no-imdb" class="section level2">
+<h2>Qual das séries é mais bem avaliada no IMDB?</h2>
+<pre class="r"><code>sumario_simples &lt;- episodes %&gt;%
+    select(user_rating, series_name) %&gt;%
+    group_by(series_name) %&gt;%
+    summarise(
+        mean = mean(user_rating),
+        max = max(user_rating),
+        min = min(user_rating),
+        q1 = quantile(user_rating, 0.25),
+        q2 = quantile(user_rating, 0.50),
+        q3 = quantile(user_rating, 0.75)
+    ) 
+
+sumario_simples</code></pre>
+<pre><code>## # A tibble: 2 x 7
+##   series_name                mean   max   min    q1    q2    q3
+##   &lt;chr&gt;                     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Game of Thrones            9.05   9.9   8     8.8  8.95  9.43
+## 2 Xena a Princesa Guerreira  7.72   8.8   5.9   7.4  7.8   8.1</code></pre>
+<pre class="r"><code>episodes %&gt;% 
+    ggplot(aes(x = series_name,
+               y = user_rating,
+               group=series_name,
+               color=series_name)) +
+    geom_violin() +
+    geom_boxplot(width=.1) +
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank())</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-7-1.png" width="672" /> * As notas de GOT são em geral mais altas que as de Xena, o que é refletido no gráfico pelo fato de que tanto o diagrama de caixa como o diagrama de violino vermelho (GOT) estarem acima dos diagrama de violino e caixa azuis (Xena).</p>
+<ul>
+<li>As notas mais frequentes de GOT estão entre [8.5, 9] (parte mais larga do violino vermelho) enquanto as notas mais frequentes de Xena estão em torno de 8.0 (parte mais larga do violino azul).</li>
+</ul>
+<p><strong>A série <em>Game of Thrones</em> aparenta ser mais bem avaliada do que a série <em>Xena a Princesa Guerreira</em> no IMBD</strong>.</p>
+<pre class="r"><code>episodes %&gt;% 
+    group_by(series_name) %&gt;%
+    summarise(
+        mean = mean(user_rating),
+        sd = sd(user_rating),
+        n = n()
+    ) %&gt;%
+    mutate(se = sd/sqrt(n)) %&gt;%
+    ggplot(aes(series_name,mean, fill = series_name)) +
+    geom_bar(stat=&#39;identity&#39;) +
+    geom_errorbar(aes(width= 0.25,
+                      ymax = mean + se,
+                      ymin = mean - se)) +
+    scale_fill_discrete(name = &quot;Série&quot;) +
+    scale_y_continuous(limits = c(0,10)) +
+    labs(y = &quot;mean user_rating&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li>Pela altura das barras (média das notas) é observável que a média da nota de GOT é mais alta do que a média das notas de Xena.</li>
+</ul>
+<p>A média das notas também sugere que a série <em>Game of Thrones</em> <strong>é mais bem avaliada</strong> que a série <em>Xena the Warrior Princess</em> no IMBD, a diferença aparenta ser de 1 ponto e em termos de notas de séries essa <strong>diferença é grande</strong>.</p>
+<hr />
+<div id="muda-de-acordo-com-as-temporadas-da-serie" class="section level3">
+<h3>Muda de acordo com as temporadas da série?</h3>
+<pre class="r"><code>episodes %&gt;% 
+  ggplot(aes(x = series_name, y = user_rating, fill=as.numeric(season))) +
+    geom_boxplot(position = position_dodge(width = 0.9)) </code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>A <em>nota mediana/barra central da caixa</em> <strong>valor que dividide os outros valores em 50% menores e 50% maiores</strong> e o <em>intervalo interquatil/caixa</em> <strong>que representa 50% dos valores</strong> flutuam ao longo das temporadas mas aparentam permanecer relativamente próximos da nota 9 para GOT e próximos de 8 para Xena.</p>
+<p>Quando comparamos a distribuição das notas ao longo das temporadas percebemos que <strong>as notas são afetadas pela mudança de temporada</strong> (e.g. as notas da série Xena refletem uma tendência de queda a partir da 4ª temporada em diante, mínimos indo de 7 para 6).</p>
+<pre class="r"><code>episodes %&gt;% 
+  ggplot(aes(x = series_name,
+             y = user_rating,
+             color=series_name)) + 
+    facet_wrap(~ season) + 
+    geom_boxplot(position = position_dodge(width = 0.9)) +
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank())</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Comparando a distribuição das notas das avaliações de cada série por temporada (notas da 1ª temporada de GOT com as notas da 1ª temporada de Xena) é possível notar que ao longo de todas as seis temporadas foi mantida uma mesma tendência. Observando a distribuição das notas através do intervalo interquatil/caixa, é possível notar que <strong>em todas as seis temporadas GOT permanece com notas mais altas do que Xena</strong> (A caixa de GOT está sempre acima da caixa de Xena).</p>
+<p><br></br></p>
+<p>As notas das séries variam com a temporada mas para efeito de comparação, de uma série com outra, mantém-se uma nota maior de GOT em relação a Xena.</p>
+<hr />
+</div>
+</div>
+<div id="qual-das-series-tem-episodios-de-qualidade-mais-irregular-segundo-o-imdb" class="section level2">
+<h2>Qual das séries tem episódios de qualidade mais irregular segundo o IMDB?</h2>
+<pre class="r"><code>episodes %&gt;% 
+  ggplot(aes(x = series_name, y = user_rating)) + 
+    geom_jitter(width = 0.25) </code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<ul>
+<li><p>As notas de GOT vão de <strong>8 (mínimo) até 9.9 (máximo)</strong> e aparentam estar relativamente concentradas em torno de 9, o que está em acordo com resultados anteriores.</p></li>
+<li><p>As notas de Xena vão de <strong>5.9 (mínimo) até 8.8 (máximo)</strong> e aparentam estar relativamente concentradas em torno de 8, o que está em acordo com resultados anteriores.</p></li>
+</ul>
+<p><strong>A série Xena aparenta ter notas mais irregulares do que GOT</strong> estando dispersa em um intervalo maior [5.9, 8.8] do que GOT [8, 9.9].</p>
+<pre class="r"><code>episodes %&gt;%
+  ggplot(aes(user_rating,color=series_name)) +
+    geom_density()</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>O histograma alisado reforça a ideia de que <strong>a série Xena tem notas mais irregulares do que GOT</strong> pois as notas de Xena ocorrem ao longo do intervalo [5.9, 8.8] (começo e fim do histograma azul) enquanto as notas de GOT ocorrem ao longo do intervalo <a href="começo%20e%20fim%20do%20histograma%20vermelho">8, 9.9</a>. Além disso o pico do histograma alisado (moda ou valor mais frequente) é em torno de 8 para Xena e em torno de 9 para GOT.</p>
+<pre class="r"><code>episodes %&gt;% 
+  ggplot(aes(x = series_name,
+             y = user_rating,
+             color=series_name)) +
+    geom_jitter(width = 0.25) +
+    facet_wrap(~ season) +
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank())</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code>episodes %&gt;%
+  ggplot(aes(user_rating,color=series_name)) +
+    geom_density() +
+    facet_wrap(~ season)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Olhando o diagrama de caixa e o histograma alisado das séries ao longo de temporadas é possível perceber que as notas da série Xena ficaram mais dispersas a partir da temporada 4 em diante pois passam a existir pontos desde em torno de 6 (pontos do gráfico ficam mais separados e histograma fica mais comprido).</p>
+<p><strong>As notas da série Xena são mais irregulares do que as notas de GOT e a diferença é grande</strong>, com as notas de Xena indo de 6 até 9 enquanto as notas de GOT vão de 8 até 10.</p>
+<hr />
+</div>
+<div id="qual-das-series-tem-episodios-mais-sem-graca-um-episodio-e-sem-graca-se-ninguem-nem-ama-nem-odeia-ele" class="section level2">
+<h2>Qual das séries tem episódios mais sem graça? (Um episódio é sem graça se ninguém nem ama nem odeia ele)</h2>
+<pre class="r"><code>episodes &lt;- episodes %&gt;%
+    mutate(
+        rank_odiados = row_number(r1), # maior = mais odiado
+        rank_amados = row_number(r10), # maior = mais amado
+        amado_odiado = rank_amados * rank_odiados) # maior = mais amado E odiado 
+
+episodes %&gt;% 
+    ggplot(aes(x = series_name,
+               y = amado_odiado,
+               group=series_name,
+               color=series_name)) +
+    geom_jitter() +
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank())</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>A série Xena apresenta uma grande concentração de episódios que não foram nem amados nem odiados, amado_odiado perto de 0, como mostra claramente o gráfico de dispersão, enquanto a série GOT não possui episódios cujo valor amado_odiado esteja perto de 0. <strong>Portanto a série Xena é a série com mais episódios sem graça.</strong></p>
+<hr />
+</div>
+<div id="episodios-no-iniciofim-da-temporada-sao-mais-bem-avaliados-que-os-no-meio" class="section level2">
+<h2>Episódios no início/fim da temporada são mais bem avaliados que os no meio?</h2>
+<p>Consideraremos os 20% iniciais e os 20% finais como o começo e fim de temporada, e os 60% entre essas duas parcelas como o meio de temporada. Um episódio será de metade de temporada se estiver incluido nesses 60%.</p>
+<pre class="r"><code>sumario_simples &lt;- 
+    episodes %&gt;% 
+    select(season_ep,season,series_name) %&gt;%
+    group_by(series_name,season) %&gt;% 
+    summarise(n = n(),
+               p20 = quantile(seq(from=1, to=n, by=1), 0.20),
+               p80 = quantile(seq(from=1, to=n, by=1), 0.80))
+
+sumario_simples</code></pre>
+<pre><code>## # A tibble: 12 x 5
+## # Groups:   series_name [?]
+##    series_name               season     n   p20   p80
+##    &lt;chr&gt;                     &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Game of Thrones           1         10   2.8   8.2
+##  2 Game of Thrones           2         10   2.8   8.2
+##  3 Game of Thrones           3         10   2.8   8.2
+##  4 Game of Thrones           4         10   2.8   8.2
+##  5 Game of Thrones           5         10   2.8   8.2
+##  6 Game of Thrones           6         10   2.8   8.2
+##  7 Xena a Princesa Guerreira 1         24   5.6  19.4
+##  8 Xena a Princesa Guerreira 2         22   5.2  17.8
+##  9 Xena a Princesa Guerreira 3         22   5.2  17.8
+## 10 Xena a Princesa Guerreira 4         22   5.2  17.8
+## 11 Xena a Princesa Guerreira 5         22   5.2  17.8
+## 12 Xena a Princesa Guerreira 6         22   5.2  17.8</code></pre>
+<pre class="r"><code>episodes &lt;- left_join(episodes, sumario_simples,
+                      by = c(&quot;series_name&quot;, &quot;season&quot;)) %&gt;% 
+    group_by(series_name, season) %&gt;%
+    mutate(middle_eps = (season_ep &gt; p20) &amp;
+               (season_ep &lt; p80)) %&gt;% 
+    ungroup()
+episodes</code></pre>
+<pre><code>## # A tibble: 194 x 25
+##    series_name   episode   series_ep season season_ep url      user_rating
+##    &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+##  1 Xena a Princ… Sins of …         1 1              1 http://…         7.9
+##  2 Xena a Princ… Chariots…         2 1              2 http://…         7.4
+##  3 Xena a Princ… Dreamwor…         3 1              3 http://…         7.7
+##  4 Xena a Princ… Cradle o…         4 1              4 http://…         7.4
+##  5 Xena a Princ… The Path…         5 1              5 http://…         7.5
+##  6 Xena a Princ… The Reck…         6 1              6 http://…         7.7
+##  7 Xena a Princ… The Tita…         7 1              7 http://…         7.5
+##  8 Xena a Princ… Promethe…         8 1              8 http://…         8  
+##  9 Xena a Princ… Death in…         9 1              9 http://…         7.8
+## 10 Xena a Princ… Hooves a…        10 1             10 http://…         7.6
+## # ... with 184 more rows, and 18 more variables: user_votes &lt;dbl&gt;,
+## #   r1 &lt;dbl&gt;, r2 &lt;dbl&gt;, r3 &lt;dbl&gt;, r4 &lt;dbl&gt;, r5 &lt;dbl&gt;, r6 &lt;dbl&gt;, r7 &lt;dbl&gt;,
+## #   r8 &lt;dbl&gt;, r9 &lt;dbl&gt;, r10 &lt;dbl&gt;, rank_odiados &lt;int&gt;, rank_amados &lt;int&gt;,
+## #   amado_odiado &lt;int&gt;, n &lt;int&gt;, p20 &lt;dbl&gt;, p80 &lt;dbl&gt;, middle_eps &lt;lgl&gt;</code></pre>
+<p><br></br></p>
+<p>Geramos a informação <strong><em>middle_eps</em></strong> para representar se uma série é ou não do meio da temporada, está entre os 20% episódios inicias e finais da temporada (no meio). Se <strong><em>middle_eps</em></strong> é TRUE o episódio é da metade da temporada, se <strong><em>middle_eps</em></strong> é FALSE o episódio é do começo/fim da temporada.</p>
+<pre class="r"><code>filtered &lt;- episodes %&gt;%
+    filter(series_name %in% c(&quot;Xena a Princesa Guerreira&quot;)) %&gt;%
+    filter(season == 4)
+
+filtered %&gt;%
+    ggplot(aes(x = season_ep, y = user_rating, color = series_name)) +
+    geom_vline(xintercept = filtered$p20,
+    color = &quot;blue&quot;) +
+    geom_vline(xintercept = filtered$p80,
+    color = &quot;blue&quot;) +
+    geom_line()</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Usando a 4ª temporada da série Xena como exemplo os episódios da metade de temporada seriam aqueles entre as barras azuis (20º percentil e 80º percentil, os quais dividem os valores em 20%-80% e 80%-20% respectivamente e assim o que está entre eles é 60% do total).</p>
+<pre class="r"><code>episodes %&gt;% 
+  ggplot(aes(user_rating, color=middle_eps)) + 
+    geom_density()</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>As formas dos histogramas alisados são semelhantes, e o pico de ambos (moda ou valor mais frequente) coincide na nota 8, isso sugere que <strong>sem distinguir as séries umas das outras os episódios no início/fim da temporada são avaliados semelhantemente aos que estão no meio da série</strong>.</p>
+<div id="muda-de-acordo-com-serie" class="section level3">
+<h3>Muda de acordo com série?</h3>
+<pre class="r"><code>episodes %&gt;% 
+  ggplot(aes(x = series_name, y = user_rating, color=middle_eps)) + 
+    geom_point(position = position_jitterdodge(dodge.width=0.9)) +
+    geom_boxplot(position = &quot;dodge&quot;) </code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Distiguindo as séries é possível notar que os boxplots azuis (que representam os episódios da metade da temporada) estão em geral abaixo dos boxplots vermelhos (que representam os episódios do começo/fim) da temporada. <strong>Assim, em termos de séries os episódios do começo/fim de temporada são mais bem avaliados.</strong></p>
+</div>
+<div id="muda-de-acordo-com-temporada" class="section level3">
+<h3>Muda de acordo com temporada?</h3>
+<pre class="r"><code>episodes %&gt;% 
+  filter(series_name %in% c(&quot;Xena a Princesa Guerreira&quot;)) %&gt;%
+  ggplot(aes(x = middle_eps,
+             y = user_rating,
+             color = middle_eps)) + 
+    facet_wrap(~ season) + 
+    geom_boxplot(position = position_dodge(width = 0.9)) +
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank()) +
+    ggtitle(&quot;Distribuição de votação metade da temporada versus começo/fim (Xena)&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Para a série Xena:</p>
+<ul>
+<li><p>Nas temporadas 5 e 6 os episódios de começo/fim de temporada foram mais bem votados</p></li>
+<li><p>Na temporada 1,2,3 e 4 a diferença fica menos clara.</p></li>
+</ul>
+<pre class="r"><code>episodes %&gt;% 
+    filter(series_name %in% c(&quot;Game of Thrones&quot;)) %&gt;%
+    ggplot(aes(x = middle_eps,
+             y = user_rating,
+             color = middle_eps)) + 
+    facet_wrap(~ season) + 
+    geom_boxplot(position = position_dodge(width = 0.9)) +
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank()) +
+    ggtitle(&quot;Distribuição de votação metada da temporada versus começo/fim (GOT)&quot;)</code></pre>
+<p><img src="../../../post/eda-xena-got_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Para a série GOT:</p>
+<ul>
+<li><p>Na 5ª temporada episodios do começo/fim e metade se comportam de maneira similar</p></li>
+<li><p>Nas temporadas 1,2,3,4 e 6 os episódios de começo/fim (boxplots vermelhos) são mais bem avaliados.</p></li>
+</ul>
+<p>Levando em consideração o que foi visto tanto em Xena como em GOT <strong>em termos de temporada os episódios começo/fim tendem a ser mais bem avaliados que os episódios de metade de temporada</strong>.</p>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F04%2Feda-game-of-thrones-got-and-xena-the-warrior-princess%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F04%2Feda-game-of-thrones-got-and-xena-the-warrior-princess%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F04%2Feda-game-of-thrones-got-and-xena-the-warrior-princess%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+                <h3 class="media-heading">EDA Game of Thrones (GOT) and Xena the Warrior Princess</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Análise exploratória de dados do IMDB sobre as séries Game of Thrones e Xena The Warrior Princess.
+ Conjunto de dados utilizado Os dados originais e as variáveis vêm deste repositorio . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.
+ Conjunto de dados de análise Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:
+ Game of Thrones Xena The Warrior Princess   Panorama dos dados episodes = read_csv(here(&quot;/data/series_from_imdb.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         1 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/04\/eda-game-of-thrones-got-and-xena-the-warrior-princess\/';
+          
+            this.page.identifier = '\/2018\/04\/eda-game-of-thrones-got-and-xena-the-warrior-princess\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+
