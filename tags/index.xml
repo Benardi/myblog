@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Me, Coffe and Data: a Love Triangle</title>
+    <title>Tags on Me &#43; coffe &#43; data : a love ∆</title>
     <link>https://benardi.github.io/myblog/tags/</link>
-    <description>Recent content in Tags on Me, Coffe and Data: a Love Triangle</description>
+    <description>Recent content in Tags on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cbsr</title>
+      <link>https://benardi.github.io/myblog/tags/cbsr/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/cbsr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eda</title>
+      <link>https://benardi.github.io/myblog/tags/eda/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/eda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Imdb</title>
+      <link>https://benardi.github.io/myblog/tags/imdb/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/imdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Msrp</title>
+      <link>https://benardi.github.io/myblog/tags/msrp/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/msrp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Prediction</title>
+      <link>https://benardi.github.io/myblog/tags/prediction/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/prediction/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eda on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/eda/</link>
+    <description>Recent content in Eda on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/eda/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>EDA about series ratings on IMDB</title>
+      <link>https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/</guid>
+      <description>Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &amp;lt;- read_csv(here(&amp;quot;data/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&amp;gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &amp;lt;chr&amp;gt; &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Wh.</description>
+    </item>
+    
+  </channel>
+</rss>

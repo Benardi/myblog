@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Msrp on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/msrp/</link>
+    <description>Recent content in Msrp on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/msrp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Case Based Reasoning System for MSRP estimation</title>
+      <link>https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/</guid>
+      <description>Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&amp;quot;code/calc_KNN_error.R&amp;quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</description>
+    </item>
+    
+  </channel>
+</rss>

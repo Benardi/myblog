@@ -1,0 +1,1126 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.40.3 with theme Tranquilpeak 0.4.3-BETA">
+    <title>EDA about series ratings on IMDB</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="Let&#39;s investigate how length, number of votes, ratings and consensus impact each other when we look at the series ratings on IMDB.">
+    <meta property="og:description" content="Let&#39;s investigate how length, number of votes, ratings and consensus impact each other when we look at the series ratings on IMDB.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="EDA about series ratings on IMDB">
+    <meta property="og:url" content="/1/01/eda-about-series-ratings-on-imdb/">
+    <meta property="og:site_name" content="Me&#43;Coffe&#43;Data: a Love Triangle">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me&#43;Coffe&#43;Data: a Love Triangle">
+    <meta name="twitter:description" content="Let&#39;s investigate how length, number of votes, ratings and consensus impact each other when we look at the series ratings on IMDB.">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me&#43;Coffe&#43;Data: a Love Triangle</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      EDA about series ratings on IMDB
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="0001-01-01T00:00:00Z">
+        
+  January 1, 1
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><br></br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<div id="analyzed-dataset" class="section level3">
+<h3>Analyzed Dataset</h3>
+<blockquote>
+<p>Exploratory Data Analysis on data from <a href="https://www.imdb.com/">IMDB</a> about TV series and Streaming. The original data and variables come from <a href="https://github.com/nazareno/imdb-series">this repository</a>. There you can find explained how the data was retrieved and the meaning of each variable.</p>
+</blockquote>
+<pre class="r"><code>episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), 
+                    progress = FALSE,
+                    col_types = cols(.default = col_double(), 
+                                     series_name = col_character(), 
+                                     episode = col_character(), 
+                                     url = col_character(),
+                                     season = col_character())) 
+episodes %&gt;% 
+    glimpse()</code></pre>
+<pre><code>## Observations: 32,070
+## Variables: 18
+## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh...
+## $ episode     &lt;chr&gt; &quot;Tape 1, Side A&quot;, &quot;Tape 1, Side B&quot;, &quot;Tape 2, Side ...
+## $ series_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3...
+## $ season      &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, ...
+## $ season_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3...
+## $ url         &lt;chr&gt; &quot;http://www.imdb.com/title/tt5174246/&quot;, &quot;http://ww...
+## $ user_rating &lt;dbl&gt; 8.5, 8.2, 8.1, 8.3, 8.5, 8.3, 8.6, 8.4, 8.9, 8.8, ...
+## $ user_votes  &lt;dbl&gt; 3661, 3009, 2784, 2658, 2617, 2491, 2548, 2436, 25...
+## $ r1          &lt;dbl&gt; 0.04143948, 0.04176334, 0.04446038, 0.05065666, 0....
+## $ r2          &lt;dbl&gt; 0.003816794, 0.003646006, 0.003226963, 0.002251407...
+## $ r3          &lt;dbl&gt; 0.0032715376, 0.0046403712, 0.0046611689, 0.003001...
+## $ r4          &lt;dbl&gt; 0.004634678, 0.006297647, 0.008246683, 0.005253283...
+## $ r5          &lt;dbl&gt; 0.011177754, 0.013258204, 0.019361778, 0.016510319...
+## $ r6          &lt;dbl&gt; 0.031079607, 0.036460060, 0.043743277, 0.038273921...
+## $ r7          &lt;dbl&gt; 0.09133043, 0.13059330, 0.13302259, 0.11031895, 0....
+## $ r8          &lt;dbl&gt; 0.20692475, 0.27842227, 0.28002868, 0.25628518, 0....
+## $ r9          &lt;dbl&gt; 0.2764449, 0.2031820, 0.1724632, 0.2112570, 0.2436...
+## $ r10         &lt;dbl&gt; 0.3298800, 0.2817368, 0.2907852, 0.3061914, 0.3457...</code></pre>
+</div>
+<div id="small-explanation-about-employed-estimators" class="section level3">
+<h3>Small explanation about employed estimators</h3>
+<p><br></br></p>
+<pre><code>- Mean: the sum of the values of the elements of a group divided by the number of elements in that group.
+- Mode: the most frequent element inside a group of values.
+- Median: the value inside a group of sorted values that divides them into 50% bigger and 50% smaller.
+- IQR: in a group of sorted values contains the 50% central values, e.g. if we had a sequence going from 1 to 100 the IQR would go from 25 to 75 (the 50 central values).</code></pre>
+<pre class="r"><code>x&lt;-rnorm(100000,mean=10, sd=2);
+qqnorm(x, pch = 1, frame = FALSE);
+qqline(x, col = &quot;red&quot;, lwd = 2);</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The Q-Q Plot (quantile-quantile plot) will be employed to describe metrics used in this analysis. The Q-Q Plot of a well behaved distribution (gaussian, symetric..) is well aligned as in the example chart.</p>
+<hr />
+</div>
+</div>
+<div id="data-overview" class="section level2">
+<h2>Data Overview</h2>
+<div id="number-of-votes-of-a-certain-episode" class="section level3">
+<h3>Number of votes of a certain episode</h3>
+<pre class="r"><code>episodes %&gt;%
+    group_by(episode) %&gt;%
+    filter(user_votes != max(user_votes)) %&gt;%
+    ggplot(aes(user_votes,y=..density..)) +
+    geom_histogram(binwidth = 50,
+                   fill=&quot;grey&quot;,
+                   color=&quot;black&quot;) +
+    scale_x_continuous(breaks=seq(0,9750,250)) +
+    labs(x = &quot;User votes&quot;,
+         y = &quot;Frequency density&quot;) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>We have a obvious mode between 0 and 250 votes.</li>
+<li>The highest values are very far way from the mode, this impacts the distribution mean and median making them higher than the mode.</li>
+<li>There are no values that violate the nature of the quantity (e.g. negative values), and would therefore invalidate our analysis.</li>
+</ul>
+<p><br></br></p>
+<p>Let’s look at the <em>10 most voted episodes</em>:</p>
+<pre class="r"><code>episodes %&gt;%
+    select(series_name,episode,user_votes) %&gt;%
+    top_n(10, user_votes) %&gt;% 
+    arrange(desc(user_votes))</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    series_name      episode                             user_votes
+##    &lt;chr&gt;            &lt;chr&gt;                                    &lt;dbl&gt;
+##  1 Game of Thrones  Battle of the Bastards                  138353
+##  2 Game of Thrones  The Winds of Winter                      93680
+##  3 Breaking Bad     Ozymandias                               87991
+##  4 Game of Thrones  Hardhome                                 59404
+##  5 Breaking Bad     Felina                                   59235
+##  6 Game of Thrones  The Rains of Castamere                   55077
+##  7 Game of Thrones  The Door                                 42617
+##  8 Game of Thrones  The Lion and the Rose                    31235
+##  9 The Walking Dead The Day Will Come When You Won&#39;t Be      30624
+## 10 Game of Thrones  Home                                     29785</code></pre>
+<p>The top 3 most voted episodes have a sensibly higher number of votes than the rest. The most voted episode of all in particular has 40.000 more votes than the second most voted episode.</p>
+<pre class="r"><code>episodes %&gt;% 
+    group_by(episode) %&gt;%
+    ggplot(aes(sample=user_votes)) + 
+        stat_qq()</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>The quantile-quantile plot clearly shows the leap around the highest values which are very far away from the rest of the distribution.</li>
+</ul>
+</div>
+<div id="episode-rating" class="section level3">
+<h3>Episode rating</h3>
+<pre class="r"><code>episodes %&gt;% 
+    group_by(episode) %&gt;%
+    ggplot(aes(user_rating, ..density..)) +
+    geom_histogram(binwidth = 0.1,
+                   fill=&quot;grey&quot;,
+                   color=&quot;black&quot;) +
+    labs(x = &quot;Episode Rating&quot;,
+         y = &quot;Frequency density&quot;) +
+        scale_x_continuous(breaks=seq(0,10,1)) </code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ul>
+<li>The most frequent rating is clearly around 8.</li>
+<li>The distribution is <em>relatively</em> well behaved (symetric), there’s however the occurrence of lower ratings (between 3 and 6).</li>
+<li>There are no values that violate the nature of the quantity (e.g. negative values), and would therefore invalidate our analysis.</li>
+</ul>
+<pre class="r"><code>episodes %&gt;% 
+    group_by(episode) %&gt;%
+    ggplot(aes(sample=user_rating)) + 
+        stat_qq() </code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>The lower ratings previously mentioned affect the curvature and prove that the distribution of episodes ratings is not symetric (well behaved).</li>
+</ul>
+</div>
+<div id="season-length" class="section level3">
+<h3>Season length</h3>
+<pre class="r"><code>sumario_n_seasons &lt;- episodes %&gt;%
+    group_by(series_name, season) %&gt;%
+    summarise(season_length = n()) 
+
+episodes &lt;- left_join(episodes, sumario_n_seasons, by= c(&quot;series_name&quot;,&quot;season&quot;)) 
+
+episodes %&gt;% 
+    select(series_name, season, season_length) %&gt;% 
+    unique() %&gt;%
+    sample_n(10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    series_name                     season season_length
+##    &lt;chr&gt;                           &lt;chr&gt;          &lt;int&gt;
+##  1 Ncis                            4                 24
+##  2 Bionic Woman                    1                  9
+##  3 Everybody Loves Raymond         3                 26
+##  4 Brilhante Victoria              3                 14
+##  5 24 Horas                        5                 25
+##  6 Last Man Standing               5                 22
+##  7 Without a Trace (Desaparecidos) 2                 24
+##  8 IZombie                         1                 13
+##  9 Sons of Anarchy                 6                 13
+## 10 A To Z                          1                 13</code></pre>
+<pre class="r"><code>episodes %&gt;%
+    select(series_name,
+           season,
+           season_length) %&gt;% 
+    unique() %&gt;%
+    ggplot(aes(season_length,..density..)) + 
+    geom_density(aes(y= 2.5 *..density..),
+             color=&quot;lightpink&quot;) +
+    geom_histogram(binwidth = 1, 
+                   fill=&quot;grey&quot;,
+                   color=&quot;black&quot;) +
+    scale_x_continuous(breaks=seq(0,120,5)) +
+    labs(y = &quot;Frequency density&quot;, x = &quot;Season length&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<ul>
+<li>The most frequent season lengths are around 10 and 20 episodes (Two modes ou bimodal).</li>
+<li>Some few seasons are curiously long.</li>
+<li>There are no values that violate the nature of the quantity (e.g. negative values), and would therefore invalidate our analysis.</li>
+</ul>
+<p><br></br></p>
+<p>Let’s observe the seasons that <strong>called our attention</strong> for being too long:</p>
+<pre class="r"><code>episodes %&gt;%
+    select(series_name,
+           season,
+           season_length) %&gt;% 
+    unique() %&gt;% 
+    top_n(10, season_length) %&gt;% 
+    arrange(desc(season_length))</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    series_name              season season_length
+##    &lt;chr&gt;                    &lt;chr&gt;          &lt;int&gt;
+##  1 Yu Yu Hakusho            1                112
+##  2 Anger Management         2                 90
+##  3 Os Cavaleiros do ZodÃ­aco 1                 73
+##  4 One Piece                2                 68
+##  5 Thundercats              1                 65
+##  6 One Piece                15                62
+##  7 One Piece                18                60
+##  8 One Piece                17                58
+##  9 One Piece                5                 57
+## 10 One Piece                3                 53</code></pre>
+<p>The series <em>Yu Yu Hakusho</em> which has 4 seasons is being wrongly classified as a single whole season. For this reason, we shall not include the series <em>Yu Yu Hakusho</em> in our analysis regarding seasons.</p>
+<pre class="r"><code>episodes %&gt;% 
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    ggplot(aes(sample=season_length)) +
+    stat_qq() </code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<ul>
+<li>In the Q-Q plot there’s a step (descontinuity), which matches the two modes (two most frequent values) on the respective histogram .</li>
+</ul>
+</div>
+<div id="median-season-length-of-a-series" class="section level3">
+<h3>Median season length of a series</h3>
+<p>To represent the overall season length of a series we will make use of the estimator median. Among the reasons to choose the median over other estimators such as the mean or the trimmed mean we give:</p>
+<ul>
+<li>The median less frequently provides values that aren’t integers (e.g. 4.6) which would make no sense for something as season length.</li>
+<li>The median is a robust meausre, in other words it’s less easily affected by outliers.</li>
+</ul>
+<pre class="r"><code>summary_season_length &lt;- episodes %&gt;%
+    group_by(series_name) %&gt;%
+    summarize(median_season_length = median(season_length)) %&gt;%
+    ungroup()
+
+episodes &lt;- left_join(episodes, summary_season_length,
+                      by = c(&quot;series_name&quot;)) 
+
+episodes %&gt;% 
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    select(series_name,
+           season_ep,
+           median_season_length) %&gt;%
+    sample_n(10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    series_name                 season_ep median_season_length
+##    &lt;chr&gt;                           &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Grey’s Anatomy                      9                   24
+##  2 Awkward                            10                   21
+##  3 American Idol                      35                   40
+##  4 Everybody Loves Raymond            13                   24
+##  5 Bleach                             19                   22
+##  6 Prison Break                       18                   22
+##  7 Downton Abbey                       8                    9
+##  8 The Fosters                        13                   21
+##  9 Secret Diary of a Call Girl         6                    8
+## 10 Melissa e Joey                     19                   30</code></pre>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    select(series_name, median_season_length) %&gt;% 
+    unique() %&gt;%
+    ggplot(aes(median_season_length,..density..)) +
+    geom_density(aes(y= 2.5 *..density..),
+                 color=&quot;red&quot;) +
+    geom_histogram(binwidth = 1,
+                   fill=&quot;grey&quot;,
+                   color=&quot;black&quot;) +
+    scale_x_continuous(breaks=seq(0,120,5)) +
+        labs(x = &quot;Median season length&quot;,
+         y = &quot;Frequency density&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ul>
+<li>The median season length behaves similarly to the metric season length.</li>
+</ul>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    select(series_name, median_season_length) %&gt;% 
+    unique() %&gt;%
+    ggplot(aes(sample=median_season_length)) + 
+        stat_qq() </code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>The median season length once again behaves similarly to the metric season length.</li>
+</ul>
+</div>
+<div id="consensus-about-a-episode-rating" class="section level3">
+<h3>Consensus about a episode rating</h3>
+<p>We generated the metric consensus as the relative frequency of the most frequent rating a episode was given from 1 to 10 (r1 to r10).</p>
+<pre class="r"><code>episodes &lt;- episodes %&gt;%
+    group_by(series_name,episode) %&gt;%
+    mutate(consensus = max(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10)) %&gt;%
+    ungroup()
+
+episodes %&gt;% 
+    select(episode,consensus) %&gt;%
+    sample_n(10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    episode                             consensus
+##    &lt;chr&gt;                                   &lt;dbl&gt;
+##  1 The Wilderness                          0.314
+##  2 The Classified Materials Turbulence     0.306
+##  3 Of Whose Uneasy Route                   0.289
+##  4 Four Little Words                       0.239
+##  5 Death Row Tip                           0.361
+##  6 Never Been Kissed                       0.462
+##  7 Redux                                   0.259
+##  8 Broken Child                            0.271
+##  9 Alterations                             0.293
+## 10 Indianapolis                            0.303</code></pre>
+<pre class="r"><code>episodes %&gt;%
+    select(series_name, consensus) %&gt;% 
+    unique() %&gt;%
+    ggplot(aes(consensus,..density..)) +
+    geom_histogram(binwidth = 0.01,
+                   fill=&quot;grey&quot;,
+                   color=&quot;black&quot;) +
+    scale_x_continuous(breaks=seq(0,1,0.125)) +
+    labs(x = &quot;Level of Consensus&quot;,
+         y = &quot;Frequency density&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>Level of Consensus mode is around 0.3125, in other words most of the time 31.25% of people gave the same rating to an episode.<br />
+</li>
+<li>Higher levels of consensus occur, going up to around 87.50%.<br />
+</li>
+<li>There are no values that violate the nature of the quantity (e.g. negative values), and would therefore invalidate our analysis.</li>
+</ul>
+<pre class="r"><code>episodes %&gt;%
+    select(series_name, consensus) %&gt;% 
+    unique() %&gt;%
+    ggplot(aes(sample=consensus)) + 
+        stat_qq() </code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li>The higher values which are far away from the mode affect the curvature and prove that the distribution of level of consensus is not symetric (well behaved).</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="are-shorter-seasons-better-rated" class="section level2">
+<h2>Are shorter seasons better rated?</h2>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    ggplot(aes(user_rating,
+               season_length)) +
+    geom_point(alpha=0.08,
+               color=&quot;#ff6666&quot;) +
+        scale_y_continuous(breaks=seq(0,100,5)) +
+        scale_x_continuous(breaks=seq(0,10,1)) +
+          labs(x = &quot;User rating&quot;,
+         y = &quot;Season length&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Seasons between 1 and 25 episodes are visibly disperse with ratings ranging from 3 to 10, it’s <strong>visible that most of the occurrences have ratings around 8 (more or less between 7 and 9)</strong>. This pattern overall holds up despite the season length and <em>matches the distribution of ratings mode which is 8</em>.</p>
+<p>There are however, two exceptions:</p>
+<ul>
+<li>For seasons around 40 episodes there’s a sizable drop in terms of rating</li>
+<li>Seasons above 40 episodes seem to experience an increase on user ratings, their relevance doesn’t seem clear or strong, however.</li>
+</ul>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    ggplot(aes(season_length, 
+               user_rating, 
+               group=season_length)) +
+    geom_boxplot(position = &quot;dodge&quot;,
+                 outlier.shape = NA,
+                 color=&quot;#ff6666&quot;) +
+    scale_x_continuous(breaks=seq(0,90,5)) +
+    scale_y_continuous(breaks=seq(0,10,1)) +
+    labs(y = &quot;User rating&quot;,
+         x = &quot;Season length&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Let’s now talk about boxplots while focusing in the median, to do so we shall desconsider external points to have a clearer perspective of the chart. In terms of median <em>what was seen in the scatter plot repeats itself with the drop on the ratings of seasons around 40 episodes.</em></p>
+<ul>
+<li>The boxplot lower and upper limits <strong>(boxplot whiskers) shows that the increase in the ratings of seasons above 40 episodes doesn’t seem very relevant</strong>.
+<ul>
+<li>The boxplot of these seasons are between the upper and lower limits of the boxplot of shorter seasons (There’s a strong Intersection of values).</li>
+</ul></li>
+</ul>
+<div id="series-of-shorter-seasons-are-better-rated" class="section level3">
+<h3>Series of shorter seasons are better rated?</h3>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    group_by(series_name) %&gt;%
+    unique() %&gt;%
+    ggplot(aes(user_rating,
+               median_season_length)) +
+    geom_point(alpha = 0.1, color=&quot;#A58AFF&quot;) +
+    scale_y_continuous(breaks=seq(0,100,5)) +
+    scale_x_continuous(breaks=seq(0,10,1)) +
+        labs(x = &quot;User rating&quot;,
+             y = &quot;Median season length&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Looking at the <em>ratings by median season length</em> we see that the distribution of ratings behaves similarly to the <em>ratings by season length</em>. The perceptible effect of focusing on the <em>ratings by median season length</em> is the even sharper drop of user ratings around 40 episodes.</p>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    group_by(series_name) %&gt;%
+    unique() %&gt;%
+    ggplot(aes(median_season_length,
+           user_rating,
+           group=median_season_length)) +
+    geom_boxplot(position = &quot;dodge&quot;,
+                 outlier.shape = NA,
+                 coef = 0,
+                 fill=&quot;#A58AFF&quot;,
+                 width=0.5) +
+    scale_x_continuous(breaks=seq(0,90,5)) +
+    scale_y_continuous(breaks=seq(0,10,1)) +
+        labs(y = &quot;User rating&quot;,
+         x = &quot;Median season rating&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>The boxplot shows similar results to those provided by the analysis of <strong>ratings by season length.</strong></p>
+</div>
+<div id="does-season-length-affects-consensus" class="section level3">
+<h3>Does season length affects consensus?</h3>
+<pre class="r"><code>episodes %&gt;%
+    filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
+    group_by(series_name,season) %&gt;%
+    ggplot(aes(season_length,consensus)) +
+    geom_point(alpha=0.3) +
+    scale_y_continuous(breaks=seq(0,1,0.1)) +
+    scale_x_continuous(breaks=seq(0,100,5)) +
+    labs(y = &quot;Level of consensus&quot;,
+         x = &quot;Season length&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><strong>The level of consensus for seasons over 30 episodes, overall, remains between 0.2 and 0.5 of consensus</strong> (consensus between 20% and 50%).<br />
+There’s a considerable disperson in terms of level of consensus for seasons up till 30 episodes. This might suggest that the season length is not the appropriate characteristic to explain the level of consensus for seasons around that number of episodes.</p>
+<p><br></br></p>
+</div>
+<div id="conclusion" class="section level3">
+<h3>Conclusion</h3>
+<ul>
+<li>Overall season length doesn’t have a meaningful effect on a series rating. <strong>Season length does not entail in a better or worse rated season, whether we look exclusively at the season’s length or at the median length of a serie’s season.</strong>
+<ul>
+<li>The exception to the aforementioned is that for seasons (and series of median season length) above 40 episodes there’s a sizable drop on user ratings.</li>
+</ul></li>
+</ul>
+<p><br></br></p>
+<ul>
+<li>For seasons up to 30 episodes the season length does not seem to provide the proper information to explain level of consensus.
+<ul>
+<li><strong>For seasons over 30 episodes the season length has a limiting effect on the level of consensus</strong>, which in general does not go above 0.5 (50%). Specially large seasons could mean episodes of irregular quality, such as filler episodes.</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="the-most-voted-episodes-are-better-rated" class="section level2">
+<h2>The most voted episodes are better rated?</h2>
+<pre class="r"><code>episodes %&gt;% 
+    ggplot(aes(user_votes,user_rating,
+               size = user_votes)) +
+    geom_point(alpha=.3,
+               position = position_jitterdodge()) +
+    scale_y_continuous(breaks=seq(0,10,1)) +
+    scale_x_continuous(breaks=seq(0,1000000,15000)) +
+    labs(y = &quot;User rating&quot;,
+         x = &quot;Number of votes&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>There’s a visible increase in the number of votes when we look at the rating above 7. <strong>In the range of ratings between 8 and 10 there’s a perceptibly large increase in the number of votes</strong>.</p>
+<pre class="r"><code>episodes %&gt;% 
+    group_by(episode) %&gt;%
+    ggplot(aes(user_rating)) +
+        geom_density(aes(y= 0.1 * ..density..),
+                 color=&quot;darkblue&quot;) +
+    geom_vline(xintercept = mean(episodes$user_rating), color = &quot;darkred&quot;) + 
+    geom_vline(xintercept = median(episodes$user_rating), color = &quot;darkgreen&quot;) +
+    scale_x_continuous(breaks=seq(0,10,0.5)) +
+    labs(y = &quot;Frequency density&quot;,
+         x = &quot;User rating&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>As has been said before, the rating 8 is a particularly interesting point (mode) in the distribution of ratings. The mean (red line) and the median (green line) also converge to that same rating. For this reason <strong>we will compare the consensus of the episodes whose ratings are below 8 (not well_rated) with the consensus of the episodes whose rating are above 8 (well_rated)</strong>.</p>
+<pre class="r"><code>episodes &lt;- 
+    episodes %&gt;% 
+    mutate(well_rated = user_rating &gt;= 8)
+
+episodes %&gt;% 
+    select(episode,
+           user_rating,
+           well_rated) %&gt;%
+    sample_n(10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    episode                                          user_rating well_rated
+##    &lt;chr&gt;                                                  &lt;dbl&gt; &lt;lgl&gt;     
+##  1 Hero                                                     8.9 TRUE      
+##  2 Three Men and a Maybe                                    7.9 FALSE     
+##  3 Final 24 Verdict                                         5.1 FALSE     
+##  4 The Winds                                                8.3 TRUE      
+##  5 Mia                                                      7.9 FALSE     
+##  6 200th Hour                                               7.6 FALSE     
+##  7 The Road Is to Hollywood! (Is Paved with Broken…         5   FALSE     
+##  8 Moving Up: Part 2                                        9.4 TRUE      
+##  9 Law &amp; Murder                                             8.4 TRUE      
+## 10 Bulldog                                                  8.6 TRUE</code></pre>
+<pre class="r"><code>episodes %&gt;% 
+    ggplot(aes(user_votes,well_rated,
+               color = well_rated)) +
+    geom_jitter(alpha = .8, width = 0.6) +
+    scale_x_continuous(breaks=seq(0,1000000,15000)) +
+            labs(x = &quot;Number of votes&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Results similar to the scatter plot, no visible impact of the <strong>well_rated</strong> characteristic. It’s even clearer the connection between higher ratings and number of votes.</p>
+<div id="better-rated-episodes-imply-in-higher-levels-of-consensus" class="section level3">
+<h3>Better rated episodes imply in higher levels of consensus?</h3>
+<pre class="r"><code>episodes %&gt;% 
+    ggplot(aes(consensus,well_rated,
+               color = well_rated)) +
+    geom_jitter(alpha=0.08) +
+    scale_x_continuous(breaks=seq(0,1,0.1)) +
+    labs(x = &quot;Level of consensus&quot;)</code></pre>
+<p><img src="../../../post/lab1-cp-3_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Curiously the mass of higher density in the chart (darker area) of the two groups is relatively close to each other, even so it’s still possible to notice that the <strong>mass of occurrences of the <em>well_rated</em> is the rightmost one (higher level of consensus)</strong>.</p>
+<p><strong>Better rated episodes generate higher level of consensus</strong>, occurrences above 0.5/50% are more frequent in the well_rated episodes and overall the mass of occurences of the well rated is more to the right (higher level of consensus) than the episodes whom were not well rated.</p>
+<p><br></br></p>
+</div>
+<div id="conclusion-1" class="section level3">
+<h3>Conclusion</h3>
+<ul>
+<li>There was a visible increase in the number of votes when we look at higher ratings (specially above 8).</li>
+<li>Better rated episodes seem to imply in higher levels of consensus.</li>
+</ul>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/imdb/">imdb</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/eda/">eda</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../1/01/case-based-reasoning-system-for-msrp-estimation/" data-tooltip="Case Based Reasoning System for MSRP estimation">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/1/01/eda-about-series-ratings-on-imdb/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/1/01/eda-about-series-ratings-on-imdb/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/1/01/eda-about-series-ratings-on-imdb/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../1/01/case-based-reasoning-system-for-msrp-estimation/" data-tooltip="Case Based Reasoning System for MSRP estimation">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/1/01/eda-about-series-ratings-on-imdb/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/1/01/eda-about-series-ratings-on-imdb/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/1/01/eda-about-series-ratings-on-imdb/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F1%2F01%2Feda-about-series-ratings-on-imdb%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F1%2F01%2Feda-about-series-ratings-on-imdb%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F1%2F01%2Feda-about-series-ratings-on-imdb%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="../../../2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/">
+                <h3 class="media-heading">EDA Game of Thrones (GOT) and Xena the Warrior Princess</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Análise exploratória de dados do IMDB sobre as séries Game of Thrones e Xena The Warrior Princess.
+ Conjunto de dados utilizado Os dados originais e as variáveis vêm deste repositorio . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.
+ Conjunto de dados de análise Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:
+ Game of Thrones Xena The Warrior Princess   Panorama dos dados episodes = read_csv(here(&quot;/data/series_from_imdb.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="../../../1/01/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 0001
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="../../../1/01/eda-about-series-ratings-on-imdb/">
+                <h3 class="media-heading">EDA about series ratings on IMDB</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 0001
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         3 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/1\/01\/eda-about-series-ratings-on-imdb\/';
+          
+            this.page.identifier = '\/1\/01\/eda-about-series-ratings-on-imdb\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

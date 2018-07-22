@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Me, Coffe and Data: a Love Triangle</title>
+    <title>Posts on Me &#43; coffe &#43; data : a love ∆</title>
     <link>https://benardi.github.io/myblog/post/</link>
-    <description>Recent content in Posts on Me, Coffe and Data: a Love Triangle</description>
+    <description>Recent content in Posts on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>EDA Game of Thrones (GOT) and Xena the Warrior Princess</title>
-      <link>https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/</link>
-      <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
+      <title>Case Based Reasoning System for MSRP estimation</title>
+      <link>https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://benardi.github.io/myblog/2018/04/eda-game-of-thrones-got-and-xena-the-warrior-princess/</guid>
-      <description>Análise exploratória de dados do IMDB sobre as séries Game of Thrones e Xena The Warrior Princess.
- Conjunto de dados utilizado Os dados originais e as variáveis vêm deste repositorio . Lá consta a explicação de como os dados foram gerados e do significado de cada variável.
- Conjunto de dados de análise Diante do conjunto de dados coletados, analisaremos as avaliações do IMDB das seguintes séries:
- Game of Thrones Xena The Warrior Princess   Panorama dos dados episodes = read_csv(here(&amp;quot;/data/series_from_imdb.</description>
+      <guid>https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/</guid>
+      <description>Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&amp;quot;code/calc_KNN_error.R&amp;quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</description>
+    </item>
+    
+    <item>
+      <title>EDA about series ratings on IMDB</title>
+      <link>https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/</guid>
+      <description>Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &amp;lt;- read_csv(here(&amp;quot;data/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&amp;gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &amp;lt;chr&amp;gt; &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Wh.</description>
     </item>
     
   </channel>

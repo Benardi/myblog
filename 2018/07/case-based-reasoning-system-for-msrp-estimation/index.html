@@ -1,0 +1,840 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.40.3 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Case Based Reasoning System for MSRP estimation</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="In this report we&#39;ll create a Case Based Reasoning System to estimate the manufacturer&#39;s suggested retail price using the k-nearest neighbors algorithm.">
+    <meta property="og:description" content="In this report we&#39;ll create a Case Based Reasoning System to estimate the manufacturer&#39;s suggested retail price using the k-nearest neighbors algorithm.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Case Based Reasoning System for MSRP estimation">
+    <meta property="og:url" content="/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="In this report we&#39;ll create a Case Based Reasoning System to estimate the manufacturer&#39;s suggested retail price using the k-nearest neighbors algorithm.">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Case Based Reasoning System for MSRP estimation
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-07-07T00:00:00Z">
+        
+  July 7, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><br></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p><br></p>
+<blockquote>
+<p>Employed data, scripts and a brief description can be found at the <a href="https://github.com/Benardi/CBRSystem">original repository</a>. Further references can be found at the page of <a href="https://www.cs.auckland.ac.nz/~ian/CBR/">Prof. Ian Watson</a>.</p>
+</blockquote>
+<pre class="r"><code>library(FNN)
+library(here)
+library(magrittr)
+library(tidyverse)
+
+source(here::here(&quot;code/calc_KNN_error.R&quot;))
+
+theme_set(theme_bw())</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<p><br></p>
+<p>Data has the following attributes:</p>
+<ul>
+<li><code>Make</code>: Make of the car;</li>
+<li><code>Model</code>: Model of the car;</li>
+<li><code>Year</code>: Manufacturing Date;</li>
+<li><code>Engine.Fuel.Type</code>: Kind of fuel the engine runs on;</li>
+<li><code>Engine.HP</code>: Engine HorsePower;</li>
+<li><code>Engine.Cylinders</code>: Number of cylinders in the engine;</li>
+<li><code>Transmission.Type</code>: Type of car transmission;</li>
+<li><code>Driven_Wheels</code>: Wheels added;</li>
+<li><code>Number.of.Doors</code>: Number of doors;</li>
+<li><code>Vehicle.Size</code>: Vehycle size;</li>
+<li><code>Vehicle.Style</code>: Vehycle style;</li>
+<li><code>highway.MPG</code>: Miles per gallon on road;</li>
+<li><code>city.mpg</code>: Miles per gallon on city;</li>
+<li><code>Popularity</code>: Car popularity;</li>
+<li><code>MSRP</code>: Manufacturer’s Suggested Retail Price and target variable.</li>
+</ul>
+<p><br></p>
+<div id="loading-data" class="section level4">
+<h4>Loading Data</h4>
+<pre class="r"><code>read_csv(here::here(&quot;data/msrp.csv&quot;),
+         progress = FALSE, 
+         col_types =
+           cols(
+            Make = col_character(),
+            Model = col_character(),
+            Year = col_integer(),
+            `Engine Fuel Type` = col_character(),
+            `Engine HP` = col_integer(),
+            `Engine Cylinders` = col_integer(),
+            `Transmission Type` = col_character(),
+            Driven_Wheels = col_character(),
+            `Number of Doors` = col_integer(),
+            `Market Category` = col_character(),
+            `Vehicle Size` = col_character(),
+            `Vehicle Style` = col_character(),
+            `highway MPG` = col_integer(),
+            `city mpg` = col_integer(),
+            Popularity = col_integer(),
+            MSRP = col_integer()
+            )) %&gt;% 
+  drop_na() -&gt; car_data </code></pre>
+</div>
+<div id="dummify-categorical-variables" class="section level2">
+<h2>Dummify Categorical Variables</h2>
+<pre class="r"><code>car_data %&gt;%
+  mutate(
+    Make = as.numeric(factor(Make)),
+    Model = as.numeric(factor(Model)),
+    `Engine Fuel Type` = as.numeric(factor(`Engine Fuel Type`)),
+    `Transmission Type` = as.numeric(factor(`Transmission Type`)),
+    Driven_Wheels = as.numeric(factor(Driven_Wheels)),
+    `Market Category` = as.numeric(factor(`Market Category`)),
+    `Vehicle Size` = as.numeric(factor(`Vehicle Size`)),
+    `Vehicle Style` = as.numeric(factor(`Vehicle Style`)))-&gt; car_data 
+
+car_data %&gt;% 
+    glimpse()</code></pre>
+<pre><code>## Observations: 11,812
+## Variables: 16
+## $ Make                &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, ...
+## $ Model               &lt;dbl&gt; 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+## $ Year                &lt;int&gt; 2011, 2011, 2011, 2011, 2011, 2012, 2012, ...
+## $ `Engine Fuel Type`  &lt;dbl&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, ...
+## $ `Engine HP`         &lt;int&gt; 335, 300, 300, 230, 230, 230, 300, 300, 23...
+## $ `Engine Cylinders`  &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, ...
+## $ `Transmission Type` &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ...
+## $ Driven_Wheels       &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ...
+## $ `Number of Doors`   &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, ...
+## $ `Market Category`   &lt;dbl&gt; 38, 67, 64, 67, 63, 67, 67, 64, 63, 63, 64...
+## $ `Vehicle Size`      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+## $ `Vehicle Style`     &lt;dbl&gt; 9, 7, 9, 9, 7, 9, 7, 9, 7, 7, 9, 9, 7, 7, ...
+## $ `highway MPG`       &lt;int&gt; 26, 28, 28, 28, 28, 28, 26, 28, 28, 27, 28...
+## $ `city mpg`          &lt;int&gt; 19, 19, 20, 18, 18, 18, 17, 20, 18, 18, 20...
+## $ Popularity          &lt;int&gt; 3916, 3916, 3916, 3916, 3916, 3916, 3916, ...
+## $ MSRP                &lt;int&gt; 46135, 40650, 36350, 29450, 34500, 31200, ...</code></pre>
+<p><br></p>
+</div>
+<div id="checking-for-missing-values" class="section level2">
+<h2>Checking for missing values</h2>
+<pre class="r"><code>row.has.na &lt;- apply(car_data, 
+                    1,
+                    function(x){any(is.na(x))})
+noquote(paste(&#39;Number of rows with misssing values: &#39;,
+            sum(row.has.na)))</code></pre>
+<pre><code>## [1] Number of rows with misssing values:  0</code></pre>
+<p><br></p>
+</div>
+<div id="applying-scale-to-predictor-variables" class="section level2">
+<h2>Applying scale to predictor variables</h2>
+<pre class="r"><code>num.vars &lt;- sapply(car_data,
+                   is.numeric, 
+                   simplify=F)
+
+num.vars$MSRP = FALSE
+num.vars &lt;- unlist(num.vars)
+
+car_data[num.vars] &lt;- lapply(car_data[num.vars],
+                             scale)
+car_data %&gt;% 
+  sample_n(10)</code></pre>
+<pre><code>## # A tibble: 10 x 16
+##      Make  Model   Year `Engine Fuel Ty… `Engine HP` `Engine Cylinde…
+##     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;
+##  1 -0.984 -1.27  -0.969           0.591       -0.545            0.200
+##  2 -0.984  1.13   0.611           0.591       -1.52            -0.942
+##  3 -0.214 -0.293 -0.179          -0.0820       0.691            0.200
+##  4  0.696  0.985  0.611           0.591       -1.09            -0.942
+##  5  0.906  1.20  -0.838           0.591       -1.00            -0.942
+##  6 -0.284 -0.481 -2.42            0.591       -1.54            -0.942
+##  7  0.556  1.08   0.479          -0.0820       0.481            0.200
+##  8 -0.984  1.15  -2.15            0.591       -0.865            0.200
+##  9  0.696 -1.31   0.611           0.591       -0.618           -0.942
+## 10 -0.634  1.25   0.611          -2.10         0.353            0.200
+## # ... with 10 more variables: `Transmission Type` &lt;dbl&gt;,
+## #   Driven_Wheels &lt;dbl&gt;, `Number of Doors` &lt;dbl&gt;, `Market Category` &lt;dbl&gt;,
+## #   `Vehicle Size` &lt;dbl&gt;, `Vehicle Style` &lt;dbl&gt;, `highway MPG` &lt;dbl&gt;,
+## #   `city mpg` &lt;dbl&gt;, Popularity &lt;dbl&gt;, MSRP &lt;int&gt;</code></pre>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="validation" class="section level1">
+<h1>Validation</h1>
+<p><br></p>
+<div id="split-data-into-trainingtesting-sets" class="section level2">
+<h2>Split data into training/testing sets</h2>
+<pre class="r"><code>set.seed(101)
+
+## Adding surrogate key to dataframe
+car_data$id &lt;- 1:nrow(car_data)
+
+car_data %&gt;% 
+  dplyr::sample_frac(.8) -&gt; train
+
+dplyr::anti_join(car_data, 
+                 train, 
+                 by = &#39;id&#39;) -&gt; test</code></pre>
+</div>
+<div id="dissociate-predictors-from-target-variablesurrogate-key" class="section level2">
+<h2>Dissociate predictors from target variable/surrogate key</h2>
+<pre class="r"><code>train %&gt;% 
+  select(-MSRP,-id) -&gt; train.predictors
+
+train %&gt;% 
+  select(MSRP, id) -&gt; train.response
+
+test %&gt;% 
+  select(-MSRP,-id) -&gt; test.predictors
+
+test %&gt;% 
+  select(MSRP, id) -&gt; test.response</code></pre>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="apply-k-nearest-neighbor" class="section level1">
+<h1>Apply K Nearest Neighbor</h1>
+<p><br></p>
+<div id="calculate-accumulated-error" class="section level2">
+<h2>Calculate accumulated error</h2>
+<pre class="r"><code>results &lt;- data.frame(matrix(ncol = 0, nrow = 10))
+results$k &lt;- seq(1,10,1)
+
+accum_err &lt;- c()
+
+for(num in results$k) {
+
+  calc_KNN_error(num,
+         train.predictors,
+         test.predictors,
+         train$id,
+         train.response,
+         test.response) -&gt; err
+  
+  accum_err &lt;-c(accum_err, err)
+}
+
+results$accum_err &lt;- accum_err
+
+results</code></pre>
+<pre><code>##     k    accum_err
+## 1   1 4.040153e+11
+## 2   2 1.370267e+12
+## 3   3 1.051880e+12
+## 4   4 1.662288e+12
+## 5   5 2.178911e+12
+## 6   6 2.518559e+12
+## 7   7 2.855903e+12
+## 8   8 3.130836e+12
+## 9   9 3.264634e+12
+## 10 10 3.361961e+12</code></pre>
+<pre class="r"><code>results %&gt;%
+  ggplot(aes(k,accum_err)) +
+  geom_point(size = 3,
+             alpha = .6) + 
+  geom_line() +
+  scale_x_continuous(breaks=seq(1,10,1)) +
+  labs(y=&quot;Accumulated Error&quot;, x= &quot;K Value&quot;) +
+  ggtitle(&quot;Accumulated Error by K value&quot;)</code></pre>
+<p><img src="../../../post/MSRP_Estimation_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<p><br></p>
+<ul>
+<li>A smaller K seems to render less accumulated error.</li>
+<li>At K = 2, we have an unusual spike in terms of accumulated error, which one could impute on a probable overfit.</li>
+<li><strong>K = 1</strong> renders the smallest amount of Accumulated Error.</li>
+</ul>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/cbsr/">cbsr</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/msrp/">msrp</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/prediction/">prediction</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/05/eda-about-series-ratings-on-imdb/" data-tooltip="EDA about series ratings on IMDB">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/05/eda-about-series-ratings-on-imdb/" data-tooltip="EDA about series ratings on IMDB">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F07%2Fcase-based-reasoning-system-for-msrp-estimation%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F07%2Fcase-based-reasoning-system-for-msrp-estimation%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F07%2Fcase-based-reasoning-system-for-msrp-estimation%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/">
+                <h3 class="media-heading">EDA about series ratings on IMDB</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         2 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/07\/case-based-reasoning-system-for-msrp-estimation\/';
+          
+            this.page.identifier = '\/2018\/07\/case-based-reasoning-system-for-msrp-estimation\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+
