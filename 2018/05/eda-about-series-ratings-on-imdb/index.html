@@ -374,18 +374,18 @@ episodes %&gt;%
     unique() %&gt;%
     sample_n(10)</code></pre>
 <pre><code>## # A tibble: 10 x 3
-##    series_name          season season_length
-##    &lt;chr&gt;                &lt;chr&gt;          &lt;int&gt;
-##  1 Defiance             1                 13
-##  2 Friday Night Lights  1                 22
-##  3 Numbers              3                 24
-##  4 Mozart in the Jungle 1                 10
-##  5 Parks and Recreation 4                 22
-##  6 Bad Judge            1                 13
-##  7 NCIS: New Orleans    3                 24
-##  8 Supernatural         2                 22
-##  9 The Glades           4                 13
-## 10 Extant               1                 13</code></pre>
+##    series_name         season season_length
+##    &lt;chr&gt;               &lt;chr&gt;          &lt;int&gt;
+##  1 The Simpsons        6                 25
+##  2 Leverage            4                 18
+##  3 Madam Secretary     1                 22
+##  4 quantico            2                 23
+##  5 Faking It           1                  8
+##  6 In Treatment        2                 35
+##  7 Pretty Little Liars 3                 24
+##  8 Call Me Fitz        2                 13
+##  9 Castle              6                 23
+## 10 Homeland            5                 12</code></pre>
 <pre class="r"><code>episodes %&gt;%
     select(series_name,
            season,
@@ -459,18 +459,18 @@ episodes %&gt;%
            median_season_length) %&gt;%
     sample_n(10)</code></pre>
 <pre><code>## # A tibble: 10 x 3
-##    series_name         season_ep median_season_length
-##    &lt;chr&gt;                   &lt;dbl&gt;                &lt;dbl&gt;
-##  1 Bitten                      3                   10
-##  2 Pretty Little Liars         5                   24
-##  3 Entourage                   6                   12
-##  4 Reign                       8                   22
-##  5 One Piece                  54                   50
-##  6 Chase                      10                   18
-##  7 The Good Wife              12                   22
-##  8 Red Widow                   2                    8
-##  9 Supernatural                1                   23
-## 10 Heroes Reborn               2                   13</code></pre>
+##    series_name             season_ep median_season_length
+##    &lt;chr&gt;                       &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Crossing Jordan                 4                   21
+##  2 Battlestar Galactica           16                   20
+##  3 Tru Calling                     8                   20
+##  4 The Amazing Race               11                   12
+##  5 Brilhante Victoria              6                   14
+##  6 The X-Files (Arquivo X)        13                   22
+##  7 Awkward                        10                   21
+##  8 Revolution                     12                   22
+##  9 Longmire                        1                   10
+## 10 Wilfred                        13                   13</code></pre>
 <pre class="r"><code>episodes %&gt;%
     filter(series_name != &quot;Yu Yu Hakusho&quot;) %&gt;%
     select(series_name, median_season_length) %&gt;% 
@@ -511,18 +511,18 @@ episodes %&gt;%
     select(episode,consensus) %&gt;%
     sample_n(10)</code></pre>
 <pre><code>## # A tibble: 10 x 2
-##    episode                                           consensus
-##    &lt;chr&gt;                                                 &lt;dbl&gt;
-##  1 Pam Freakin&#39; Staggs                                   0.312
-##  2 War of the Hecks                                      0.255
-##  3 Descent                                               0.592
-##  4 He&#39;s a Few Ticks Away from Having a Heart Attack!     0.381
-##  5 Looking Death in the Eye                              0.243
-##  6 Instinct                                              0.330
-##  7 Gimcrack and Bunkum                                   0.372
-##  8 Static                                                0.252
-##  9 Don&#39;t Look Now                                        0.351
-## 10 The Trial of Leslie Knope                             0.323</code></pre>
+##    episode                            consensus
+##    &lt;chr&gt;                                  &lt;dbl&gt;
+##  1 Turn This Car Around                   0.314
+##  2 Unaired Pilot                          0.328
+##  3 Everybody Hates Tattaglia              0.383
+##  4 Believers                              0.282
+##  5 These Boots Were Made for Stalking     0.256
+##  6 Shade                                  0.413
+##  7 Chasing Amy and Molly                  0.324
+##  8 Trespass                               0.294
+##  9 Trust Exercise                         0.294
+## 10 Remember Nothing                       0.248</code></pre>
 <pre class="r"><code>episodes %&gt;%
     select(series_name, consensus) %&gt;% 
     unique() %&gt;%
@@ -695,18 +695,18 @@ episodes %&gt;%
            well_rated) %&gt;%
     sample_n(10)</code></pre>
 <pre><code>## # A tibble: 10 x 3
-##    episode                                           user_rating well_rated
-##    &lt;chr&gt;                                                   &lt;dbl&gt; &lt;lgl&gt;     
-##  1 Stop Dragging My Heart Around                             7.3 FALSE     
-##  2 Merciless Fight to the Death! Luffy vs. Crocodile         7.8 FALSE     
-##  3 Given to Fly                                              7.9 FALSE     
-##  4 Ghost in the Machine                                      7.6 FALSE     
-##  5 The Third Wheel Gets the Grace                            7.8 FALSE     
-##  6 The Man in the Killer Suit                                8.7 TRUE      
-##  7 Force Quit                                                8.5 TRUE      
-##  8 What, Has This Thing Appear&#39;d Again Tonight?              8.4 TRUE      
-##  9 The Situation                                             8.2 TRUE      
-## 10 Give Me a Sign                                            7.7 FALSE</code></pre>
+##    episode                                        user_rating well_rated
+##    &lt;chr&gt;                                                &lt;dbl&gt; &lt;lgl&gt;     
+##  1 Dance Me to the End of Love                            8   TRUE      
+##  2 Ellcrys                                                8.2 TRUE      
+##  3 Crazy Love                                             9.4 TRUE      
+##  4 Day 4: 3:00 a.m.-4:00 a.m.                             8.5 TRUE      
+##  5 The Road to Hell                                       8.4 TRUE      
+##  6 Babies &amp; Bathwater                                     8.9 TRUE      
+##  7 Pirates Get on the Move! Astounding New World!         7.4 FALSE     
+##  8 Save Our Souls                                         8.1 TRUE      
+##  9 The Journey                                            8.3 TRUE      
+## 10 Game of the Week                                       8.3 TRUE</code></pre>
 <pre class="r"><code>episodes %&gt;% 
     ggplot(aes(user_votes,well_rated,
                color = well_rated)) +
@@ -1088,7 +1088,7 @@ $(document).ready(function() {
             return;
           }
           var d = document, s = d.createElement('script');
-          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          var disqus_shortname = 'https-benardi-github-io-myblog';
           s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
           s.setAttribute('data-timestamp', +new Date());
