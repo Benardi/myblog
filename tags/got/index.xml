@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Got on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/got/</link>
+    <description>Recent content in Got on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/got/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Interactive Visualization on GoT x Xena (IMDB)</title>
+      <link>https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/</guid>
+      <description>Introduction Let’s compare the series Game of Thrones and Xena the Warrior Princess to answer :
+ Which one is better rated by users?  The difference is maintained throughout seasons? Where the episode is placed inside its season (beggining/end or middle) has an effect?   Employed dataset  Exploratory Data Analysis on data from IMDB about the series Game of Thrones and Xena the Warrior Princess.</description>
+    </item>
+    
+    <item>
+      <title>Chakrans and Dragons on IMDB</title>
+      <link>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</link>
+      <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</guid>
+      <description>Employed data Exploratory data analysis on IMDB data about TV series. Original data comes from this repository, there we have an explanation on how the data was gathered and the meaning of each variable.
+ Data under analysis Before the staggering number of different series available in our data we will analyse the following two:
+ Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;data/series_from_imdb.</description>
+    </item>
+    
+  </channel>
+</rss>

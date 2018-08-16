@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regression on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/regression/</link>
+    <description>Recent content in Regression on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 05 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/regression/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Multivariate logistic regression on speed dating data</title>
+      <link>https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/</link>
+      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/</guid>
+      <description>This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in learning something about.</description>
+    </item>
+    
+    <item>
+      <title>Multivariate linear regression on speed dating data</title>
+      <link>https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/</guid>
+      <description>This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</description>
+    </item>
+    
+    <item>
+      <title>Multivariate linear regression on speed dating data</title>
+      <link>https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/</guid>
+      <description>This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</description>
+    </item>
+    
+  </channel>
+</rss>

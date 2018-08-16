@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Movielens on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/movielens/</link>
+    <description>Recent content in Movielens on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/movielens/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Analysis on MovieLens dataset with bootstrap</title>
+      <link>https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/</guid>
+      <description>Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&amp;quot;data/movies.csv&amp;quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&amp;gt;% group_by(movieId) %&amp;gt;% mutate(year = as.numeric(sub(&amp;quot;\\).*&amp;quot;, &amp;quot;&amp;quot;,sub(&amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>Analysis on MovieLens dataset with hypothesis testing</title>
+      <link>https://benardi.github.io/myblog/1/01/analysis-on-movielens-dataset-with-hypothesis-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/1/01/analysis-on-movielens-dataset-with-hypothesis-testing/</guid>
+      <description>Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data, a description of the variables used in this report and another report employing Confidence Intervals on the same dataset can be found in the original repository
+ 
+
+ Data Overview 
+Loading and filtering data readr::read_csv(here::here(&amp;quot;data/movies.csv&amp;quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&amp;gt;% group_by(movieId) %&amp;gt;% mutate(year = as.</description>
+    </item>
+    
+  </channel>
+</rss>

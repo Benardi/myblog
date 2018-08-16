@@ -1,0 +1,1205 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.46 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Jake Gyllenhaal&#39;s type of movies</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="Let&#39;s separate Jake Gyllenhaal&#39;s movies in groups using hierarchical clustering">
+    <meta property="og:description" content="Let&#39;s separate Jake Gyllenhaal&#39;s movies in groups using hierarchical clustering">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Jake Gyllenhaal&#39;s type of movies">
+    <meta property="og:url" content="/2018/05/jake-gyllenhaals-type-of-movies/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="Let&#39;s separate Jake Gyllenhaal&#39;s movies in groups using hierarchical clustering">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Jake Gyllenhaal&#39;s type of movies
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-22T00:00:00Z">
+        
+  May 22, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <script src="../../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../../rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="../../../rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="../../../rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="../../../rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="../../../rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="../../../rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="../../../rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<p><br/><br/></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<blockquote>
+<p>Exploratory data analysis on data from <a href="https://www.rottentomatoes.com/">RottenTomatoes</a> about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on <a href="https://github.com/Benardi/agrupamento-filmes/">this report’s repository</a> deste relatório.</p>
+</blockquote>
+<ul>
+<li>Entries that have no information about box office were ignored.</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<pre class="r"><code>import_data(&quot;jake_gyllenhaal&quot;) 
+filmes &lt;- read_imported_data()
+filmes %&gt;% 
+    glimpse()</code></pre>
+<pre><code>## Observations: 20
+## Variables: 5
+## $ avaliacao  &lt;int&gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,...
+## $ filme      &lt;chr&gt; &quot;Stronger&quot;, &quot;Life&quot;, &quot;Nocturnal Animals&quot;, &quot;Demolitio...
+## $ papel      &lt;chr&gt; &quot;Jeff Bauman&quot;, &quot;David Jordan&quot;, &quot;Tony HastingsEdward...
+## $ bilheteria &lt;dbl&gt; 4.2, 30.2, 10.7, 1.7, 46.6, 42.4, 61.0, 39.1, 54.7,...
+## $ ano        &lt;int&gt; 2017, 2017, 2016, 2016, 2015, 2015, 2013, 2012, 201...</code></pre>
+<div id="box-office" class="section level2">
+<h2>Box Office</h2>
+<ul>
+<li>Data refers to revenue collected inside the USA.</li>
+</ul>
+<pre class="r"><code>p &lt;- filmes %&gt;%
+    ggplot(aes(x = ano, 
+               y = bilheteria,
+               text = paste(&quot;Movie:&quot;,filme,
+                            &quot;\nBox Office:&quot;,
+                            bilheteria,&quot;m&quot;,
+                            &quot;\nYear:&quot;,ano))) + 
+    geom_point(size = 4, color = paleta[1]) +
+    labs(y = &quot;Box Office (MM)&quot;, x = &quot;Year of release&quot;)
+
+ggplotly(p, tooltip = &quot;text&quot;) %&gt;%
+    layout(autosize = F)</code></pre>
+<div id="htmlwidget-1" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"data":[{"x":[2017,2017,2016,2016,2015,2015,2013,2012,2011,2010,2010,2009,2007,2007,2005,2005,2005,2004,2002,2002],"y":[4.2,30.2,10.7,1.7,46.6,42.4,61,39.1,54.7,33.3,90.8,28.6,9.7,33,83,62.6,7.5,186.6,13.8,4.2],"text":["Movie: Stronger <br />Box Office: 4.2 m <br />Year: 2017","Movie: Life <br />Box Office: 30.2 m <br />Year: 2017","Movie: Nocturnal Animals <br />Box Office: 10.7 m <br />Year: 2016","Movie: Demolition <br />Box Office: 1.7 m <br />Year: 2016","Movie: Everest <br />Box Office: 46.6 m <br />Year: 2015","Movie: Southpaw <br />Box Office: 42.4 m <br />Year: 2015","Movie: Prisoners <br />Box Office: 61 m <br />Year: 2013","Movie: End of Watch <br />Box Office: 39.1 m <br />Year: 2012","Movie: Source Code <br />Box Office: 54.7 m <br />Year: 2011","Movie: Love and Other Drugs <br />Box Office: 33.3 m <br />Year: 2010","Movie: Prince of Persia: The Sands of Time <br />Box Office: 90.8 m <br />Year: 2010","Movie: Brothers <br />Box Office: 28.6 m <br />Year: 2009","Movie: Rendition <br />Box Office: 9.7 m <br />Year: 2007","Movie: Zodiac <br />Box Office: 33 m <br />Year: 2007","Movie: Brokeback Mountain <br />Box Office: 83 m <br />Year: 2005","Movie: Jarhead <br />Box Office: 62.6 m <br />Year: 2005","Movie: Proof <br />Box Office: 7.5 m <br />Year: 2005","Movie: The Day After Tomorrow <br />Box Office: 186.6 m <br />Year: 2004","Movie: The Good Girl <br />Box Office: 13.8 m <br />Year: 2002","Movie: Lovely & Amazing <br />Box Office: 4.2 m <br />Year: 2002"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,78,77,1)","opacity":1,"size":15.1181102362205,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(64,78,77,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":24.7671232876712,"r":7.30593607305936,"b":38.7214611872146,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2001.25,2017.75],"tickmode":"array","ticktext":["2005","2010","2015"],"tickvals":[2005,2010,2015],"categoryorder":"array","categoryarray":["2005","2010","2015"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Year of release","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-7.545,195.845],"tickmode":"array","ticktext":["0","50","100","150"],"tickvals":[8.88178419700125e-16,50,100,150],"categoryorder":"array","categoryarray":["0","50","100","150"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Box Office (MM)","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895}},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"40961824e608":{"x":{},"y":{},"text":{},"type":"scatter"}},"cur_data":"40961824e608","visdat":{"40961824e608":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<ul>
+<li><p>Among the movies where Jake acted one sets itself apart from others in terms of revenue: The movie <strong>“The Day After Tomorrow”</strong> released in 2004.</p></li>
+<li><p>It’s possible to notice a downward trend in the Box Office of the movies where Jake acted after 2013.</p></li>
+</ul>
+<pre class="r"><code>filmes %&gt;% 
+    ggplot(aes(x = bilheteria)) + 
+    geom_histogram(aes(y=(..count..)/sum(..count..)),binwidth = 10, boundary = 0, 
+                   fill = &quot;grey&quot;, color = &quot;black&quot;) + 
+    geom_rug(size = .5) +
+    scale_x_continuous(breaks=seq(0,200,20)) +
+    labs(y = &quot;Relative Frequency&quot;, x = &quot;Box Office (MM)&quot;)</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
+<ul>
+<li><p>We see a clear disparity between <strong>“The Day After Tomorrow”</strong> and the rest of the movies.</p></li>
+<li><p>No values outside expected domain, e.g. negative values.</p></li>
+</ul>
+<pre class="r"><code>p &lt;- filmes %&gt;% 
+    ggplot(aes(x = &quot;&quot;,
+               y = bilheteria,
+               label = filme,
+               text = paste(&quot;Movie:&quot;,filme,
+                            &quot;\nBox Office:&quot;,
+                            bilheteria,&quot;m&quot;))) + 
+    geom_jitter(width = .05, alpha = .3, size = 3) + 
+    labs(x = &quot;&quot;, y=&quot;Box Office (MM)&quot;)
+
+ggplotly(p, tooltip=&quot;text&quot;) %&gt;% 
+    layout(autosize = F)</code></pre>
+<div id="htmlwidget-2" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":[{"x":[0.991274561057799,1.02573535752017,0.956383494497277,1.01081939120777,0.993581389030442,1.03573572160676,0.983167507569306,0.994188492768444,1.00428858404048,1.02854659012519,0.989999775774777,1.03644328555092,0.969726982433349,1.03148215031251,1.00329012523871,1.04718518028967,0.989526311564259,0.994897903082892,1.03396772188135,0.98766322711017],"y":[4.18971039343625,30.1351121204346,10.7879759298637,1.81388594869524,46.5627646536753,42.4257146838307,61.0309608002938,39.0447821044736,54.5916463560052,33.290881784074,90.8415749426931,28.503403545469,9.69325358774513,33.0439270184375,83.0439873879217,62.7144070532918,7.60318640721962,186.673949689139,13.7307443357818,4.19819321841002],"text":["Movie: Stronger <br />Box Office: 4.2 m","Movie: Life <br />Box Office: 30.2 m","Movie: Nocturnal Animals <br />Box Office: 10.7 m","Movie: Demolition <br />Box Office: 1.7 m","Movie: Everest <br />Box Office: 46.6 m","Movie: Southpaw <br />Box Office: 42.4 m","Movie: Prisoners <br />Box Office: 61 m","Movie: End of Watch <br />Box Office: 39.1 m","Movie: Source Code <br />Box Office: 54.7 m","Movie: Love and Other Drugs <br />Box Office: 33.3 m","Movie: Prince of Persia: The Sands of Time <br />Box Office: 90.8 m","Movie: Brothers <br />Box Office: 28.6 m","Movie: Rendition <br />Box Office: 9.7 m","Movie: Zodiac <br />Box Office: 33 m","Movie: Brokeback Mountain <br />Box Office: 83 m","Movie: Jarhead <br />Box Office: 62.6 m","Movie: Proof <br />Box Office: 7.5 m","Movie: The Day After Tomorrow <br />Box Office: 186.6 m","Movie: The Good Girl <br />Box Office: 13.8 m","Movie: Lovely & Amazing <br />Box Office: 4.2 m"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":0.3,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":24.7671232876712,"r":7.30593607305936,"b":12.4200913242009,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.5,1.5],"tickmode":"array","ticktext":[""],"tickvals":[1],"categoryorder":"array","categoryarray":[""],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-7.42911723832693,195.916952876161],"tickmode":"array","ticktext":["0","50","100","150"],"tickvals":[0,50,100,150],"categoryorder":"array","categoryarray":["0","50","100","150"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Box Office (MM)","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895}},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"40961b846b8e":{"x":{},"y":{},"label":{},"text":{},"type":"scatter"}},"cur_data":"40961b846b8e","visdat":{"40961b846b8e":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<ul>
+<li><p>Separate movies in those whose Box Office is below 50 millions and those whose Box Office is above that seems a reasonable approach.</p></li>
+<li><p><strong>“The Day After Tomorrow”</strong> seems to form a group of its own. Which would give us 3 groups.</p></li>
+</ul>
+</div>
+<div id="rating" class="section level2">
+<h2>Rating</h2>
+<pre class="r"><code>p &lt;- filmes %&gt;% 
+    ggplot(aes(x = ano, 
+               y = avaliacao,
+                text = paste(&quot;Movie:&quot;,filme,
+                            &quot;\nRating:&quot;,
+                            avaliacao,
+                            &quot;\nYear:&quot;,ano))) + 
+    geom_point(size = 4, color = paleta[1])  +
+    scale_y_continuous(limits = c(0, 100)) +
+    labs(y = &quot;Rating RT&quot;, x = &quot;Year of Release&quot;)
+
+ggplotly(p, tooltip = &quot;text&quot;) %&gt;%
+    layout(autosize = F)</code></pre>
+<div id="htmlwidget-3" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"data":[{"x":[2017,2017,2016,2016,2015,2015,2013,2012,2011,2010,2010,2009,2007,2007,2005,2005,2005,2004,2002,2002],"y":[92,67,72,52,73,59,82,85,92,49,35,64,47,90,87,61,62,44,82,86],"text":["Movie: Stronger <br />Rating: 92 <br />Year: 2017","Movie: Life <br />Rating: 67 <br />Year: 2017","Movie: Nocturnal Animals <br />Rating: 72 <br />Year: 2016","Movie: Demolition <br />Rating: 52 <br />Year: 2016","Movie: Everest <br />Rating: 73 <br />Year: 2015","Movie: Southpaw <br />Rating: 59 <br />Year: 2015","Movie: Prisoners <br />Rating: 82 <br />Year: 2013","Movie: End of Watch <br />Rating: 85 <br />Year: 2012","Movie: Source Code <br />Rating: 92 <br />Year: 2011","Movie: Love and Other Drugs <br />Rating: 49 <br />Year: 2010","Movie: Prince of Persia: The Sands of Time <br />Rating: 35 <br />Year: 2010","Movie: Brothers <br />Rating: 64 <br />Year: 2009","Movie: Rendition <br />Rating: 47 <br />Year: 2007","Movie: Zodiac <br />Rating: 90 <br />Year: 2007","Movie: Brokeback Mountain <br />Rating: 87 <br />Year: 2005","Movie: Jarhead <br />Rating: 61 <br />Year: 2005","Movie: Proof <br />Rating: 62 <br />Year: 2005","Movie: The Day After Tomorrow <br />Rating: 44 <br />Year: 2004","Movie: The Good Girl <br />Rating: 82 <br />Year: 2002","Movie: Lovely & Amazing <br />Rating: 86 <br />Year: 2002"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,78,77,1)","opacity":1,"size":15.1181102362205,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(64,78,77,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":24.7671232876712,"r":7.30593607305936,"b":38.7214611872146,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2001.25,2017.75],"tickmode":"array","ticktext":["2005","2010","2015"],"tickvals":[2005,2010,2015],"categoryorder":"array","categoryarray":["2005","2010","2015"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Year of Release","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-5,105],"tickmode":"array","ticktext":["0","25","50","75","100"],"tickvals":[0,25,50,75,100],"categoryorder":"array","categoryarray":["0","25","50","75","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Rating RT","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895}},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"40964b702439":{"x":{},"y":{},"text":{},"type":"scatter"}},"cur_data":"40964b702439","visdat":{"40964b702439":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<ul>
+<li>Between 2005 and 2010 Jake participated in a particular series of movies that did not please the critics.</li>
+<li>There doesn’t seem to exist a particularly clear tendency in the year of release.</li>
+</ul>
+<pre class="r"><code>filmes %&gt;% 
+    ggplot(aes(x = avaliacao)) + 
+    geom_histogram(aes(y=(..count..)/sum(..count..)),binwidth = 10, boundary = 0, 
+                   fill = paleta[3], color = &quot;black&quot;) + 
+    geom_rug(size = .5) +
+    scale_x_continuous(breaks=seq(0,100,10)) +
+    labs(y = &quot;Relative Frequency&quot;, x = &quot;Rating RT&quot;)</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-7-1.png" width="576" /></p>
+<ul>
+<li><p>It’s possible to notice a considerable number of movies with ratings above 80.</p></li>
+<li><p>No values outside expected domain, e.g. negative values.</p></li>
+</ul>
+<pre class="r"><code>p &lt;- filmes %&gt;% 
+    ggplot(aes(x = &quot;&quot;,
+               y = avaliacao,
+               text = paste(
+                    &quot;Filme:&quot;,filme,
+                    &quot;\nAvaliação:&quot;,avaliacao))) + 
+    geom_jitter(width = .05, alpha = .3, size = 3) + 
+    labs(x = &quot;&quot;, y=&quot;Avaliação RT&quot;)
+
+ggplotly(p, tooltip = &quot;text&quot;) %&gt;% 
+    layout(autosize = F)</code></pre>
+<div id="htmlwidget-4" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"data":[{"x":[1.0301678706659,1.03313553987537,0.961045013321564,1.03917143770959,1.04706692588516,0.977279813424684,1.01780704993289,0.973477615066804,0.970665100449696,1.0156490964815,1.01816748150159,0.999793186807074,1.02088124707807,1.01874922153074,1.00182133265771,0.979412210569717,0.979809657274745,1.04636148018762,0.970266033546068,0.978019171697088],"y":[91.6942300105467,67.0606362847611,72.3456698987633,52.3425476139411,72.6441145652905,58.7559651166201,81.6406396690756,85.1968949306756,92.1225813506171,48.9170566704124,35.0850190272555,64.1332943649963,46.7416026050225,89.983336472325,86.924957228452,60.9799210637808,62.1121891731396,44.1228261746466,82.187921060808,85.6094418818131],"text":["Filme: Stronger <br />Avaliação: 92","Filme: Life <br />Avaliação: 67","Filme: Nocturnal Animals <br />Avaliação: 72","Filme: Demolition <br />Avaliação: 52","Filme: Everest <br />Avaliação: 73","Filme: Southpaw <br />Avaliação: 59","Filme: Prisoners <br />Avaliação: 82","Filme: End of Watch <br />Avaliação: 85","Filme: Source Code <br />Avaliação: 92","Filme: Love and Other Drugs <br />Avaliação: 49","Filme: Prince of Persia: The Sands of Time <br />Avaliação: 35","Filme: Brothers <br />Avaliação: 64","Filme: Rendition <br />Avaliação: 47","Filme: Zodiac <br />Avaliação: 90","Filme: Brokeback Mountain <br />Avaliação: 87","Filme: Jarhead <br />Avaliação: 61","Filme: Proof <br />Avaliação: 62","Filme: The Day After Tomorrow <br />Avaliação: 44","Filme: The Good Girl <br />Avaliação: 82","Filme: Lovely & Amazing <br />Avaliação: 86"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":0.3,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":24.7671232876712,"r":7.30593607305936,"b":12.4200913242009,"l":37.2602739726027},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.5,1.5],"tickmode":"array","ticktext":[""],"tickvals":[1],"categoryorder":"array","categoryarray":[""],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[32.2331409110874,94.9744594667852],"tickmode":"array","ticktext":["40","50","60","70","80","90"],"tickvals":[40,50,60,70,80,90],"categoryorder":"array","categoryarray":["40","50","60","70","80","90"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Avaliação RT","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895}},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"409659cd00d7":{"x":{},"y":{},"text":{},"type":"scatter"}},"cur_data":"409659cd00d7","visdat":{"409659cd00d7":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<ul>
+<li>Intuitively three groups arise:
+<ul>
+<li>The movies with ratings above 80</li>
+<li>The movies with ratings between 55 and 70</li>
+<li>The movies with ratings below 55</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="hierarchical-clustering" class="section level1">
+<h1>Hierarchical Clustering</h1>
+<p><br> <br></p>
+<div id="one-dimension" class="section level2">
+<h2>One dimension</h2>
+<p><br></p>
+<div id="box-office-1" class="section level3">
+<h3>Box Office</h3>
+<pre class="r"><code>agrupamento_h = filmes %&gt;% 
+    mutate(nome = paste0(filme, &quot; (bil=&quot;, bilheteria, &quot;)&quot;)) %&gt;% 
+    as.data.frame() %&gt;% 
+    column_to_rownames(&quot;filme&quot;) %&gt;% 
+    select(bilheteria) %&gt;%
+    dist(method = &quot;euclidian&quot;) %&gt;% 
+    hclust(method = &quot;centroid&quot;)
+
+ggdendrogram(agrupamento_h, rotate = T, size = 2, theme_dendro = F) +
+    labs(y = &quot;Dissimilarity&quot;, x = &quot;&quot;, title = &quot;Dendrogram&quot;) +
+    geom_hline(aes(yintercept = c(20,30), color=c(&quot;4 grupos&quot;,&quot;3 grupos&quot;))) +
+    scale_colour_manual(name=&quot;#Groups&quot;,
+    values=c(&quot;#56B4E9&quot;, &quot;#FF9999&quot;))</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+<ul>
+<li>In terms of Dendrogram the separation in four and three groups seems appropriate, given that the increase in dissimilarity from 4 to 3 groups doesn’t seem to be substantial.</li>
+<li>Cut made for 4 groups</li>
+</ul>
+<pre class="r"><code>atribuicoes = get_grupos(agrupamento_h, num_grupos = 1:6)
+
+atribuicoes = atribuicoes %&gt;% 
+    left_join(filmes, by = c(&quot;label&quot; = &quot;filme&quot;))
+
+atribuicoes %&gt;% 
+    ggplot(aes(x = &quot;Movies&quot;, y = bilheteria, colour = grupo)) + 
+    geom_jitter(width = .02, height = 0, size = 1.6, alpha = .6) + 
+    facet_wrap(~ paste(k, &quot; groups&quot;)) + 
+    scale_color_brewer(palette = &quot;Dark2&quot;) +
+    labs(y = &quot;Box Office (MM)&quot;, x = &quot;&quot;, title = &quot;Grouping by Box Office&quot;) +
+    guides(color=guide_legend(title=&quot;group&quot;))</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+<ul>
+<li>The division in 4 groups seems more appropriate than the division in 3 groups.
+<ul>
+<li>The movie cluster on the base of chart seems to require its own group (In the 4 groups division the aforementioned group would be the group 1).</li>
+</ul></li>
+</ul>
+<pre class="r"><code>k_escolhido = 4
+
+m &lt;- list(l = 220)
+
+p &lt;-atribuicoes %&gt;% 
+    filter(k == k_escolhido) %&gt;% 
+    ggplot(aes(x = reorder(label, bilheteria),
+               y = bilheteria,
+               colour = grupo,
+               text = paste(
+                    &quot;Movie:&quot;, reorder(label, bilheteria),
+                    &quot;\nRating:&quot;, bilheteria,
+                    &quot;\nGroup:&quot;, grupo))) + 
+    geom_jitter(width = .02, height = 0, size = 3, alpha = .6) + 
+    facet_wrap(~ paste(k, &quot; groups&quot;)) + 
+    scale_color_brewer(palette = &quot;Dark2&quot;) + 
+    labs(x = &quot;&quot;, y = &quot;Rating RT&quot;) + 
+    guides(color=guide_legend(title=&quot;group&quot;)) +
+    coord_flip()
+
+ggplotly(p,tooltip = &quot;text&quot;) %&gt;%
+    layout(autosize = F, margin = m)</code></pre>
+<div id="htmlwidget-5" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"data":[{"x":[4.2,10.7,1.7,9.7,7.5,13.8,4.2],"y":[2.98041284891777,5.99390652292408,0.981452548475936,5.01415833586827,3.98616704165936,6.99455298137851,1.98631716025993],"text":["Movie: Stronger <br />Rating: 4.2 <br />Group: 1","Movie: Nocturnal Animals <br />Rating: 10.7 <br />Group: 1","Movie: Demolition <br />Rating: 1.7 <br />Group: 1","Movie: Rendition <br />Rating: 9.7 <br />Group: 1","Movie: Proof <br />Rating: 7.5 <br />Group: 1","Movie: The Good Girl <br />Rating: 13.8 <br />Group: 1","Movie: Lovely & Amazing <br />Rating: 4.2 <br />Group: 1"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(27,158,119,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[30.2,46.6,42.4,61,39.1,54.7,33.3,28.6,33,62.6],"y":[8.9980703862384,14.0147510929871,13.0191107892711,16.0174081227276,12.0185885525402,14.984467202872,11.0079246672243,8.01958053918555,10.0020594926644,17.0106380073074],"text":["Movie: Life <br />Rating: 30.2 <br />Group: 2","Movie: Everest <br />Rating: 46.6 <br />Group: 2","Movie: Southpaw <br />Rating: 42.4 <br />Group: 2","Movie: Prisoners <br />Rating: 61 <br />Group: 2","Movie: End of Watch <br />Rating: 39.1 <br />Group: 2","Movie: Source Code <br />Rating: 54.7 <br />Group: 2","Movie: Love and Other Drugs <br />Rating: 33.3 <br />Group: 2","Movie: Brothers <br />Rating: 28.6 <br />Group: 2","Movie: Zodiac <br />Rating: 33 <br />Group: 2","Movie: Jarhead <br />Rating: 62.6 <br />Group: 2"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(217,95,2,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[90.8,83],"y":[19.0126749964152,17.9927511988673],"text":["Movie: Prince of Persia: The Sands of Time <br />Rating: 90.8 <br />Group: 3","Movie: Brokeback Mountain <br />Rating: 83 <br />Group: 3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(117,112,179,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[186.6],"y":[19.9832157798298],"text":"Movie: The Day After Tomorrow <br />Rating: 186.6 <br />Group: 4","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,41,138,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,41,138,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.7073474470735,"r":7.30593607305936,"b":38.7214611872146,"l":220},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-7.545,195.845],"tickmode":"array","ticktext":["0","50","100","150"],"tickvals":[8.88178419700125e-16,50,100,150],"categoryorder":"array","categoryarray":["0","50","100","150"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"annotations":[{"text":"Rating RT","x":0.5,"y":-0.0176940639269406,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis"},{"text":"4  groups","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Bold","size":15.9402241594022},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"group","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,20.6],"tickmode":"array","ticktext":["Demolition","Lovely & Amazing","Stronger","Proof","Rendition","Nocturnal Animals","The Good Girl","Brothers","Life","Zodiac","Love and Other Drugs","End of Watch","Southpaw","Everest","Source Code","Prisoners","Jarhead","Brokeback Mountain","Prince of Persia: The Sands of Time","The Day After Tomorrow"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"categoryorder":"array","categoryarray":["Demolition","Lovely & Amazing","Stronger","Proof","Rendition","Nocturnal Animals","The Good Girl","Brothers","Life","Zodiac","Love and Other Drugs","End of Watch","Southpaw","Everest","Source Code","Prisoners","Jarhead","Brokeback Mountain","Prince of Persia: The Sands of Time","The Day After Tomorrow"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":22.5819842258198,"yanchor":1,"ysizemode":"pixel"}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895},"y":0.96751968503937},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"40969f22335":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"40969f22335","visdat":{"40969f22335":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<ul>
+<li><strong>The Day After Tomorrow</strong> demanded a group for itself, as expected.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="rating-1" class="section level3">
+<h3>Rating</h3>
+<pre class="r"><code>agrupamento_h = filmes %&gt;% 
+    mutate(nome = paste0(filme, &quot; (av=&quot;, avaliacao, &quot;)&quot;)) %&gt;% 
+    as.data.frame() %&gt;% 
+    column_to_rownames(&quot;filme&quot;) %&gt;% 
+    select(avaliacao) %&gt;%
+    dist(method = &quot;euclidian&quot;) %&gt;% 
+    hclust(method = &quot;ward.D&quot;)
+
+ggdendrogram(agrupamento_h, rotate = T, size = 2, theme_dendro = F) +
+    labs(y = &quot;Dissimilarity&quot;, x = &quot;&quot;, title = &quot;Dendrogram&quot;) +
+    geom_hline(aes(yintercept = 30),color=&quot;red&quot;)</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-12-1.png" width="576" /></p>
+<ul>
+<li>In terms of Dendrogram the <strong>division in three groups seems the most appropriate</strong>, given that the increase in dissimilarity becomes substantial when we go from 3 to 2 groups.</li>
+</ul>
+<pre class="r"><code>atribuicoes = get_grupos(agrupamento_h, num_grupos = 1:6)
+
+atribuicoes = atribuicoes %&gt;% 
+    left_join(filmes, by = c(&quot;label&quot; = &quot;filme&quot;))
+
+atribuicoes %&gt;% 
+    ggplot(aes(x = &quot;Movies&quot;, y = avaliacao, colour = grupo)) + 
+    geom_jitter(width = .02, height = 0, size = 1.6, alpha = .6) + 
+    facet_wrap(~ paste(k, &quot; groups&quot;)) + 
+    scale_color_brewer(palette = &quot;Dark2&quot;) +
+    guides(color=guide_legend(title=&quot;group&quot;)) +
+    labs(y = &quot;Rating RT&quot;, x = &quot;&quot;, title = &quot;Grouping by Rating&quot;)</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-13-1.png" width="576" /></p>
+<ul>
+<li>Visually the division in three groups seems appropriate in accordance with the dendrogram.</li>
+</ul>
+<pre class="r"><code>k_escolhido = 3
+
+m &lt;- list(l = 220)
+
+p &lt;-atribuicoes %&gt;% 
+    filter(k == k_escolhido) %&gt;% 
+    ggplot(aes(x = reorder(label, avaliacao),
+               y = avaliacao,
+               colour = grupo,
+               text = paste(
+                    &quot;Movie:&quot;, reorder(label, avaliacao),
+                    &quot;\nRating:&quot;, avaliacao,
+                    &quot;\nGroup:&quot;, grupo))) + 
+    geom_jitter(width = .02, height = 0, size = 3, alpha = .6) + 
+    facet_wrap(~ paste(k, &quot; groups&quot;)) + 
+    scale_color_brewer(palette = &quot;Dark2&quot;) + 
+    labs(x = &quot;&quot;, y = &quot;Rating RT&quot;) + 
+    guides(color=guide_legend(title=&quot;group&quot;)) +
+    coord_flip()
+
+ggplotly(p,tooltip = &quot;text&quot;) %&gt;%
+    layout(autosize = F, margin = m)</code></pre>
+<div id="htmlwidget-6" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6">{"x":{"data":[{"x":[92,82,85,92,90,87,82,86],"y":[19.9996196925361,13.0033513621893,15.0137443626672,18.9813614174817,18.0151988887042,16.9859276069142,14.0022129940893,16.0092741264123],"text":["Movie: Stronger <br />Rating: 92 <br />Group: 1","Movie: Prisoners <br />Rating: 82 <br />Group: 1","Movie: End of Watch <br />Rating: 85 <br />Group: 1","Movie: Source Code <br />Rating: 92 <br />Group: 1","Movie: Zodiac <br />Rating: 90 <br />Group: 1","Movie: Brokeback Mountain <br />Rating: 87 <br />Group: 1","Movie: The Good Girl <br />Rating: 82 <br />Group: 1","Movie: Lovely & Amazing <br />Rating: 86 <br />Group: 1"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(27,158,119,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[67,72,73,59,64,61,62],"y":[9.98502498595044,11.0180102838855,11.9923205750901,5.98948543781415,9.01948792277835,6.98582352894358,7.98430242581293],"text":["Movie: Life <br />Rating: 67 <br />Group: 2","Movie: Nocturnal Animals <br />Rating: 72 <br />Group: 2","Movie: Everest <br />Rating: 73 <br />Group: 2","Movie: Southpaw <br />Rating: 59 <br />Group: 2","Movie: Brothers <br />Rating: 64 <br />Group: 2","Movie: Jarhead <br />Rating: 61 <br />Group: 2","Movie: Proof <br />Rating: 62 <br />Group: 2"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(217,95,2,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[52,49,35,47,44],"y":[5.00738957801834,3.9901451769378,0.985156280063093,3.01025147562847,1.99214546472766],"text":["Movie: Demolition <br />Rating: 52 <br />Group: 3","Movie: Love and Other Drugs <br />Rating: 49 <br />Group: 3","Movie: Prince of Persia: The Sands of Time <br />Rating: 35 <br />Group: 3","Movie: Rendition <br />Rating: 47 <br />Group: 3","Movie: The Day After Tomorrow <br />Rating: 44 <br />Group: 3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(117,112,179,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.7073474470735,"r":7.30593607305936,"b":38.7214611872146,"l":220},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[32.15,94.85],"tickmode":"array","ticktext":["40","50","60","70","80","90"],"tickvals":[40,50,60,70,80,90],"categoryorder":"array","categoryarray":["40","50","60","70","80","90"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"annotations":[{"text":"Rating RT","x":0.5,"y":-0.0176940639269406,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis"},{"text":"3  groups","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Bold","size":15.9402241594022},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"group","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,20.6],"tickmode":"array","ticktext":["Prince of Persia: The Sands of Time","The Day After Tomorrow","Rendition","Love and Other Drugs","Demolition","Southpaw","Jarhead","Proof","Brothers","Life","Nocturnal Animals","Everest","Prisoners","The Good Girl","End of Watch","Lovely & Amazing","Brokeback Mountain","Zodiac","Source Code","Stronger"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"categoryorder":"array","categoryarray":["Prince of Persia: The Sands of Time","The Day After Tomorrow","Rendition","Love and Other Drugs","Demolition","Southpaw","Jarhead","Proof","Brothers","Life","Nocturnal Animals","Everest","Prisoners","The Good Girl","End of Watch","Lovely & Amazing","Brokeback Mountain","Zodiac","Source Code","Stronger"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":22.5819842258198,"yanchor":1,"ysizemode":"pixel"}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895},"y":0.96751968503937},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"409633f208a0":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"409633f208a0","visdat":{"409633f208a0":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<ul>
+<li>Arguably, <strong>Prince of Persia: The Sands of Time</strong> could demand a group of its own.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="two-dimensions" class="section level2">
+<h2>Two dimensions</h2>
+<p><br></p>
+<div id="how-many-groups-should-we-choose" class="section level3">
+<h3>How many groups should we choose?</h3>
+<p><br></p>
+<pre class="r"><code>agrupamento_h_2d = filmes %&gt;%
+   mutate(bilheteria = log10(bilheteria)) %&gt;%
+   mutate_at(vars(&quot;avaliacao&quot;, &quot;bilheteria&quot;), funs(scale)) %&gt;%
+   column_to_rownames(&quot;filme&quot;) %&gt;%
+   select(&quot;avaliacao&quot;, &quot;bilheteria&quot;) %&gt;%
+   dist(method = &quot;euclidean&quot;) %&gt;%
+   hclust(method = &quot;ward.D&quot;)
+
+ggdendrogram(agrupamento_h_2d, rotate = TRUE, theme_dendro = F) +
+    labs(y = &quot;Dissimilarity&quot;, x = &quot;&quot;, title = &quot;Dendrogram&quot;) +
+    geom_hline(aes(yintercept = 4),color=&quot;red&quot;)</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-15-1.png" width="576" /></p>
+<ul>
+<li>Going from 4 to 3 groups represents little variation in terms of dissimilarity</li>
+<li>Going from 3 to 2 groups represents a relatively substantial increase in dissimilarity, therefore from 6 to 3 groups seems a good choice in terms of dendrogram.</li>
+</ul>
+<pre class="r"><code>filmes2 &lt;- filmes %&gt;%
+    mutate(bilheteria = log10(bilheteria))
+
+plota_hclusts_2d(agrupamento_h_2d,
+                filmes2,
+                c(&quot;avaliacao&quot;, &quot;bilheteria&quot;),
+                linkage_method = &quot;ward.D&quot;, 
+                ks = 1:6,
+                palette = &quot;Dark2&quot;) + 
+    facet_wrap(~ paste(k, &quot; groups&quot;)) +
+    scale_y_log10() +
+    guides(color=guide_legend(title=&quot;group&quot;)) +
+    labs(y = &quot;Box Office&quot;, x = &quot;Rating&quot;, title = &quot;Grouping with two dimensions&quot;)</code></pre>
+<p><img src="../../../post/tipos-univariados_files/figure-html/unnamed-chunk-16-1.png" width="576" /></p>
+<ul>
+<li>The choice of 5 groups seems appropriate, as it reflects matters of Box Office as matters of Ratings. <strong>We’ll choose 5 groups</strong> for the following reasons (Groups mentioned on the 5 groups division):
+<ul>
+<li>The <span class="math inline">\(\color{magenta}{\text{4 best rated movies}}\)</span> are very close to each other and suggest a group.</li>
+<li>The <span class="math inline">\(\color{#7C3F7C}{\text{3 movies of small Box Office and low ratings}}\)</span> are very dissimilar the rest of the movies and suggest a group.</li>
+<li>The <span class="math inline">\(\color{#16A085}{\text{4 movies of small Box Office and high ratings}}\)</span> are close to each other and suggest a group.</li>
+<li>The <span class="math inline">\(\color{green}{\text{2 movies of huge Box Office and very low ratings}}\)</span> are very far from the rest of the movies and suggest a group.</li>
+<li>The <span class="math inline">\(\color{#CF5300}{\text{6 central/median movies in terms of Box Office/Rating}}\)</span> are very close to each other and suggest a group.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>atribuicoes = get_grupos(agrupamento_h_2d, num_grupos = 1:6)
+
+atribuicoes = atribuicoes %&gt;% 
+    filter(k == 5) %&gt;%
+    mutate(filme = label) %&gt;% 
+    left_join(filmes, by = &quot;filme&quot;)
+
+p &lt;- atribuicoes %&gt;%
+    ggplot(aes(x = avaliacao,
+               y = bilheteria,
+               colour = grupo,
+               text = paste(
+                    &quot;Movie:&quot;, filme,
+                    &quot;\nBox Office:&quot;, bilheteria,&quot;m\n&quot;,
+                    &quot;Rating:&quot;, avaliacao))) + 
+    geom_jitter(width = .02, height = 0, size = 3, alpha = .6) + 
+    facet_wrap(~ paste(k, &quot; groups&quot;)) + 
+    scale_color_brewer(palette = &quot;Dark2&quot;) +
+    scale_y_log10() +
+    guides(color=guide_legend(title=&quot;group&quot;)) +
+    labs(y = &quot;Box Office&quot;, x = &quot;Rating RT&quot;)
+
+
+ggplotly(p, tooltip = &quot;text&quot;) %&gt;%
+    layout(autosize = F)</code></pre>
+<div id="htmlwidget-7" style="width:576px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7">{"x":{"data":[{"x":[91.9985189021192,71.994594449196,82.0012218835484,85.9973401446547],"y":[0.6232492903979,1.02938377768521,1.13987908640124,0.6232492903979],"text":["Movie: Stronger <br />Box Office: 4.2 m<br /> Rating: 92","Movie: Nocturnal Animals <br />Box Office: 10.7 m<br /> Rating: 72","Movie: The Good Girl <br />Box Office: 13.8 m<br /> Rating: 82","Movie: Lovely & Amazing <br />Box Office: 4.2 m<br /> Rating: 86"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(27,158,119,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[66.9906075904891,72.9930847813375,59.0062513601873,48.9976623854414,64.0102169714775,61.0123548136279],"y":[1.48000694295715,1.66838591669,1.62736585659273,1.52244423350632,1.45636603312904,1.79657433321043],"text":["Movie: Life <br />Box Office: 30.2 m<br /> Rating: 67","Movie: Everest <br />Box Office: 46.6 m<br /> Rating: 73","Movie: Southpaw <br />Box Office: 42.4 m<br /> Rating: 59","Movie: Love and Other Drugs <br />Box Office: 33.3 m<br /> Rating: 49","Movie: Brothers <br />Box Office: 28.6 m<br /> Rating: 64","Movie: Jarhead <br />Box Office: 62.6 m<br /> Rating: 61"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(217,95,2,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[52.0128824308421,46.9902719276119,62.0185165379662],"y":[0.230448921378274,0.986771734266245,0.8750612633917],"text":["Movie: Demolition <br />Box Office: 1.7 m<br /> Rating: 52","Movie: Rendition <br />Box Office: 9.7 m<br /> Rating: 47","Movie: Proof <br />Box Office: 7.5 m<br /> Rating: 62"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(117,112,179,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[82.0052331151534,85.0125761695672,92.007914684834,89.9894566527847,86.9810576146748],"y":[1.78532983501077,1.59217675739587,1.73798732633343,1.51851393987789,1.91907809237607],"text":["Movie: Prisoners <br />Box Office: 61 m<br /> Rating: 82","Movie: End of Watch <br />Box Office: 39.1 m<br /> Rating: 85","Movie: Source Code <br />Box Office: 54.7 m<br /> Rating: 92","Movie: Zodiac <br />Box Office: 33 m<br /> Rating: 90","Movie: Brokeback Mountain <br />Box Office: 83 m<br /> Rating: 87"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,41,138,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,41,138,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[34.991905154502,43.9896302390099],"y":[1.95808584852109,2.27091163941048],"text":["Movie: Prince of Persia: The Sands of Time <br />Box Office: 90.8 m<br /> Rating: 35","Movie: The Day After Tomorrow <br />Box Office: 186.6 m<br /> Rating: 44"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(102,166,30,1)","opacity":0.6,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(102,166,30,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.7073474470735,"r":7.30593607305936,"b":38.7214611872146,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[32.1411046779854,94.8587151613506],"tickmode":"array","ticktext":["40","50","60","70","80","90"],"tickvals":[40,50,60,70,80,90],"categoryorder":"array","categoryarray":["40","50","60","70","80","90"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"annotations":[{"text":"Rating RT","x":0.5,"y":-0.0176940639269406,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis"},{"text":"Box Office","x":-0.0185502283105023,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"right","yanchor":"center","annotationType":"axis"},{"text":"5  groups","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Bold","size":15.9402241594022},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"group","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.128425785476664,2.37293477531209],"tickmode":"array","ticktext":["3","10","30","100"],"tickvals":[0.477121254719662,1,1.47712125471966,2],"categoryorder":"array","categoryarray":["3","10","30","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Roboto-Regular","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":22.5819842258198,"yanchor":1,"ysizemode":"pixel"}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Roboto-Regular","size":11.689497716895},"y":0.96751968503937},"hovermode":"closest","barmode":"relative","autosize":false},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"4096138d353e":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"4096138d353e","visdat":{"4096138d353e":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="what-are-the-name-of-the-groups" class="section level3">
+<h3>What are the name of the groups?</h3>
+<p><br></p>
+<p><span class="math inline">\(\color{#16A085}{\text{Group 1 (Oddball):}}\)</span> <em>Movies overall well received by the public</em>, which reflected on its low revenue. The name Oddball comes from the later interest on the movies from people who consider themselves eccentric not rarely to re-validate their sense of exclusivity.</p>
+<p><br/></p>
+<p><span class="math inline">\(\color{#CF5300}{\text{Group 2 (Matinee):}}\)</span> Movies overall <em>not so well received by the critics and more formulaic</em>. In terms of box office most of them had low revenue but the movie paid itself. The name Matinee comes from the idea of that movies that did not perform that well or stopped being the hot topic for a long time occupying being aired by that time.</p>
+<p><br/></p>
+<p><span class="math inline">\(\color{#7C3F7C}{\text{Group 3 (Demolition of a budget):}}\)</span> Movies overall <em>poorly received by both critics and public</em>, which reflected on its small Box Office and low ratings. The name of the group is a wordplay with the very small revenue rendered by the movies, which “demolished” the investment of those who betted in them.</p>
+<p><br/></p>
+<p><span class="math inline">\(\color{magenta}{\text{Grupo 4 (Broke Records and Awards):}}\)</span> Movies <em>acclaimed by critics</em> and whose box office was either successful or at least decent. The movies in this group have a more serious tone, talking of serious matter that frequently create controversy (serial murders, non heterosexuality, terrorism..). The name of the group is a word play with the name of one of its movies and the sheer amount of prizes this particular movie won.</p>
+<p><br/></p>
+<p><span class="math inline">\(\color{green}{\text{Grupo 5 (BlockBusters):}}\)</span> Movies in which Jack acted that the critics didn’t like that much but who collected a huge box office, with a revenue on the scale of hundreds of millions. The term BlockBuster is usually given to movies who attract crowds to the movie theaters, which is the case of the movies who belong to this group.</p>
+<p><br></p>
+<hr />
+<p><br/></p>
+</div>
+<div id="movie-example-of-each-group" class="section level3">
+<h3>Movie-example of each group</h3>
+<p><br/></p>
+<p><span class="math inline">\(\color{#16A085}{\text{Grupo 1 (Oddball):}}\)</span></p>
+<ul>
+<li><strong>Stronger</strong>: Biographical movie about ‘Jeff Bauman’, victim of the Boston terrorist attack who lost both legs on the explosion. The film was acclaimed by the critics who complimented how well executed and moving the movie was, the movie was also praised for focusing on a story of overcoming instead of using the tragedy to do fear-mongering. The movie however was a complete failure in terms of box office.</li>
+</ul>
+<p><br/></p>
+<p><span class="math inline">\(\color{#CF5300}{\text{Grupo 2 (Matinee):}}\)</span></p>
+<ul>
+<li><strong>Life</strong>: Movie in the genre spacial sci-fi, had a box office not that expressive and the critics were equally uninspired. Was considered by many well executed but little innovative.</li>
+</ul>
+<p><br/></p>
+<p><span class="math inline">\(\color{#7C3F7C}{\text{Grupo 3 (Demolition of a budget):}}\)</span></p>
+<ul>
+<li><strong>Demolition</strong>: In this movie Jacks acts as a man back to work after losing his wife who finds comfort in the company of a telemarketing attendant who he meets when he complains about a vending machine. The movie was a failure in terms of box office as well as in terms of review. Critics pointed the movie script as the big problem, which was described as ‘pretending to be profound’ and anti-charismatic.</li>
+</ul>
+<p><br/></p>
+<p><span class="math inline">\(\color{magenta}{\text{Grupo 4 (Broke Records and Awards):}}\)</span></p>
+<ul>
+<li><strong>Brokeback Mountain</strong>: Probably Jake Gyllenhaal’s best performance till now, this movie rendered Jake a Oscar nomination and raised a lot of controversy for containing a sex scene between two man. The Academy (responsible for choosing the Oscar winners) was accused of homophobia for not choosing this movie as the winner of Best Picture , still Brokeback Mountain won another 141 awards and 128 nominations according to IMDB. The movie was considered a success both in box office as in ratings.</li>
+</ul>
+<p><br/></p>
+<p><span class="math inline">\(\color{green}{\text{Grupo 5 (BlockBusters):}}\)</span></p>
+<ul>
+<li><strong>Prince of Persia: The Sands of Time</strong>: Based on the game of same name, game which many still consider a reference in quality and innovation. The movie brought disappointed comments from both critics and fans who curiously didn’t fail to contribute to its box office.</li>
+</ul>
+</div>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/descriptive/">descriptive</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/grouping/">grouping</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/hierarchical/">hierarchical</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/05/interactive-visualization-on-got-x-xena-imdb/" data-tooltip="Interactive Visualization on GoT x Xena (IMDB)">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/05/eda-about-series-ratings-on-imdb/" data-tooltip="EDA about series ratings on IMDB">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/05/interactive-visualization-on-got-x-xena-imdb/" data-tooltip="Interactive Visualization on GoT x Xena (IMDB)">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/05/eda-about-series-ratings-on-imdb/" data-tooltip="EDA about series ratings on IMDB">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F05%2Fjake-gyllenhaals-type-of-movies%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F05%2Fjake-gyllenhaals-type-of-movies%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F05%2Fjake-gyllenhaals-type-of-movies%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in learning something about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate linear regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+                <h3 class="media-heading">Analysis on MovieLens dataset with bootstrap</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&quot;data/movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.numeric(sub(&quot;\\).*&quot;, &quot;&quot;,sub(&quot;.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/">
+                <h3 class="media-heading">Analysis on Github commits (2016-2017)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&quot;data/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;,.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
+                <h3 class="media-heading">Movie lines by gender</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
+ 
+
+ Data Overview readr::read_csv(here(&quot;data/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/">
+                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
+Considerations In the analysis below we could:
+ See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/">
+                <h3 class="media-heading">Interactive Visualization on GoT x Xena (IMDB)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Let’s compare the series Game of Thrones and Xena the Warrior Princess to answer :
+ Which one is better rated by users?  The difference is maintained throughout seasons? Where the episode is placed inside its season (beggining/end or middle) has an effect?   Employed dataset  Exploratory Data Analysis on data from IMDB about the series Game of Thrones and Xena the Warrior Princess.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+                <h3 class="media-heading">Jake Gyllenhaal&#39;s type of movies</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction  Exploratory data analysis on data from RottenTomatoes about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on this report’s repository deste relatório.
+  Entries that have no information about box office were ignored.  
+
+ Data Overview import_data(&quot;jake_gyllenhaal&quot;) filmes &lt;- read_imported_data() filmes %&gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &lt;int&gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/">
+                <h3 class="media-heading">EDA about series ratings on IMDB</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         12 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/05\/jake-gyllenhaals-type-of-movies\/';
+          
+            this.page.identifier = '\/2018\/05\/jake-gyllenhaals-type-of-movies\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-benardi-github-io-myblog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+    <script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	  MathJax.Hub.Config({
+  	    messageStyle: 'none',
+  	    showProcessingMessages: false,
+	    tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']],
+		processEscapes: true
+	      }
+	  });
+	  MathJax.Hub.Queue(function() {
+	    var i, text, code, codes = document.getElementsByTagName('code');
+	    for (i = 0; i < codes.length;) {
+	      code = codes[i];
+	      if (code.parentNode.tagName !== 'PRE' &&
+		  code.childElementCount === 0) {
+		text = code.textContent;
+		if (/^\\\((.|\s)+\\\)$/.test(text) ||
+		    /^\$(.|\s)+\$$/.test(text) ||
+		    /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+		  code.outerHTML = code.innerHTML;  
+		  continue;
+		}
+	      }
+	      i++;
+	    }
+	    });
+	</script>
+  </body>
+</html>
+

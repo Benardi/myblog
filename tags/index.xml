@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bootstrap</title>
+      <link>https://benardi.github.io/myblog/tags/bootstrap/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/bootstrap/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Cbsr</title>
@@ -17,6 +26,15 @@
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/cbsr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Descriptive</title>
+      <link>https://benardi.github.io/myblog/tags/descriptive/</link>
+      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/descriptive/</guid>
       <description></description>
     </item>
     
@@ -30,11 +48,92 @@
     </item>
     
     <item>
+      <title>Github</title>
+      <link>https://benardi.github.io/myblog/tags/github/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Got</title>
+      <link>https://benardi.github.io/myblog/tags/got/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/got/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Grouping</title>
+      <link>https://benardi.github.io/myblog/tags/grouping/</link>
+      <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/grouping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hierarchical</title>
+      <link>https://benardi.github.io/myblog/tags/hierarchical/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/hierarchical/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hypothesis Testing</title>
+      <link>https://benardi.github.io/myblog/tags/hypothesis-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/hypothesis-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Imdb</title>
       <link>https://benardi.github.io/myblog/tags/imdb/</link>
-      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/imdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Interactive</title>
+      <link>https://benardi.github.io/myblog/tags/interactive/</link>
+      <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/interactive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>K Means</title>
+      <link>https://benardi.github.io/myblog/tags/k-means/</link>
+      <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/k-means/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Logistic</title>
+      <link>https://benardi.github.io/myblog/tags/logistic/</link>
+      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/logistic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Movielens</title>
+      <link>https://benardi.github.io/myblog/tags/movielens/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/movielens/</guid>
       <description></description>
     </item>
     
@@ -48,11 +147,38 @@
     </item>
     
     <item>
-      <title>Prediction</title>
-      <link>https://benardi.github.io/myblog/tags/prediction/</link>
+      <title>Predictive</title>
+      <link>https://benardi.github.io/myblog/tags/predictive/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://benardi.github.io/myblog/tags/prediction/</guid>
+      <guid>https://benardi.github.io/myblog/tags/predictive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Regression</title>
+      <link>https://benardi.github.io/myblog/tags/regression/</link>
+      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spotify</title>
+      <link>https://benardi.github.io/myblog/tags/spotify/</link>
+      <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/spotify/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xena</title>
+      <link>https://benardi.github.io/myblog/tags/xena/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/xena/</guid>
       <description></description>
     </item>
     

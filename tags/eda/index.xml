@@ -21,5 +21,16 @@
  episodes &amp;lt;- read_csv(here(&amp;quot;data/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&amp;gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &amp;lt;chr&amp;gt; &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Wh.</description>
     </item>
     
+    <item>
+      <title>Chakrans and Dragons on IMDB</title>
+      <link>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</link>
+      <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</guid>
+      <description>Employed data Exploratory data analysis on IMDB data about TV series. Original data comes from this repository, there we have an explanation on how the data was gathered and the meaning of each variable.
+ Data under analysis Before the staggering number of different series available in our data we will analyse the following two:
+ Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;data/series_from_imdb.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -1,0 +1,1604 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.46 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Multivariate logistic regression on speed dating data</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="An analysis with multivariate logistic regression on data from a speed dating experiment from Columbia Business School">
+    <meta property="og:description" content="An analysis with multivariate logistic regression on data from a speed dating experiment from Columbia Business School">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Multivariate logistic regression on speed dating data">
+    <meta property="og:url" content="/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="An analysis with multivariate logistic regression on data from a speed dating experiment from Columbia Business School">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Multivariate logistic regression on speed dating data
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-08-05T00:00:00Z">
+        
+  August 5, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><br></p>
+<blockquote>
+<p>This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this <a href="https://github.com/Benardi/speed-dating_analysis">report repository</a>.</p>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<hr />
+<p><br></p>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<p><br></p>
+<div id="the-variables" class="section level2">
+<h2>The variables</h2>
+<p><br></p>
+<pre><code>The response variable is the variable that you are interested in learning something about.
+
+A predictor variable is a variable used in regression to predict another variable.
+
+Our response variable will be &quot;dec&quot;, we want to study how well the predictor variables can help predict its behavior and how they impact it.</code></pre>
+<p><br></p>
+<div id="each-speed-date-had-two-participants-p1-participant-1-and-p2-participant-2.-for-each-speed-date-we-the-following-variable-were-collected" class="section level5">
+<h5>Each speed date had two participants, <strong>p1</strong> (participant 1) and <strong>p2</strong> (participant 2). For each speed date we the following variable were collected:</h5>
+<p><br></p>
+<ul>
+<li><strong>iid</strong> : id of the participant p1 in the date</li>
+<li><strong>gender</strong> : gender of p1, 0 = woman</li>
+<li><strong>order</strong> : of the several dates in the night, this was the nth, according to this variable</li>
+<li><strong>pid</strong> : id of participant p2</li>
+<li><strong>int_corr</strong> : correlation between the interests of p1 and p2</li>
+<li><strong>samerace</strong> : Are p1 and p2 of the same race?</li>
+<li><strong>age_o</strong> : Age of p2</li>
+<li><strong>age</strong> : Age of p1</li>
+<li><strong>field</strong> : field of study of p1</li>
+<li><strong>race</strong> : race of p1. The code is Black/African American=1; European/Caucasian-American=2; Latino/Hispanic American=3; Asian/Pacific Islander/Asian-American=4; Native American=5; Other=6</li>
+<li><strong>from</strong> : from where p1 comes from</li>
+<li><strong>career</strong> : what career p1 wants to follow sports, tvsports, exercise, dining, museums, art, hiking, gaming, clubbing, reading, tv, theater, movies, concerts, music, shopping, yoga : From 1 to 10, how interested p1 is in each one of these activities$</li>
+<li><strong>attr</strong> : how attractive p1 thinks p2 is</li>
+<li><strong>sinc</strong> : how sincere p1 thinks p2 is</li>
+<li><strong>intel</strong> : how smart p1 thinks p2 is</li>
+<li><strong>fun</strong> : how fun p1 thinks p2 is</li>
+<li><strong>amb</strong> : how ambitious p1 thinks p2 is</li>
+<li><strong>shar</strong> : how much p1 believes they both (p1 and p2) share the same interests and hobbies</li>
+<li><strong>like</strong> : in general, how much does p1 likes p2?</li>
+<li><strong>prob</strong> : how probable p1 thinks it’s that p2 will want to meet again with p- (scale 1-10)</li>
+<li><strong>attr3_s</strong> : how attractive p1 believes itself</li>
+<li><strong>sinc3_s</strong> : how sincere p1 believes itself</li>
+<li><strong>intel3_s</strong> : how smart p1 believes itself</li>
+<li><strong>fun3_s</strong> : how fun p1 believes itself</li>
+<li><strong>amb3_s</strong> : how ambitious p1 believes itself</li>
+<li><strong>dec</strong> : whether p1 wants to meet p2 again given how the speed date went.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>data &lt;- read_csv(here::here(&quot;data/speed-dating2.csv&quot;),
+                 col_types = cols(
+                          .default = col_integer(),
+                          int_corr = col_double(),
+                          field = col_character(),
+                          from = col_character(),
+                          career = col_character(),
+                          attr = col_double(),
+                          sinc = col_double(),
+                          intel = col_double(),
+                          fun = col_double(),
+                          amb = col_double(),
+                          shar = col_double(),
+                          like = col_double(),
+                          prob = col_double(),
+                          match_es = col_double(),
+                          attr3_s = col_double(),
+                          sinc3_s = col_double(),
+                          intel3_s = col_double(),
+                          fun3_s = col_double(),
+                          amb3_s = col_double(),
+                          dec = col_character()
+                        )) %&gt;% 
+  mutate(dec = factor(dec),
+         gender = factor(gender),
+         samerace = factor(samerace),
+         race = factor(race))
+
+data %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 4,918
+## Variables: 44
+## $ iid      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,...
+## $ gender   &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+## $ order    &lt;int&gt; 4, 3, 10, 5, 7, 6, 1, 2, 8, 9, 10, 9, 6, 1, 3, 2, 7, ...
+## $ pid      &lt;int&gt; 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 11, 12, 13, 1...
+## $ int_corr &lt;dbl&gt; 0.14, 0.54, 0.16, 0.61, 0.21, 0.25, 0.34, 0.50, 0.28,...
+## $ samerace &lt;fct&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1,...
+## $ age_o    &lt;int&gt; 27, 22, 22, 23, 24, 25, 30, 27, 28, 24, 27, 22, 22, 2...
+## $ age      &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 24, 24, 24, 2...
+## $ field    &lt;chr&gt; &quot;Law&quot;, &quot;Law&quot;, &quot;Law&quot;, &quot;Law&quot;, &quot;Law&quot;, &quot;Law&quot;, &quot;Law&quot;, &quot;Law...
+## $ race     &lt;fct&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2,...
+## $ from     &lt;chr&gt; &quot;Chicago&quot;, &quot;Chicago&quot;, &quot;Chicago&quot;, &quot;Chicago&quot;, &quot;Chicago&quot;...
+## $ career   &lt;chr&gt; &quot;lawyer&quot;, &quot;lawyer&quot;, &quot;lawyer&quot;, &quot;lawyer&quot;, &quot;lawyer&quot;, &quot;la...
+## $ sports   &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ tvsports &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,...
+## $ exercise &lt;int&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7,...
+## $ dining   &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10,...
+## $ museums  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8,...
+## $ art      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 6, 6, 6, 6, 6,...
+## $ hiking   &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ gaming   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 5,...
+## $ clubbing &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 8, 8, 8, 8, 8, 8, 8,...
+## $ reading  &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10,...
+## $ tv       &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ theater  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9,...
+## $ movies   &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 8, 8, 8, 8, 8...
+## $ concerts &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 7, 7, 7, 7, 7...
+## $ music    &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8,...
+## $ shopping &lt;int&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ yoga     &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ attr     &lt;dbl&gt; 6, 7, 5, 7, 5, 4, 7, 4, 7, 5, 5, 8, 5, 7, 6, 8, 7, 5,...
+## $ sinc     &lt;dbl&gt; 9, 8, 8, 6, 6, 9, 6, 9, 6, 6, 7, 5, 8, 9, 8, 7, 5, 8,...
+## $ intel    &lt;dbl&gt; 7, 7, 9, 8, 7, 7, 7, 7, 8, 6, 8, 6, 9, 7, 7, 8, 9, 7,...
+## $ fun      &lt;dbl&gt; 7, 8, 8, 7, 7, 4, 4, 6, 9, 8, 4, 6, 6, 6, 9, 3, 6, 5,...
+## $ amb      &lt;dbl&gt; 6, 5, 5, 6, 6, 6, 6, 5, 8, 10, 6, 9, 3, 5, 7, 6, 7, 9...
+## $ shar     &lt;dbl&gt; 5, 6, 7, 8, 6, 4, 7, 6, 8, 8, 3, 6, 4, 7, 8, 2, 9, 5,...
+## $ like     &lt;dbl&gt; 7, 7, 7, 7, 6, 6, 6, 6, 7, 6, 6, 7, 6, 7, 8, 6, 8, 5,...
+## $ prob     &lt;dbl&gt; 6, 5, NA, 6, 6, 5, 5, 7, 7, 6, 4, 3, 7, 8, 6, 5, 7, 6...
+## $ match_es &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ attr3_s  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ sinc3_s  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ intel3_s &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ fun3_s   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ amb3_s   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ dec      &lt;fct&gt; yes, yes, yes, yes, yes, no, yes, no, yes, yes, no, n...</code></pre>
+</div>
+</div>
+<div id="data-exploration" class="section level2">
+<h2>Data exploration</h2>
+<pre class="r"><code>data %&gt;%
+  na.omit(race) %&gt;%
+  ggplot(aes(race,y=(..count..)/sum(..count..))) +
+    geom_bar(color = &quot;black&quot;,
+           fill = &quot;grey&quot;) +
+  labs(x= &quot;Participant Race&quot;,
+       y = &quot;Relative Frequency&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<ul>
+<li>Most of the participants are white (code = 2)</li>
+<li>There were no Native Americans involved (code = 5)</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  na.omit(intel) %&gt;%
+  ggplot(aes(intel, ..ndensity..)) +
+  geom_histogram(color = &quot;black&quot;,
+                 fill = &quot;grey&quot;,
+                 breaks=seq(0, 10, by = 1)) +
+  scale_x_continuous(breaks=seq(0, 10, by = 1)) +
+  labs(x= &quot;Intelligence (intel)&quot;,
+       y = &quot;Relative Density&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>Most of the time P1 gave P2 a score around 7 and 8 for intelligence.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  na.omit(attr) %&gt;%
+  ggplot(aes(attr, ..ndensity..)) +
+  geom_histogram(color = &quot;black&quot;,
+                 fill = &quot;grey&quot;,
+                 breaks=seq(0, 10, by = 1)) +
+  scale_x_continuous(breaks=seq(0, 10, by = 1)) +
+  labs(x= &quot;Attractivnes (attr)&quot;,
+       y = &quot;Relative Density&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li>Most of the time P1 gave P2 a score around 5 and 6 for attractiveness.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  na.omit(amb) %&gt;%
+  ggplot(aes(amb, ..ndensity..)) +
+  geom_histogram(color = &quot;black&quot;,
+                 fill = &quot;grey&quot;,
+                 breaks=seq(0, 10, by = 1)) +
+  scale_x_continuous(breaks=seq(0, 10, by = 1)) +
+  labs(x= &quot;Ambition (amb)&quot;,
+       y = &quot;Relative Density&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>Most of the time P1 gave P2 a score around 6 and 7 for ambition.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  na.omit(sinc) %&gt;%
+  ggplot(aes(sinc, ..ndensity..)) +
+  geom_histogram(color = &quot;black&quot;,
+                 fill = &quot;grey&quot;,
+                 breaks=seq(0, 10, by = 1)) +
+  scale_x_continuous(breaks=seq(0, 10, by = 1)) +
+  labs(x= &quot;Sincerity (sinc)&quot;,
+       y = &quot;Relative Density&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ul>
+<li>Most of the time P1 gave P2 a score around 6 and 8 for sincerity.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  na.omit(like) %&gt;%
+  ggplot(aes(like, ..ndensity..)) +
+  geom_histogram(color = &quot;black&quot;,
+                 fill = &quot;grey&quot;,
+                 breaks=seq(0, 10, by = 1)) +
+  scale_x_continuous(breaks=seq(0, 10, by = 1)) +
+  labs(x= &quot;Like (like)&quot;,
+       y = &quot;Relative Density&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>Most of the time P1 gave P2 a score around 5 and 6 for like.</li>
+</ul>
+</div>
+<div id="splitting-data-for-cross-validation" class="section level2">
+<h2>Splitting Data for Cross Validation</h2>
+<pre class="r"><code>data %&gt;% # Keep only candidate predictor variables and response variable
+  select(dec,fun, prob, order, amb,
+         attr, sinc, prob, shar, 
+         intel, like, gender, samerace) %&gt;%
+  na.omit() %&gt;% # remove NAs
+   mutate_at(
+     .vars = vars(fun, prob, order,attr, ## Put numeric predictor variables on same scale 
+                  sinc, like, prob, shar,intel),
+     .funs = funs(as.numeric(scale(.)))) -&gt; data_scaled
+
+data_scaled %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 4,101
+## Variables: 12
+## $ dec      &lt;fct&gt; yes, yes, yes, yes, no, yes, no, yes, yes, no, no, no...
+## $ fun      &lt;dbl&gt; 0.3673163, 0.8696052, 0.3673163, 0.3673163, -1.139550...
+## $ prob     &lt;dbl&gt; 0.44246160, -0.01644963, 0.44246160, 0.44246160, -0.0...
+## $ order    &lt;dbl&gt; -0.90758631, -1.08582650, -0.72934613, -0.37286577, -...
+## $ amb      &lt;dbl&gt; 6, 5, 6, 6, 6, 6, 5, 8, 10, 6, 9, 3, 5, 7, 6, 7, 9, 4...
+## $ attr     &lt;dbl&gt; -0.0256121, 0.4905314, 0.4905314, -0.5417556, -1.0578...
+## $ sinc     &lt;dbl&gt; 1.09093408, 0.53812046, -0.56750679, -0.56750679, 1.0...
+## $ shar     &lt;dbl&gt; -0.1395212, 0.3235922, 1.2498190, 0.3235922, -0.60263...
+## $ intel    &lt;dbl&gt; -0.1541995, -0.1541995, 0.4728427, -0.1541995, -0.154...
+## $ like     &lt;dbl&gt; 0.52052548, 0.52052548, 0.52052548, -0.01812579, -0.0...
+## $ gender   &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+## $ samerace &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1,...</code></pre>
+<ul>
+<li>Selecting promising predictors, filtering invalid numbers and putting the variables on appropriate scale</li>
+</ul>
+<p><br></p>
+<div id="for-the-sake-of-simplicity-well-follow-the-8020-thumb-rule-based-on-paretos-principle-and-put-80-of-our-dataset-in-the-training-set-and-20-in-the-test-set." class="section level4">
+<h4>For the sake of simplicity we’ll follow the (80/20) thumb rule (based on Pareto’s principle) and put 80% of our dataset in the training set and 20% in the test set.</h4>
+<p><br></p>
+<pre class="r"><code>set.seed(101) # We set the set for reason of reproducibility
+
+## Adding surrogate key to dataframe
+data_scaled$id &lt;- 1:nrow(data_scaled)
+
+data_scaled %&gt;% 
+  dplyr::sample_frac(.8) -&gt; training_data
+
+training_data %&gt;% 
+  glimpse()</code></pre>
+<pre><code>## Observations: 3,281
+## Variables: 13
+## $ dec      &lt;fct&gt; yes, no, no, yes, no, no, yes, no, yes, yes, yes, no,...
+## $ fun      &lt;dbl&gt; 0.3673163, 0.3673163, -0.1349725, 0.8696052, -0.63726...
+## $ prob     &lt;dbl&gt; 0.90137283, 2.27810651, -0.01644963, 0.90137283, 0.90...
+## $ order    &lt;dbl&gt; 0.16185478, -0.55110595, -0.90758631, 0.87481550, -0....
+## $ amb      &lt;dbl&gt; 8, 10, 6, 7, 4, 7, 6, 2, 9, 6, 6, 8, 7, 6, 8, 6, 8, 9...
+## $ attr     &lt;dbl&gt; 1.5228184, -1.5740426, -0.0256121, 0.4905314, -2.0901...
+## $ sinc     &lt;dbl&gt; 0.53812046, 1.64374770, -0.01469317, 0.53812046, -2.2...
+## $ shar     &lt;dbl&gt; 1.2498190, -0.1395212, -0.1395212, 1.2498190, -1.5288...
+## $ intel    &lt;dbl&gt; 1.0998849, -0.1541995, -0.7812416, 0.4728427, -2.0353...
+## $ like     &lt;dbl&gt; 1.05917675, -1.09542833, -0.01812579, 1.05917675, -2....
+## $ gender   &lt;fct&gt; 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0,...
+## $ samerace &lt;fct&gt; 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1,...
+## $ id       &lt;int&gt; 1527, 180, 2909, 2696, 1024, 1230, 2396, 1366, 2546, ...</code></pre>
+<ul>
+<li>Randomly selecting the <strong>training data</strong></li>
+</ul>
+<pre class="r"><code>dplyr::anti_join(data_scaled, 
+                 training_data, 
+                 by = &#39;id&#39;) -&gt; testing_data
+testing_data %&gt;% 
+  glimpse()</code></pre>
+<pre><code>## Observations: 820
+## Variables: 13
+## $ dec      &lt;fct&gt; no, yes, no, no, no, yes, no, no, no, no, yes, no, no...
+## $ fun      &lt;dbl&gt; -0.1349725, -0.1349725, -1.6418391, 0.3673163, 0.8696...
+## $ prob     &lt;dbl&gt; 0.90137283, 1.36028406, -0.01644963, 0.90137283, -1.8...
+## $ order    &lt;dbl&gt; -0.55110595, -1.44230686, -1.26406668, -1.44230686, -...
+## $ amb      &lt;dbl&gt; 3, 5, 6, 9, 6, 7, 8, 5, 4, 3, 2, 8, 7, 7, 6, 6, 1, 10...
+## $ attr     &lt;dbl&gt; -0.5417556, 0.4905314, 1.0066749, 1.0066749, -1.05789...
+## $ sinc     &lt;dbl&gt; 0.53812046, 1.09093408, -0.01469317, -0.01469317, -0....
+## $ shar     &lt;dbl&gt; -0.6026347, 0.7867056, -1.5288615, 0.7867056, 0.78670...
+## $ intel    &lt;dbl&gt; 1.0998849, -0.1541995, 0.4728427, 1.0998849, 0.472842...
+## $ like     &lt;dbl&gt; -0.01812579, 0.52052548, -0.01812579, 1.05917675, -1....
+## $ gender   &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,...
+## $ samerace &lt;fct&gt; 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0,...
+## $ id       &lt;int&gt; 12, 13, 15, 27, 30, 31, 32, 39, 42, 50, 51, 62, 96, 9...</code></pre>
+<ul>
+<li>The rest of the data will be the <strong>testing data</strong> (Disjoint sets)</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="explanation-on-logistic-regression" class="section level1">
+<h1>Explanation on logistic regression</h1>
+<p><br></p>
+<blockquote>
+<p>If you already know your way around logistic regression feel free to skip this section. If you ever feel unsure about it feel free to come back here and consult it.</p>
+</blockquote>
+<p><br></p>
+<div id="formulas-and-definitions" class="section level2">
+<h2>Formulas and definitions</h2>
+<p><br></p>
+<p>Let’s use as example our aforementioned response variable <span class="math inline">\(dec\)</span>, and let’s suppose we’ll use as our sole predictor <span class="math inline">\(like\)</span>. In the end it all boils down to a conditional probability for a certain value of <span class="math inline">\(dec\)</span> and <span class="math inline">\(like\)</span>:</p>
+<p><br></p>
+<p><span class="math display">\[\large P(y \ | \ x ) = z, \normalsize where: \ y = dec;\ x=like;\]</span></p>
+<p><br></p>
+<p>As you may have noticed <span class="math inline">\(dec\)</span> is a binary variable (p1 either says <strong>yes</strong> or <strong>no</strong>), for this reason we work with a sigmoid function for the probability of a certain outcome of <span class="math inline">\(dec\)</span>:</p>
+<p><br></p>
+<p><span class="math display">\[\large P(y\ | \ x)=\frac{e^{b_{0}+b_{1} \cdot x}}{1 + e^{b_{0}+b_{1} \cdot x}}, \; \normalsize where: \ y = dec;\ x=like;\]</span></p>
+<p><br></p>
+<p>However, to talk about how the predictor <span class="math inline">\(like\)</span> impacts the response variable <span class="math inline">\(dec\)</span>, which means talking about <span class="math inline">\(b_{1}\)</span> it’s more convenient to talk in terms of <em><strong>odds ratio</strong></em>:</p>
+<p><br></p>
+<p><span class="math display">\[\large \frac{P(y\ | \ x)}{1 - P(y \ | \ x)} =e^{b_{0}+b_{1} \cdot x_{1}}, \; \normalsize where: \ y = dec;\ x_{1}=like;\]</span></p>
+<p><br></p>
+<p>The libraries usually render the coefficients in the following form:</p>
+<p><br></p>
+<p><span class="math display">\[\large log(\frac{P(y\ | \ x)}{1 - P(y\ | \ x)}) =b_{0}+b_{1} \cdot x_{1}, \; \normalsize where: \ y = dec;\ x_{1}=like;\]</span></p>
+<p><br></p>
+</div>
+<div id="numeric-example" class="section level2">
+<h2>Numeric example</h2>
+<p><br></p>
+<p>In my experience an example with actual numbers helps a lot, so let’s assume these are the following values for our variables (by means of the logistic regression):</p>
+<p><span class="math inline">\(b1 = 0.9441278, \\ b0 = -6.2119061, \\ y = 1 \ (p1 \ wants \ to \ see \ p2 \ again ).\)</span></p>
+<p><br></p>
+<p>Our variable’s values would render the following formula in terms of standard library output:</p>
+<p><br></p>
+<p><span class="math display">\[\large log(\frac{P(y = 1\ | \ x)}{1 - P(y = 1\ | \ x)}) =-6.2119061+0.9441278 \cdot x_{1}, \; \normalsize where: \ y = dec;\ x_{1}=like;\]</span></p>
+<p><br></p>
+<p>Knowing that <span class="math inline">\(e^{-6.2119061} \sim 0.002005411\)</span> the more meaningful formula with the actual exponentiation would look like: <br></p>
+<p><span class="math display">\[\large \frac{P(y=1 \ | \ x)}{1 - P(y=1 \ | \ x)} =0.002005411 \cdot e^{b_{1} \cdot x}, \; \normalsize where: \ y = dec;\ x=like;\]</span></p>
+<p><br></p>
+<p>Which depending on <span class="math inline">\(x\)</span> will look like:</p>
+<p><br></p>
+<p><span class="math inline">\(\large \frac{P(y=1 \ | \ x)}{1 - P(y=1 \ | \ x)} =0.002005411, \; \normalsize if: \ x=0;\)</span></p>
+<p><span class="math inline">\(\large \frac{P(y=1 \ | \ x)}{1 - P(y=1 \ | \ x)} =0.002005411 \cdot e^{b_{1}}, \; \normalsize where: \ x=1;\)</span></p>
+<p><span class="math inline">\(\large \frac{P(y=1 \ | \ x)}{1 - P(y=1 \ | \ x)} =0.002005411 \cdot e^{2 \cdot b_{1}}, \; \normalsize where: \ x=2;\)</span></p>
+<p><br></p>
+<p>And so forth…</p>
+<p><br></p>
+<p>Notice that at the end how the formula changes depends mostly on the term <span class="math inline">\(\large e^{b_{1} \cdot x}\)</span>. If we have the exponentiation <span class="math inline">\(A^{B}\)</span> we have three possibilities:</p>
+<p><span class="math inline">\(B &gt; 0 \ \)</span> : Then <span class="math inline">\(A^{B} &gt; 1\)</span> and <span class="math inline">\(A^{B}\)</span> will be bigger the bigger <span class="math inline">\(B\)</span> is.</p>
+<p><span class="math inline">\(B = 0 \ \)</span> : Then <span class="math inline">\(A^{B} = 1\)</span></p>
+<p><span class="math inline">\(B &lt; 0 \ \)</span>: Then <span class="math inline">\(A^{B}\)</span> boils down to <span class="math inline">\(\frac{1}{A^{B}}\)</span> which will be a smaller fraction the bigger <span class="math inline">\(B\)</span> is.</p>
+<p><br></p>
+<p>Mind now that our <span class="math inline">\(b1 &gt; 0\)</span> or in other words <span class="math inline">\(e^{b1} &gt; 1\)</span>, therefore it will have a positive effect on <span class="math inline">\(\frac{P(y=1 \ | \ x)}{1 - P(y=1 \ | \ x)}\)</span>, and the bigger it’s the stronger the positive effect. Therefore <span class="math inline">\(like\)</span> has a positive effect on the <em><strong>oddratio</strong></em> of <span class="math inline">\(dec = 1\)</span> over <span class="math inline">\(dec = 0\)</span>.</p>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="analysis-questions" class="section level1">
+<h1>Analysis Questions</h1>
+<p><br></p>
+<blockquote>
+<p>Which factors (predictors) have a significant effect on the chance of p1 deciding to meet with p2 again? Are their effect positive or negative?</p>
+</blockquote>
+<blockquote>
+<p>Which factor (predictor) has the most effect (relevance) on the chance of p1 deciding to meet with p2 again?</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="logistic-regression" class="section level1">
+<h1>Logistic Regression</h1>
+<pre class="r"><code>glm(dec ~ like + fun + attr + shar + sinc + prob + amb + intel + intel * shar,
+      data = training_data, 
+      family = &quot;binomial&quot;) -&gt; bm
+
+glance(bm)</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1         4468.    3280 -1514. 3049. 3110.    3029.        3271</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+<div id="residual-analysis" class="section level2">
+<h2>Residual Analysis</h2>
+<p><br></p>
+<blockquote>
+<p>Residual Analysis can be very hard to use to help you understand what is going on with your logistic regression model. So we should take what they say with a grain of salt and probably give more weight to what <span class="math inline">\(McFadden&#39;s \ pseudo \ R2\)</span> said.</p>
+</blockquote>
+<p><br></p>
+<p>Let’s keep the residual data in a specific data frame</p>
+<pre class="r"><code>mod.res &lt;- resid(bm)
+std.resid &lt;- rstandard(bm)
+dec &lt;- training_data$dec
+
+resid_data &lt;- data.frame(mod.res,std.resid,training_data,
+                       stringsAsFactors=FALSE)
+resid_data %&gt;% 
+  sample_n(10)</code></pre>
+<pre><code>##         mod.res  std.resid dec        fun       prob       order amb
+## 1545  1.0811017  1.0821094 yes -0.6372614  0.4424616 -0.01638541   6
+## 3142 -0.6311717 -0.6338376  no -0.1349725  1.3602841  1.58777623  10
+## 1992  0.8239655  0.8249330 yes  0.8696052  0.4424616  1.40953605   6
+## 3056 -1.1644742 -1.1676620  no -0.6372614  1.3602841  2.12249678   8
+## 585  -1.1156755 -1.1175782  no -0.1349725  1.3602841  1.76601641   5
+## 694   1.0827327  1.0843812 yes -0.1349725  0.4424616  0.87481550   7
+## 606  -0.6816411 -0.6836557  no -1.1395502 -0.9342721  1.05305569   3
+## 400  -0.3565621 -0.3569524  no -2.1441279 -0.9342721  1.23129587   3
+## 705  -0.2253665 -0.2255826  no -1.1395502 -1.8520946  0.34009496   8
+## 1156 -1.5431694 -1.5490716  no -1.6418391  0.4424616 -0.55110595   6
+##            attr        sinc       shar      intel        like gender
+## 1545  0.4905314 -0.56750679 -0.1395212 -0.7812416 -0.01812579      0
+## 3142 -1.0578991  1.64374770  1.7129324  1.7269270  0.52052548      0
+## 1992  1.0066749 -0.01469317  0.3235922 -0.1541995 -0.01812579      1
+## 3056 -0.0256121 -1.12032042  0.3235922  0.4728427 -0.01812579      0
+## 585  -0.0256121 -0.56750679 -0.1395212 -0.7812416 -0.55677706      1
+## 694  -0.5417556 -0.56750679  1.2498190 -0.1541995  0.52052548      1
+## 606  -1.0578991 -1.12032042 -1.5288615 -1.4082838 -0.01812579      1
+## 400  -1.0578991 -2.22594767 -1.0657481 -2.0353260 -1.63407961      0
+## 705   0.4905314 -1.12032042 -1.0657481 -2.0353260 -2.17273088      1
+## 1156  1.5228184 -1.12032042 -1.0657481 -0.7812416 -0.01812579      1
+##      samerace   id
+## 1545        1  996
+## 3142        0 1040
+## 1992        0 3749
+## 3056        1 3459
+## 585         1 3819
+## 694         0 3906
+## 606         0 3867
+## 400         1  419
+## 705         0  452
+## 1156        1  552</code></pre>
+<div id="against-each-predictor" class="section level3">
+<h3>Against each predictor</h3>
+<pre class="r"><code>resid_data %&gt;% 
+  ggplot(aes(intel,mod.res)) + 
+  geom_point(alpha=0.4) + 
+  labs(x = &quot;Predictor Intelligence (intel)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; intel_resid
+
+resid_data %&gt;% 
+  ggplot(aes(fun,mod.res)) + 
+  geom_point(alpha=0.4) + 
+  labs(x = &quot;Predictor Funny (fun)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; fun_resid
+
+gridExtra::grid.arrange(intel_resid,
+                        fun_resid, 
+                        ncol = 2)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ul>
+<li>No alarming results in terms of extreme values, obviously non-linear patterns nor heteroscedasticity.</li>
+</ul>
+<pre class="r"><code>resid_data %&gt;% 
+  ggplot(aes(attr,mod.res)) + 
+  geom_point(alpha=0.4) +
+  labs(x = &quot;Predictor Attractiveness (attr)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; attr_resid
+
+resid_data %&gt;% 
+  ggplot(aes(amb,mod.res)) + 
+  geom_point(alpha=0.4) +
+  labs(x = &quot;Predictor Ambition (amb)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; amb_resid
+
+gridExtra::grid.arrange(attr_resid,
+                        amb_resid, 
+                        ncol = 2)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>No alarming results in terms of extreme values, obviously non-linear patterns nor heteroscedasticity.</li>
+</ul>
+<pre class="r"><code>resid_data %&gt;% 
+  ggplot(aes(sinc,mod.res)) + 
+  geom_point(alpha=0.4) +
+  labs(x = &quot;Predictor Sincerity (sinc)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; sinc_resid
+
+resid_data %&gt;% 
+  ggplot(aes(like,mod.res)) + 
+  geom_point(alpha=0.4) + 
+  labs(x = &quot;Predictor Like (like)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; like_resid
+
+gridExtra::grid.arrange(sinc_resid, 
+                        like_resid,
+                        ncol=2)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<ul>
+<li>No alarming results in terms of extreme values, obviously non-linear patterns nor heteroscedasticity.</li>
+</ul>
+<pre class="r"><code>resid_data %&gt;% 
+  ggplot(aes(shar,mod.res)) + 
+  geom_point(alpha=0.4) +
+  labs(x = &quot;Predictor Shared (shar)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; shar_resid
+
+resid_data %&gt;% 
+  ggplot(aes(prob,mod.res)) + 
+  geom_point(alpha=0.4) + 
+  labs(x = &quot;Predictor Probability (prob)&quot;,
+       y = &quot;Model Residual&quot;) -&gt; prob_resid
+
+gridExtra::grid.arrange(shar_resid, 
+                        prob_resid,
+                        ncol=2)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>No alarming results in terms of extreme values, obviously non-linear patterns nor heteroscedasticity.</li>
+</ul>
+<p><br></p>
+<div id="looking-at-each-predictor-against-the-model-residual-we-can-say" class="section level4">
+<h4>Looking at each predictor against the model residual we can say:</h4>
+<ul>
+<li>They’re not symmetrically distributed, nor they tend to cluster towards the middle of the plot.</li>
+<li>They’re relatively clustered around the lower single digits of the y-axis (e.g., ideally would be 0.5 or 1.5), while not ideal it could be worse.</li>
+</ul>
+</div>
+</div>
+<div id="against-whole-model" class="section level3">
+<h3>Against whole model</h3>
+<pre class="r"><code>bm %&gt;%
+  ggplot(aes(.fitted, .resid)) + 
+  geom_point() +
+  stat_smooth(method=&quot;loess&quot;) + 
+  geom_hline(yintercept=0, col=&quot;red&quot;, linetype=&quot;dashed&quot;) + 
+  xlab(&quot;Fitted values&quot;) + ylab(&quot;Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Fitted Plot&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li>There’s no distinctive pattern in the plot, therefore this suggests that there weren’t non-linear patterns in the data that couldn’t be explained by the model and were left out in the residuals.</li>
+</ul>
+<blockquote>
+<p>The data doesn’t seem to demand a non-linear regression.</p>
+</blockquote>
+<pre class="r"><code>y &lt;- quantile(resid_data$std.resid[!is.na(resid_data$std.resid)], c(0.25, 0.75))
+x &lt;- qnorm(c(0.25, 0.75))
+slope &lt;- diff(y)/diff(x)
+int &lt;- y[1L] - slope * x[1L]
+
+resid_data %&gt;%
+  ggplot(aes(sample=std.resid)) +
+  stat_qq(shape=1, size=3) +      # open circles
+  labs(title=&quot;Normal Q-Q&quot;,        # plot title
+  x=&quot;Theoretical Quantiles&quot;,      # x-axis label
+  y=&quot;Standardized Residuals&quot;) +   # y-axis label
+  geom_abline(slope = slope,
+              color = &quot;red&quot;,
+              size = 0.8,
+              intercept = int,
+              linetype=&quot;dashed&quot;)  # dashed reference line</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li>There’s some deviation from the normal distribution on both left and right side of the qq plot, but otherwise the standardized residuals are not that far way from the normal distribution. <em>For a <strong>logistic regression</strong> our qqplot is very well behaved</em>.</li>
+<li>The Normal Q-Q plot helps you detect if your residuals are normally distributed. But the deviance residuals don’t have to be normally distributed for the model to be valid, so the normality / non-normality of the residuals doesn’t necessarily tell you anything.</li>
+</ul>
+<blockquote>
+<p>This suggests that there would be a better combination of predictors to be found, although the current one still seems considerably appropriate.</p>
+</blockquote>
+<pre class="r"><code>bm %&gt;%
+  ggplot(aes(.fitted, 
+             sqrt(abs(.stdresid)))) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;,
+              na.rm = TRUE) +
+  labs(title = &quot;Scale-Location&quot;,
+       x= &quot;Fitted Value&quot;,
+       y = expression(sqrt(&quot;|Standardized residuals|&quot;)))</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<ul>
+<li>The residuals appear to be somewhat randomly spread, however there’s a tendency in them to form a parabola.</li>
+<li>There’s some degree of violation on the assumption of equal variance (homoscedasticity).</li>
+</ul>
+<blockquote>
+<p>Confirmation of the qqplot results.</p>
+</blockquote>
+<pre class="r"><code>bm %&gt;%
+  ggplot(aes(.hat, .stdresid)) + 
+  geom_point(aes(size=.cooksd), na.rm=TRUE) +
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) +
+  xlab(&quot;Leverage&quot;)+ylab(&quot;Standardized Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Leverage Plot&quot;) + 
+  scale_size_continuous(&quot;Cook&#39;s Distance&quot;, range=c(1,5)) +    
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<ul>
+<li>All the occurrences have low values of Cook’s Distance (below 0.1).</li>
+</ul>
+<blockquote>
+<p>There are no “outliers”/extreme values who are influential cases (i.e., subjects) and would therefore have an undue influence on the regression line.</p>
+</blockquote>
+<p><br></p>
+<pre><code>Overall our residua analysis suggests that our regression fit the data very well. 
+There may be a better model out there but ours does a pretty good job. </code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="model-coefficients" class="section level2">
+<h2>Model Coefficients</h2>
+<pre class="r"><code>tidy(bm, conf.int = TRUE)</code></pre>
+<pre><code>## # A tibble: 10 x 7
+##    term        estimate std.error statistic  p.value conf.low conf.high
+##    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 (Intercept)   0.910     0.243      3.75  1.76e- 4   0.436     1.39  
+##  2 like          1.12      0.0905    12.3   6.54e-35   0.940     1.30  
+##  3 fun           0.216     0.0743     2.91  3.65e- 3   0.0706    0.362 
+##  4 attr          0.884     0.0682    13.0   1.91e-38   0.752     1.02  
+##  5 shar          0.326     0.0642     5.08  3.71e- 7   0.201     0.453 
+##  6 sinc         -0.407     0.0698    -5.83  5.51e- 9  -0.544    -0.271 
+##  7 prob          0.377     0.0556     6.78  1.18e-11   0.269     0.487 
+##  8 amb          -0.225     0.0364    -6.19  6.01e-10  -0.297    -0.154 
+##  9 intel        -0.0601    0.0745    -0.806 4.20e- 1  -0.206     0.0857
+## 10 shar:intel   -0.0292    0.0528    -0.553 5.80e- 1  -0.134     0.0736</code></pre>
+<pre class="r"><code>broom::tidy(bm,
+            conf.int = TRUE,
+            conf.level = 0.95) %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  ggplot(aes(term, estimate,
+             ymin = conf.low,
+             ymax = conf.high)) +
+  geom_errorbar(size = 0.8, width= 0.4) +
+  geom_point(color = &quot;red&quot;, size = 2) +
+  geom_hline(yintercept = 0, colour = &quot;darkred&quot;) +
+  labs(x = &quot;Predictor variable&quot;,
+       title = &quot;Logistic regression terms&quot;,
+       y = expression(paste(&quot;estimated &quot;, &#39;b&#39;,&quot; (95% confidence)&quot;)))</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>The coefficients here follow a generalization of the formula <span class="math display">\[\normalsize log(\frac{P(y\ | \ x)}{1 - P(y\ | \ x)}) =b_{0}+b_{1} \cdot x_{1} \;\]</span></p>
+<p>This particular alternative doesn’t give a clear idea on the magnitude of the coefficients’ effect. There are however some things that can be extracted:</p>
+<ul>
+<li><strong>intel</strong> and <strong>shar * intel</strong> have no significant effect as (their C.I) regarding <span class="math inline">\(b\)</span> intersect 0.</li>
+<li><strong>amb, attr, fun, like, prob, shar</strong> and <strong>sinc</strong> have significant effect as (their C.I) don’t intersect 1.
+<ul>
+<li><strong>amb</strong> and <strong>sinc</strong> have a negative effect on the on the response variable.</li>
+<li><strong>attr, fun, like ,prob</strong> and <strong>shar</strong> have a positive effect on the response variable.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><strong>like</strong> and <strong>attr</strong> seem to have the highest effect on the response variable, farthest from 0.
+<ul>
+<li>Despite intersection with <strong>attr</strong>, <strong>like</strong> seems to have the biggest impact on the response variable.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<pre class="r"><code># EXPONENTIATING:
+tidy(bm, conf.int = TRUE, exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 10 x 7
+##    term        estimate std.error statistic  p.value conf.low conf.high
+##    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 (Intercept)    2.48     0.243      3.75  1.76e- 4    1.55      4.00 
+##  2 like           3.05     0.0905    12.3   6.54e-35    2.56      3.65 
+##  3 fun            1.24     0.0743     2.91  3.65e- 3    1.07      1.44 
+##  4 attr           2.42     0.0682    13.0   1.91e-38    2.12      2.77 
+##  5 shar           1.39     0.0642     5.08  3.71e- 7    1.22      1.57 
+##  6 sinc           0.666    0.0698    -5.83  5.51e- 9    0.580     0.763
+##  7 prob           1.46     0.0556     6.78  1.18e-11    1.31      1.63 
+##  8 amb            0.798    0.0364    -6.19  6.01e-10    0.743     0.857
+##  9 intel          0.942    0.0745    -0.806 4.20e- 1    0.813     1.09 
+## 10 shar:intel     0.971    0.0528    -0.553 5.80e- 1    0.875     1.08</code></pre>
+<pre class="r"><code>broom::tidy(bm,
+            conf.int = TRUE,
+            conf.level = 0.95,
+            exponentiate = TRUE) %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  ggplot(aes(term, estimate,
+             ymin = conf.low,
+             ymax = conf.high)) +
+  geom_errorbar(size = 0.8, width= 0.4) +
+  geom_point(color = &quot;red&quot;, size = 2) +
+  geom_hline(yintercept = 1, colour = &quot;darkred&quot;) +
+  labs(x = &quot;Predictor variable&quot;,
+       title = &quot;Exponentiated logistic regression terms&quot;,
+       y = expression(paste(&quot;estimated &quot;, &#39;e&#39;^{&#39;b&#39;},&quot; (95% confidence)&quot;))) +
+  ylim(0,4)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>The coefficients here follow a generalization of the formula <span class="math display">\[\normalsize \frac{P(y\ | \ x)}{1 - P(y \ | \ x)} =e^{b_{0}+b_{1} \cdot x_{1}} \;\]</span></p>
+<p>As mentioned in the previous section when <span class="math inline">\(e^{b} &gt; 1\)</span> its effect is positive and when <span class="math inline">\(e^{b} &lt; 1\)</span> it has a negative effect. Therefore:</p>
+<ul>
+<li><p><strong>intel</strong> and <strong>shar * intel</strong> have no significant effect as (their C.I) intersect 1.</p></li>
+<li><strong>amb, attr, fun, like, prob, shar</strong> and <strong>sinc</strong> have significant effect as (their C.I) don’t intersect 1.
+<ul>
+<li><strong>amb</strong> and <strong>sinc</strong> have a negative effect on the <strong>oodratio</strong> of <span class="math inline">\(dec = 1\)</span> over <span class="math inline">\(dec = 0\)</span>.</li>
+<li><strong>attr, fun, like ,prob</strong> and <strong>shar</strong> have a positive effect on the <strong>oodratio</strong> of <span class="math inline">\(dec = 1\)</span> over <span class="math inline">\(dec = 0\)</span>.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<p>A multiplier of negative effect is strongest <em>the farther it’s from 1 and the closer it’s to 0</em> while A multiplier of positive effect is strongest <em>the farther it’s from 1 and the closer it’s to <span class="math inline">\(+\infty\)</span></em>.</p>
+<p><br></p>
+<div id="the-predictor-like-is-the-most-relevant-of-the-candidates-i.e.its-the-one-has-that-the-most-effect-on-the-chance-of-p1-deciding-to-meet-with-p2-again." class="section level5">
+<h5>The predictor <strong>like</strong> is the most relevant of the candidates i.e. it’s the one has that the most effect on the chance of p1 deciding to meet with p2 again.</h5>
+<ul>
+<li>The predictor <strong>like</strong>’s estimate range is the farthest from 1. To have an idea C.I for <strong>like</strong> is around 3 so it’s basically tripling the <strong>oddratio</strong> when <span class="math inline">\(like = 1\)</span>.</li>
+<li>To have a multiplier of negative effect comparable to <strong>like</strong> its C.I. would need to be around <span class="math inline">\(\frac{1}{3}\)</span>, so it would cut by three the <strong>oddratio</strong> when its value is 1 the same way <strong>like</strong> triples it when <span class="math inline">\(like = 1\)</span>.</li>
+<li>As we can see in the plot the range of all other predictors in terms of C.I. are far too close to 1 to compare to <strong>like</strong> with the exception of <strong>attr</strong>.
+<ul>
+<li>While <strong>attr</strong> intersects <strong>like</strong> the intersection is not big enough to completely dismiss any possibility of significant difference between them. For this reason we’ll still consider <strong>like</strong> as the most relevant with <strong>attr</strong> dangerously close as second.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="cross-validation" class="section level1">
+<h1>Cross Validation</h1>
+<p><br></p>
+<div id="roc-curve" class="section level2">
+<h2>ROC Curve</h2>
+<pre class="r"><code># Compute AUC for predicting Class with the model
+prob &lt;- predict(bm, newdata=testing_data, type=&quot;response&quot;)
+pred &lt;- prediction(prob, testing_data$dec)
+perf &lt;- performance(pred, measure = &quot;tpr&quot;, x.measure = &quot;fpr&quot;)
+
+autoplot(perf) +
+  labs(x=&quot;False Positive Rate&quot;, 
+       y=&quot;True Positive Rate&quot;,
+       title=&quot;ROC Curve&quot;)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<pre class="r"><code>auc &lt;- performance(pred, measure = &quot;auc&quot;)
+auc &lt;- auc@y.values[[1]]
+auc</code></pre>
+<pre><code>## [1] 0.863979</code></pre>
+<ul>
+<li>AUC values above 0.80 indicate that the model does a good job.</li>
+<li>With a result of <span class="math inline">\(0.863979\)</span> the computed AUC for the predicting Class shows that the model does a good job in discriminating between the two categories which comprise our target variable.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="classification-rate" class="section level2">
+<h2>Classification Rate</h2>
+<pre class="r"><code>predictions = bm %&gt;% 
+  augment(type.predict = &quot;response&quot;) %&gt;% 
+  mutate(acc_to_model = .fitted &gt; .5, 
+         acc_to_data = dec == &quot;yes&quot;)
+
+table(predictions$acc_to_model, predictions$acc_to_data)</code></pre>
+<pre><code>##        
+##         FALSE TRUE
+##   FALSE  1539  410
+##   TRUE    358  974</code></pre>
+<pre class="r"><code>xtabs(~ acc_to_model + acc_to_data, data = predictions)</code></pre>
+<pre><code>##             acc_to_data
+## acc_to_model FALSE TRUE
+##        FALSE  1539  410
+##        TRUE    358  974</code></pre>
+<pre class="r"><code>mosaic(acc_to_model ~ acc_to_data, data = predictions, 
+       shade = T)</code></pre>
+<p><img src="../../../post/logistic_regression_dating_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<pre class="r"><code>predictions %&gt;%
+ summarise(accuracy = sum(acc_to_model == acc_to_data) / n(),
+           false_positives = n())</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   accuracy false_positives
+##      &lt;dbl&gt;           &lt;int&gt;
+## 1    0.766            3281</code></pre>
+<ul>
+<li>Our model rendered a pretty decent accuracy rate of <span class="math inline">\(0.765925\)</span>.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="mcfaddens-pseudo-r2" class="section level2">
+<h2>McFadden’s pseudo R2</h2>
+<pre class="r"><code>pR2(bm)</code></pre>
+<pre><code>##           llh       llhNull            G2      McFadden          r2ML 
+## -1514.3062029 -2233.9458752  1439.2793446     0.3221384     0.3551070 
+##          r2CU 
+##     0.4774310</code></pre>
+<ul>
+<li><span class="math inline">\(Rho-squared\)</span> also known as <span class="math inline">\(McFadden&#39;s \ pseudo \ R2\)</span> can be interpreted like R2, but its values tend to be considerably lower than those of the R2 index. And values from 0.2-0.4 indicate (in McFadden’s words) excellent model fit. Our <span class="math inline">\(0.3221384\)</span> therefore represents an excellent fit in terms of <span class="math inline">\(McFadden&#39;s \ pseudo \ R2\)</span>.</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p><br></p>
+<div id="significance" class="section level2">
+<h2>Significance</h2>
+<p><br></p>
+<ul>
+<li><strong>amb, attr, fun, like, prob, shar</strong> and <strong>sinc</strong> have significant effect as (their C.I) don’t intersect 1 in terms of <span class="math inline">\(e^{b}\)</span> nor 0 in terms of <span class="math inline">\(b\)</span>.
+<ul>
+<li><strong>amb</strong> and <strong>sinc</strong> have a negative effect on the <strong>oodratio</strong> of <span class="math inline">\(dec = 1\)</span> over <span class="math inline">\(dec = 0\)</span>.</li>
+<li><strong>attr, fun, like ,prob</strong> and <strong>shar</strong> have a positive effect on the <strong>oddratio</strong> of <span class="math inline">\(dec = 1\)</span> over <span class="math inline">\(dec = 0\)</span>.</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+<div id="most-relevant-predictor" class="section level2">
+<h2>Most relevant predictor</h2>
+<p><br></p>
+<ul>
+<li>The predictor <strong>like</strong> is the most relevant of the candidates i.e. it’s the one has that the most effect on the chance of p1 deciding to meet with p2 again with <strong>attr</strong> close as second.
+<ul>
+<li>Despite intersection we opted to choose <strong>like</strong> as winner for we judged their intersection was not big enough to dismiss the possibility of difference between them.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/descriptive/">descriptive</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/regression/">regression</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/logistic/">logistic</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/07/multivariate-linear-regression-on-speed-dating-data/" data-tooltip="Multivariate linear regression on speed dating data">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/07/multivariate-linear-regression-on-speed-dating-data/" data-tooltip="Multivariate linear regression on speed dating data">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F08%2Fmultivariate-logistic-regression-on-speed-dating-data%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F08%2Fmultivariate-logistic-regression-on-speed-dating-data%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F08%2Fmultivariate-logistic-regression-on-speed-dating-data%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in learning something about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate linear regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+                <h3 class="media-heading">Analysis on MovieLens dataset with bootstrap</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&quot;data/movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.numeric(sub(&quot;\\).*&quot;, &quot;&quot;,sub(&quot;.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/">
+                <h3 class="media-heading">Analysis on Github commits (2016-2017)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&quot;data/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;,.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
+                <h3 class="media-heading">Movie lines by gender</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
+ 
+
+ Data Overview readr::read_csv(here(&quot;data/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/">
+                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
+Considerations In the analysis below we could:
+ See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/">
+                <h3 class="media-heading">Interactive Visualization on GoT x Xena (IMDB)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Let’s compare the series Game of Thrones and Xena the Warrior Princess to answer :
+ Which one is better rated by users?  The difference is maintained throughout seasons? Where the episode is placed inside its season (beggining/end or middle) has an effect?   Employed dataset  Exploratory Data Analysis on data from IMDB about the series Game of Thrones and Xena the Warrior Princess.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+                <h3 class="media-heading">Jake Gyllenhaal&#39;s type of movies</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction  Exploratory data analysis on data from RottenTomatoes about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on this report’s repository deste relatório.
+  Entries that have no information about box office were ignored.  
+
+ Data Overview import_data(&quot;jake_gyllenhaal&quot;) filmes &lt;- read_imported_data() filmes %&gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &lt;int&gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/">
+                <h3 class="media-heading">EDA about series ratings on IMDB</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         12 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/08\/multivariate-logistic-regression-on-speed-dating-data\/';
+          
+            this.page.identifier = '\/2018\/08\/multivariate-logistic-regression-on-speed-dating-data\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-benardi-github-io-myblog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+    <script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	  MathJax.Hub.Config({
+  	    messageStyle: 'none',
+  	    showProcessingMessages: false,
+	    tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']],
+		processEscapes: true
+	      }
+	  });
+	  MathJax.Hub.Queue(function() {
+	    var i, text, code, codes = document.getElementsByTagName('code');
+	    for (i = 0; i < codes.length;) {
+	      code = codes[i];
+	      if (code.parentNode.tagName !== 'PRE' &&
+		  code.childElementCount === 0) {
+		text = code.textContent;
+		if (/^\\\((.|\s)+\\\)$/.test(text) ||
+		    /^\$(.|\s)+\$$/.test(text) ||
+		    /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+		  code.outerHTML = code.innerHTML;  
+		  continue;
+		}
+	      }
+	      i++;
+	    }
+	    });
+	</script>
+  </body>
+</html>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Github on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/github/</link>
+    <description>Recent content in Github on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Analysis on Github commits (2016-2017)</title>
+      <link>https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/</guid>
+      <description>Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&amp;quot;data/github-users-committing-filetypes.csv&amp;quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&amp;gt; data data %&amp;gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &amp;lt;chr&amp;gt; &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;,.</description>
+    </item>
+    
+  </channel>
+</rss>

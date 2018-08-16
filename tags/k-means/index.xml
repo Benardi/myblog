@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K Means on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/k-means/</link>
+    <description>Recent content in K Means on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 29 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Movie lines by gender</title>
+      <link>https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/</link>
+      <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/</guid>
+      <description>Introduction 
+ Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
+ 
+
+ Data Overview readr::read_csv(here(&amp;quot;data/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
+    </item>
+    
+  </channel>
+</rss>

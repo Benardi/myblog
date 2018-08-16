@@ -1,0 +1,1282 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.46 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Analysis on MovieLens dataset with bootstrap</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="Analysis with statistical inference by bootstrap on data about movie ratings from the MovieLens dataset">
+    <meta property="og:description" content="Analysis with statistical inference by bootstrap on data about movie ratings from the MovieLens dataset">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Analysis on MovieLens dataset with bootstrap">
+    <meta property="og:url" content="/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="Analysis with statistical inference by bootstrap on data about movie ratings from the MovieLens dataset">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Analysis on MovieLens dataset with bootstrap
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-07-14T00:00:00Z">
+        
+  July 14, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><br></br></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p></br></p>
+<blockquote>
+<p>This report is an analysis on the dataset movielens which can be found in full <a href="https://grouplens.org/datasets/movielens/latest/">here</a>. The code, data and a description of the variables used in this report can be found in the <a href="https://github.com/Benardi/movielens_analysis/">original repository</a></p>
+</blockquote>
+<p></br></p>
+<hr />
+<p></br></p>
+</div>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<pre class="r"><code>readr::read_csv(here::here(&quot;data/movies.csv&quot;),
+                progress = FALSE,
+                col_types = cols(
+                      movieId = col_integer(),
+                      title = col_character(),
+                      genres = col_character()
+                    )) %&gt;% 
+  group_by(movieId) %&gt;%
+  mutate(year = as.numeric(sub(&quot;\\).*&quot;, &quot;&quot;,sub(&quot;.*\\(&quot;, &quot;&quot;, title))),
+         num_genres = length(as.list(strsplit(genres,&#39;|&#39;,fixed = TRUE))[[1]]),
+         homogeneous = num_genres == 1, # Deriving homogeneity
+         xx_century = year &lt;= 2000
+         ) %&gt;%  
+  na.omit() %&gt;%
+  ungroup() -&gt; movies
+
+readr::read_csv(here::here(&quot;data/ratings.csv&quot;),
+                progress = FALSE,
+                col_types = cols(
+                userId = col_integer(),
+                movieId = col_integer(),
+                rating = col_double(),
+                timestamp = col_integer()
+                )) %&gt;%
+  na.omit() -&gt; ratings</code></pre>
+<pre class="r"><code>dplyr::inner_join(
+  movies,
+  ratings,
+  by=&quot;movieId&quot;) -&gt; data
+
+
+data %&gt;%
+  group_by(movieId) %&gt;%
+  summarise(median_rating = median(rating), # Deriving whether a movies is well rated
+            well_rated = median_rating &gt; 3.5) -&gt; summarised
+
+
+dplyr::inner_join(
+  summarised,
+  data,
+  by=&quot;movieId&quot;) -&gt; data
+
+data %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 99,997
+## Variables: 12
+## $ movieId       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+## $ median_rating &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ...
+## $ well_rated    &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, ...
+## $ title         &lt;chr&gt; &quot;Toy Story (1995)&quot;, &quot;Toy Story (1995)&quot;, &quot;Toy Sto...
+## $ genres        &lt;chr&gt; &quot;Adventure|Animation|Children|Comedy|Fantasy&quot;, &quot;...
+## $ year          &lt;dbl&gt; 1995, 1995, 1995, 1995, 1995, 1995, 1995, 1995, ...
+## $ num_genres    &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, ...
+## $ homogeneous   &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,...
+## $ xx_century    &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, ...
+## $ userId        &lt;int&gt; 7, 9, 13, 15, 19, 20, 23, 26, 30, 37, 43, 44, 47...
+## $ rating        &lt;dbl&gt; 3.0, 4.0, 5.0, 2.0, 3.0, 3.5, 3.0, 5.0, 4.0, 4.0...
+## $ timestamp     &lt;int&gt; 851866703, 938629179, 1331380058, 997938310, 855...</code></pre>
+<pre class="r"><code>movies %&gt;%
+  filter(title == &quot;Hamlet (2000)&quot;)</code></pre>
+<pre><code>## # A tibble: 2 x 7
+##   movieId title     genres          year num_genres homogeneous xx_century
+##     &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;      &lt;int&gt; &lt;lgl&gt;       &lt;lgl&gt;     
+## 1    3598 Hamlet (… Crime|Drama|R…  2000          4 FALSE       TRUE      
+## 2   65665 Hamlet (… Drama           2000          1 TRUE        TRUE</code></pre>
+<pre class="r"><code>data %&gt;%
+  filter(movieId != 3598) -&gt; data</code></pre>
+<ul>
+<li>Looks like Hamlet was included twice. As Hamlet is clearly a Drama we’re gonna remove the entries that say otherwise.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  group_by(movieId) %&gt;%
+  slice(1) %&gt;%
+  ggplot(aes(year)) +
+  geom_bar() +
+  labs(x=&quot;Movie Year&quot;,
+       y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li>There’s a whole lot of movies from the 2000’s.</li>
+<li>There’s movies going as far as the first decade of the 1900’s.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(num_genres)) +
+  geom_bar() +
+  labs(x=&quot;Number of Genres&quot;,
+       y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>Most movies have 2 or 3 genres.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(rating,y=..prop..)) +
+  geom_bar() +
+  labs(x=&quot;Movie Rating&quot;, 
+       y=&quot;Relative Frequency&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ul>
+<li>There’s a lot of generous reviews, with 4 stars composing almost 30% of the ratings.</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="help-on-confidence-intervals" class="section level1">
+<h1>Help on Confidence Intervals</h1>
+<p><br></p>
+<p>Throughout this report we will employ Confidence Intervals of the difference of two distinct values, let’s call them <strong>A</strong> and <strong>B</strong> for instance.This gives us <em>three</em> possibilities:</p>
+<ul>
+<li>The C.I of <strong>A - B</strong> is exclusively above 0
+<ul>
+<li>A is greater than B</li>
+</ul></li>
+<li>The C.I of <strong>A - B</strong> is exclusively above 0
+<ul>
+<li>A is greater than B</li>
+</ul></li>
+<li>The C.I of <strong>A - B</strong> contains 0
+<ul>
+<li>We can’t say which is greater</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="homogeneity-in-genre" class="section level1">
+<h1>Homogeneity in Genre</h1>
+<p><br></p>
+<ul>
+<li>A movie will be considered homogeneous (in terms of genre) if the movie is classified under a single genre. Therefore, any movie with more than one genre will not be considered homogeneous.</li>
+</ul>
+<div id="data-sample-preview" class="section level2">
+<h2>Data Sample Preview</h2>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(homogeneous,rating)) +
+  geom_violin() +
+  labs(x=&quot;Homogeneous in Genre &quot;,
+       y=&quot;Movie Rating&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>The plot indicates a difference on the average rating of the two groups. The heterogeneous movies seem to have a higher number of better ratings as far as samples go.</li>
+<li>In terms of dispersion the ratings seem to be similarly distributed across both groups as far as samples go.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(homogeneous,year)) +
+  geom_violin() +
+  labs(x=&quot;Homogeneous in Genre &quot;,
+       y=&quot;Year of the movie&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li>The Homogeneous group seems to have more movies around the 1980s</li>
+<li>The Heterogeneous group has the oldest movies.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="is-the-average-rating-affected-by-genre-homogeneity" class="section level2">
+<h2>Is the average rating affected by genre homogeneity?</h2>
+<p><br></p>
+<ul>
+<li>We will use as estimator the unpaired difference of median ratings (TRUE - FALSE):
+<ul>
+<li><strong>The median rating of the well rated minus the median rating of the not well rated</strong>.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>meu_theta &lt;- function(x, i) {
+    x %&gt;% 
+        slice(i) %&gt;% 
+        group_by(homogeneous) %&gt;%
+        summarise(average = mean(rating)) -&gt; y
+  
+    result &lt;- y[y$homogeneous == TRUE,]$average - 
+              y[y$homogeneous == FALSE,]$average
+    
+    return(result)
+}
+
+mean.boot &lt;- boot(data = data, 
+                 statistic = meu_theta, 
+                 R = 5000)
+plot(mean.boot)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<ul>
+<li>The bootstrap summary shows evidence of normality both in terms of qqplot and histogram. It’s safe to say that the <em>basic</em> method is appropriate.</li>
+</ul>
+<pre class="r"><code>result_mean &lt;- boot.ci(boot.out = mean.boot, 
+        conf = 0.95, 
+        type = &quot;basic&quot;)
+result_mean</code></pre>
+<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 5000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = mean.boot, conf = 0.95, type = &quot;basic&quot;)
+## 
+## Intervals : 
+## Level      Basic         
+## 95%   (-0.0602, -0.0257 )  
+## Calculations and Intervals on Original Scale</code></pre>
+<pre class="r"><code>X2.5. = c(result_mean$basic[4])
+X97.5. = c(result_mean$basic[5])
+mean.diff = data.frame(X2.5.,X97.5.)
+
+mean.diff %&gt;%
+  ggplot(aes(x = &quot;Homogeneous - Heterogeneous&quot;,ymin = X2.5., ymax = X97.5.)) +
+  geom_errorbar(width = .2) +
+  geom_hline(yintercept = 0, colour = &quot;darkorange&quot;) +
+  labs(x=&quot;&quot;) +
+  ggtitle(&quot;Confidence Interval for difference of means&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<ul>
+<li><p>There’s evidence at 95% of confidence that heterogeneous movies are significantly better rated than the Homogeneous movies.</p></li>
+<li><p>The difference in means although significant in statistical terms is very small in practical terms and therefore is not relevant (doesn’t amount to much in terms of magnitude).</p></li>
+</ul>
+<blockquote>
+<p>Aparently staying faithful to the same concept all the time is counter productive. One could argue that to be truly complete a movie should dab into more than one aspect of the human psyche. This makes sense when we think about Chaplin, whose best movies not only made us laugh but also dared from time to time to make us cry or make us think.</p>
+</blockquote>
+<p><br></p>
+</div>
+<div id="is-the-ratings-dispersion-affected-by-homogeneity-in-genre" class="section level2">
+<h2>Is the rating’s dispersion affected by homogeneity in genre?</h2>
+<p><br></p>
+<ul>
+<li>We will use as estimator the unpaired difference of the standard deviations (TRUE - FALSE):
+<ul>
+<li><strong>The rating’s standard deviation of the homogeneous (in genre) minus the rating’s standard deviation of the heterogeneous (in genre)</strong>.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>meu_theta &lt;- function(x, i) {
+    x %&gt;% 
+        slice(i) %&gt;% 
+        group_by(homogeneous) %&gt;%
+        summarise(deviation = sd(rating)) -&gt; y
+  
+    result &lt;- y[y$homogeneous == TRUE,]$deviation - 
+              y[y$homogeneous == FALSE,]$deviation
+    
+    return(result)
+}
+
+deviation.boot &lt;- boot(data = data, 
+                 statistic = meu_theta, 
+                 R = 5000)
+plot(deviation.boot)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ul>
+<li>The bootstrap summary shows evidence of normality both in terms of qqplot and histogram. It’s safe to say that the <em>basic</em> method is appropriate.</li>
+</ul>
+<pre class="r"><code>result_deviation &lt;- boot.ci(boot.out = deviation.boot, 
+        conf = 0.95, 
+        type = &quot;basic&quot;)
+result_deviation</code></pre>
+<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 5000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = deviation.boot, conf = 0.95, type = &quot;basic&quot;)
+## 
+## Intervals : 
+## Level      Basic         
+## 95%   (-0.0020,  0.0231 )  
+## Calculations and Intervals on Original Scale</code></pre>
+<pre class="r"><code>X2.5. = c(result_deviation$basic[4])
+X97.5. = c(result_deviation$basic[5])
+sd.diff = data.frame(X2.5.,X97.5.)
+
+sd.diff %&gt;%
+  ggplot(aes(x = &quot;Homogeneous - Heterogeneous&quot;,ymin = X2.5., ymax = X97.5.)) +
+  geom_errorbar(width = .2) +
+  geom_hline(yintercept = 0, colour = &quot;darkorange&quot;) +
+  labs(title=&quot;Confidence Interval for difference of standard deviation&quot;, x=&quot;&quot;) </code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>There’s no significant difference at 95% of confidence in terms of dispersion between the ratings of heterogeneous and homogeneous movies.</li>
+</ul>
+<blockquote>
+<p>Across homogeneous and heterogeneous movies we could see the same central tendency around 4 stars. We must assume that this has more to do with the nature of how the people rate (extremely positive and extremely bad rates rare, positive ratings more common), rather than to do with whether a movie is homogeneneous in genre.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="is-the-movie-well-rated" class="section level1">
+<h1>Is the movie well rated</h1>
+<p><br></p>
+<ul>
+<li>Where our analysis regards impact of genre we shall consider only the movies homogeneous in terms of genre, we do so to have a clearer picture of the effect of the different genres.</li>
+<li>Movies are considered well rated when they have been rated above 2.5 stars in terms of median.</li>
+</ul>
+<pre class="r"><code>data %&gt;% 
+  filter(homogeneous) %&gt;%
+  mutate(genres = as.factor(genres)) -&gt; data_homogen</code></pre>
+<div id="data-sample-preview-1" class="section level2">
+<h2>Data Sample Preview</h2>
+<pre class="r"><code>data_homogen %&gt;%
+  ggplot(aes(&quot;&quot;,rating,
+             group=well_rated,
+             color=well_rated)) +
+  geom_count(position = position_dodge(width = 0.5)) + 
+  coord_flip() + 
+  labs(y=&quot;Movie Rating&quot;,x=&quot;&quot;) +
+    theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  scale_size(range = c(1,15)) </code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li><strong>Whether the movie is well rated</strong> seems to have an impact on how the ratings are distributed, whether it’s significant remains to be seen.</li>
+</ul>
+<pre class="r"><code>data_homogen %&gt;%
+  ggplot(aes(genres,rating,
+             group=genres,
+             color=well_rated)) +
+  geom_count() + 
+  coord_flip() + 
+  facet_grid(~ well_rated) +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_blank()) +
+  labs(y=&quot;Movie Rating&quot;, x=&quot;Movie Genre&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li><strong>The impact of the genre on the ratings</strong> apparently remains similar across movies that were well rated and movies that were not, the aforementioned is in terms of sample.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>data %&gt;%
+  group_by(movieId) %&gt;%
+  slice(1) %&gt;%
+  ggplot(aes(x=well_rated,
+             fill=xx_century)) +
+  geom_bar() +
+  labs(x=&quot;Is Well Rated&quot;, 
+       y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li>In terms of sample movies from the XX century seem to have a higher proportion of well rated movies.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="is-the-impact-of-the-genre-on-the-ratings-affected-by-whether-the-movie-is-well-rated" class="section level2">
+<h2>Is the impact of the genre on the ratings affected by whether the movie is well rated?</h2>
+<p><br></p>
+<ul>
+<li>We will use as estimator the unpaired difference of the R<sup>2</sup> of genre against ratings (TRUE - FALSE): <strong>The R<sup>2</sup> of the well rated minus the R<sup>2</sup> of the not well rated</strong>.</li>
+<li>The R<sup>2</sup> in this case represents how much of the variation in the ratings can be explained by the genre.</li>
+</ul>
+<pre class="r"><code>meu_theta &lt;- function(x, i) {
+    x %&gt;% 
+        slice(i) %&gt;% 
+    filter(well_rated) -&gt; d1
+    x %&gt;% 
+        slice(i) %&gt;% 
+    filter(!well_rated) -&gt; d2
+      
+    fit1 = lm(rating ~ genres, data=d1)
+    fit2 = lm(rating ~ genres, data=d2)
+    return(summary(fit1)$r.square - summary(fit2)$r.square)
+}
+
+r2.boot &lt;- boot(data = data_homogen, 
+                 statistic = meu_theta, 
+                 R = 5000)
+plot(r2.boot)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<ul>
+<li>The bootstrap summary shows evidence of normality both in terms of qqplot and histogram. It’s safe to say that the <em>basic</em> method is appropriate.</li>
+</ul>
+<pre class="r"><code>result_r2 &lt;- boot.ci(boot.out = r2.boot, 
+        conf = 0.95, 
+        type = &quot;basic&quot;)
+result_r2</code></pre>
+<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 5000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = r2.boot, conf = 0.95, type = &quot;basic&quot;)
+## 
+## Intervals : 
+## Level      Basic         
+## 95%   (-0.0113,  0.0013 )  
+## Calculations and Intervals on Original Scale</code></pre>
+<pre class="r"><code>X2.5. = c(result_r2$basic[4])
+X97.5. = c(result_r2$basic[5])
+r2.diff = data.frame(X2.5.,X97.5.)
+
+r2.diff %&gt;%
+  ggplot(aes(x = &quot;(Well Rated) - (NOT Well Rated)&quot;,ymin = X2.5., ymax = X97.5.)) +
+  geom_errorbar(width = .2) +
+  geom_hline(yintercept = 0, colour = &quot;darkorange&quot;) +
+  labs(x=&quot;&quot;) +
+    ggtitle(&quot;Confidence Interval for Impact of Genre on Ratings&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<ul>
+<li>There’s no evidence of a significant difference at 95% of confidence in <strong>how much the genre impacts the ratings</strong> when we put side by side the movies whom were well rated and the ones whom weren’t.</li>
+<li>This is in accordance to what we previewed in the sample.</li>
+</ul>
+<blockquote>
+<p>As one would expect whether the movie is objectively bad or not should not have to do with the movie genre unless people are biased towards a certain genre. It seems that people’s bias towards certain genres didn’t play much of a role, a happy surprise to be honest.</p>
+</blockquote>
+<p><br></p>
+</div>
+<div id="is-there-a-difference-in-the-proportion-of-well-rated-movies-when-we-compare-movies-from-xx-and-xxi-century" class="section level2">
+<h2>Is there a difference in the proportion of well rated movies when we compare movies from XX and XXI century?</h2>
+<p><br></p>
+<ul>
+<li>We will use as estimator the unpaired difference of the proportion of well rated (TRUE - FALSE):
+<ul>
+<li><strong>The proportion of well rated of movies from the XX century minus the proportion of well rated of movies from the XXI century</strong>.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>meu_theta &lt;- function(x, i) {
+    x %&gt;% 
+        slice(i) -&gt; d
+  
+    d %&gt;% 
+      group_by(xx_century) %&gt;%
+        filter(well_rated) %&gt;%
+        summarise(n = n()) -&gt; y  
+    d %&gt;% 
+        group_by(xx_century) %&gt;%
+        summarise(n = n()) -&gt; total 
+
+    
+    prop1 &lt;- y[y$xx_century == TRUE,]$n / total[total$xx_century == TRUE,]$n
+    prop2 &lt;- y[y$xx_century == FALSE,]$n / total[total$xx_century == FALSE,]$n
+    
+    return(prop1 - prop2)
+}
+
+proport.boot &lt;- boot(data = data, 
+                 statistic = meu_theta, 
+                 R = 5000)
+
+plot(proport.boot)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<ul>
+<li>The bootstrap summary shows evidence of normality both in terms of qqplot and histogram. It’s safe to say that the <em>basic</em> method is appropriate.</li>
+</ul>
+<pre class="r"><code>result_proport &lt;- boot.ci(boot.out = proport.boot, 
+        conf = 0.95, 
+        type = &quot;basic&quot;)
+
+result_proport</code></pre>
+<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 5000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = proport.boot, conf = 0.95, type = &quot;basic&quot;)
+## 
+## Intervals : 
+## Level      Basic         
+## 95%   ( 0.0368,  0.0513 )  
+## Calculations and Intervals on Original Scale</code></pre>
+<pre class="r"><code>X2.5. = c(result_proport$basic[4])
+X97.5. = c(result_proport$basic[5])
+prop.diff = data.frame(X2.5.,X97.5.)
+
+prop.diff %&gt;%
+  ggplot(aes(x = &quot;(XX century) - (XXI century)&quot;,ymin = X2.5., ymax = X97.5.)) +
+  geom_errorbar(width = .2) +
+  geom_hline(yintercept = 0, colour = &quot;darkorange&quot;) +
+  labs(x=&quot;&quot;) +
+    ggtitle(&quot;Confidence Interval for proportion of well rated&quot;)</code></pre>
+<p><img src="../../../post/movielens_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<ul>
+<li><p>There’s significant evidence at 95% of confidence, which indicates that movies from the XX century have a higher proportion of well rated movies in terms of inference as well.</p></li>
+<li><p>The difference in proportions although significant in statistical terms is very small in practical terms and therefore is not relevant (doesn’t amount to much in terms of magnitude).</p></li>
+</ul>
+<blockquote>
+<p>The XX century has had its fair share of awful movies, however it’s natural that most of the forgettable movies don’t make their way into our minds and datasets. The bad movies from the XXI century are still fresh on our minds and our datasets. For this reason it’s understandable that there are less well rated movies in the group of the XXI century.</p>
+</blockquote>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/descriptive/">descriptive</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/movielens/">movielens</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/bootstrap/">bootstrap</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/07/multivariate-linear-regression-on-speed-dating-data/" data-tooltip="Multivariate linear regression on speed dating data">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/07/analysis-on-github-commits-2016-2017/" data-tooltip="Analysis on Github commits (2016-2017)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/07/multivariate-linear-regression-on-speed-dating-data/" data-tooltip="Multivariate linear regression on speed dating data">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/07/analysis-on-github-commits-2016-2017/" data-tooltip="Analysis on Github commits (2016-2017)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F07%2Fanalysis-on-movielens-dataset-with-bootstrap%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F07%2Fanalysis-on-movielens-dataset-with-bootstrap%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F07%2Fanalysis-on-movielens-dataset-with-bootstrap%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in learning something about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate linear regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+                <h3 class="media-heading">Analysis on MovieLens dataset with bootstrap</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&quot;data/movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.numeric(sub(&quot;\\).*&quot;, &quot;&quot;,sub(&quot;.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/">
+                <h3 class="media-heading">Analysis on Github commits (2016-2017)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&quot;data/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;,.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
+                <h3 class="media-heading">Movie lines by gender</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
+ 
+
+ Data Overview readr::read_csv(here(&quot;data/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/">
+                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
+Considerations In the analysis below we could:
+ See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/">
+                <h3 class="media-heading">Interactive Visualization on GoT x Xena (IMDB)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Let’s compare the series Game of Thrones and Xena the Warrior Princess to answer :
+ Which one is better rated by users?  The difference is maintained throughout seasons? Where the episode is placed inside its season (beggining/end or middle) has an effect?   Employed dataset  Exploratory Data Analysis on data from IMDB about the series Game of Thrones and Xena the Warrior Princess.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
+                <h3 class="media-heading">Jake Gyllenhaal&#39;s type of movies</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction  Exploratory data analysis on data from RottenTomatoes about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on this report’s repository deste relatório.
+  Entries that have no information about box office were ignored.  
+
+ Data Overview import_data(&quot;jake_gyllenhaal&quot;) filmes &lt;- read_imported_data() filmes %&gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &lt;int&gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/">
+                <h3 class="media-heading">EDA about series ratings on IMDB</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
+ episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         12 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/07\/analysis-on-movielens-dataset-with-bootstrap\/';
+          
+            this.page.identifier = '\/2018\/07\/analysis-on-movielens-dataset-with-bootstrap\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-benardi-github-io-myblog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+    <script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	  MathJax.Hub.Config({
+  	    messageStyle: 'none',
+  	    showProcessingMessages: false,
+	    tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']],
+		processEscapes: true
+	      }
+	  });
+	  MathJax.Hub.Queue(function() {
+	    var i, text, code, codes = document.getElementsByTagName('code');
+	    for (i = 0; i < codes.length;) {
+	      code = codes[i];
+	      if (code.parentNode.tagName !== 'PRE' &&
+		  code.childElementCount === 0) {
+		text = code.textContent;
+		if (/^\\\((.|\s)+\\\)$/.test(text) ||
+		    /^\$(.|\s)+\$$/.test(text) ||
+		    /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+		  code.outerHTML = code.innerHTML;  
+		  continue;
+		}
+	      }
+	      i++;
+	    }
+	    });
+	</script>
+  </body>
+</html>
+

@@ -3,8 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/</loc>
+    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/</loc>
+    <lastmod>2018-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/</loc>
+    <lastmod>2018-05-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -13,7 +53,22 @@
   </url>
   
   <url>
+    <loc>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</loc>
+    <lastmod>2018-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/1/01/analysis-on-movielens-dataset-with-hypothesis-testing/</loc>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/archives/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/bootstrap/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -29,20 +84,79 @@
   </url>
   
   <url>
+    <loc>https://benardi.github.io/myblog/tags/descriptive/</loc>
+    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/tags/eda/</loc>
     <lastmod>2018-05-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://benardi.github.io/myblog/tags/github/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/got/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/grouping/</loc>
+    <lastmod>2018-06-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/hierarchical/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/hypothesis-testing/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/tags/imdb/</loc>
-    <lastmod>2018-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/interactive/</loc>
+    <lastmod>2018-05-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/k-means/</loc>
+    <lastmod>2018-06-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/logistic/</loc>
+    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/movielens/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -54,19 +168,37 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/post/</loc>
+    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/predictive/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://benardi.github.io/myblog/tags/prediction/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+    <loc>https://benardi.github.io/myblog/tags/regression/</loc>
+    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/spotify/</loc>
+    <lastmod>2018-05-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/xena/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
