@@ -1,0 +1,2667 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Analysis on Brazilian elections</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="Data Analysis with multivariate Linear Regression  on data about polls for the 2006 and 2010 elections in Brazil for the &#39;Câmara Federal de Deputados&#39;. Data was taken from the TSE portal and encompasses approximately 7300 candidates.">
+    <meta property="og:description" content="Data Analysis with multivariate Linear Regression  on data about polls for the 2006 and 2010 elections in Brazil for the &#39;Câmara Federal de Deputados&#39;. Data was taken from the TSE portal and encompasses approximately 7300 candidates.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Analysis on Brazilian elections">
+    <meta property="og:url" content="/2018/10/analysis-on-brazilian-elections/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="Data Analysis with multivariate Linear Regression  on data about polls for the 2006 and 2010 elections in Brazil for the &#39;Câmara Federal de Deputados&#39;. Data was taken from the TSE portal and encompasses approximately 7300 candidates.">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Analysis on Brazilian elections
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-10-10T00:00:00Z">
+        
+  October 10, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<p><br></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p><br></p>
+<blockquote>
+<p>Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the <a href="http://www.tse.jus.br/">TSE portal</a> and encompasses approximately 7300 candidates.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<p><br></p>
+<div id="loading-data" class="section level2">
+<h2>Loading Data</h2>
+<pre class="r"><code>eleicoes_data &lt;- readr::read_csv(
+  here::here(&#39;evidences/eleicoes_2006_e_2010.csv&#39;), 
+  progress = FALSE,
+  local=readr::locale(&quot;br&quot;),
+  col_types = cols(
+    ano = col_integer(),
+    sequencial_candidato = col_character(),
+    quantidade_doacoes = col_integer(),
+    quantidade_doadores = col_integer(),
+    total_receita = col_double(),
+    media_receita = col_double(),
+    recursos_de_outros_candidatos.comites = col_double(),
+    recursos_de_pessoas_fisicas = col_double(),
+    recursos_de_pessoas_juridicas = col_double(),
+    recursos_proprios = col_double(),
+    `recursos_de_partido_politico` = col_double(),
+    quantidade_despesas = col_integer(),
+    quantidade_fornecedores = col_integer(),
+    total_despesa = col_double(),
+    media_despesa = col_double(),
+    votos = col_integer(),
+    .default = col_character()))</code></pre>
+<pre class="r"><code># Let&#39;s put everything in Upper case for uniformity
+eleicoes_data %&gt;% 
+  mutate(nome = toupper(nome),
+         sexo = toupper(sexo),
+         grau = toupper(grau),
+         nome = toupper(nome),
+         cargo = toupper(cargo),
+         ocupacao = toupper(ocupacao),
+         partido = toupper(partido),
+         estado_civil = toupper(estado_civil),
+         sequencial_candidato = as.numeric(sequencial_candidato)) -&gt; eleicoes_data
+
+# Adding surrogate key to dataframe
+eleicoes_data$id &lt;- 1:nrow(eleicoes_data)
+
+eleicoes_data %&gt;% 
+  glimpse()</code></pre>
+<pre><code>## Observations: 7,476
+## Variables: 25
+## $ ano                                   &lt;int&gt; 2006, 2006, 2006, 2006, 20…
+## $ sequencial_candidato                  &lt;dbl&gt; 10001, 10002, 10002, 10002…
+## $ nome                                  &lt;chr&gt; &quot;JOSÉ LUIZ NOGUEIRA DE SOU…
+## $ uf                                    &lt;chr&gt; &quot;AP&quot;, &quot;RO&quot;, &quot;AP&quot;, &quot;MS&quot;, &quot;R…
+## $ partido                               &lt;chr&gt; &quot;PT&quot;, &quot;PT&quot;, &quot;PT&quot;, &quot;PRONA&quot;,…
+## $ quantidade_doacoes                    &lt;int&gt; 6, 13, 17, 6, 48, 6, 14, 2…
+## $ quantidade_doadores                   &lt;int&gt; 6, 13, 16, 6, 48, 6, 7, 2,…
+## $ total_receita                         &lt;dbl&gt; 16600.00, 22826.00, 158120…
+## $ media_receita                         &lt;dbl&gt; 2766.67, 1755.85, 9301.22,…
+## $ recursos_de_outros_candidatos.comites &lt;dbl&gt; 0.00, 6625.00, 2250.00, 0.…
+## $ recursos_de_pessoas_fisicas           &lt;dbl&gt; 9000.00, 15000.00, 34150.0…
+## $ recursos_de_pessoas_juridicas         &lt;dbl&gt; 6300.00, 1000.00, 62220.80…
+## $ recursos_proprios                     &lt;dbl&gt; 1300.00, 201.00, 59500.00,…
+## $ recursos_de_partido_politico          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 11…
+## $ quantidade_despesas                   &lt;int&gt; 14, 24, 123, 8, 133, 9, 17…
+## $ quantidade_fornecedores               &lt;int&gt; 14, 23, 108, 8, 120, 9, 10…
+## $ total_despesa                         &lt;dbl&gt; 16583.60, 20325.99, 146011…
+## $ media_despesa                         &lt;dbl&gt; 1184.54, 846.92, 1187.09, …
+## $ cargo                                 &lt;chr&gt; &quot;DEPUTADO FEDERAL&quot;, &quot;DEPUT…
+## $ sexo                                  &lt;chr&gt; &quot;MASCULINO&quot;, &quot;FEMININO&quot;, &quot;…
+## $ grau                                  &lt;chr&gt; &quot;ENSINO MÉDIO COMPLETO&quot;, &quot;…
+## $ estado_civil                          &lt;chr&gt; &quot;CASADO(A)&quot;, &quot;SOLTEIRO(A)&quot;…
+## $ ocupacao                              &lt;chr&gt; &quot;VEREADOR&quot;, &quot;SERVIDOR PÚBL…
+## $ votos                                 &lt;int&gt; 8579, 2757, 17428, 1193, 2…
+## $ id                                    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9,…</code></pre>
+<p><br></p>
+</div>
+<div id="the-variables" class="section level2">
+<h2>The variables</h2>
+<p><br></p>
+<pre><code>The response variable is the variable that you are interesting in making measurements and conclusions on.
+
+A predictor variable is a variable used to predict another variable.
+
+Our response variable will be &quot;votos&quot;, we want to study how well the predictor variables can help predict its behavior and how they impact in the linear regression.</code></pre>
+<p><br></p>
+<div id="each-item-corresponds-to-a-candidate-the-attributes-of-each-item-are-as-follows" class="section level4">
+<h4>Each item corresponds to a candidate, the attributes of each item are as follows:</h4>
+<ul>
+<li><strong>ano</strong> : Year at which the election took place.</li>
+<li><strong>sequencial_candidato</strong> : Sequential ID to map the candidates</li>
+<li><strong>nome</strong> : Name of the candidate</li>
+<li><strong>uf</strong> : Federate state to which the candidate belongs.</li>
+<li><strong>partido</strong> : Political party to which the candidate belongs.</li>
+<li><strong>quantidade_doacoes</strong> : Number of donations received during political campaign.</li>
+<li><strong>quantidade_doadores</strong> : Number of donators that contributed to the candidate’s political campaign.</li>
+<li><strong>total_receita</strong> : Total revenue.</li>
+<li><strong>media_receita</strong> : Mean revenue.</li>
+<li><strong>recursos_de_outros_candidatos.comites</strong> : Revenue coming from other candidate’s committees.</li>
+<li><strong>recursos_de_pessoas_fisicas</strong> : Revenue coming from individuals.</li>
+<li><strong>recursos_de_pessoas_juridicas</strong> : Revenue coming from legal entities.</li>
+<li><strong>recursos_proprios</strong> : Revenue coming from personal resources.</li>
+<li><strong>recursos_de_partido_politico</strong> : Revenue coming from political party.</li>
+<li><strong>quantidade_despesas</strong> : Number of expenses.</li>
+<li><strong>quantidade_fornecedores</strong> : Number of suppliers.</li>
+<li><strong>total_despesa</strong> : Total expenditure.</li>
+<li><strong>media_despesa</strong> : Mea expenditure.</li>
+<li><strong>cargo</strong> : Position.</li>
+<li><strong>sexo</strong> : Sex.</li>
+<li><strong>grau</strong> : Level of education.</li>
+<li><strong>estado_civil</strong> : Marital status.</li>
+<li><strong>ocupacao</strong> : Candidate’s occupation up to the election.</li>
+<li><strong>votos</strong> : Number of votes received.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="data-exploration" class="section level2">
+<h2>Data Exploration</h2>
+<pre class="r"><code>eleicoes_data %&gt;%
+  filter(ano == 2006) %&gt;%
+  group_by(partido) %&gt;%
+  summarize(n = sum(votos)) %&gt;%
+  ggplot(aes(reorder(partido,n), n)) +
+  geom_bar(stat = &quot;identity&quot;) + 
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1)) +
+  labs(x=&quot;Political Party&quot;,
+       title=&quot;2006 elections&quot;,
+       y=&quot;Number of votes&quot;) -&gt; p1
+
+eleicoes_data %&gt;%
+  filter(ano == 2010) %&gt;%
+  group_by(partido) %&gt;%
+  summarize(n = sum(votos)) %&gt;%
+  ggplot(aes(reorder(partido,n), n)) +
+  geom_bar(stat = &quot;identity&quot;) + 
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1)) +
+  labs(x=&quot;Political Party&quot;,
+       title=&quot;2010 elections&quot;,
+       y=&quot;Number of votes&quot;) -&gt; p2
+
+grid.arrange(p1, p2, ncol=1)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>In 2010 the poltical party <span class="math inline">\(PMDB\)</span> takes the first place from the poltical party <span class="math inline">\(PT\)</span></li>
+<li>The poltical party <span class="math inline">\(PSDB\)</span> maintains its position at the third place.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  ggplot(aes(total_receita)) +
+  geom_histogram(bins = 30) +
+  labs(x=&quot;Total Revenue&quot;,
+       y=&quot;Absolute Frequency&quot;) +
+  facet_grid(. ~ ano) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li>We can see a positive skew where small values are very frequent</li>
+<li>This indicates that for this predictor: <span class="math inline">\(mode &lt; median &lt; mean\)</span></li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  ggplot(aes(media_receita)) +
+  geom_histogram(bins = 30) +
+  labs(x=&quot;Mean Revenue&quot;,
+       y=&quot;Absolute Frequency&quot;) +
+  facet_grid(. ~ ano)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>We can see a positive skew where small values are very frequent</li>
+<li>This indicates that for this predictor: <span class="math inline">\(mode &lt; median &lt; mean\)</span></li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  ggplot(aes(total_despesa)) +
+  geom_histogram(bins = 30) +
+  labs(x=&quot;Total Expenditure&quot;,
+       y=&quot;Absolute Frequency&quot;) +
+  facet_grid(. ~ ano)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ul>
+<li>We can see a positive skew where small values are very frequent</li>
+<li>This indicates that for this predictor: <span class="math inline">\(mode &lt; median &lt; mean\)</span></li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  ggplot(aes(media_despesa)) +
+  geom_histogram(bins = 30) +
+  labs(x=&quot;Mean Expenditure&quot;,
+       y=&quot;Absolute Frequency&quot;) +
+  facet_grid(. ~ ano)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>We can see a positive skew where small values are very frequent</li>
+<li>This indicates that for this predictor: <span class="math inline">\(mode &lt; median &lt; mean\)</span></li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  ggplot(aes(recursos_proprios)) +
+  geom_histogram(bins = 30) +
+  labs(x=&quot;Own resources&quot;,
+       y=&quot;Absolute Frequency&quot;) +
+  facet_grid(. ~ ano)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li>We can see a positive skew where small values are very frequent</li>
+<li>This indicates that for this predictor: <span class="math inline">\(mode &lt; median &lt; mean\)</span></li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  mutate(ano = as.factor(ano)) %&gt;%
+  group_by(estado_civil, ano) %&gt;%
+  summarize(n = n()) %&gt;%
+  ggplot(aes(reorder(estado_civil,n), n,
+             fill= ano)) +
+  geom_bar(stat = &quot;identity&quot;,
+           position = position_dodge(width = 0.5)) + 
+  labs(x=&quot;Marital status of candidate&quot;, 
+       y=&quot;Absolute Frequency&quot;) +
+  guides(fill = guide_legend(title = &quot;year&quot;)) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>2010 overall tops 2006 in the number of candidates of each and every marital status with <strong>one exception</strong>:</p>
+<ul>
+<li>We see a decrease of candidates whose marital status is <em>SEPARADO(A) JUDICIALMENTE</em> from 2006 to 2010.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  mutate(ano = as.factor(ano)) %&gt;%
+  group_by(grau, ano) %&gt;%
+  summarize(n = n()) %&gt;%
+  ggplot(aes(reorder(grau,n), n,
+             fill= ano)) +
+  geom_bar(stat = &quot;identity&quot;,
+           position = position_dodge(width = 0.5)) + 
+  labs(x=&quot;Education level&quot;, 
+       y=&quot;Absolute Frequency&quot;) +
+  guides(fill = guide_legend(title = &quot;year&quot;)) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>2010 overall tops 2006 in the number of candidates of each and every education level with <strong>one exception</strong>:</p>
+<ul>
+<li>The number of candidates with level of education <em>ENSINO FUNDAMENTAL INCOMPLETO</em> decreased.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  group_by(sexo, ano) %&gt;%
+  summarize(n = n()) %&gt;%
+  ggplot(aes(reorder(sexo,n), n)) +
+  geom_bar(stat = &quot;identity&quot;) + 
+  labs(x=&quot;Sex&quot;, 
+       y=&quot;Absolute Frequency&quot;) +
+  facet_grid(. ~ano)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<ul>
+<li>Male predominance is maintained across elections.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="evaluating-skew-on-predictors" class="section level2">
+<h2>Evaluating <em>skew</em> on predictors</h2>
+<p><br></p>
+<div id="lets-take-a-look-at-the-quantitative-predictors-of-interest." class="section level5">
+<h5>Let’s take a look at the quantitative predictors of interest.</h5>
+<ul>
+<li><strong>sequencial candidato</strong> has no meaning attached to it so we’ll skip it.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  select(id,
+         quantidade_despesas,
+         quantidade_fornecedores,
+         recursos_de_partido_politico,
+         recursos_de_pessoas_juridicas,
+         recursos_de_pessoas_fisicas,
+         recursos_de_outros_candidatos.comites) %&gt;%
+  melt(id=c(&quot;id&quot;))  %&gt;%
+  ggplot(aes(x = value)) + 
+  geom_histogram(bins = 30) + 
+  facet_wrap(. ~ variable,
+             ncol = 2,
+             scales = &quot;free_x&quot;)  +
+  labs(x=&quot;Predictor&quot;,y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ul>
+<li>We can see a <em>positive skew</em> across checked predictors even if different elections are no longer discriminated.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  select(id,
+         total_receita,
+         media_receita,
+         total_despesa,
+         media_despesa,
+         recursos_proprios,
+         quantidade_doacoes,
+         quantidade_doadores) %&gt;%
+  melt(id=c(&quot;id&quot;))  %&gt;%
+  ggplot(aes(x = value)) + 
+  geom_histogram(bins = 30) + 
+  facet_wrap(. ~ variable,
+             scales = &quot;free_x&quot;) +
+  labs(x=&quot;Predictor&quot;,y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ul>
+<li>The overall <em>positive skew</em> extends to these variables as well even if different elections are no longer discriminated.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="dealing-with-positive-skew" class="section level4">
+<h4>Dealing with <em>positive skew</em></h4>
+<p><br></p>
+<p>The standard method to deal with a <em>positive skew</em> is to apply a logarithmic transformation to the affected predictor. However, to apply the aforementioned transformation <strong>the predictor must not contain any 0</strong>.</p>
+<pre class="r"><code>eleicoes_data %&gt;%
+  select(quantidade_doacoes,
+         quantidade_doadores,
+         total_receita,
+         media_receita,
+         recursos_de_outros_candidatos.comites,
+         recursos_de_pessoas_fisicas,
+         recursos_de_pessoas_juridicas,
+         recursos_proprios,
+         recursos_de_partido_politico,
+         quantidade_despesas,
+         quantidade_fornecedores,
+         total_despesa,
+         media_despesa) %&gt;%
+  sapply(., function(x) 0 %in% x) %&gt;%
+  as.data.frame(row.names = NULL) %&gt;%
+  tibble::rownames_to_column() %&gt;%
+  set_colnames(c(&quot;predictor&quot;,&quot;contains_zero&quot;)) %&gt;%
+  arrange(contains_zero)</code></pre>
+<pre><code>##                                predictor contains_zero
+## 1                     quantidade_doacoes         FALSE
+## 2                    quantidade_doadores         FALSE
+## 3                    quantidade_despesas         FALSE
+## 4                quantidade_fornecedores         FALSE
+## 5                          total_receita          TRUE
+## 6                          media_receita          TRUE
+## 7  recursos_de_outros_candidatos.comites          TRUE
+## 8            recursos_de_pessoas_fisicas          TRUE
+## 9          recursos_de_pessoas_juridicas          TRUE
+## 10                     recursos_proprios          TRUE
+## 11          recursos_de_partido_politico          TRUE
+## 12                         total_despesa          TRUE
+## 13                         media_despesa          TRUE</code></pre>
+<ul>
+<li>There are four predictors on which we may apply the logarithmic transformation</li>
+<li>We’ll resort to square root transformation for the rest.</li>
+</ul>
+<pre class="r"><code># apply logarithmic transformation
+eleicoes_data %&gt;%
+  mutate(log.quantidade_doacoes = log10(quantidade_doacoes),
+         log.quantidade_doadores = log10(quantidade_doadores),
+         log.quantidade_despesas = log10(quantidade_despesas),
+         log.quantidade_fornecedores = log10(quantidade_fornecedores),
+         sqrt.total_receita = sqrt(total_receita),
+         sqrt.media_receita = sqrt(media_receita),
+         sqrt.total_despesa = sqrt(total_despesa),
+         sqrt.media_despesa = sqrt(media_despesa),
+         sqrt.recursos_proprios = sqrt(recursos_proprios),
+         sqrt.recursos_de_pessoas_juridicas = sqrt(recursos_de_pessoas_juridicas),
+         sqrt.recursos_de_partido_politico = sqrt(recursos_de_partido_politico),
+         sqrt.recursos_de_outros_candidatos.comites = sqrt(recursos_de_outros_candidatos.comites),
+         sqrt.recursos_de_pessoas_fisicas = sqrt(recursos_de_pessoas_fisicas)) -&gt; eleicoes_data
+
+
+# put all quantitative predictors (of interest) in same scale
+eleicoes_data %&gt;%
+  mutate_at(.vars = vars(quantidade_doacoes,
+                         quantidade_doadores,
+                         total_receita,
+                         media_receita,
+                         sqrt.total_receita,
+                         sqrt.media_receita,
+                         sqrt.recursos_de_outros_candidatos.comites,
+                         sqrt.recursos_de_pessoas_fisicas,
+                         sqrt.recursos_de_pessoas_juridicas,
+                         sqrt.recursos_proprios,
+                         sqrt.recursos_de_partido_politico,
+                         sqrt.total_despesa,
+                         sqrt.media_despesa,
+                         log.quantidade_doacoes,
+                         log.quantidade_doadores,
+                         log.quantidade_despesas,
+                         log.quantidade_fornecedores,
+                         sequencial_candidato,
+                         recursos_de_outros_candidatos.comites,
+                         recursos_de_pessoas_fisicas,
+                         recursos_de_pessoas_juridicas,
+                         recursos_proprios,
+                         recursos_de_partido_politico,
+                         quantidade_despesas,
+                         quantidade_fornecedores,
+                         total_despesa,
+                         media_despesa),
+             .funs = funs(as.numeric(scale(.)))) -&gt; scaled_data</code></pre>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.</code></pre>
+<pre class="r"><code>eleicoes_data %&gt;%
+  select(id,
+         log.quantidade_doacoes,
+         log.quantidade_doadores,
+         log.quantidade_despesas,
+         log.quantidade_fornecedores) %&gt;%
+  melt(id=c(&quot;id&quot;))  %&gt;%
+  ggplot(aes(x = value)) + 
+  geom_histogram(bins = 30) + 
+  facet_wrap(. ~ variable,
+             scales = &quot;free_x&quot;) +
+  labs(x=&quot;Predictor&quot;,y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>We have evidence that the positive skew has been atenuated by the logarithmic transformations.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;%
+  select(id,
+         sqrt.total_receita,
+         sqrt.media_receita,
+         sqrt.recursos_de_outros_candidatos.comites,
+         sqrt.recursos_de_pessoas_fisicas,
+         sqrt.recursos_de_pessoas_juridicas,
+         sqrt.recursos_proprios,
+         sqrt.recursos_de_partido_politico,
+         sqrt.total_despesa,
+         sqrt.media_despesa) %&gt;%
+  melt(id=c(&quot;id&quot;))  %&gt;%
+  ggplot(aes(x = value)) + 
+  geom_histogram(bins = 30) + 
+  facet_wrap(. ~ variable,
+             scales = &quot;free_x&quot;) +
+  labs(x=&quot;Predictor&quot;,y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li>We have evidence that the positive skew has been atenuated by the square root transformation.
+<ul>
+<li>On a side note, the square root transformation seems less eficient than the logarithmic transformation.</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="discern-promising-predictors" class="section level2">
+<h2>Discern promising predictors</h2>
+<p><br></p>
+<div id="well-use-the-correlogram-to-have-an-idea-on-how-the-predictors-interact-with-each-and-with-the-target-variable.-how-the-predictors-react-with-the-target-votos-is-of-particular-interest." class="section level5">
+<h5>We’ll use the correlogram to have an idea on how the predictors interact with each and with the target variable. How the predictors react with the target <strong>votos</strong> is of particular interest.</h5>
+<ul>
+<li>Predictors whom have been transformed will be replaced by their enhanced versions.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;% 
+  filter(ano == 2006) %&gt;%
+  select(-partido,
+         -uf,-nome,-id,
+         -estado_civil,
+         -ocupacao,-ano,
+         -total_receita,
+         -media_receita,
+         -total_despesa,
+         -media_despesa,
+         -recursos_proprios,
+         -cargo,-grau,-sexo,
+         -quantidade_doacoes,
+         -quantidade_doadores,
+         -quantidade_despesas,
+         -quantidade_fornecedores,
+         -recursos_de_pessoas_fisicas,
+         -recursos_de_partido_politico,
+         -recursos_de_pessoas_juridicas,
+         -recursos_de_outros_candidatos.comites) %&gt;%
+  na.omit() %&gt;%
+  ggcorr(palette = &quot;RdBu&quot;,
+         color = &quot;grey50&quot;,
+         label = TRUE, hjust = 1,
+         label_size = 3, size = 4,
+         nbreaks = 5, layout.exp = 7) +
+  ggtitle(&quot;Correlation plot for 2006 elections&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li><strong>sequencial_candidato</strong> doesn’t not look meaningful (as expected).</li>
+<li><strong>total_receita</strong>, <strong>total_despesa</strong> and <strong>recursos_de_pessoas_juridicas</strong> seem very meaningful.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;% 
+  filter(ano == 2010) %&gt;%
+  select(-partido,
+         -uf,-nome,-id,
+         -estado_civil,
+         -ocupacao,-ano,
+         -total_receita,
+         -media_receita,
+         -total_despesa,
+         -media_despesa,
+         -recursos_proprios,
+         -cargo,-grau,-sexo,
+         -quantidade_doacoes,
+         -quantidade_doadores,
+         -quantidade_despesas,
+         -quantidade_fornecedores,
+         -recursos_de_pessoas_fisicas,
+         -recursos_de_partido_politico,
+         -recursos_de_pessoas_juridicas,
+         -recursos_de_outros_candidatos.comites) %&gt;%
+  na.omit() %&gt;%
+  ggcorr(palette = &quot;RdBu&quot;,
+         color = &quot;grey50&quot;,
+         label = TRUE, hjust = 1,
+         label_size = 3, size = 4,
+         nbreaks = 5, layout.exp = 7) +
+  ggtitle(&quot;Correlation plot for 2010 elections&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<ul>
+<li><strong>sequencial_candidato</strong> doesn’t look meaningful (as expected).</li>
+<li><strong>sqrt.total_receita</strong>, <strong>sqrt.total_despesa</strong> and <strong>sqrt.recursos_de_pessoas_juridicas</strong> seem meaningful.</li>
+</ul>
+<pre class="r"><code>eleicoes_data %&gt;% 
+  select(-partido,
+         -uf,-nome,-id,
+         -estado_civil,
+         -ocupacao,-ano,
+         -total_receita,
+         -media_receita,
+         -total_despesa,
+         -media_despesa,
+         -recursos_proprios,
+         -cargo,-grau,-sexo,
+         -quantidade_doacoes,
+         -quantidade_doadores,
+         -quantidade_despesas,
+         -quantidade_fornecedores,
+         -recursos_de_pessoas_fisicas,
+         -recursos_de_partido_politico,
+         -recursos_de_pessoas_juridicas,
+         -recursos_de_outros_candidatos.comites) %&gt;%
+  na.omit() %&gt;%
+  ggcorr(palette = &quot;RdBu&quot;,
+         color = &quot;grey50&quot;,
+         label = TRUE, hjust = 1,
+         label_size = 3, size = 4,
+         nbreaks = 5, layout.exp = 7) +
+  ggtitle(&quot;Correlation plot for both elections&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<ul>
+<li><strong>sequencial_candidato</strong> does’nt look meaningful (as expected).</li>
+<li><strong>sqrt.total_receita</strong>, <strong>sqrt.total_despesa</strong> and <strong>sqrt.recursos_de_pessoas_juridicas</strong> seem very meaningful.</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="should-we-use-all-variables" class="section level1">
+<h1>Should we use all variables?</h1>
+<p><br></p>
+<div id="a-multivariate-linear-regression-model-made-with-all-variables-wouldnt-be-feasible" class="section level4">
+<h4>A multivariate linear regression model made with all variables wouldn’t be feasible</h4>
+<ul>
+<li><strong>cargo</strong> is categorical and renders a one level factor. For this reason we simply can’t use it in our regression.</li>
+<li><strong>sequencial_candidato</strong> isn’t meaningful at all as the correlogram clearly showed us.</li>
+<li>We have nominal categorical variables such as <strong>uf</strong> that have dozens of levels. A variable like this one demands a <em>one hot encoding</em> which would increase exponentialy the number of variables fed to the model and most likely lead to an overfitting.</li>
+</ul>
+<blockquote>
+<p>For the aforementioned reasons a multivariate linear regression model made with all variables isn’t plausible.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="model-for-2006-elections-vs-model-for-2010-elections" class="section level1">
+<h1>Model for 2006 elections vs Model for 2010 elections</h1>
+<div id="linear-model-for-2006-elections" class="section level2">
+<h2>Linear Model for 2006 elections</h2>
+<p><br></p>
+<div id="split-data-for-cross-validation" class="section level3">
+<h3>Split Data for Cross Validation</h3>
+<p><br></p>
+<ul>
+<li>Let’s use the <span class="math inline">\(50/25/25\)</span> proportions for the train, validate and test datasets.</li>
+</ul>
+<pre class="r"><code>scaled_data %&gt;%  
+   filter(ano == 2006) -&gt; scaled_data_2006
+
+scaled_data_2006 %&gt;%
+  sample_n(5)</code></pre>
+<pre><code>## # A tibble: 5 x 38
+##     ano sequencial_cand… nome  uf    partido quantidade_doac…
+##   &lt;int&gt;            &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;
+## 1  2006           -0.930 JOAO… BA    PSDC              -0.228
+## 2  2006           -0.930 ADEL… PA    PTB               -0.203
+## 3  2006           -0.930 AILT… MG    PDT               -0.228
+## 4  2006           -0.930 NAEL… RN    PSDC              -0.228
+## 5  2006           -0.930 RONA… RJ    PSB               -0.169
+## # … with 32 more variables: quantidade_doadores &lt;dbl&gt;,
+## #   total_receita &lt;dbl&gt;, media_receita &lt;dbl&gt;,
+## #   recursos_de_outros_candidatos.comites &lt;dbl&gt;,
+## #   recursos_de_pessoas_fisicas &lt;dbl&gt;,
+## #   recursos_de_pessoas_juridicas &lt;dbl&gt;, recursos_proprios &lt;dbl&gt;,
+## #   recursos_de_partido_politico &lt;dbl&gt;, quantidade_despesas &lt;dbl&gt;,
+## #   quantidade_fornecedores &lt;dbl&gt;, total_despesa &lt;dbl&gt;,
+## #   media_despesa &lt;dbl&gt;, cargo &lt;chr&gt;, sexo &lt;chr&gt;, grau &lt;chr&gt;,
+## #   estado_civil &lt;chr&gt;, ocupacao &lt;chr&gt;, votos &lt;int&gt;, id &lt;int&gt;,
+## #   log.quantidade_doacoes &lt;dbl&gt;, log.quantidade_doadores &lt;dbl&gt;,
+## #   log.quantidade_despesas &lt;dbl&gt;, log.quantidade_fornecedores &lt;dbl&gt;,
+## #   sqrt.total_receita &lt;dbl&gt;, sqrt.media_receita &lt;dbl&gt;,
+## #   sqrt.total_despesa &lt;dbl&gt;, sqrt.media_despesa &lt;dbl&gt;,
+## #   sqrt.recursos_proprios &lt;dbl&gt;,
+## #   sqrt.recursos_de_pessoas_juridicas &lt;dbl&gt;,
+## #   sqrt.recursos_de_partido_politico &lt;dbl&gt;,
+## #   sqrt.recursos_de_outros_candidatos.comites &lt;dbl&gt;,
+## #   sqrt.recursos_de_pessoas_fisicas &lt;dbl&gt;</code></pre>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+scaled_data_2006 %&gt;% 
+  dplyr::sample_frac(.5) -&gt; train_data_2006
+
+encoding &lt;- build_encoding(dataSet = train_data_2006,
+                           cols = c(&quot;uf&quot;,&quot;sexo&quot;,&quot;grau&quot;,
+                                    &quot;partido&quot;,&quot;estado_civil&quot;),
+                           verbose = F)
+
+train_data_2006 &lt;- one_hot_encoder(dataSet = train_data_2006,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+cat(&quot;#### Train Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(train_data_2006),
+    &quot;\n##### Variables: &quot;,ncol(train_data_2006))</code></pre>
+<div id="train-data" class="section level4">
+<h4>Train Data</h4>
+<div id="observations-1718" class="section level5">
+<h5>Observations: 1718</h5>
+</div>
+<div id="variables-102" class="section level5">
+<h5>Variables: 102</h5>
+<p><br></p>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+dplyr::anti_join(scaled_data_2006, 
+                 train_data_2006, 
+                 by = &#39;id&#39;) -&gt; intermediate_data
+
+intermediate_data %&gt;% 
+  dplyr::sample_frac(.5) -&gt; test_data_2006
+
+test_data_2006 &lt;- one_hot_encoder(dataSet = test_data_2006,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+cat(&quot;#### Test Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(test_data_2006),
+    &quot;\n##### Variables: &quot;,ncol(test_data_2006))</code></pre>
+</div>
+</div>
+<div id="test-data" class="section level4">
+<h4>Test Data</h4>
+<div id="observations-859" class="section level5">
+<h5>Observations: 859</h5>
+</div>
+<div id="variables-102-1" class="section level5">
+<h5>Variables: 102</h5>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+dplyr::anti_join(intermediate_data, 
+                 test_data_2006, 
+                 by = &#39;id&#39;) -&gt; validate_data_2006
+
+
+validate_data_2006 &lt;- one_hot_encoder(dataSet = validate_data_2006,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+rm(intermediate_data)
+
+cat(&quot;#### Validate Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(validate_data_2006),
+    &quot;\n##### Variables: &quot;,ncol(validate_data_2006))</code></pre>
+</div>
+</div>
+<div id="validate-data" class="section level4">
+<h4>Validate Data</h4>
+<div id="observations-859-1" class="section level5">
+<h5>Observations: 859</h5>
+</div>
+<div id="variables-102-2" class="section level5">
+<h5>Variables: 102</h5>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="train-the-model" class="section level3">
+<h3>Train the model</h3>
+<pre class="r"><code>mod_2006 &lt;- lm(votos ~ log.quantidade_fornecedores * partido.PSDB + sqrt.media_despesa * partido.PMDB +
+                  sqrt.total_receita * sqrt.total_despesa + uf.SP * estado.civil.CASADO.A. + 
+                  uf.RJ * sqrt.total_despesa + sqrt.total_receita * `grau.SUPERIOR COMPLETO`, 
+          data = train_data_2006)
+
+broom::glance(mod_2006)</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared  sigma statistic   p.value    df  logLik    AIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.521         0.517 31581.      116. 8.40e-258    17 -20228. 40492.
+## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<ul>
+<li>As these quality metrics come from training they aren’t that meaningful:
+<ul>
+<li>A decent <span class="math inline">\(R^2\)</span> and <span class="math inline">\(adjusted \thinspace R^2\)</span> around <span class="math inline">\(0.5\)</span>.</li>
+<li>The <span class="math inline">\(F \thinspace statistic\)</span> (statistic) is way bigger than 1 (a good sign).</li>
+</ul></li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2006,
+            conf.int = TRUE,
+            conf.level = 0.95)</code></pre>
+<pre><code>## # A tibble: 17 x 7
+##    term            estimate std.error statistic  p.value conf.low conf.high
+##    &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 (Intercept)       33434.     2270.   14.7    2.58e-46   28982.    37885.
+##  2 log.quantidade…  -12327.     2032.   -6.07   1.60e- 9  -16312.    -8342.
+##  3 partido.PSDB      -3866.     3445.   -1.12   2.62e- 1  -10623.     2892.
+##  4 sqrt.media_des…   -2453.     1689.   -1.45   1.47e- 1   -5765.      860.
+##  5 partido.PMDB       -981.     2773.   -0.354  7.23e- 1   -6420.     4457.
+##  6 sqrt.total_rec…  -14239.    10973.   -1.30   1.95e- 1  -35762.     7283.
+##  7 sqrt.total_des…   75440.    11734.    6.43   1.66e-10   52426.    98455.
+##  8 uf.SP              4022.     3232.    1.24   2.13e- 1   -2316.    10361.
+##  9 estado.civil.C…    1079.     1846.    0.584  5.59e- 1   -2542.     4699.
+## 10 uf.RJ              -237.     2661.   -0.0892 9.29e- 1   -5456.     4981.
+## 11 `grau.SUPERIOR…     765.     1815.    0.421  6.74e- 1   -2796.     4325.
+## 12 log.quantidade…    3952.     3130.    1.26   2.07e- 1   -2186.    10091.
+## 13 sqrt.media_des…    -875.     2740.   -0.319  7.50e- 1   -6249.     4500.
+## 14 sqrt.total_rec…   -7936.     1255.   -6.32   3.29e-10  -10398.    -5474.
+## 15 uf.SP:estado.c…   -5188.     3942.   -1.32   1.88e- 1  -12920.     2543.
+## 16 sqrt.total_des…   -1166.     3843.   -0.303  7.62e- 1   -8703.     6372.
+## 17 sqrt.total_rec…    4494.     2714.    1.66   9.80e- 2    -830.     9818.</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="linear-model-for-2010-elections" class="section level2">
+<h2>Linear Model for 2010 elections</h2>
+<p><br></p>
+<div id="split-data-for-cross-validation-1" class="section level3">
+<h3>Split Data for Cross Validation</h3>
+<p><br></p>
+<ul>
+<li>Let’s use the <span class="math inline">\(50/25/25\)</span> proportions for the train, validate and test datasets</li>
+</ul>
+<pre class="r"><code>scaled_data %&gt;%
+  filter(ano == 2010) -&gt; scaled_data_2010
+
+scaled_data_2010 %&gt;%
+  sample_n(5)</code></pre>
+<pre><code>## # A tibble: 5 x 38
+##     ano sequencial_cand… nome  uf    partido quantidade_doac…
+##   &lt;int&gt;            &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;
+## 1  2010            0.382 FERN… MG    PRTB              -0.169
+## 2  2010           -0.829 EDSO… AC    PSDB              -0.211
+## 3  2010            0.988 MARC… RJ    PDT                0.946
+## 4  2010           -0.728 ELIA… AL    PR                -0.228
+## 5  2010           -0.425 SEGI… BA    PSC               -0.100
+## # … with 32 more variables: quantidade_doadores &lt;dbl&gt;,
+## #   total_receita &lt;dbl&gt;, media_receita &lt;dbl&gt;,
+## #   recursos_de_outros_candidatos.comites &lt;dbl&gt;,
+## #   recursos_de_pessoas_fisicas &lt;dbl&gt;,
+## #   recursos_de_pessoas_juridicas &lt;dbl&gt;, recursos_proprios &lt;dbl&gt;,
+## #   recursos_de_partido_politico &lt;dbl&gt;, quantidade_despesas &lt;dbl&gt;,
+## #   quantidade_fornecedores &lt;dbl&gt;, total_despesa &lt;dbl&gt;,
+## #   media_despesa &lt;dbl&gt;, cargo &lt;chr&gt;, sexo &lt;chr&gt;, grau &lt;chr&gt;,
+## #   estado_civil &lt;chr&gt;, ocupacao &lt;chr&gt;, votos &lt;int&gt;, id &lt;int&gt;,
+## #   log.quantidade_doacoes &lt;dbl&gt;, log.quantidade_doadores &lt;dbl&gt;,
+## #   log.quantidade_despesas &lt;dbl&gt;, log.quantidade_fornecedores &lt;dbl&gt;,
+## #   sqrt.total_receita &lt;dbl&gt;, sqrt.media_receita &lt;dbl&gt;,
+## #   sqrt.total_despesa &lt;dbl&gt;, sqrt.media_despesa &lt;dbl&gt;,
+## #   sqrt.recursos_proprios &lt;dbl&gt;,
+## #   sqrt.recursos_de_pessoas_juridicas &lt;dbl&gt;,
+## #   sqrt.recursos_de_partido_politico &lt;dbl&gt;,
+## #   sqrt.recursos_de_outros_candidatos.comites &lt;dbl&gt;,
+## #   sqrt.recursos_de_pessoas_fisicas &lt;dbl&gt;</code></pre>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+scaled_data_2010 %&gt;% 
+  dplyr::sample_frac(.5) -&gt; train_data_2010
+
+encoding &lt;- build_encoding(dataSet = train_data_2010,
+                           cols = c(&quot;uf&quot;,&quot;sexo&quot;,&quot;grau&quot;,
+                                    &quot;partido&quot;,&quot;estado_civil&quot;),
+                           verbose = F)
+
+train_data_2010 &lt;- one_hot_encoder(dataSet = train_data_2010,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+cat(&quot;#### Train Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(train_data_2010),
+    &quot;\n##### Variables: &quot;,ncol(train_data_2010))</code></pre>
+<div id="train-data-1" class="section level4">
+<h4>Train Data</h4>
+<div id="observations-2020" class="section level5">
+<h5>Observations: 2020</h5>
+</div>
+<div id="variables-101" class="section level5">
+<h5>Variables: 101</h5>
+<p><br></p>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+dplyr::anti_join(scaled_data_2010, 
+                 train_data_2010, 
+                 by = &#39;id&#39;) -&gt; intermediate_data
+
+intermediate_data %&gt;% 
+  dplyr::sample_frac(.5) -&gt; test_data_2010
+
+test_data_2010 &lt;- one_hot_encoder(dataSet = test_data_2010,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+cat(&quot;#### Test Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(test_data_2010),
+    &quot;\n##### Variables: &quot;,ncol(test_data_2010))</code></pre>
+</div>
+</div>
+<div id="test-data-1" class="section level4">
+<h4>Test Data</h4>
+<div id="observations-1010" class="section level5">
+<h5>Observations: 1010</h5>
+</div>
+<div id="variables-101-1" class="section level5">
+<h5>Variables: 101</h5>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+dplyr::anti_join(intermediate_data, 
+                 test_data_2010, 
+                 by = &#39;id&#39;) -&gt; validate_data_2010
+
+validate_data_2010 &lt;- one_hot_encoder(dataSet = validate_data_2010,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+rm(intermediate_data)
+
+cat(&quot;#### Validate Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(validate_data_2010),
+    &quot;\n##### Variables: &quot;,ncol(validate_data_2010))</code></pre>
+</div>
+</div>
+<div id="validate-data-1" class="section level4">
+<h4>Validate Data</h4>
+<div id="observations-1010-1" class="section level5">
+<h5>Observations: 1010</h5>
+</div>
+<div id="variables-101-2" class="section level5">
+<h5>Variables: 101</h5>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div id="train-the-model-1" class="section level2">
+<h2>Train the model</h2>
+<pre class="r"><code>mod_2010 &lt;- lm(votos ~ log.quantidade_fornecedores * partido.PSDB + sqrt.media_despesa * partido.PMDB +
+                  sqrt.total_receita * sqrt.total_despesa + uf.SP * estado.civil.CASADO.A. + 
+                  uf.RJ * sqrt.total_despesa + sqrt.total_receita * `grau.SUPERIOR COMPLETO`,
+          data = train_data_2010)
+
+broom::glance(mod_2010)</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared  sigma statistic   p.value    df  logLik    AIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.450         0.445 41280.      102. 1.15e-245    17 -24327. 48689.
+## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<ul>
+<li>As the quality metric come from training they aren’t that meaningful
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> and <span class="math inline">\(adjusted \thinspace R^2\)</span> around <span class="math inline">\(0.45\)</span> are borderline disappointing.</li>
+<li>The <span class="math inline">\(F \thinspace statistic\)</span> (statistic) is way bigger than 1 (a good sign).</li>
+</ul></li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2010,
+            conf.int = TRUE,
+            conf.level = 0.95)</code></pre>
+<pre><code>## # A tibble: 17 x 7
+##    term            estimate std.error statistic  p.value conf.low conf.high
+##    &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 (Intercept)       27782.     2334.    11.9   1.33e-31   23203.    32360.
+##  2 log.quantidade…  -14528.     2494.    -5.82  6.66e- 9  -19419.    -9636.
+##  3 partido.PSDB      -4555.     4212.    -1.08  2.80e- 1  -12816.     3706.
+##  4 sqrt.media_des…   -5917.     1497.    -3.95  7.95e- 5   -8852.    -2982.
+##  5 partido.PMDB      -1024.     3664.    -0.279 7.80e- 1   -8210.     6162.
+##  6 sqrt.total_rec…   29283.     9997.     2.93  3.44e- 3    9677.    48888.
+##  7 sqrt.total_des…   35641.    10103.     3.53  4.29e- 4   15827.    55454.
+##  8 uf.SP             -3310.     3588.    -0.923 3.56e- 1  -10346.     3726.
+##  9 estado.civil.C…    -811.     2186.    -0.371 7.11e- 1   -5099.     3476.
+## 10 uf.RJ              -310.     2713.    -0.114 9.09e- 1   -5630.     5009.
+## 11 `grau.SUPERIOR…   -2747.     1963.    -1.40  1.62e- 1   -6596.     1102.
+## 12 log.quantidade…   -5525.     3343.    -1.65  9.85e- 2  -12080.     1030.
+## 13 sqrt.media_des…     715.     3173.     0.225 8.22e- 1   -5507.     6937.
+## 14 sqrt.total_rec…   -5713.      783.    -7.30  4.15e-13   -7248.    -4178.
+## 15 uf.SP:estado.c…   11461.     4540.     2.52  1.17e- 2    2556.    20365.
+## 16 sqrt.total_des…    1847.     2691.     0.686 4.93e- 1   -3430.     7124.
+## 17 sqrt.total_rec…   -6570.     1921.    -3.42  6.39e- 4  -10337.    -2802.</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="evaluating-models" class="section level1">
+<h1>Evaluating Models</h1>
+<p><br></p>
+<div id="we-shall-keep-out-the-intercept-from-our-p.value-and-coefficient-analysis-as-its-analysis-isnt-as-meaningful-as-that-of-other-predictors." class="section level5">
+<h5>We shall keep out the <em>Intercept</em> from our p.value and coefficient analysis as its analysis isn’t as meaningful as that of other predictors.</h5>
+<p><br></p>
+</div>
+<div id="p-value" class="section level2">
+<h2>P Value</h2>
+<pre class="r"><code>broom::tidy(mod_2006, 
+     conf.int = TRUE, 
+     conf.level = 0.95,
+     sep=&quot;:&quot;) %&gt;%
+  arrange(desc(p.value)) %&gt;%
+  slice(1:3) %&gt;%
+  ggplot(aes(reorder(term,p.value), p.value)) +
+  geom_point(size = 2) +
+  labs(x = &quot;Predictor variable&quot;,
+       y = &quot;Estimated p-value&quot;,
+       title=&quot;Predictors of of biggest p.value (2006 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<ul>
+<li>The predictors created out of the encoding of the nominal categorical variables <strong>uf</strong> and <strong>partido</strong> didn’t perform well.</li>
+<li>Unexpectedly <strong>sqrt.total_despesa</strong> didn’t perform so well in terms of <span class="math inline">\(p-value\)</span>, probably due to the interaction with the underperforming variable <strong>uf</strong>.</li>
+<li>Unexpectedly <strong>sqrt.media_despesa</strong> didn’t perform so well in terms of <span class="math inline">\(p-value\)</span>, probably due to the interaction with the underperforming variable <strong>partido</strong>.</li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2010, 
+     conf.int = TRUE, 
+     conf.level = 0.95,
+     sep=&quot;:&quot;) %&gt;%
+  arrange(desc(p.value)) %&gt;%
+  slice(1:3) %&gt;%
+  ggplot(aes(reorder(term,p.value), p.value)) +
+  geom_point(size = 2) +
+  labs(x = &quot;Predictor variable&quot;,
+       y = &quot;Estimated p-value&quot;,
+       title=&quot;Predictors of biggest p.value (2010 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<ul>
+<li>The predictors created out of the encoding of the nominal categorical variables <strong>partido</strong> and <strong>uf</strong> didn’t perform well.</li>
+<li>The predictor <strong>sqrt.media_despesa</strong> didn’t perform so well in terms of <span class="math inline">\(p-value\)</span>, probably due to the interaction with the underperforming variable <strong>partido</strong>.</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>On both models we can see that predictors related to <strong>partido</strong> perform poorly. Also we could see the sizable appearance of categorical variable among underperformer predictors.</p>
+</blockquote>
+<p><br></p>
+<div id="p-value-isnt-as-effective-in-pointing-out-who-are-the-most-meaningful-predictors-as-its-in-pointing-which-are-the-least-meaningful." class="section level5">
+<h5>P Value isn’t as effective in pointing out who are the most meaningful predictors as it’s in pointing which are the least meaningful.</h5>
+<pre class="r"><code>broom::tidy(mod_2006, 
+     conf.int = TRUE, 
+     conf.level = 0.95,
+     sep=&quot;:&quot;) %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  arrange(p.value) %&gt;%
+  slice(1:3) %&gt;%
+  ggplot(aes(reorder(term,p.value), p.value)) +
+  geom_hline(yintercept = 0.05, colour = &quot;darkred&quot;) +
+  geom_point(size = 2) +
+  labs(x = &quot;Predictor variable&quot;,
+       y = &quot;Estimated p-value&quot;,
+       title=&quot;Predictors of smallest p.value (2006 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<ul>
+<li>We can see the presence of different combinations of the predictors <strong>sqrt.total_receita</strong> and <strong>sqrt.total_despesa</strong> as predictors with good pvalues. This corroborates what the <em>correlogram</em> suggested.</li>
+<li>We also have <strong>log.quantidade_fornecedores</strong> with positive results.</li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2010, 
+     conf.int = TRUE, 
+     conf.level = 0.95,
+     sep=&quot;:&quot;) %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  arrange(p.value) %&gt;%
+  slice(1:3) %&gt;%
+  ggplot(aes(reorder(term,p.value), p.value)) +
+  geom_hline(yintercept = 0.05, colour = &quot;darkred&quot;) +
+  geom_point(size = 2) +
+  labs(x = &quot;Predictor variable&quot;,
+       y = &quot;Estimated p-value&quot;,
+       title=&quot;Predictors of smallest p.value (2010 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<ul>
+<li>We can see the presence of different combinations of the predictors <strong>sqrt.total_receita</strong> and <strong>sqrt.total_despesa</strong> as predictors with good pvalues. This corroborates what the <em>correlogram</em> suggested.</li>
+<li>We also have <strong>log.quantidade_fornecedores</strong> and <strong>sqrt.media_despesa</strong> with positive results.</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>On both models different combinations of the predictors <strong>sqrt.total_receita</strong> and <strong>sqrt.total_despesa</strong> were clearly the best predictors (those that could explain the votes the most).</p>
+</blockquote>
+</div>
+</div>
+<div id="coefficients" class="section level2">
+<h2>Coefficients</h2>
+<pre class="r"><code>broom::tidy(mod_2006, 
+     conf.int = TRUE, 
+     conf.level = 0.95,
+     sep=&quot;:&quot;) %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  ggplot(aes(reorder(term, estimate),
+             estimate )) +
+  geom_bar(stat = &quot;identity&quot;) + 
+  coord_flip() +
+  labs(x=&quot;Coefficient&quot;,y=&quot;Predictor&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<ul>
+<li>Results regarding coefficients corroborate what we saw in the predictors’ <span class="math inline">\(p.value\)</span>.
+<ul>
+<li><strong>uf</strong> and <strong>partido</strong> don’t seem meaningful (smallest coefficients).</li>
+<li><strong>sqrt.total_receita</strong>, <strong>log.quantidade_fornecedores</strong> and specially <strong>sqrt.total_despesa</strong> seem particularly meaningful (biggest coefficients).</li>
+</ul></li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2010, 
+     conf.int = TRUE, 
+     conf.level = 0.95,
+     sep=&quot;:&quot;) %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  ggplot(aes(reorder(term, estimate),
+             estimate )) +
+  geom_bar(stat = &quot;identity&quot;) + 
+  coord_flip() +
+  labs(x=&quot;Coefficient&quot;,y=&quot;Predictor&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<ul>
+<li>Results regarding coefficients seem to corroborate what we saw in the predictors’ <span class="math inline">\(p.value\)</span>.
+<ul>
+<li><strong>uf</strong> <strong>estado.civil</strong> and <strong>partido</strong> don’t seem meaningful (smallest coefficients).</li>
+<li><strong>sqrt.total_receita</strong>, <strong>log.quantidade_fornecedores</strong> and specially <strong>sqrt.total_despesa</strong> seem particularly meaningful (biggest coefficients).</li>
+</ul></li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2006, 
+     conf.int = TRUE, 
+     conf.level = 0.95)  %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  ggplot(aes(reorder(term, estimate),
+             estimate, ymin = conf.low,
+             ymax = conf.high)) +
+  geom_errorbar(size = 0.8, width= 0.4) +
+  geom_point(color = &quot;red&quot;, size = 2) +
+  geom_hline(yintercept = 0, colour = &quot;darkred&quot;) +
+  labs(x = &quot;Predictor&quot;,
+       y = &quot;Estimated coefficient (95% of confidence)&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<ul>
+<li>The only predictors that seem statiscally significant at a level of confidence of <span class="math inline">\(95\%\)</span> are <strong>sqrt.total_despesa</strong>, <strong>log.quantidade_fornecedores</strong> and the interaction between <strong>sqrt.total_despesa</strong> and <strong>sqrt.total_receita</strong></li>
+</ul>
+<pre class="r"><code>broom::tidy(mod_2010, 
+     conf.int = TRUE, 
+     conf.level = 0.95)  %&gt;%
+  filter(term != &quot;(Intercept)&quot;) %&gt;%
+  ggplot(aes(reorder(term, estimate),
+             estimate, ymin = conf.low,
+             ymax = conf.high)) +
+  geom_errorbar(size = 0.8, width= 0.4) +
+  geom_point(color = &quot;red&quot;, size = 2) +
+  geom_hline(yintercept = 0, colour = &quot;darkred&quot;) +
+  labs(x = &quot;Predictor&quot;,
+       y = &quot;Estimated coefficient (95% of confidence)&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<ul>
+<li>In the model for the 2010 elections at a level of confidence of <span class="math inline">\(95\%\)</span> we have evidence of more statiscally significant predictors, among which we still have <strong>sqrt.total_despesa</strong>, <strong>log.quantidade_fornecedores</strong> and now also <strong>sqrt.total_receita</strong> (among others).</li>
+</ul>
+</div>
+<div id="residue-analysis" class="section level2">
+<h2>Residue Analysis</h2>
+<p><br></p>
+<div id="resorting-to-thumb-rules-regarding-cooks-distance-well-use-d_i-1-as-a-cutoff-for-highly-influential-pointsoutliers" class="section level5">
+<h5>Resorting to thumb rules regarding <strong>Cook’s Distance</strong> we’ll use <span class="math inline">\(D_i &gt; 1\)</span> as a cutoff for highly influential points/outliers</h5>
+</div>
+<div id="residual-vs-fitted" class="section level3">
+<h3>Residual vs Fitted</h3>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.fitted, .resid)) + 
+  geom_point() +
+  stat_smooth(method=&quot;loess&quot;) + 
+  geom_hline(col=&quot;red&quot;,
+             yintercept=0,
+             linetype=&quot;dashed&quot;) + 
+  labs(y=&quot;Residuals&quot;,
+       x=&quot;Fitted values&quot;,
+       title=&quot;Residual vs Fitted Plot (2006 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<ul>
+<li>There’s indication, although not strong, of a pattern in the <em>residual vs fitted</em>, this is a bad sign for the analyzed model.</li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.fitted, .resid)) + 
+  geom_point() +
+  stat_smooth(method=&quot;loess&quot;) + 
+  geom_hline(col=&quot;red&quot;,
+             yintercept=0,
+             linetype=&quot;dashed&quot;) + 
+  labs(y=&quot;Residuals&quot;,
+       x=&quot;Fitted values&quot;,
+       title=&quot;Residual vs Fitted Plot (2010 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<ul>
+<li>Here we can see rather equally spread residuals around a horizontal line (could be better) without distinct patterns. A good sign for the model.</li>
+</ul>
+</div>
+<div id="normal-q-q" class="section level3">
+<h3>Normal Q-Q</h3>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(sample=rstandard(.))) +
+  stat_qq(na.rm = TRUE,
+          shape=1,size=3) +      # open circles
+  labs(title=&quot;Normal Q-Q (2006 elections)&quot;,        # plot title
+  x=&quot;Theoretical Quantiles&quot;,      # x-axis label
+  y=&quot;Standardized Residuals&quot;) +   # y-axis label +
+  geom_abline(color = &quot;red&quot;,
+              size = 0.8,
+              linetype=&quot;dashed&quot;)  # dashed reference line</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<ul>
+<li>Our residuals somewhat deviate from a normal distribution. As we have a <em>relatively</em> mild deviation we have a negative yet mild symptom.</li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(sample=rstandard(.))) +
+  stat_qq(na.rm = TRUE,
+          shape=1,size=3) +      # open circles
+  labs(title=&quot;Normal Q-Q (2010 elections)&quot;,        # plot title
+  x=&quot;Theoretical Quantiles&quot;,      # x-axis label
+  y=&quot;Standardized Residuals&quot;) +   # y-axis label +
+  geom_abline(color = &quot;red&quot;,
+              size = 0.8,
+              linetype=&quot;dashed&quot;)  # dashed reference line</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<ul>
+<li>Although not perfect we can see that the residuals for this model are closer to normally distributed.</li>
+</ul>
+</div>
+<div id="scale-location" class="section level3">
+<h3>Scale-Location</h3>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.fitted, 
+             sqrt(abs(.stdresid)))) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;,
+              na.rm = TRUE) +
+  labs(title = &quot;Scale-Location (2006 elections)&quot;,
+       x= &quot;Fitted Value&quot;,
+       y = expression(sqrt(&quot;|Standardized residuals|&quot;)))</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<ul>
+<li>The residuals are not equally spread. Our model has violated the assumption of <span class="math inline">\(homoscedasticity\)</span> (equal variance) which is a bad sign.
+<ul>
+<li>The degree of the violation isn’t so extense, as from around the 50000th fitted value onward the residuals seem very equally spread.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.fitted, 
+             sqrt(abs(.stdresid)))) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;,
+              na.rm = TRUE) +
+  labs(title = &quot;Scale-Location (2010 elections)&quot;,
+       x= &quot;Fitted Value&quot;,
+       y = expression(sqrt(&quot;|Standardized residuals|&quot;)))</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<ul>
+<li>Here we see a scenario similar to the one we just witnessed on the previous model.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="residual-vs-leverage-plot" class="section level3">
+<h3>Residual vs Leverage Plot</h3>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.hat, .stdresid)) + 
+  geom_point(aes(size=.cooksd), na.rm=TRUE) +
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) +
+  xlab(&quot;Leverage&quot;)+ylab(&quot;Standardized Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Leverage Plot (2006 elections)&quot;) + 
+  scale_size_continuous(&quot;Cook&#39;s Distance&quot;, range=c(1,5)) +    
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.hat, .stdresid)) + 
+  geom_point(aes(size=.cooksd), na.rm=TRUE) +
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) +
+  xlab(&quot;Leverage&quot;)+ylab(&quot;Standardized Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Leverage Plot (2010 elections)&quot;) + 
+  scale_size_continuous(&quot;Cook&#39;s Distance&quot;, range=c(1,5)) +    
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<ul>
+<li>Here we have evidence of a outlier that would drastically change the results of our model: <span class="math inline">\(D_i = 1.2\)</span></li>
+</ul>
+</div>
+<div id="cooks-dist-vs-leverage" class="section level3">
+<h3>Cook’s dist vs Leverage</h3>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.hat, .cooksd)) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) + 
+  xlab(&quot;Leverage hii&quot;)+ylab(&quot;Cook&#39;s Distance&quot;) + 
+  ggtitle(&quot;Cook&#39;s dist vs Leverage hii/(1-hii) (2006 elections)&quot;) + 
+  geom_abline(slope=seq(0,3,0.5), color=&quot;gray&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.hat, .cooksd)) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) + 
+  xlab(&quot;Leverage hii&quot;)+ylab(&quot;Cook&#39;s Distance&quot;) + 
+  ggtitle(&quot;Cook&#39;s dist vs Leverage hii/(1-hii) (2010 elections)&quot;) + 
+  geom_abline(slope=seq(0,3,0.5), color=&quot;gray&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<ul>
+<li>Here we have evidence of a outlier that would drastically change the results of our model: <span class="math inline">\(D_i = 1.2\)</span> ## Cross Validation</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="cross-validation" class="section level2">
+<h2>Cross Validation</h2>
+<p><br></p>
+<div id="validate" class="section level3">
+<h3>Validate</h3>
+<pre class="r"><code>predictions &lt;- mod_2006 %&gt;% predict(validate_data_2006)
+
+data.frame( R2 = caret::R2(predictions, validate_data_2006$votos),
+            RMSE = caret::RMSE(predictions, validate_data_2006$votos),
+            MAE = caret::MAE(predictions, validate_data_2006$votos),
+            ERR = caret::RMSE(predictions, validate_data_2006$votos)/
+              mean(validate_data_2006$votos))</code></pre>
+<pre><code>##          R2     RMSE     MAE      ERR
+## 1 0.5639769 30668.81 13639.2 1.321718</code></pre>
+<p>Now let’s talk about the results taken from the validate data for 2006 elections (more meaningful).</p>
+<ul>
+<li><p>We got a decent 0.56 R² and adjusted R² approximately (notice the decrease). This means that this model explain approximately 56% of the response variable variability.</p></li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 30669.
+<ul>
+<li>Our model would miss the mark by approximately 30669 (RMSE), that is if candidate had one million votes we would predict 30669 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 13639.2 .</li>
+<li><p>The prediction error rate (ERR) was 1.321718.</p></li>
+</ul>
+<p><br></p>
+<pre class="r"><code>predictions &lt;- mod_2010 %&gt;% predict(validate_data_2010)
+
+data.frame( R2 = caret::R2(predictions, validate_data_2010$votos),
+            RMSE = caret::RMSE(predictions, validate_data_2010$votos),
+            MAE = caret::MAE(predictions, validate_data_2010$votos),
+            ERR = caret::RMSE(predictions, validate_data_2010$votos)/
+              mean(validate_data_2010$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.6208835 27599.68 13981.47 1.275393</code></pre>
+<p>Now let’s talk about the results taken from the validate data for 2010 elections (more meaningful).</p>
+<ul>
+<li>We got a decent 0.62 R² and adjusted R² approximately (notice the decrease). This means that this model explain approximately 62% of the response variable variability. (Smaller than the previous model)</li>
+</ul>
+<p><em>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 27600 + Our model would miss the mark by approximately 27600 (RMSE), that is if candidate had one million votes we would predict 27600 more than we should (or less than we should). </em> The average absolute difference between observed and predicted outcomes (MAE) was approximately 13981. * The prediction error rate (ERR) was 1.275393.</p>
+<blockquote>
+<p>We have signs here of a decent although not brilliant fit of the model for 2006 elections. There’s no clear evidence of overfitting as test, validate and train rendered consonant results.</p>
+</blockquote>
+<p><br></p>
+</div>
+<div id="test" class="section level3">
+<h3>Test</h3>
+<pre class="r"><code>predictions &lt;- mod_2006 %&gt;% predict(test_data_2006)
+
+data.frame( R2 = caret::R2(predictions, test_data_2006$votos),
+            RMSE = caret::RMSE(predictions, test_data_2006$votos),
+            MAE = caret::MAE(predictions, test_data_2006$votos),
+            ERR = caret::RMSE(predictions, test_data_2006$votos)/
+              mean(test_data_2006$votos))</code></pre>
+<pre><code>##          R2    RMSE      MAE      ERR
+## 1 0.5810708 28937.3 13644.98 1.236634</code></pre>
+<p>Now let’s talk about the results taken from the test data for 2006 elections (most meaningful).</p>
+<ul>
+<li><p>We got a decent 0.58 R² and adjusted R² approximately (notice the decrease). This means that this model explain approximately 58% of the response variable variability. (Smaller than the previous model)</p></li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 28937
+<ul>
+<li>Our model would miss the mark by approximately 28937 (RMSE), that is if candidate had one million votes we would predict 28937 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 13645.</li>
+<li><p>The prediction error rate (ERR) was 1.236634.</p></li>
+</ul>
+<p><br></p>
+<pre class="r"><code>predictions &lt;- mod_2010 %&gt;% predict(test_data_2010)
+
+data.frame( R2 = caret::R2(predictions, test_data_2010$votos),
+            RMSE = caret::RMSE(predictions, test_data_2010$votos),
+            MAE = caret::MAE(predictions, test_data_2010$votos),
+            ERR = caret::RMSE(predictions, test_data_2010$votos)/
+              mean(test_data_2010$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.5920504 26772.92 12847.32 1.347477</code></pre>
+<p>Now let’s talk about the results taken from the test data for 2006 elections (most meaningful).</p>
+<ul>
+<li><p>We got a decent 0.59 R² and adjusted R² approximately (notice the decrease). This means that this model explain approximately 59% of the response variable variability. (Smaller than the previous model)</p></li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 26773
+<ul>
+<li>Our model would miss the mark by approximately 26773 (RMSE), that is if candidate had one million votes we would predict 26773 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 12847.</li>
+<li><p>The prediction error rate (ERR) was 1.347477.</p></li>
+</ul>
+<blockquote>
+<p>The model for the 2010 elections also showed of a decent although not brilliant fit. There’s no clear evidence of overfitting as test, validate and train rendered consonant results.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="removing-redundant-predictors" class="section level1">
+<h1>Removing redundant predictors</h1>
+<p><br></p>
+<div id="the-quality-assesment-we-performed-residue-analysis-cross-validation-suggested-that-sqrt.total_receita-sqrt.total_despesa-and-log.quantidade_fornecedores-were-the-most-meaningful-predictors-those-that-could-explain-the-votes-the-most." class="section level5">
+<h5>The quality assesment we performed (residue analysis, cross validation …) suggested that <strong>sqrt.total_receita</strong>, <strong>sqrt.total_despesa</strong> and <strong>log.quantidade_fornecedores</strong> were the most meaningful predictors (those that could explain the votes the most).</h5>
+</div>
+<div id="evidence-suggested-that-the-rest-of-the-predictors-such-as-partido-uf-and-estado.civil-were-redundant.-for-this-reason-well-try-to-create-a-model-using-only-the-most-meaningful-predictors-i.e-a-skimmed-model." class="section level5">
+<h5>Evidence suggested that the rest of the predictors, such as <strong>partido</strong>, <strong>uf</strong> and <strong>estado.civil</strong> were redundant. For this reason we’ll try to create a model using only the most meaningful predictors (i.e a <em>skimmed model</em>).</h5>
+<p><br></p>
+</div>
+<div id="elections-skimmed-model" class="section level2">
+<h2>2006 elections skimmed model</h2>
+<pre class="r"><code>mod_2006 &lt;- lm(votos ~ sqrt.total_receita * sqrt.total_despesa + 
+                 log.quantidade_fornecedores,
+          data = train_data_2006)
+
+broom::glance(mod_2006)</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared  sigma statistic   p.value    df  logLik    AIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.518         0.517 31575.      460. 1.85e-269     5 -20234. 40480.
+## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<ul>
+<li>As the quality metric come from training they aren’t that meaningful
+<ul>
+<li>A decent <span class="math inline">\(R^2\)</span> and <span class="math inline">\(adjusted \thinspace R^2\)</span> very close to the original model.</li>
+<li>The <span class="math inline">\(F \thinspace statistic\)</span> (statistic) is way bigger than 1 (a good sign) and bigger than that of the original model.</li>
+</ul></li>
+</ul>
+<div id="residue-analysis-1" class="section level3">
+<h3>Residue Analysis</h3>
+<p><br></p>
+<div id="resorting-to-thumb-rules-regarding-cooks-distance-well-use-d_i-1-as-a-cutoff-for-highly-influential-pointsoutliers-1" class="section level5">
+<h5>Resorting to thumb rules regarding <strong>Cook’s Distance</strong> we’ll use <span class="math inline">\(D_i &gt; 1\)</span> as a cutoff for highly influential points/outliers</h5>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.fitted, .resid)) + 
+  geom_point() +
+  stat_smooth(method=&quot;loess&quot;) + 
+  geom_hline(col=&quot;red&quot;,
+             yintercept=0,
+             linetype=&quot;dashed&quot;) + 
+  labs(y=&quot;Residuals&quot;,
+       x=&quot;Fitted values&quot;,
+       title=&quot;Residual vs Fitted Plot (2006 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<ul>
+<li>There’s indication, although not strong, of a pattern in the residual vs fitted, this is a bad sign for the analyzed model.
+<ul>
+<li>Pattern stronger than the one from the original model.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(sample=rstandard(.))) +
+  stat_qq(na.rm = TRUE,
+          shape=1,size=3) +      # open circles
+  labs(title=&quot;Normal Q-Q (2006 elections)&quot;,        # plot title
+  x=&quot;Theoretical Quantiles&quot;,      # x-axis label
+  y=&quot;Standardized Residuals&quot;) +   # y-axis label +
+  geom_abline(color = &quot;red&quot;,
+              size = 0.8,
+              linetype=&quot;dashed&quot;)  # dashed reference line</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<ul>
+<li>Our residuals somewhat deviate from a normal distribution. As we have a relatively mild deviation we have a negative yet mild sign for our model.
+<ul>
+<li>Results similar to original model.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.fitted, 
+             sqrt(abs(.stdresid)))) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;,
+              na.rm = TRUE) +
+  labs(title = &quot;Scale-Location (2006 elections)&quot;,
+       x= &quot;Fitted Value&quot;,
+       y = expression(sqrt(&quot;|Standardized residuals|&quot;)))</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<ul>
+<li>The residuals are not equally spread. Our model has violated the assumption of <span class="math inline">\(homoscedasticity\)</span> (equal variance)
+<ul>
+<li>Violation slightly stronger here.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.hat, .stdresid)) + 
+  geom_point(aes(size=.cooksd), na.rm=TRUE) +
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) +
+  xlab(&quot;Leverage&quot;)+ylab(&quot;Standardized Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Leverage Plot (2006 elections)&quot;) + 
+  scale_size_continuous(&quot;Cook&#39;s Distance&quot;, range=c(1,5)) +    
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+<pre class="r"><code>mod_2006 %&gt;%
+  ggplot(aes(.hat, .cooksd)) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) + 
+  xlab(&quot;Leverage hii&quot;)+ylab(&quot;Cook&#39;s Distance&quot;) + 
+  ggtitle(&quot;Cook&#39;s dist vs Leverage hii/(1-hii) (2006 elections)&quot;) + 
+  geom_abline(slope=seq(0,3,0.5), color=&quot;gray&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<ul>
+<li>Here we see indication of a somewhat more influential data point (still within acceptable range).</li>
+</ul>
+</div>
+</div>
+<div id="cross-validation-1" class="section level3">
+<h3>Cross Validation</h3>
+<p><br></p>
+<div id="validate-1" class="section level4">
+<h4>Validate</h4>
+<pre class="r"><code>predictions &lt;- mod_2006 %&gt;% predict(validate_data_2006)
+
+data.frame( R2 = caret::R2(predictions, validate_data_2006$votos),
+            RMSE = caret::RMSE(predictions, validate_data_2006$votos),
+            MAE = caret::MAE(predictions, validate_data_2006$votos),
+            ERR = caret::RMSE(predictions, validate_data_2006$votos)/
+              mean(validate_data_2006$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.5632688 30697.33 13569.11 1.322946</code></pre>
+<p>Now let’s talk about the results taken from the validate data (more meaningful).</p>
+<ul>
+<li>We got a decent 0.56 R² and adjusted R² approximately. This means that this model explain approximately 56% of the response variable variability.</li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 30697.
+<ul>
+<li>Our model would miss the mark by approximately 30697 (RMSE), that is if candidate had one million votes we would predict 30697 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 13569.</li>
+<li>The prediction error rate (ERR) was 1.322946.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="test-1" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>predictions &lt;- mod_2006 %&gt;% predict(test_data_2006)
+
+data.frame( R2 = caret::R2(predictions, test_data_2006$votos),
+            RMSE = caret::RMSE(predictions, test_data_2006$votos),
+            MAE = caret::MAE(predictions, test_data_2006$votos),
+            ERR = caret::RMSE(predictions, test_data_2006$votos)/
+              mean(test_data_2006$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.5882667 28684.37 13522.92 1.225825</code></pre>
+<p>Now let’s talk about the results taken from the test data (most meaningful).</p>
+<ul>
+<li>We got a decent 0.59 R² and adjusted R² approximately. This means that this model explain approximately 59% of the response variable variability.</li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 28684.
+<ul>
+<li>Our model would miss the mark by approximately 28684 (RMSE), that is if candidate had one million votes we would predict 28684 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 13522.92.</li>
+<li>The prediction error rate (ERR) was 1.225825.</li>
+</ul>
+<blockquote>
+<p>Our skimmed model fared quite similarly to the original model especially in the cross validation.</p>
+</blockquote>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="elections-skimmed-model-1" class="section level2">
+<h2>2010 elections skimmed model</h2>
+<pre class="r"><code>mod_2010 &lt;- lm(votos ~ sqrt.total_receita * sqrt.total_despesa,
+          data = train_data_2010)
+
+broom::glance(mod_2010)</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared  sigma statistic   p.value    df  logLik    AIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.433         0.432 41757.      514. 5.58e-248     4 -24356. 48723.
+## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<ul>
+<li>As the quality metric come from training they aren’t that meaningful
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> and <span class="math inline">\(adjusted \thinspace R^2\)</span> around <span class="math inline">\(0.43\)</span> are borderline disappointing and close to the original model.</li>
+<li>The <span class="math inline">\(F \thinspace statistic\)</span> (statistic) is way bigger than 1 (a good sign) and bigger than the one from the original model.</li>
+</ul></li>
+</ul>
+<div id="residue-analysis-2" class="section level3">
+<h3>Residue Analysis</h3>
+<p><br></p>
+<div id="resorting-to-thumb-rules-regarding-cooks-distance-well-use-d_i-1-as-a-cutoff-for-highly-influential-pointsoutliers-2" class="section level5">
+<h5>Resorting to thumb rules regarding <strong>Cook’s Distance</strong> we’ll use <span class="math inline">\(D_i &gt; 1\)</span> as a cutoff for highly influential points/outliers</h5>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.fitted, .resid)) + 
+  geom_point() +
+  stat_smooth(method=&quot;loess&quot;) + 
+  geom_hline(col=&quot;red&quot;,
+             yintercept=0,
+             linetype=&quot;dashed&quot;) + 
+  labs(y=&quot;Residuals&quot;,
+       x=&quot;Fitted values&quot;,
+       title=&quot;Residual vs Fitted Plot (2010 elections)&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<ul>
+<li>Here we can see rather equally spread (could be better) residuals around a horizontal line without distinct patterns. A good sign for the model.
+<ul>
+<li>Results slightly to those of the original model.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(sample=rstandard(.))) +
+  stat_qq(na.rm = TRUE,
+          shape=1,size=3) +      # open circles
+  labs(title=&quot;Normal Q-Q (2010 elections)&quot;,        # plot title
+  x=&quot;Theoretical Quantiles&quot;,      # x-axis label
+  y=&quot;Standardized Residuals&quot;) +   # y-axis label +
+  geom_abline(color = &quot;red&quot;,
+              size = 0.8,
+              linetype=&quot;dashed&quot;)  # dashed reference line</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<ul>
+<li>Although not perfect we can see that the residuals for this model are closer to normally distributed.
+<ul>
+<li>Results similar to those from the original model.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.fitted, 
+             sqrt(abs(.stdresid)))) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;,
+              na.rm = TRUE) +
+  labs(title = &quot;Scale-Location (2010 elections)&quot;,
+       x= &quot;Fitted Value&quot;,
+       y = expression(sqrt(&quot;|Standardized residuals|&quot;)))</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<ul>
+<li>Here we see a scenario similar to the one we just witnessed, but in the case of this model the residuals are closer to equally spread.
+<ul>
+<li>Results somewhat better than ones from original model.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.hat, .stdresid)) + 
+  geom_point(aes(size=.cooksd), na.rm=TRUE) +
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) +
+  xlab(&quot;Leverage&quot;)+ylab(&quot;Standardized Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Leverage Plot (2010 elections)&quot;) + 
+  scale_size_continuous(&quot;Cook&#39;s Distance&quot;, range=c(1,5)) +    
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+<pre class="r"><code>mod_2010 %&gt;%
+  ggplot(aes(.hat, .cooksd)) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) + 
+  xlab(&quot;Leverage hii&quot;)+ylab(&quot;Cook&#39;s Distance&quot;) + 
+  ggtitle(&quot;Cook&#39;s dist vs Leverage hii/(1-hii) (2010 elections)&quot;) + 
+  geom_abline(slope=seq(0,3,0.5), color=&quot;gray&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+</div>
+</div>
+<div id="cross-validation-2" class="section level3">
+<h3>Cross Validation</h3>
+<pre class="r"><code>predictions &lt;- mod_2010 %&gt;% predict(validate_data_2010)
+
+data.frame( R2 = caret::R2(predictions, validate_data_2010$votos),
+            RMSE = caret::RMSE(predictions, validate_data_2010$votos),
+            MAE = caret::MAE(predictions, validate_data_2010$votos),
+            ERR = caret::RMSE(predictions, validate_data_2010$votos)/
+              mean(validate_data_2010$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.6298557 27228.86 14152.26 1.258257</code></pre>
+<p>Now let’s talk about the results taken from the validate data (more meaningful).</p>
+<ul>
+<li>We got a decent 0.63 R² and adjusted R² approximately. This means that this model explain approximately 63% of the response variable variability.</li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 27229.
+<ul>
+<li>Our model would miss the mark by approximately 27229 (RMSE), that is if candidate had one million votes we would predict 27229 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 14152.26.</li>
+<li>The prediction error rate (ERR) was 1.258257.</li>
+</ul>
+<pre class="r"><code>predictions &lt;- mod_2010 %&gt;% predict(test_data_2010)
+
+data.frame( R2 = caret::R2(predictions, test_data_2010$votos),
+            RMSE = caret::RMSE(predictions, test_data_2010$votos),
+            MAE = caret::MAE(predictions, test_data_2010$votos),
+            ERR = caret::RMSE(predictions, test_data_2010$votos)/
+              mean(test_data_2010$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.6008068 26425.65 13160.91 1.329999</code></pre>
+<p>Now let’s talk about the results taken from the test data (most meaningful).</p>
+<ul>
+<li><p>We got a decent 0.60 R² and adjusted R² approximately (notice the decrease). This means that this model explain approximately 60% of the response variable variability.</p></li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 26426.
+<ul>
+<li>Our model would miss the mark by approximately 26426 (RMSE), that is if candidate had one million votes we would predict 26426 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 13160.91.</li>
+<li><p>The prediction error rate (ERR) was 1.329999.</p></li>
+</ul>
+<blockquote>
+<p>The skimmed model fared quite similarly to the original model in terms of cross validation. Furthermore, we got rid of the overly influential outlier.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="model-for-both-elections" class="section level1">
+<h1>Model for both elections</h1>
+<p><br></p>
+<div id="split-data-for-cross-validation-2" class="section level2">
+<h2>Split data for cross validation</h2>
+<p><br></p>
+<ul>
+<li>Let’s use the <span class="math inline">\(50/25/25\)</span> proportions for the train,validate and test datasets</li>
+</ul>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+scaled_data %&gt;% 
+  dplyr::sample_frac(.5) -&gt; train_data
+
+encoding &lt;- build_encoding(dataSet = train_data,
+                           cols = c(&quot;uf&quot;,&quot;sexo&quot;,&quot;grau&quot;,
+                                    &quot;partido&quot;,&quot;estado_civil&quot;),
+                           verbose = F)
+
+train_data &lt;- one_hot_encoder(dataSet = train_data,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+cat(&quot;#### Train Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(train_data),
+    &quot;\n##### Variables: &quot;,ncol(train_data))</code></pre>
+<div id="train-data-2" class="section level4">
+<h4>Train Data</h4>
+<div id="observations-3738" class="section level5">
+<h5>Observations: 3738</h5>
+</div>
+<div id="variables-105" class="section level5">
+<h5>Variables: 105</h5>
+<p><br></p>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+dplyr::anti_join(scaled_data, 
+                 train_data, 
+                 by = &#39;id&#39;) -&gt; intermediate_data
+
+intermediate_data %&gt;% 
+  dplyr::sample_frac(.5) -&gt; test_data
+
+test_data &lt;- one_hot_encoder(dataSet = test_data,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+cat(&quot;#### Test Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(test_data),
+    &quot;\n##### Variables: &quot;,ncol(test_data))</code></pre>
+</div>
+</div>
+<div id="test-data-2" class="section level4">
+<h4>Test Data</h4>
+<div id="observations-1869" class="section level5">
+<h5>Observations: 1869</h5>
+</div>
+<div id="variables-105-1" class="section level5">
+<h5>Variables: 105</h5>
+<pre class="r"><code>set.seed(11) # We set the set for reason of reproducibility
+
+dplyr::anti_join(intermediate_data, 
+                 test_data, 
+                 by = &#39;id&#39;) -&gt; validate_data
+
+validate_data &lt;- one_hot_encoder(dataSet = validate_data,
+                           encoding = encoding,
+                           drop = TRUE,
+                           verbose = F)
+
+rm(intermediate_data)
+
+cat(&quot;#### Validate Data &quot;,
+    &quot;\n##### Observations: &quot;,nrow(validate_data),
+    &quot;\n##### Variables: &quot;,ncol(validate_data))</code></pre>
+</div>
+</div>
+<div id="validate-data-2" class="section level4">
+<h4>Validate Data</h4>
+<div id="observations-1869-1" class="section level5">
+<h5>Observations: 1869</h5>
+</div>
+<div id="variables-105-2" class="section level5">
+<h5>Variables: 105</h5>
+<pre class="r"><code>mod &lt;- lm(votos ~ sqrt.total_receita * sqrt.total_despesa + 
+                  log.quantidade_fornecedores,
+          data = train_data)
+
+broom::glance(mod)</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared  sigma statistic p.value    df  logLik    AIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.517         0.517 32532.     1001.       0     5 -44139. 88290.
+## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<ul>
+<li>As the quality metric come from training they aren’t that meaningful
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> and <span class="math inline">\(adjusted \thinspace R^2\)</span> are decent.</li>
+<li>The <span class="math inline">\(F \thinspace statistic\)</span> (statistic) is way bigger than 1 (a good sign).</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="residue-analysis-3" class="section level2">
+<h2>Residue Analysis</h2>
+<p><br></p>
+<div id="resorting-to-thumb-rules-regarding-cooks-distance-well-use-d_i-1-as-a-cutoff-for-highly-influential-pointsoutliers-3" class="section level5">
+<h5>Resorting to thumb rules regarding <strong>Cook’s Distance</strong> we’ll use <span class="math inline">\(D_i &gt; 1\)</span> as a cutoff for highly influential points/outliers</h5>
+<pre class="r"><code>mod %&gt;%
+  ggplot(aes(.fitted, .resid)) + 
+  geom_point() +
+  stat_smooth(method=&quot;loess&quot;) + 
+  geom_hline(col=&quot;red&quot;,
+             yintercept=0,
+             linetype=&quot;dashed&quot;) + 
+  labs(y=&quot;Residuals&quot;,
+       x=&quot;Fitted values&quot;,
+       title=&quot;Residual vs Fitted Plot&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<ul>
+<li>There’s mild indication of a pattern in the residual, this is a bad sign for the analyzed model.</li>
+</ul>
+<pre class="r"><code>mod %&gt;%
+  ggplot(aes(sample=rstandard(.))) +
+  stat_qq(na.rm = TRUE,
+          shape=1,size=3) +      # open circles
+  labs(title=&quot;Normal Q-Q&quot;,        # plot title
+  x=&quot;Theoretical Quantiles&quot;,      # x-axis label
+  y=&quot;Standardized Residuals&quot;) +   # y-axis label +
+  geom_abline(color = &quot;red&quot;,
+              size = 0.8,
+              linetype=&quot;dashed&quot;)  # dashed reference line</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<ul>
+<li>Our residuals deviate considerably from a normal distribution.</li>
+</ul>
+<pre class="r"><code>mod %&gt;%
+  ggplot(aes(.fitted, 
+             sqrt(abs(.stdresid)))) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;,
+              na.rm = TRUE) +
+  labs(title = &quot;Scale-Location&quot;,
+       x= &quot;Fitted Value&quot;,
+       y = expression(sqrt(&quot;|Standardized residuals|&quot;)))</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<ul>
+<li>The residuals are not equally spread. Our model has violated the assumption of <span class="math inline">\(homoscedasticity\)</span> (equal variance).</li>
+</ul>
+<pre class="r"><code>mod %&gt;%
+  ggplot(aes(.hat, .stdresid)) + 
+  geom_point(aes(size=.cooksd), na.rm=TRUE) +
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) +
+  xlab(&quot;Leverage&quot;)+ylab(&quot;Standardized Residuals&quot;) + 
+  ggtitle(&quot;Residual vs Leverage Plot&quot;) + 
+  scale_size_continuous(&quot;Cook&#39;s Distance&quot;, range=c(1,5)) +    
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+<pre class="r"><code>mod %&gt;%
+  ggplot(aes(.hat, .cooksd)) + 
+  geom_point(na.rm=TRUE) + 
+  stat_smooth(method=&quot;loess&quot;, na.rm=TRUE) + 
+  xlab(&quot;Leverage hii&quot;)+ylab(&quot;Cook&#39;s Distance&quot;) + 
+  ggtitle(&quot;Cook&#39;s dist vs Leverage hii/(1-hii)&quot;) + 
+  geom_abline(slope=seq(0,3,0.5), color=&quot;gray&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="../../../post/eleicoes_predict_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<ul>
+<li>We can see no outliers that would drastically change the results of our model.</li>
+</ul>
+</div>
+</div>
+<div id="cross-validation-3" class="section level2">
+<h2>Cross Validation</h2>
+<pre class="r"><code>predictions &lt;- mod %&gt;% predict(validate_data)
+
+data.frame( R2 = caret::R2(predictions, validate_data$votos),
+            RMSE = caret::RMSE(predictions, validate_data$votos),
+            MAE = caret::MAE(predictions, validate_data$votos),
+            ERR = caret::RMSE(predictions, validate_data$votos)/
+              mean(validate_data$votos))</code></pre>
+<pre><code>##          R2     RMSE      MAE      ERR
+## 1 0.6350622 25160.61 13125.83 1.139725</code></pre>
+<p>Now let’s talk about the results taken from the validate data (more meaningful).</p>
+<ul>
+<li>We got a decent 0.64 R² and adjusted R² approximately. This means that this model explain approximately 64% of the response variable variability.</li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 25161.
+<ul>
+<li>Our model would miss the mark by approximately 25161 (RMSE), that is if candidate had one million votes we would predict 25161 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 13125.83.</li>
+<li>The prediction error rate (ERR) was 1.139725.</li>
+</ul>
+<pre class="r"><code>predictions &lt;- mod %&gt;% predict(test_data)
+
+data.frame( R2 = caret::R2(predictions, test_data$votos),
+            RMSE = caret::RMSE(predictions, test_data$votos),
+            MAE = caret::MAE(predictions, test_data$votos),
+            ERR = caret::RMSE(predictions, test_data$votos)/
+              mean(test_data$votos))</code></pre>
+<pre><code>##          R2     RMSE     MAE      ERR
+## 1 0.4187352 41802.93 14063.7 1.855572</code></pre>
+<p>Now let’s talk about the results taken from the test data (most meaningful).</p>
+<ul>
+<li>We got a borderline dissapointing 0.42 R² and adjusted R² approximately. This means that this model explain approximately 42% of the response variable variability.</li>
+<li>The average difference between the observed known outcome values and the values predicted by the model (RMSE) was of approximately 41801.
+<ul>
+<li>Our model would miss the mark by approximately 41801 (RMSE), that is if candidate had one million votes we would predict 41801 more than we should (or less than we should).</li>
+</ul></li>
+<li>The average absolute difference between observed and predicted outcomes (MAE) was approximately 14063.7.</li>
+<li>The prediction error rate (ERR) was 1.855572.</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>In the model for both elections we could see signs of the model stuggling to fit the data. At the stage of cross validation as expected, and the model for both elections fared worse than the rest, especially in terms of test.</p>
+</blockquote>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/predictive/">predictive</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/regression/">regression</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/elections/">elections</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/" data-tooltip="C.E.A.P analysis (suppliers and weekend expenses)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/" data-tooltip="C.E.A.P analysis (suppliers and weekend expenses)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F10%2Fanalysis-on-brazilian-elections%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F10%2Fanalysis-on-brazilian-elections%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F10%2Fanalysis-on-brazilian-elections%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+Loading Data eleicoes_data &lt;- readr::read_csv( here::here(&#39;evidences/eleicoes_2006_e_2010.csv&#39;), progress = FALSE, local=readr::locale(&quot;br&quot;), col_types = cols( ano = col_integer(), sequencial_candidato = col_character(), quantidade_doacoes = col_integer(), quantidade_doadores = col_integer(), total_receita = col_double(), media_receita = col_double(), recursos_de_outros_candidatos.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/">
+                <h3 class="media-heading">C.E.A.P analysis (suppliers and weekend expenses)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+                <h3 class="media-heading">C.E.A.P Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in learning something about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate linear regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+                <h3 class="media-heading">Analysis on MovieLens dataset with bootstrap</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&quot;evidences/lens_movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/">
+                <h3 class="media-heading">Analysis on Github commits (2016-2017)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&quot;evidences/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;… ## $ month_day &lt;int&gt; 18, 17, 27, 16, 26, 21, 4, 22, 23, 1, 12, 3, 2, 2… ## $ the_month &lt;int&gt; 2, 2, 1, 2, 1, 3, 2, 2, 2, 2, 4, 2, 2, 2, 4, 3, 4… ## $ the_year &lt;int&gt; 2016, 2016, 2016, 2016, 2016, 2017, 2016, 2016, 2… ## $ users &lt;int&gt; 10279, 10208, 10118, 10045, 10020, 10015, 9991, 9…</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
+                <h3 class="media-heading">Movie lines by gender</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
+ 
+
+ Data Overview readr::read_csv(here(&quot;evidences/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/">
+                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
+Considerations In the analysis below we could:
+ See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         15 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/10\/analysis-on-brazilian-elections\/';
+          
+            this.page.identifier = '\/2018\/10\/analysis-on-brazilian-elections\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-benardi-github-io-myblog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+    <script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	  MathJax.Hub.Config({
+  	    messageStyle: 'none',
+  	    showProcessingMessages: false,
+	    tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']],
+		processEscapes: true
+	      }
+	  });
+	  MathJax.Hub.Queue(function() {
+	    var i, text, code, codes = document.getElementsByTagName('code');
+	    for (i = 0; i < codes.length;) {
+	      code = codes[i];
+	      if (code.parentNode.tagName !== 'PRE' &&
+		  code.childElementCount === 0) {
+		text = code.textContent;
+		if (/^\\\((.|\s)+\\\)$/.test(text) ||
+		    /^\$(.|\s)+\$$/.test(text) ||
+		    /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+		  code.outerHTML = code.innerHTML;  
+		  continue;
+		}
+	      }
+	      i++;
+	    }
+	    });
+	</script>
+  </body>
+</html>
+

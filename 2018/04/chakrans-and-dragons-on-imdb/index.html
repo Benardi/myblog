@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.46 with theme Tranquilpeak 0.4.3-BETA">
+    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
     <title>Chakrans and Dragons on IMDB</title>
     <meta name="author" content="Benardi Nunes">
     <meta name="keywords" content="">
@@ -232,7 +232,10 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <hr />
+              
+
+
+<hr />
 <div id="employed-data" class="section level2">
 <h2>Employed data</h2>
 <p>Exploratory data analysis on <a href="https://www.imdb.com/">IMDB</a> data about TV series. Original data comes from <a href="https://github.com/nazareno/imdb-series">this repository</a>, there we have an explanation on how the data was gathered and the meaning of each variable.</p>
@@ -248,7 +251,7 @@
 </div>
 <div id="data-overview" class="section level2">
 <h2>Data Overview</h2>
-<pre class="r"><code>episodes = read_csv(here(&quot;data/series_from_imdb.csv&quot;), 
+<pre class="r"><code>episodes = read_csv(here(&quot;evidences/series_from_imdb.csv&quot;), 
                     progress = FALSE,
                     col_types = cols(.default = col_double(), 
                                      series_name = col_character(), 
@@ -261,24 +264,24 @@ episodes %&gt;%
            glimpse()</code></pre>
 <pre><code>## Observations: 194
 ## Variables: 18
-## $ series_name &lt;chr&gt; &quot;Xena a Princesa Guerreira&quot;, &quot;Xena a Princesa Guer...
-## $ episode     &lt;chr&gt; &quot;Sins of the Past&quot;, &quot;Chariots of War&quot;, &quot;Dreamworke...
-## $ series_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,...
-## $ season      &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, ...
-## $ season_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,...
-## $ url         &lt;chr&gt; &quot;http://www.imdb.com/title/tt0394990/&quot;, &quot;http://ww...
-## $ user_rating &lt;dbl&gt; 7.9, 7.4, 7.7, 7.4, 7.5, 7.7, 7.5, 8.0, 7.8, 7.6, ...
-## $ user_votes  &lt;dbl&gt; 440, 339, 318, 297, 288, 282, 270, 303, 278, 287, ...
-## $ r1          &lt;dbl&gt; 0.003623188, 0.025641026, 0.064516129, 0.023474178...
-## $ r2          &lt;dbl&gt; 0.04347826, 0.03846154, 0.03548387, 0.02347418, 0....
-## $ r3          &lt;dbl&gt; 0.010869565, 0.038461538, 0.029032258, 0.004694836...
-## $ r4          &lt;dbl&gt; 0.007246377, 0.034188034, 0.022580645, 0.023474178...
-## $ r5          &lt;dbl&gt; 0.018115942, 0.042735043, 0.019354839, 0.046948357...
-## $ r6          &lt;dbl&gt; 0.02536232, 0.12393162, 0.03870968, 0.06103286, 0....
-## $ r7          &lt;dbl&gt; 0.08695652, 0.16239316, 0.05161290, 0.11267606, 0....
-## $ r8          &lt;dbl&gt; 0.1086957, 0.1666667, 0.1354839, 0.2112676, 0.1804...
-## $ r9          &lt;dbl&gt; 0.15579710, 0.09829060, 0.17096774, 0.18309859, 0....
-## $ r10         &lt;dbl&gt; 0.5398551, 0.2692308, 0.4322581, 0.3098592, 0.3383...</code></pre>
+## $ series_name &lt;chr&gt; &quot;Xena a Princesa Guerreira&quot;, &quot;Xena a Princesa Guerre…
+## $ episode     &lt;chr&gt; &quot;Sins of the Past&quot;, &quot;Chariots of War&quot;, &quot;Dreamworker&quot;…
+## $ series_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
+## $ season      &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1…
+## $ season_ep   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
+## $ url         &lt;chr&gt; &quot;http://www.imdb.com/title/tt0394990/&quot;, &quot;http://www.…
+## $ user_rating &lt;dbl&gt; 7.9, 7.4, 7.7, 7.4, 7.5, 7.7, 7.5, 8.0, 7.8, 7.6, 7.…
+## $ user_votes  &lt;dbl&gt; 440, 339, 318, 297, 288, 282, 270, 303, 278, 287, 27…
+## $ r1          &lt;dbl&gt; 0.003623188, 0.025641026, 0.064516129, 0.023474178, …
+## $ r2          &lt;dbl&gt; 0.04347826, 0.03846154, 0.03548387, 0.02347418, 0.02…
+## $ r3          &lt;dbl&gt; 0.010869565, 0.038461538, 0.029032258, 0.004694836, …
+## $ r4          &lt;dbl&gt; 0.007246377, 0.034188034, 0.022580645, 0.023474178, …
+## $ r5          &lt;dbl&gt; 0.018115942, 0.042735043, 0.019354839, 0.046948357, …
+## $ r6          &lt;dbl&gt; 0.02536232, 0.12393162, 0.03870968, 0.06103286, 0.12…
+## $ r7          &lt;dbl&gt; 0.08695652, 0.16239316, 0.05161290, 0.11267606, 0.13…
+## $ r8          &lt;dbl&gt; 0.1086957, 0.1666667, 0.1354839, 0.2112676, 0.180451…
+## $ r9          &lt;dbl&gt; 0.15579710, 0.09829060, 0.17096774, 0.18309859, 0.13…
+## $ r10         &lt;dbl&gt; 0.5398551, 0.2692308, 0.4322581, 0.3098592, 0.338345…</code></pre>
 <div id="on-average-how-many-votes-there-are-for-an-episode-of-a-season" class="section level3">
 <h3>On average how many votes there are for an episode of a season?</h3>
 <pre class="r"><code>episodes %&gt;% 
@@ -492,7 +495,7 @@ episodes %&gt;%
 
 sumario_simples</code></pre>
 <pre><code>## # A tibble: 12 x 5
-## # Groups:   series_name [?]
+## # Groups:   series_name [2]
 ##    series_name               season     n   p20   p80
 ##    &lt;chr&gt;                     &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1 Game of Thrones           1         10   2.8   8.2
@@ -527,9 +530,9 @@ episodes</code></pre>
 ##  8 Xena a Pri… Promet…         8 1              8 http…         8  
 ##  9 Xena a Pri… Death …         9 1              9 http…         7.8
 ## 10 Xena a Pri… Hooves…        10 1             10 http…         7.6
-## # ... with 184 more rows, and 18 more variables: user_votes &lt;dbl&gt;,
-## #   r1 &lt;dbl&gt;, r2 &lt;dbl&gt;, r3 &lt;dbl&gt;, r4 &lt;dbl&gt;, r5 &lt;dbl&gt;, r6 &lt;dbl&gt;, r7 &lt;dbl&gt;,
-## #   r8 &lt;dbl&gt;, r9 &lt;dbl&gt;, r10 &lt;dbl&gt;, rank_odiados &lt;int&gt;, rank_amados &lt;int&gt;,
+## # … with 184 more rows, and 18 more variables: user_votes &lt;dbl&gt;, r1 &lt;dbl&gt;,
+## #   r2 &lt;dbl&gt;, r3 &lt;dbl&gt;, r4 &lt;dbl&gt;, r5 &lt;dbl&gt;, r6 &lt;dbl&gt;, r7 &lt;dbl&gt;, r8 &lt;dbl&gt;,
+## #   r9 &lt;dbl&gt;, r10 &lt;dbl&gt;, rank_odiados &lt;int&gt;, rank_amados &lt;int&gt;,
 ## #   amado_odiado &lt;int&gt;, n &lt;int&gt;, p20 &lt;dbl&gt;, p80 &lt;dbl&gt;, middle_eps &lt;lgl&gt;</code></pre>
 <p><br></br></p>
 <p>We generated the information <strong><em>middle_eps</em></strong> to represent whether an episode belongs to the middle of its season, i.e. if it’s between the 20% initial episodes and the 20% final episodes. If <strong><em>middle_eps</em></strong> is TRUE the episode belongs to the middle of the season, if <strong><em>middle_eps</em></strong> is FALSE the episode belongs to beginning/end of the season.</p>
@@ -710,7 +713,7 @@ filtered %&gt;%
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2018 Benardi Nunes. All Rights Reserved
+    &copy; 2019 Benardi Nunes. All Rights Reserved
   </span>
 </footer>
 
@@ -864,6 +867,70 @@ filtered %&gt;%
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+Loading Data eleicoes_data &lt;- readr::read_csv( here::here(&#39;evidences/eleicoes_2006_e_2010.csv&#39;), progress = FALSE, local=readr::locale(&quot;br&quot;), col_types = cols( ano = col_integer(), sequencial_candidato = col_character(), quantidade_doacoes = col_integer(), quantidade_doadores = col_integer(), total_receita = col_double(), media_receita = col_double(), recursos_de_outros_candidatos.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/">
+                <h3 class="media-heading">C.E.A.P analysis (suppliers and weekend expenses)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+                <h3 class="media-heading">C.E.A.P Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
                 <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
               </a>
@@ -920,7 +987,7 @@ The response variable is the variable that you are interesting in making measure
  This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
  
 
- Data Overview readr::read_csv(here::here(&quot;data/movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.numeric(sub(&quot;\\).*&quot;, &quot;&quot;,sub(&quot;.</div>
+ Data Overview readr::read_csv(here::here(&quot;evidences/lens_movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -941,7 +1008,7 @@ The response variable is the variable that you are interesting in making measure
  The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
  
  Data Overview 
-readr::read_csv(here::here(&quot;data/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;,.</div>
+readr::read_csv(here::here(&quot;evidences/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;… ## $ month_day &lt;int&gt; 18, 17, 27, 16, 26, 21, 4, 22, 23, 1, 12, 3, 2, 2… ## $ the_month &lt;int&gt; 2, 2, 1, 2, 1, 3, 2, 2, 2, 2, 4, 2, 2, 2, 4, 3, 4… ## $ the_year &lt;int&gt; 2016, 2016, 2016, 2016, 2016, 2017, 2016, 2016, 2… ## $ users &lt;int&gt; 10279, 10208, 10118, 10045, 10020, 10015, 9991, 9…</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -985,7 +1052,7 @@ Data has the following attributes:
  Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
  
 
- Data Overview readr::read_csv(here(&quot;data/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
+ Data Overview readr::read_csv(here(&quot;evidences/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -994,7 +1061,7 @@ Data has the following attributes:
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/">
                 <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
               </a>
               <span class="media-meta">
@@ -1010,62 +1077,6 @@ Considerations In the analysis below we could:
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/interactive-visualization-on-got-x-xena-imdb/">
-                <h3 class="media-heading">Interactive Visualization on GoT x Xena (IMDB)</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Introduction Let’s compare the series Game of Thrones and Xena the Warrior Princess to answer :
- Which one is better rated by users?  The difference is maintained throughout seasons? Where the episode is placed inside its season (beggining/end or middle) has an effect?   Employed dataset  Exploratory Data Analysis on data from IMDB about the series Game of Thrones and Xena the Warrior Princess.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jake-gyllenhaals-type-of-movies/">
-                <h3 class="media-heading">Jake Gyllenhaal&#39;s type of movies</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Introduction  Exploratory data analysis on data from RottenTomatoes about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on this report’s repository deste relatório.
-  Entries that have no information about box office were ignored.  
-
- Data Overview import_data(&quot;jake_gyllenhaal&quot;) filmes &lt;- read_imported_data() filmes %&gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &lt;int&gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/">
-                <h3 class="media-heading">EDA about series ratings on IMDB</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
- episodes &lt;- read_csv(here(&quot;data/series_from_imdb.csv&quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &lt;chr&gt; &quot;13 Reasons Why&quot;, &quot;13 Reasons Why&quot;, &quot;13 Reasons Wh.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1073,7 +1084,7 @@ Considerations In the analysis below we could:
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         12 posts found
+         15 posts found
       </p>
     </div>
   </div>

@@ -30,9 +30,18 @@
     </item>
     
     <item>
+      <title>Ceap</title>
+      <link>https://benardi.github.io/myblog/tags/ceap/</link>
+      <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/ceap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Descriptive</title>
       <link>https://benardi.github.io/myblog/tags/descriptive/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/descriptive/</guid>
       <description></description>
@@ -44,6 +53,15 @@
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/eda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Elections</title>
+      <link>https://benardi.github.io/myblog/tags/elections/</link>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/elections/</guid>
       <description></description>
     </item>
     
@@ -149,7 +167,7 @@
     <item>
       <title>Predictive</title>
       <link>https://benardi.github.io/myblog/tags/predictive/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/predictive/</guid>
       <description></description>
@@ -158,7 +176,7 @@
     <item>
       <title>Regression</title>
       <link>https://benardi.github.io/myblog/tags/regression/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/regression/</guid>
       <description></description>

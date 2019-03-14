@@ -28,7 +28,7 @@
       
       <guid>https://benardi.github.io/myblog/2018/05/eda-about-series-ratings-on-imdb/</guid>
       <description>Introduction Analyzed Dataset  Exploratory Data Analysis on data from IMDB about TV series and Streaming. The original data and variables come from this repository. There you can find explained how the data was retrieved and the meaning of each variable.
- episodes &amp;lt;- read_csv(here(&amp;quot;data/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&amp;gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &amp;lt;chr&amp;gt; &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Wh.</description>
+ episodes &amp;lt;- read_csv(here(&amp;quot;evidences/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) episodes %&amp;gt;% glimpse() ## Observations: 32,070 ## Variables: 18 ## $ series_name &amp;lt;chr&amp;gt; &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;… ## $ episode &amp;lt;chr&amp;gt; &amp;quot;Tape 1, Side A&amp;quot;, &amp;quot;Tape 1, Side B&amp;quot;, &amp;quot;Tape 2, Side A&amp;quot;… ## $ series_ep &amp;lt;dbl&amp;gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, … ## $ season &amp;lt;chr&amp;gt; &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;1… ## $ season_ep &amp;lt;dbl&amp;gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, … ## $ url &amp;lt;chr&amp;gt; &amp;quot;http://www.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@
       <guid>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</guid>
       <description>Employed data Exploratory data analysis on IMDB data about TV series. Original data comes from this repository, there we have an explanation on how the data was gathered and the meaning of each variable.
  Data under analysis Before the staggering number of different series available in our data we will analyse the following two:
- Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;data/series_from_imdb.</description>
+ Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;evidences/series_from_imdb.</description>
     </item>
     
   </channel>

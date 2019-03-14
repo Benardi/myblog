@@ -13,10 +13,10 @@
     
     <item>
       <title>Jackson do Pandeiro - The king of rithm</title>
-      <link>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/</link>
+      <link>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/</guid>
+      <guid>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/</guid>
       <description>Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
 Considerations In the analysis below we could:
  See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</description>

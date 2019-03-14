@@ -6,10 +6,36 @@
     <description>Recent content in Descriptive on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/tags/descriptive/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C.E.A.P analysis (suppliers and weekend expenses)</title>
+      <link>https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/</link>
+      <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/</guid>
+      <description>Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &amp;lt;- read_csv(here::here(&amp;quot;evidences/dadosCEAP.csv&amp;quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&amp;gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &amp;quot;-&amp;quot;), tipoDespesa = toupper(tipoDespesa)) -&amp;gt; data state_info &amp;lt;- read_csv(here::here(&amp;quot;/evidences/limiteMensalCEAP.</description>
+    </item>
+    
+    <item>
+      <title>C.E.A.P Analysis</title>
+      <link>https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/</guid>
+      <description>Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &amp;lt;- read_csv(here::here(&amp;quot;evidences/dadosCEAP.csv&amp;quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&amp;gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &amp;quot;-&amp;quot;), tipoDespesa = toupper(tipoDespesa)) -&amp;gt; data state_info &amp;lt;- read_csv(here::here(&amp;quot;/evidences/limiteMensalCEAP.</description>
+    </item>
     
     <item>
       <title>Multivariate logistic regression on speed dating data</title>
@@ -49,7 +75,7 @@ The response variable is the variable that you are interesting in making measure
  This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
  
 
- Data Overview readr::read_csv(here::here(&amp;quot;data/movies.csv&amp;quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&amp;gt;% group_by(movieId) %&amp;gt;% mutate(year = as.numeric(sub(&amp;quot;\\).*&amp;quot;, &amp;quot;&amp;quot;,sub(&amp;quot;.</description>
+ Data Overview readr::read_csv(here::here(&amp;quot;evidences/lens_movies.csv&amp;quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&amp;gt;% group_by(movieId) %&amp;gt;% mutate(year = as.</description>
     </item>
     
     <item>
@@ -62,7 +88,7 @@ The response variable is the variable that you are interesting in making measure
  The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
  
  Data Overview 
-readr::read_csv(here::here(&amp;quot;data/github-users-committing-filetypes.csv&amp;quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&amp;gt; data data %&amp;gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &amp;lt;chr&amp;gt; &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;,.</description>
+readr::read_csv(here::here(&amp;quot;evidences/github-users-committing-filetypes.csv&amp;quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&amp;gt; data data %&amp;gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &amp;lt;chr&amp;gt; &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;md&amp;quot;, &amp;quot;… ## $ month_day &amp;lt;int&amp;gt; 18, 17, 27, 16, 26, 21, 4, 22, 23, 1, 12, 3, 2, 2… ## $ the_month &amp;lt;int&amp;gt; 2, 2, 1, 2, 1, 3, 2, 2, 2, 2, 4, 2, 2, 2, 4, 3, 4… ## $ the_year &amp;lt;int&amp;gt; 2016, 2016, 2016, 2016, 2016, 2017, 2016, 2016, 2… ## $ users &amp;lt;int&amp;gt; 10279, 10208, 10118, 10045, 10020, 10015, 9991, 9…</description>
     </item>
     
     <item>
@@ -75,15 +101,15 @@ readr::read_csv(here::here(&amp;quot;data/github-users-committing-filetypes.csv&
  Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
  
 
- Data Overview readr::read_csv(here(&amp;quot;data/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
+ Data Overview readr::read_csv(here(&amp;quot;evidences/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
     </item>
     
     <item>
       <title>Jackson do Pandeiro - The king of rithm</title>
-      <link>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/</link>
+      <link>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/</link>
       <pubDate>Tue, 29 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/</guid>
+      <guid>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/</guid>
       <description>Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
 Considerations In the analysis below we could:
  See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</description>
@@ -108,7 +134,7 @@ Considerations In the analysis below we could:
       <description>Introduction  Exploratory data analysis on data from RottenTomatoes about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on this report’s repository deste relatório.
   Entries that have no information about box office were ignored.  
 
- Data Overview import_data(&amp;quot;jake_gyllenhaal&amp;quot;) filmes &amp;lt;- read_imported_data() filmes %&amp;gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &amp;lt;int&amp;gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,.</description>
+ Data Overview #import_data(&amp;quot;jake_gyllenhaal&amp;quot;) filmes &amp;lt;- read_imported_data() filmes %&amp;gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &amp;lt;int&amp;gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47, 9… ## $ filme &amp;lt;chr&amp;gt; &amp;quot;Stronger&amp;quot;, &amp;quot;Life&amp;quot;, &amp;quot;Nocturnal Animals&amp;quot;, &amp;quot;Demolition&amp;quot;… ## $ papel &amp;lt;chr&amp;gt; &amp;quot;Jeff Bauman&amp;quot;, &amp;quot;David Jordan&amp;quot;, &amp;quot;Tony HastingsEdward S… ## $ bilheteria &amp;lt;dbl&amp;gt; 4.</description>
     </item>
     
     <item>
@@ -119,7 +145,7 @@ Considerations In the analysis below we could:
       <guid>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</guid>
       <description>Employed data Exploratory data analysis on IMDB data about TV series. Original data comes from this repository, there we have an explanation on how the data was gathered and the meaning of each variable.
  Data under analysis Before the staggering number of different series available in our data we will analyse the following two:
- Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;data/series_from_imdb.</description>
+ Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;evidences/series_from_imdb.</description>
     </item>
     
     <item>
@@ -133,7 +159,7 @@ Considerations In the analysis below we could:
  
 
  Data Overview 
-Loading and filtering data readr::read_csv(here::here(&amp;quot;data/movies.csv&amp;quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&amp;gt;% group_by(movieId) %&amp;gt;% mutate(year = as.</description>
+Loading and filtering data readr::read_csv(here::here(&amp;quot;evidences/lens_movies.csv&amp;quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&amp;gt;% group_by(movieId) %&amp;gt;% mutate(year = as.</description>
     </item>
     
   </channel>

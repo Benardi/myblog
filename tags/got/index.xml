@@ -29,7 +29,7 @@
       <guid>https://benardi.github.io/myblog/2018/04/chakrans-and-dragons-on-imdb/</guid>
       <description>Employed data Exploratory data analysis on IMDB data about TV series. Original data comes from this repository, there we have an explanation on how the data was gathered and the meaning of each variable.
  Data under analysis Before the staggering number of different series available in our data we will analyse the following two:
- Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;data/series_from_imdb.</description>
+ Game of Thrones Xena The Warrior Princess (in Portuguese Xena a Princesa Guerreira)   Data Overview episodes = read_csv(here(&amp;quot;evidences/series_from_imdb.</description>
     </item>
     
   </channel>

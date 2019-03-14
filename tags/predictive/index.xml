@@ -6,10 +6,24 @@
     <description>Recent content in Predictive on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/tags/predictive/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Analysis on Brazilian elections</title>
+      <link>https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/</link>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/</guid>
+      <description>Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+Loading Data eleicoes_data &amp;lt;- readr::read_csv( here::here(&amp;#39;evidences/eleicoes_2006_e_2010.csv&amp;#39;), progress = FALSE, local=readr::locale(&amp;quot;br&amp;quot;), col_types = cols( ano = col_integer(), sequencial_candidato = col_character(), quantidade_doacoes = col_integer(), quantidade_doadores = col_integer(), total_receita = col_double(), media_receita = col_double(), recursos_de_outros_candidatos.</description>
+    </item>
     
     <item>
       <title>Case Based Reasoning System for MSRP estimation</title>

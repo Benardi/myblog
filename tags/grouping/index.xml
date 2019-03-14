@@ -21,7 +21,7 @@
  Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
  
 
- Data Overview readr::read_csv(here(&amp;quot;data/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
+ Data Overview readr::read_csv(here(&amp;quot;evidences/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
     </item>
     
     <item>
@@ -33,7 +33,7 @@
       <description>Introduction  Exploratory data analysis on data from RottenTomatoes about actor Jake Gyllenhaal. The code used to mine the data here analyzed and the explanation on how to use it can be found on this report’s repository deste relatório.
   Entries that have no information about box office were ignored.  
 
- Data Overview import_data(&amp;quot;jake_gyllenhaal&amp;quot;) filmes &amp;lt;- read_imported_data() filmes %&amp;gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &amp;lt;int&amp;gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47,.</description>
+ Data Overview #import_data(&amp;quot;jake_gyllenhaal&amp;quot;) filmes &amp;lt;- read_imported_data() filmes %&amp;gt;% glimpse() ## Observations: 20 ## Variables: 5 ## $ avaliacao &amp;lt;int&amp;gt; 92, 67, 72, 52, 73, 59, 82, 85, 92, 49, 35, 64, 47, 9… ## $ filme &amp;lt;chr&amp;gt; &amp;quot;Stronger&amp;quot;, &amp;quot;Life&amp;quot;, &amp;quot;Nocturnal Animals&amp;quot;, &amp;quot;Demolition&amp;quot;… ## $ papel &amp;lt;chr&amp;gt; &amp;quot;Jeff Bauman&amp;quot;, &amp;quot;David Jordan&amp;quot;, &amp;quot;Tony HastingsEdward S… ## $ bilheteria &amp;lt;dbl&amp;gt; 4.</description>
     </item>
     
   </channel>

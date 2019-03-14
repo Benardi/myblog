@@ -21,7 +21,7 @@
  Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
  
 
- Data Overview readr::read_csv(here(&amp;quot;data/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
+ Data Overview readr::read_csv(here(&amp;quot;evidences/character_list5.csv&amp;quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&amp;gt;% mutate(age = as.</description>
     </item>
     
   </channel>

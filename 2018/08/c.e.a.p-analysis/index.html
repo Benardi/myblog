@@ -1,0 +1,1489 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
+    <title>C.E.A.P Analysis</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="This exploratory data analysis was made based on data provided by the Brazilian government  about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity).">
+    <meta property="og:description" content="This exploratory data analysis was made based on data provided by the Brazilian government  about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity).">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="C.E.A.P Analysis">
+    <meta property="og:url" content="/2018/08/c.e.a.p-analysis/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="This exploratory data analysis was made based on data provided by the Brazilian government  about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity).">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      C.E.A.P Analysis
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-08-30T00:00:00Z">
+        
+  August 30, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<p><br></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p><br></p>
+<blockquote>
+<p>This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its <a href="http://www2.camara.leg.br/transparencia/acesso-a-informacao/copy_of_perguntas-frequentes/cota-para-o-exercicio-da-atividade-parlamentar">official site</a></p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<pre class="r"><code>data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;),
+                 progress = F,
+                 col_types = cols(
+                   nomeParlamentar = col_character(),
+                   idCadastro = col_integer(),
+                   sgUF = col_character(),
+                   sgPartido = col_character(),
+                   tipoDespesa = col_character(),
+                   especDespesa = col_character(),
+                   fornecedor = col_character(),
+                   CNPJCPF = col_character(),
+                   tipoDocumento = col_integer(),
+                   dataEmissao = col_character(),
+                   valorDocumento = col_double(),
+                   valorGlosa = col_integer(),
+                   valorLíquido = col_double())) 
+
+data %&gt;% 
+  mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;),
+         year_month = paste(lubridate::year(dataEmissao),   # extract year
+                            lubridate::month(dataEmissao),  # extract month
+                            sep = &quot;-&quot;),
+         tipoDespesa = toupper(tipoDespesa)) -&gt; data
+
+state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.csv&quot;),
+                       progress = F,
+                       col_types = cols(
+                         UF = col_character(),
+                         limite_mensal = col_double()))
+
+data %&gt;% 
+  full_join(state_info,
+            by = c(&quot;sgUF&quot; = &quot;UF&quot;)) -&gt; data
+
+data %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 963,452
+## Variables: 15
+## $ nomeParlamentar &lt;chr&gt; &quot;ABEL MESQUITA JR.&quot;, &quot;ABEL MESQUITA JR.&quot;, &quot;ABEL …
+## $ idCadastro      &lt;int&gt; 178957, 178957, 178957, 178957, 178957, 178957, …
+## $ sgUF            &lt;chr&gt; &quot;RR&quot;, &quot;RR&quot;, &quot;RR&quot;, &quot;RR&quot;, &quot;RR&quot;, &quot;RR&quot;, &quot;RR&quot;, &quot;RR&quot;, …
+## $ sgPartido       &lt;chr&gt; &quot;DEM&quot;, &quot;DEM&quot;, &quot;DEM&quot;, &quot;DEM&quot;, &quot;DEM&quot;, &quot;DEM&quot;, &quot;DEM&quot;,…
+## $ tipoDespesa     &lt;chr&gt; &quot;MANUTENÇÃO DE ESCRITÓRIO DE APOIO À ATIVIDADE P…
+## $ especDespesa    &lt;chr&gt; NA, NA, NA, NA, NA, &quot;Veículos Automotores&quot;, &quot;Veí…
+## $ fornecedor      &lt;chr&gt; &quot;COMPANHIA DE AGUAS E ESGOTOS DE RORAIMA&quot;, &quot;COMP…
+## $ CNPJCPF         &lt;chr&gt; &quot;05939467000115&quot;, &quot;05939467000115&quot;, &quot;02341470000…
+## $ tipoDocumento   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ dataEmissao     &lt;dttm&gt; 2015-11-14, 2015-12-10, 2015-11-27, 2015-12-30,…
+## $ valorDocumento  &lt;dbl&gt; 165.65, 59.48, 130.95, 196.53, 310.25, 32.00, 50…
+## $ valorGlosa      &lt;int&gt; 0, 0, 0, 347, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ valorLíquido    &lt;dbl&gt; 165.65, 59.48, 130.95, 193.06, 310.25, 32.00, 50…
+## $ year_month      &lt;chr&gt; &quot;2015-11&quot;, &quot;2015-12&quot;, &quot;2015-11&quot;, &quot;2015-12&quot;, &quot;201…
+## $ limite_mensal   &lt;dbl&gt; 45612.53, 45612.53, 45612.53, 45612.53, 45612.53…</code></pre>
+<pre class="r"><code>read_tsv(here::here(&quot;evidences/trsl_expenses.tsv&quot;),
+         progress = F,
+         col_types = cols(
+           original_term = col_character(),
+           translation = col_character())) -&gt; trsltd_expenses
+
+trsltd_expenses</code></pre>
+<pre><code>## # A tibble: 18 x 2
+##    original_term                      translation                          
+##    &lt;chr&gt;                              &lt;chr&gt;                                
+##  1 MANUTENÇÃO DE ESCRITÓRIO DE APOIO… MAINTENANCE OF OFFICE TO SUPPORT PAR…
+##  2 COMBUSTÍVEIS E LUBRIFICANTES.      FUELS AND LUBRICANTS.                
+##  3 CONSULTORIAS, PESQUISAS E TRABALH… CONSULTANCIES, RESEARCH AND TECHNICA…
+##  4 DIVULGAÇÃO DA ATIVIDADE PARLAMENT… DIVULGATION OF PARLIAMENTARY ACTIVIT…
+##  5 SERVIÇO DE SEGURANÇA PRESTADO POR… SECURITY SERVICE PROVIDED BY SPECIAL…
+##  6 PASSAGENS AÉREAS                   AIRLINE TICKETS                      
+##  7 SERVIÇOS POSTAIS                   POSTAL SERVICES                      
+##  8 FORNECIMENTO DE ALIMENTAÇÃO DO PA… SUPPLY OF FOOD FOR PARLIAMENTARIAN   
+##  9 TELEFONIA                          TELEPHONY                            
+## 10 LOCAÇÃO OU FRETAMENTO DE VEÍCULOS… LEASING OR FREIGHTING OF AUTOMOTIVE …
+## 11 LOCAÇÃO OU FRETAMENTO DE EMBARCAÇ… LEASING OR FREIGHTING OF VESSELS     
+## 12 SERVIÇO DE TÁXI, PEDÁGIO E ESTACI… TAXI SERVICE, TOLL AND PARKING       
+## 13 EMISSÃO BILHETE AÉREO              AIR TICKET ISSUANCE                  
+## 14 HOSPEDAGEM ,EXCETO DO PARLAMENTAR… ACCOMMODATION, EXCEPT OF THE PARLIAM…
+## 15 LOCAÇÃO OU FRETAMENTO DE AERONAVES LEASING OR FREIGHTING OF AIRCRAFT    
+## 16 PASSAGENS TERRESTRES, MARÍTIMAS O… TERRESTRIAL,MARITIME OR FLUVAL TICKE…
+## 17 ASSINATURA DE PUBLICAÇÕES          SUBSCRIPTION TO PUBLICATIONS         
+## 18 PARTICIPAÇÃO EM CURSO, PALESTRA O… PARTICIPATION IN COURSE, CONFERENCE …</code></pre>
+<ul>
+<li>A translation for the description of each one of the 18 types of expense was recorded alongside its original term.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>data %&gt;% 
+  full_join(trsltd_expenses,
+            by = c(&quot;tipoDespesa&quot; = &quot;original_term&quot;))  %&gt;% 
+  mutate(tipoDespesa = translation) %&gt;%  # translate col tipoDespesa 
+  select(-translation)-&gt; data # drop unused column
+
+data %&gt;%
+  sample_n(5) %&gt;%
+  select(nomeParlamentar,
+         tipoDespesa,
+         dataEmissao)</code></pre>
+<pre><code>## # A tibble: 5 x 3
+##   nomeParlamentar    tipoDespesa                        dataEmissao        
+##   &lt;chr&gt;              &lt;chr&gt;                              &lt;dttm&gt;             
+## 1 MARCO MAIA         TELEPHONY                          2015-06-15 00:00:00
+## 2 JÉSSICA SALES      SUPPLY OF FOOD FOR PARLIAMENTARIAN 2016-04-10 00:00:00
+## 3 EDINHO BEZ         FUELS AND LUBRICANTS.              2015-12-08 00:00:00
+## 4 ODELMO LEÃO        SUPPLY OF FOOD FOR PARLIAMENTARIAN 2015-06-02 00:00:00
+## 5 ARTHUR OLIVEIRA M… MAINTENANCE OF OFFICE TO SUPPORT … 2016-12-14 00:00:00</code></pre>
+<ul>
+<li>We now have each term in the column tipoDespesa translated.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>data %&gt;%
+  na.omit(year_month) %&gt;% 
+  group_by(year_month) %&gt;%     # times used
+  summarize(total = n()) %&gt;%   # by year/month
+  ggplot(aes(year_month, total)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 60,
+                                   hjust = 1)) +
+  labs(x=&quot;Year and month&quot;, y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li>The period of time covered by the dataset is of about 3 years which amounts to the duration of our parliamentarian’s office minus the 120 days prior to the election.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  group_by(idCadastro,
+           nomeParlamentar) %&gt;%
+  slice(1) %&gt;% # keep one entry for parliamentarian
+  ungroup() %&gt;%
+  group_by(sgPartido) %&gt;%              # calc parliamentarian  
+  summarize(num_parliament = n()) %&gt;%  # by party
+  na.omit() %&gt;%
+  ggplot(aes(reorder(sgPartido,
+                     num_parliament),
+             num_parliament)) +
+  geom_bar(stat=&quot;identity&quot;) + 
+  labs(x=&quot;Political parties&quot;,
+       y=&quot;Number of parliamentarians&quot;) +
+  theme(axis.text.x = element_text(angle = 60,
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>We can see that <strong>PMDB</strong> detains the majority of offices followed closely by <strong>PT</strong> and that <strong>PSDB</strong> is still a major player. This was to be expected as the aforementioned parties are often regarded as the most proeminent ones in the Brazilian political scene.</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="overall-spending-of-the-ceap-budget" class="section level1">
+<h1>Overall spending of the CEAP budget</h1>
+<p><br></p>
+<div id="in-this-section-well-look-at-both-the-biggest-spenders-and-most-frugal-parliamentarians." class="section level5">
+<h5>In this section we’ll look at both the <strong>biggest spenders</strong> and <strong>most frugal</strong> parliamentarians.</h5>
+</div>
+<div id="well-examine-each-group-in-ranks-of-10-parliamentarians-a-commonplace-in-terms-of-ranking." class="section level5">
+<h5>We’ll examine each group in ranks of 10 parliamentarians, a commonplace in terms of ranking.</h5>
+<p><br></p>
+</div>
+<div id="which-parliamentarians-spent-the-most" class="section level2">
+<h2>Which parliamentarians spent the most?</h2>
+<pre class="r"><code>data %&gt;%
+  group_by(sgUF,idCadastro,nomeParlamentar) %&gt;%     # calculate expense for
+  summarize(total_expense = sum(valorLíquido)) %&gt;%  # each parliamentarian
+  ungroup() %&gt;%                                   
+  top_n(n=10, wt=total_expense) %&gt;%  # get the top 10 expenders
+  ggplot(aes(total_expense, 
+             reorder(nomeParlamentar,
+                     total_expense))) +
+  geom_segment(aes(x = min(total_expense),
+                   y =reorder(nomeParlamentar,
+                              total_expense),
+                   xend = total_expense,
+                   yend = nomeParlamentar),
+               color = &quot;grey50&quot;, size=0.35) +
+  geom_point(aes(color=sgUF), size=3.5) +
+  scale_x_continuous(breaks = seq(from = 135E3,
+                                  to=1E7,
+                                  by = 1E4)) +
+  theme(axis.text.x = element_text(angle = 30,
+                                   hjust = 1)) +
+  guides(color=guide_legend(&quot;State&quot;)) +
+  labs(x=&quot;Total Expense (R$)&quot;, 
+       y=&quot;Parliamentarian name&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ul>
+<li>The parliamentarian <em>Edio Lopes</em> from the state of Roraima is the biggest spender with a total expense of <span class="math inline">\(R\$\:1,\!485,\!000.\,00\)</span> (that’s almost <strong>1.5 million reais</strong>).
+<ul>
+<li><em>Edio Lopes</em> spent what the second place <em>Hiran Gonçalves</em> (also from Roraima) spent plus some <span class="math inline">\(R\$\:55,\!000.\,00\)</span>.</li>
+<li><em>Edio Lopes</em> spent what the tenth place <em>Silas Câmara</em> from the state of Amazonas spent plus some <span class="math inline">\(R\$\: 80,\!000.\,00\)</span>.</li>
+</ul></li>
+<li>All 10 parliamentarians spent well over <em>1 million reais</em>, furthermore except for Amazonas none of the states involved are usually pointed as one of the richest Brazilian states.
+<ul>
+<li>Among the states that made to the rank Amazonas would be the most prominent and yet its parliamentarian is right at the bottom of the top 10 rank.</li>
+</ul></li>
+<li>Half of the big spenders are from the state of Roraima (top three included).</li>
+</ul>
+<pre class="r"><code>state_info %&gt;%
+  ggplot(aes(reorder(UF,limite_mensal),
+             limite_mensal)) +          
+  geom_point() +
+  scale_y_continuous(breaks = seq(5E2,5E5,1.5E3)) +
+  labs(y=&quot;Montly allowance&quot;, x=&quot;State&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li><p>The state of Roraima (RR) has the biggest monthly allowance in the whole country which is approximately <span class="math inline">\(R\$\:45,\!500.\,00\)</span>. It makes sense that their parliamentarians are among the biggest spenders in the whole country.</p></li>
+<li><p>The federal district (DF), where’s the capital, has the smallest allowance which is a little more than <span class="math inline">\(R\$\:30,\!500.\,00\)</span>. A parliamentarian who lives there is already close to the capital so doesn’t have to travel by plane and probably already has a house there, so the smaller allowance is to be expected.</p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="which-parliamentarians-spent-less" class="section level2">
+<h2>Which parliamentarians spent less?</h2>
+<pre class="r"><code>data %&gt;%
+  group_by(sgUF,idCadastro,nomeParlamentar) %&gt;%     # calculate expense for
+  summarize(total_expense = sum(valorLíquido)) %&gt;%  # each parliamentarian
+  ungroup() %&gt;%
+  filter(total_expense &gt;= 0) %&gt;%  # Remove those without actual net amount 
+  arrange(total_expense) %&gt;%      # Order by total expense  
+  slice(1:10) %&gt;%                 # Get the top 10 frugal
+  ggplot(aes(total_expense,
+             reorder(nomeParlamentar,
+                     total_expense))) +
+  geom_segment(aes(x = 0,
+                   y = reorder(nomeParlamentar,
+                               -total_expense),
+                   xend = total_expense,
+                   yend = nomeParlamentar),
+               color = &quot;grey50&quot;, size=0.35) +
+  geom_point(aes(color=sgUF), size=3.5) +
+  scale_x_continuous(breaks = seq(from = 0,
+                                  to=1E5,
+                                  by = 20)) +
+  guides(color=guide_legend(&quot;State&quot;)) +
+  labs(x=&quot;Total Expense (R$)&quot;,
+       y=&quot;Parliamentarian name&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Going against what one would expect none of the more frugal parliamentarians are from the Federal District (DF) which has the smallest monthly allowance.</p>
+<ul>
+<li>Our frugal friends live in other states so they had to travel and pay for accommodations. So, how did they pay for the aforementioned expenses? Did it come from their own pockets?
+<ul>
+<li>The parliamentarian <em>Camilo Cola</em> spent a astonishingly small sum, this demands a closer look.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div id="a-closer-look-at-the-3-most-frugal-parliamentarians-in-brazil" class="section level3">
+<h3>A closer look at the 3 most frugal parliamentarians in Brazil</h3>
+<p><br></p>
+<p>Let’s look at the exact values for the top 3 most frugal parliamentarians</p>
+<pre class="r"><code>data %&gt;%
+  group_by(sgUF,idCadastro,nomeParlamentar) %&gt;%
+  summarize(total_expense = sum(valorLíquido)) %&gt;%
+  ungroup() %&gt;%
+  filter(total_expense &gt;= 0) %&gt;%
+  arrange(total_expense) %&gt;%
+  slice(1:3)</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##   sgUF  idCadastro nomeParlamentar total_expense
+##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;
+## 1 ES        141395 CAMILO COLA              0.62
+## 2 MS        178899 MARCIO MONTEIRO         14.2 
+## 3 PR        146613 MARCELO ALMEIDA         26.2</code></pre>
+<ul>
+<li>The total expense of the top 3, specially Camilo Cola who spent only <span class="math inline">\(R\$\:0.\,62\)</span> seems almost ludicrous.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  select(sgUF,fornecedor,
+         nomeParlamentar,
+         sgPartido,tipoDespesa) %&gt;%
+  filter(nomeParlamentar %in% 
+         c(&quot;CAMILO COLA&quot;,
+           &quot;MARCIO MONTEIRO&quot;,
+           &quot;MARCELO ALMEIDA&quot;))</code></pre>
+<pre><code>## # A tibble: 3 x 5
+##   sgUF  fornecedor nomeParlamentar sgPartido tipoDespesa
+##   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;      
+## 1 ES    RAMAL      CAMILO COLA     PMDB      TELEPHONY  
+## 2 PR    RAMAL      MARCELO ALMEIDA PMDB      TELEPHONY  
+## 3 MS    RAMAL      MARCIO MONTEIRO PSDB      TELEPHONY</code></pre>
+<ul>
+<li>The only expense of each of the 3 parliamentarians was related to telephony. Most likely something they couldn’t pay for themselves in reason of bureaucracy.</li>
+</ul>
+<p><br></p>
+<div id="camilo-cola" class="section level4">
+<h4>Camilo Cola</h4>
+<div id="looking-up-the-most-frugal-parliamentarians-in-brazil-we-can-have-an-idea-of-who-he-is.-originally-very-poor-camilo-cola-is-a-self-made-businessman-and-founder-of-a-whole-bussiness-empire-called-grupo-itapemirim.-when-camilo-first-became-a-parliamentarian-he-was-over-80-years-old." class="section level5">
+<h5>Looking up the most frugal parliamentarians in Brazil we can have an idea of who he is. Originally very poor, <strong>Camilo Cola</strong> is a self made businessman and founder of a whole bussiness empire called Grupo Itapemirim. When <strong>Camilo</strong> first became a parliamentarian he was over 80 years old.</h5>
+<blockquote>
+<p>Camilo Cola seems the type of man that would pay for pretty much all of his expenses as parliamentarian.</p>
+</blockquote>
+<p><br></p>
+</div>
+</div>
+<div id="marcelo-almeida" class="section level4">
+<h4>Marcelo Almeida</h4>
+<div id="our-second-place-marcelo-almeida-was-pointed-as-the-richest-parliamentarian-in-brazil-by-the-portal-uol-eleicoes-in-2014." class="section level5">
+<h5>Our second place <strong>Marcelo Almeida</strong> was pointed as the richest parliamentarian in Brazil by the portal ‘Uol Eleições’ in 2014.</h5>
+<blockquote>
+<p>It’s likely that our second place, ‘<em>the richest parliamentarian in Brazil</em>’, would pay for most of his expenses.</p>
+</blockquote>
+<p><br></p>
+</div>
+</div>
+<div id="marcio-monteiro" class="section level4">
+<h4>Marcio Monteiro</h4>
+<div id="our-third-place-marcio-monteiro-quickly-left-his-position-as-parliamentarian-and-from-then-on-his-office-was-occupied-by-his-substitute-elizeu-dionizio." class="section level5">
+<h5>Our third place <strong>Marcio Monteiro</strong> quickly left his position as parliamentarian and from then on his office was occupied by his substitute <strong>Elizeu Dionízio</strong>.</h5>
+<blockquote>
+<p>The third place simply didn’t have enough time to spend any money.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="looking-at-spending-by-state" class="section level1">
+<h1>Looking at spending by state</h1>
+<p><br></p>
+<div id="in-this-section-well-look-at-the-parliamentary-expenses-paid-for-with-the-ceap-budget-from-the-point-of-view-of-the-states-these-parliamentarians-represent." class="section level5">
+<h5>In this section we’ll look at the parliamentary expenses paid for with the CEAP budget from the point of view of the states these parliamentarians represent.</h5>
+</div>
+<div id="when-talking-about-the-parliamentarians-themselves-well-keep-our-ranking-of-10-parliamentarians.-however-when-examining-the-states-well-adopt-a-ranking-of-3-states.-talking-about-10-states-means-talking-about-almost-half-the-states-which-would-be-cumbersome." class="section level5">
+<h5>When talking about the parliamentarians themselves we’ll keep our ranking of 10 parliamentarians. However, when examining the states we’ll adopt a <strong>ranking of 3 states</strong>. Talking about 10 states means talking about almost half the states, which would be cumbersome.</h5>
+<p><br></p>
+</div>
+<div id="parliamentarians-from-which-states-spent-the-most-abroad-and-the-less" class="section level2">
+<h2>Parliamentarians from which states spent the most abroad? And the less?</h2>
+<p><br></p>
+<pre class="r"><code>data %&gt;%
+  filter(tipoDocumento == 2) %&gt;%  # Keep only expenses abroad 
+  group_by(sgUF) %&gt;%  # group by State 
+  summarize(international_expense = sum(valorLíquido)) %&gt;% # calc expense by state
+  ggplot(aes(reorder(sgUF,international_expense),
+             international_expense)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  labs(x=&quot;States&quot;, y=&quot;Expenses abroad (R$)&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<ul>
+<li>Parliamentarians from Maranhão, Paraíba and Pará spent the less abroad.
+<ul>
+<li>The three states are less prominent (smaller gross domestic product for instance) so it makes sense their parliamentarians would spend less abroad.</li>
+<li>Maranhão spendings are incredibly small, a closer look is due.</li>
+</ul></li>
+<li>Parliamentarians from São Paulo, Minas Gerais and Pernambuco spent the most abroad
+<ul>
+<li>São Paulo and Minas Gerais and in lesser degree Pernambuco are some of the richest states in Brazil.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  filter(tipoDocumento == 2) %&gt;% # keep only expenses abroad
+  filter(sgUF == &quot;MA&quot;) %&gt;%  # keep only expenses from MA
+  select(fornecedor,
+         tipoDespesa,
+         valorLíquido,
+         nomeParlamentar,
+         sgUF,
+         sgPartido)</code></pre>
+<pre><code>## # A tibble: 1 x 6
+##   fornecedor tipoDespesa       valorLíquido nomeParlamentar sgUF  sgPartido
+##   &lt;chr&gt;      &lt;chr&gt;                    &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;    
+## 1 7 ELEVEN   SUPPLY OF FOOD F…         41.0 JUNIOR MARRECA  MA    PEN</code></pre>
+<ul>
+<li>The whole international expense made by all the parliamentarians from the state of Maranhão was some meal bought at a convenience store. For the looks of the chain of convenience stores it was most likely fast food.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="which-parliamentarians-violated-the-ceap-budget-set-by-their-state-the-most" class="section level2">
+<h2>Which parliamentarians violated the CEAP budget set by their state the most?</h2>
+<pre class="r"><code>data %&gt;%
+  group_by(sgUF,idCadastro,year_month,          # group by parliamentarian
+           nomeParlamentar,limite_mensal) %&gt;%   # and vars of interest
+  summarise(monthly_expense = sum(valorLíquido)) %&gt;% # calc expense by month/year
+  filter(year_month != &quot;NA-NA&quot;) %&gt;%  # remove expense without a month/year  
+  filter(monthly_expense &gt; limite_mensal) %&gt;%  # keep only violations
+  ungroup() -&gt; expense_month_year
+#
+expense_month_year %&gt;%
+  select(nomeParlamentar,
+         year_month,
+         limite_mensal,
+         monthly_expense) %&gt;%
+  sample_n(5)</code></pre>
+<pre><code>## # A tibble: 5 x 4
+##   nomeParlamentar  year_month limite_mensal monthly_expense
+##   &lt;chr&gt;            &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt;
+## 1 CÉLIO SILVEIRA   2016-8            35507.          40659.
+## 2 ROBERTO BALESTRA 2016-6            35507.          41849.
+## 3 JOZI ARAÚJO      2016-10           43375.          47672.
+## 4 PEDRO FERNANDES  2017-3            42152.          48936.
+## 5 LÁZARO BOTELHO   2015-10           39504.          62858.</code></pre>
+<ul>
+<li>We now have the monthly expense of the parliamentarians that violated their respective monthly allowance.</li>
+</ul>
+<pre class="r"><code>expense_month_year %&gt;%
+  group_by(idCadastro,nomeParlamentar) %&gt;% # group only by parliamentarian 
+  arrange(desc(monthly_expense)) %&gt;%   # order by month/year expense
+  slice(1) %&gt;%                         # keep biggest expense of each parliamentarian
+  ungroup() %&gt;%
+  top_n(n=10, wt=monthly_expense) %&gt;%  # get overall top 10 month/year expenses 
+  mutate(overbudget = monthly_expense - limite_mensal) %&gt;% # calc actual overbudget
+  ggplot(aes(overbudget,
+             reorder(nomeParlamentar,
+                     overbudget))) +
+  geom_segment(aes(x = 1E5, 
+                   y =reorder(nomeParlamentar,
+                              overbudget),
+                   xend = overbudget,
+                   yend = nomeParlamentar),
+               color = &quot;grey50&quot;,
+               size=0.35) +
+  geom_point(aes(color=sgUF),size=3) +
+  labs(x=&quot;Overbudget (R$)&quot;,
+       y=&quot;parliamentarians&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>At the top of the rank we have Pastor Eurico who managed to spend over R$ 180,000 more than he should in a single month.</li>
+<li>All of our ranked parliamentarians for some reason had to spend way over R$ 100,000 than they should have in the period of a single month.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="at-which-states-the-parliamentarians-spent-the-most-with-airfare-and-the-less" class="section level2">
+<h2>At which states the parliamentarians spent the most with airfare ? And the less?</h2>
+<p><br></p>
+<p>We will consider both the cost of air tickets themselves and the cost of their issuance.</p>
+<pre class="r"><code>data %&gt;%
+  filter(tipoDespesa %in% 
+         c(&quot;AIRLINE TICKETS&quot;,
+           &quot;AIR TICKET ISSUANCE&quot;)) %&gt;% # keep only fligths
+  group_by(sgUF) %&gt;%
+  summarize(international_expense = sum(valorLíquido)) %&gt;%
+  filter(sgUF != &quot;NA&quot;) %&gt;%
+  ggplot(aes(reorder(sgUF,international_expense),
+             international_expense)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  labs(x=&quot;States&quot;, y=&quot;Flight expense&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div id="states-where-parliamentarians-spent-most-with-airfare" class="section level4">
+<h4>States where parliamentarians spent most with airfare</h4>
+<ul>
+<li>We have São Paulo - <strong>SP</strong>, Amazonas - <strong>AM</strong>, Rio de Janeiro - <strong>RJ</strong> and Minas Gerais - <strong>MG</strong>.
+<ul>
+<li>São Paulo, Amazonas, Rio de Janeiro and Minas Gerais count among the richest states in the country. <br></li>
+</ul></li>
+</ul>
+</div>
+<div id="states-where-parliamentarians-spent-less-with-airfare" class="section level4">
+<h4>States where parliamentarians spent less with airfare</h4>
+<ul>
+<li>We have Distrito Federal - <strong>DF</strong>, Goiás - <strong>GO</strong> and Tocantins - <strong>TO</strong>.
+<ul>
+<li>The capital is in Distrito Federal, so not a lot of reasons to fly around.</li>
+<li>Distrito Federal is actually within the borders of Goiás and Tocantins is right next to Goiás itself.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="taking-a-closer-look-at-paraiba" class="section level1">
+<h1>Taking a closer look at Paraíba</h1>
+<p><br></p>
+<div id="in-this-section-well-pay-closer-attention-to-the-state-of-paraiba.-well-examine-which-political-parties-are-the-most-avid-and-the-most-restrained-spenders-in-terms-of-frequency-and-overall-cost." class="section level5">
+<h5>In this section we’ll pay closer attention to the state of Paraíba. We’ll examine which political parties are the most avid and the most restrained spenders in terms of frequency and overall cost.</h5>
+</div>
+<div id="well-put-the-political-parties-in-rankings-of-3-a-number-we-consider-reasonable-as-our-examination-covers-a-total-of-12-political-parties." class="section level5">
+<h5>We’ll put the political parties in <strong>rankings of 3</strong>, a number we consider reasonable as our examination covers a total of 12 political parties.</h5>
+<p><br></p>
+</div>
+<div id="in-which-parties-the-parliamentarians-used-ceap-more-frequently-in-which-did-they-use-it-less-frequently" class="section level2">
+<h2>In which parties the parliamentarians used CEAP more frequently? In which did they use it less frequently?</h2>
+<pre class="r"><code>data %&gt;%
+  filter(sgUF == &quot;PB&quot;) %&gt;% # keep only PB
+  na.omit(sgUF,
+          sgPartido) %&gt;%
+  group_by(sgPartido) %&gt;% 
+  summarize(frequency =n()) %&gt;% # calc num of times
+  ggplot(aes(reorder(sgPartido,frequency),
+             frequency)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  labs(x=&quot;Parties&quot;, y=&quot;Absolute frequency&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>The parties <strong>PMDB</strong> (Brazilian Democratic Movement | centre to centre-right), <strong>PP</strong> (Progressistas | right-wing) and <strong>SD</strong> (Solidariedade | centre-left) are by far the ones that used CEAP the most times.
+<ul>
+<li>In the case of <strong>PMDB</strong> it was to be expected as it detains the majority of offices.</li>
+</ul></li>
+<li>The parties <strong>PSC</strong> (Social Christian Party | centre-right) and <strong>PROS</strong> (Republican Party of the Social Order | centre-right) are by far the ones that have used CEAP the least times.
+<ul>
+<li>The third party to have used CEAP the least times <strong>PT</strong> (Workers’ Party | centre-left to left-wing) still used CEAP many times more than <strong>PSC</strong> and <strong>PROS</strong>.</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+<div id="in-which-parties-the-parliamentarians-spent-the-most-from-ceap-in-which-they-spent-the-less" class="section level2">
+<h2>In which parties the parliamentarians spent the most from CEAP? In which they spent the less?</h2>
+<pre class="r"><code>data %&gt;%
+  filter(sgUF == &quot;PB&quot;) %&gt;% # keep only PB
+  na.omit(sgUF,
+          sgPartido,
+          valorLíquido) %&gt;%
+  group_by(sgPartido) %&gt;%
+  summarize(total_expense = sum(valorLíquido)) %&gt;% # calc total expense
+  ggplot(aes(reorder(sgPartido,total_expense),
+             total_expense)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  labs(x=&quot;Parties&quot;, y=&quot;Total expense&quot;)</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li><strong>PMDB</strong> (Brazilian Democratic Movement | centre to centre-right) is by far the party that spent the most in Paraíba, which was to be expected as <strong>PMDB</strong> detains the majority of offices.
+<ul>
+<li>Second place <strong>PSD</strong> (Social Democratic Party | centre) and third place and <strong>DEM</strong> (Democrats | centre-right to right) total expenses are far below the biggest spender.</li>
+</ul></li>
+<li>The parties <strong>PSC</strong> (Social Christian Party | centre-right) and <strong>PROS</strong> (Republican Party of the Social Order | centre-right) both spent very little compared to the rest and are clearly the parties that spent less in Paraíba.
+<ul>
+<li>The third party to spend less <strong>PTB</strong> (Brazilian Labour Party | centre-right) still has a total expense considerably bigger than that of <strong>PSC</strong> and <strong>PROS</strong>.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="looking-at-spending-by-political-party" class="section level1">
+<h1>Looking at spending by political party</h1>
+<p><br></p>
+<div id="at-this-section-well-look-closely-at-the-expenses-of-three-of-the-major-political-parties-in-brazil-pt-psdb-and-pmdb.-candidates-from-pt-and-psdb-are-often-the-competitors-at-the-run-off-election-for-presidency-and-pmdb-often-holds-the-parliamentary-majority-as-is-the-case-in-this-dataset.-these-are-only-some-of-the-evidences-of-the-importance-of-the-chosen-parties-in-the-brazilian-political-scene." class="section level5">
+<h5>At this section we’ll look closely at the expenses of three of the major political parties in Brazil: <strong>PT, PSDB</strong> and <strong>PMDB</strong>. Candidates from <strong>PT</strong> and <strong>PSDB</strong> are often the competitors at the run-off election for presidency and <strong>PMDB</strong> often holds the parliamentary majority (as is the case in this dataset). These are only some of the evidences of the importance of the chosen parties in the Brazilian political scene.</h5>
+<p><br></p>
+</div>
+<div id="what-type-of-expense-is-more-frequently-paid-for-with-ceap-by-parliamentarians-of-these-parties" class="section level2">
+<h2>What type of expense is more frequently paid for with CEAP by parliamentarians of these parties?</h2>
+<div id="psdb" class="section level3">
+<h3>PSDB</h3>
+<pre class="r"><code>data %&gt;%
+  filter(sgPartido %in% c(&quot;PSDB&quot;)) %&gt;% # keep only PSDB
+  group_by(tipoDespesa) %&gt;%
+  summarize(frequency = n()) %&gt;% # calc total times
+  ggplot(aes(reorder(tipoDespesa,frequency),
+             frequency)) +
+  geom_bar(stat=&quot;identity&quot;,
+           fill=&quot;#1E347F&quot;) +
+  labs(y= &quot;Absolute Frequency&quot;, 
+       x=&quot;Type of expense&quot;) +
+  coord_flip() +
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li><strong>Air Tick Issuance</strong> is the type of expense most frequently paid for with CEAP by parliamentarians from PSDB. Next follows <strong>Fuel and Lubricants</strong> and <strong>Telephony</strong>.</li>
+</ul>
+</div>
+<div id="pmdb" class="section level3">
+<h3>PMDB</h3>
+<pre class="r"><code>data %&gt;%
+  filter(sgPartido %in% c(&quot;PMDB&quot;)) %&gt;% # keep only PMDB
+  group_by(tipoDespesa) %&gt;%
+  summarize(frequency = n()) %&gt;% # calc total times
+  ggplot(aes(reorder(tipoDespesa,frequency),
+             frequency)) +
+  geom_bar(stat=&quot;identity&quot;,
+           fill=&quot;#7F6607&quot;) + 
+  labs(y= &quot;Absolute Frequency&quot;, 
+       x=&quot;Type of expense&quot;) +
+  coord_flip() +
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<ul>
+<li><strong>Air Tick Issuance</strong> is the type of expense most frequently paid for with CEAP by parliamentarians from PMDB. Next follows <strong>Fuel and Lubricants</strong> and <strong>Telephony</strong>.</li>
+</ul>
+</div>
+<div id="pt" class="section level3">
+<h3>PT</h3>
+<pre class="r"><code>data %&gt;%
+  filter(sgPartido %in% c(&quot;PT&quot;)) %&gt;% # keep only PT
+  group_by(tipoDespesa) %&gt;%
+  summarize(frequency = n()) %&gt;% # calc total times
+  ggplot(aes(reorder(tipoDespesa,frequency),
+             frequency)) +
+  geom_bar(stat=&quot;identity&quot;,
+           fill=&quot;#7F1707&quot;) + 
+  labs(y= &quot;Absolute Frequency&quot;, 
+       x=&quot;Type of expense&quot;) +
+  coord_flip() +
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<ul>
+<li><strong>Air Tick Issuance</strong> is the type of expense most frequently paid for with CEAP by parliamentarians from PT. Next follows <strong>Fuel and Lubricants</strong> and <strong>Taxi Service, Toll and Parking</strong>.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<p><br></p>
+<blockquote>
+<p>Across all three parties <em>the expense most frequently paid for with CEAP</em> is <strong>Air Tick Issuance</strong>, followed by <strong>Fuel and Lubricants</strong>. The third place is <strong>Telephony</strong> for PSDB and PMDB and <strong>Taxi Service, Toll and Parking</strong> for PT.</p>
+</blockquote>
+<p><br></p>
+</div>
+</div>
+<div id="what-type-of-expense-paid-for-with-ceap-by-parliamentarians-of-these-parties-costed-more" class="section level2">
+<h2>What type of expense paid for with CEAP by parliamentarians of these parties costed more?</h2>
+<div id="psdb-1" class="section level3">
+<h3>PSDB</h3>
+<pre class="r"><code>data %&gt;%
+  filter(sgPartido %in% c(&quot;PSDB&quot;)) %&gt;% # keep only PSDB
+  group_by(tipoDespesa) %&gt;%
+  summarize(expense = sum(valorLíquido)) %&gt;% # calc total expense
+  ggplot(aes(reorder(tipoDespesa,expense),
+             expense)) +
+  geom_bar(stat=&quot;identity&quot;,
+           fill=&quot;#1E347F&quot;) +
+  labs(y= &quot;Total expense&quot;, 
+       x=&quot;Type of expense&quot;) +
+  coord_flip() +
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<ul>
+<li>The costlier expense for PSDB is <strong>Air Tick Issuance</strong> followed by <strong>Divulgation of Parliamentary Activity</strong> and <strong>Maintenance of Office to support Parliamentary Activity</strong>.</li>
+</ul>
+</div>
+<div id="pmdb-1" class="section level3">
+<h3>PMDB</h3>
+<pre class="r"><code>data %&gt;%
+  filter(sgPartido %in% c(&quot;PMDB&quot;)) %&gt;% # keep only PMDB
+  group_by(tipoDespesa) %&gt;%
+  summarize(expense = sum(valorLíquido)) %&gt;% # calc total expense
+  ggplot(aes(reorder(tipoDespesa,expense),
+             expense)) +
+  geom_bar(stat=&quot;identity&quot;,
+           fill=&quot;#7F6607&quot;) +
+  labs(y= &quot;Total expense&quot;, 
+       x=&quot;Type of expense&quot;) +
+  coord_flip() +
+  theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<ul>
+<li>The costlier expense for PMDB is <strong>Divulgation of Parliamentary Activity</strong> followed by <strong>Air Ticket Issuance</strong> and <strong>Leasing or Freighting of Automotive Vehicles</strong>.</li>
+</ul>
+</div>
+<div id="pt-1" class="section level3">
+<h3>PT</h3>
+<pre class="r"><code>data %&gt;%
+  filter(sgPartido %in% c(&quot;PT&quot;)) %&gt;% # keep only PT
+  group_by(tipoDespesa) %&gt;%
+  summarize(expense = sum(valorLíquido)) %&gt;% # calc total expense
+  ggplot(aes(reorder(tipoDespesa,expense),
+             expense)) +
+  geom_bar(stat=&quot;identity&quot;,
+           fill=&quot;#7F1707&quot;) +
+  labs(y= &quot;Total expense&quot;, 
+       x=&quot;Type of expense&quot;) +
+  coord_flip() +
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1))</code></pre>
+<p><img src="../../../post/ceap_analysis_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<ul>
+<li>The costlier expense for PT is <strong>Air Ticket Issuance</strong> followed by <strong>Divulgation of Parliamentary Activity</strong> and <strong>Maintenance of Office to support Parliamentary Activity</strong>.</li>
+</ul>
+</div>
+<div id="summary-1" class="section level3">
+<h3>Summary</h3>
+<blockquote>
+<p>PT and PSDB have the same three costlier expenses <strong>Air Ticket Issuance, Divulgation and Office Maintenance</strong>. Unlike the other for PMDB <strong>Divulgation</strong> is costlier than <strong>Air Ticket Issuance</strong> and <strong>Vehicle Renting/Freighting</strong> takes the spot from <strong>Office Maintenance</strong>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/ceap/">ceap</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/descriptive/">descriptive</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/" data-tooltip="C.E.A.P analysis (suppliers and weekend expenses)">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/08/multivariate-logistic-regression-on-speed-dating-data/" data-tooltip="Multivariate logistic regression on speed dating data">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/" data-tooltip="C.E.A.P analysis (suppliers and weekend expenses)">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/08/multivariate-logistic-regression-on-speed-dating-data/" data-tooltip="Multivariate logistic regression on speed dating data">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F08%2Fc.e.a.p-analysis%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F08%2Fc.e.a.p-analysis%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F08%2Fc.e.a.p-analysis%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+Loading Data eleicoes_data &lt;- readr::read_csv( here::here(&#39;evidences/eleicoes_2006_e_2010.csv&#39;), progress = FALSE, local=readr::locale(&quot;br&quot;), col_types = cols( ano = col_integer(), sequencial_candidato = col_character(), quantidade_doacoes = col_integer(), quantidade_doadores = col_integer(), total_receita = col_double(), media_receita = col_double(), recursos_de_outros_candidatos.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/">
+                <h3 class="media-heading">C.E.A.P analysis (suppliers and weekend expenses)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+                <h3 class="media-heading">C.E.A.P Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in learning something about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate linear regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+                <h3 class="media-heading">Analysis on MovieLens dataset with bootstrap</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&quot;evidences/lens_movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/">
+                <h3 class="media-heading">Analysis on Github commits (2016-2017)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&quot;evidences/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;… ## $ month_day &lt;int&gt; 18, 17, 27, 16, 26, 21, 4, 22, 23, 1, 12, 3, 2, 2… ## $ the_month &lt;int&gt; 2, 2, 1, 2, 1, 3, 2, 2, 2, 2, 4, 2, 2, 2, 4, 3, 4… ## $ the_year &lt;int&gt; 2016, 2016, 2016, 2016, 2016, 2017, 2016, 2016, 2… ## $ users &lt;int&gt; 10279, 10208, 10118, 10045, 10020, 10015, 9991, 9…</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
+                <h3 class="media-heading">Movie lines by gender</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
+ 
+
+ Data Overview readr::read_csv(here(&quot;evidences/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/">
+                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
+Considerations In the analysis below we could:
+ See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         15 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/08\/c.e.a.p-analysis\/';
+          
+            this.page.identifier = '\/2018\/08\/c.e.a.p-analysis\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-benardi-github-io-myblog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+    <script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	  MathJax.Hub.Config({
+  	    messageStyle: 'none',
+  	    showProcessingMessages: false,
+	    tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']],
+		processEscapes: true
+	      }
+	  });
+	  MathJax.Hub.Queue(function() {
+	    var i, text, code, codes = document.getElementsByTagName('code');
+	    for (i = 0; i < codes.length;) {
+	      code = codes[i];
+	      if (code.parentNode.tagName !== 'PRE' &&
+		  code.childElementCount === 0) {
+		text = code.textContent;
+		if (/^\\\((.|\s)+\\\)$/.test(text) ||
+		    /^\$(.|\s)+\$$/.test(text) ||
+		    /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+		  code.outerHTML = code.innerHTML;  
+		  continue;
+		}
+	      }
+	      i++;
+	    }
+	    });
+	</script>
+  </body>
+</html>
+

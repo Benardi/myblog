@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ceap on Me &#43; coffe &#43; data : a love ∆</title>
+    <link>https://benardi.github.io/myblog/tags/ceap/</link>
+    <description>Recent content in Ceap on Me &#43; coffe &#43; data : a love ∆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://benardi.github.io/myblog/tags/ceap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C.E.A.P analysis (suppliers and weekend expenses)</title>
+      <link>https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/</link>
+      <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/</guid>
+      <description>Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &amp;lt;- read_csv(here::here(&amp;quot;evidences/dadosCEAP.csv&amp;quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&amp;gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &amp;quot;-&amp;quot;), tipoDespesa = toupper(tipoDespesa)) -&amp;gt; data state_info &amp;lt;- read_csv(here::here(&amp;quot;/evidences/limiteMensalCEAP.</description>
+    </item>
+    
+    <item>
+      <title>C.E.A.P Analysis</title>
+      <link>https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/</guid>
+      <description>Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &amp;lt;- read_csv(here::here(&amp;quot;evidences/dadosCEAP.csv&amp;quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&amp;gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &amp;quot;-&amp;quot;), tipoDespesa = toupper(tipoDespesa)) -&amp;gt; data state_info &amp;lt;- read_csv(here::here(&amp;quot;/evidences/limiteMensalCEAP.</description>
+    </item>
+    
+  </channel>
+</rss>

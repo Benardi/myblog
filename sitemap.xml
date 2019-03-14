@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/</loc>
+    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/</loc>
+    <lastmod>2018-09-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/</loc>
+    <lastmod>2018-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/</loc>
     <lastmod>2018-08-05T00:00:00+00:00</lastmod>
   </url>
@@ -33,7 +48,7 @@
   </url>
   
   <url>
-    <loc>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro---the-king-of-rithm/</loc>
+    <loc>https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/</loc>
     <lastmod>2018-05-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -84,14 +99,26 @@
   </url>
   
   <url>
+    <loc>https://benardi.github.io/myblog/tags/ceap/</loc>
+    <lastmod>2018-09-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/tags/descriptive/</loc>
-    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/eda/</loc>
     <lastmod>2018-05-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/elections/</loc>
+    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -150,7 +177,7 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/</loc>
-    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -168,19 +195,19 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/post/</loc>
-    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/predictive/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/regression/</loc>
-    <lastmod>2018-08-05T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
