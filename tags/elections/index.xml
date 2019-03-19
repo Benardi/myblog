@@ -6,10 +6,39 @@
     <description>Recent content in Elections on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/tags/elections/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Classification of candidates in Brazilian elections</title>
+      <link>https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/</guid>
+      <description>Introduction 
+ Data Analysis and Classification on a subset of data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal which originally encompassed approximately 7300 candidates.
+ 
+
+ Data Overview The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</description>
+    </item>
+    
+    <item>
+      <title>Analysis with Regularization on Brazilian elections</title>
+      <link>https://benardi.github.io/myblog/2018/11/analysis-with-regularization-on-brazilian-elections/</link>
+      <pubDate>Fri, 02 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/2018/11/analysis-with-regularization-on-brazilian-elections/</guid>
+      <description>Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the lower house (Câmara Federal de Deputados). Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</description>
+    </item>
     
     <item>
       <title>Analysis on Brazilian elections</title>

@@ -1,0 +1,2563 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Classification of candidates in Brazilian elections</title>
+    <meta name="author" content="Benardi Nunes">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="../../../favicon.png">
+    
+
+    
+    <meta name="description" content="Let&#39;s now apply machine learning models in order to predict the winners in the brazilian elections for lower house.">
+    <meta property="og:description" content="Let&#39;s now apply machine learning models in order to predict the winners in the brazilian elections for lower house.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Classification of candidates in Brazilian elections">
+    <meta property="og:url" content="/2018/12/classification-of-candidates-in-brazilian-elections/">
+    <meta property="og:site_name" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Me &#43; coffe &#43; data : a love ∆">
+    <meta name="twitter:description" content="Let&#39;s now apply machine learning models in order to predict the winners in the brazilian elections for lower house.">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="../../../css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="../../../">Me &#43; coffe &#43; data : a love ∆</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="../../../#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="../../../#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Benardi Nunes</h4>
+        
+          <h5 class="sidebar-profile-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/9077439/jos%C3%A9-benardi" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="../../../index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Classification of candidates in Brazilian elections
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-12-01T00:00:00Z">
+        
+  December 1, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<p><br></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p><br></p>
+<blockquote>
+<p>Data Analysis and Classification on a subset of data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the <a href="http://www.tse.jus.br/">TSE portal</a> which originally encompassed approximately 7300 candidates.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="data-overview" class="section level1">
+<h1>Data Overview</h1>
+<div id="the-variables" class="section level2">
+<h2>The variables</h2>
+<p><br></p>
+<pre><code>The response variable is the variable that you are interested in reaching conclusions about.
+
+A predictor variable is a variable used to predict another variable.
+
+Our response variable will be &quot;situacao&quot;, we want to study how well the predictor variables can help predict its behavior and how they impact in the linear regression.</code></pre>
+<p><br></p>
+<div id="each-item-corresponds-to-a-candidate-the-attributes-of-each-item-are-as-follows" class="section level4">
+<h4>Each item corresponds to a candidate, the attributes of each item are as follows:</h4>
+<ul>
+<li><strong>ano</strong> : Year at which the election took place.</li>
+<li><strong>sequencial_candidato</strong> : Sequential ID to map the candidates</li>
+<li><strong>nome</strong> : Name of the candidate</li>
+<li><strong>uf</strong> : Federate state to which the candidate belongs.</li>
+<li><strong>partido</strong> : Political party to which the candidate belongs.</li>
+<li><strong>quantidade_doacoes</strong> : Number of donations received during political campaign.</li>
+<li><strong>quantidade_doadores</strong> : Number of donors that contributed to the candidate’s political campaign.</li>
+<li><strong>total_receita</strong> : Total revenue.</li>
+<li><strong>media_receita</strong> : Mean revenue.</li>
+<li><strong>recursos_de_outros_candidatos.comites</strong> : Revenue from other candidate’s committees.</li>
+<li><strong>recursos_de_pessoas_fisicas</strong> : Revenue from individuals.</li>
+<li><strong>recursos_de_pessoas_juridicas</strong> : Revenue from legal entities.</li>
+<li><strong>recursos_proprios</strong> : Revenue from personal resources.</li>
+<li><strong>recursos_de_partido_politico</strong> : Revenue from political party.</li>
+<li><strong>quantidade_despesas</strong> : Number of expenses.</li>
+<li><strong>quantidade_fornecedores</strong> : Number of suppliers.</li>
+<li><strong>total_despesa</strong> : Total expenditure.</li>
+<li><strong>media_despesa</strong> : Mean expenditure.</li>
+<li><strong>cargo</strong> : Position.</li>
+<li><strong>sexo</strong> : Sex.</li>
+<li><strong>grau</strong> : Level of education.</li>
+<li><strong>estado_civil</strong> : Marital status.</li>
+<li><strong>ocupacao</strong> : Candidate’s occupation up to the election.</li>
+<li><strong>situacao</strong> : Whether the candidate was elected.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="loading-data" class="section level2">
+<h2>Loading Data</h2>
+<pre class="r"><code>readr::read_csv(here::here(&#39;evidences/train_class.csv&#39;),
+                progress = FALSE,
+                local=readr::locale(&quot;br&quot;),
+                col_types = cols(ano = col_integer(),
+                                 sequencial_candidato = col_character(),
+                                 quantidade_doacoes = col_integer(),
+                                 quantidade_doadores = col_integer(),
+                                 total_receita = col_double(),
+                                 media_receita = col_double(),
+                                 recursos_de_outros_candidatos.comites = col_double(),
+                                 recursos_de_pessoas_fisicas = col_double(),
+                                 recursos_de_pessoas_juridicas = col_double(),
+                                 recursos_proprios = col_double(),
+                                 `recursos_de_partido_politico` = col_double(),
+                                 quantidade_despesas = col_integer(),
+                                 quantidade_fornecedores = col_integer(),
+                                 total_despesa = col_double(),
+                                 media_despesa = col_double(),
+                                 situacao = col_character(),
+                                 .default = col_character())) %&gt;%
+  mutate(sequencial_candidato = as.numeric(sequencial_candidato),
+         estado_civil = as.factor(estado_civil),
+         ocupacao = as.factor(ocupacao),
+         situacao = as.factor(situacao),
+         partido = as.factor(partido),
+         grau = as.factor(grau),
+         sexo = as.factor(sexo),
+         uf = as.factor(uf)) -&gt; data
+
+data %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 7,622
+## Variables: 24
+## $ ano                                   &lt;int&gt; 2006, 2006, 2006, 2006, 20…
+## $ sequencial_candidato                  &lt;dbl&gt; 10001, 10002, 10002, 10002…
+## $ nome                                  &lt;chr&gt; &quot;JOSÉ LUIZ NOGUEIRA DE SOU…
+## $ uf                                    &lt;fct&gt; AP, RO, AP, MS, RO, AP, PI…
+## $ partido                               &lt;fct&gt; PT, PT, PT, PRONA, PT, PT,…
+## $ quantidade_doacoes                    &lt;int&gt; 6, 13, 17, 6, 48, 8, 6, 14…
+## $ quantidade_doadores                   &lt;int&gt; 6, 13, 16, 6, 48, 8, 6, 7,…
+## $ total_receita                         &lt;dbl&gt; 16600.00, 22826.00, 158120…
+## $ media_receita                         &lt;dbl&gt; 2766.67, 1755.85, 9301.22,…
+## $ recursos_de_outros_candidatos.comites &lt;dbl&gt; 0.00, 6625.00, 2250.00, 0.…
+## $ recursos_de_pessoas_fisicas           &lt;dbl&gt; 9000.00, 15000.00, 34150.0…
+## $ recursos_de_pessoas_juridicas         &lt;dbl&gt; 6300.00, 1000.00, 62220.80…
+## $ recursos_proprios                     &lt;dbl&gt; 1300.00, 201.00, 59500.00,…
+## $ recursos_de_partido_politico          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ quantidade_despesas                   &lt;int&gt; 14, 24, 123, 8, 133, 38, 9…
+## $ quantidade_fornecedores               &lt;int&gt; 14, 23, 108, 8, 120, 37, 9…
+## $ total_despesa                         &lt;dbl&gt; 16583.60, 20325.99, 146011…
+## $ media_despesa                         &lt;dbl&gt; 1184.54, 846.92, 1187.09, …
+## $ cargo                                 &lt;chr&gt; &quot;DEPUTADO FEDERAL&quot;, &quot;DEPUT…
+## $ sexo                                  &lt;fct&gt; MASCULINO, FEMININO, FEMIN…
+## $ grau                                  &lt;fct&gt; ENSINO MÉDIO COMPLETO, SUP…
+## $ estado_civil                          &lt;fct&gt; CASADO(A), SOLTEIRO(A), VI…
+## $ ocupacao                              &lt;fct&gt; &quot;VEREADOR&quot;, &quot;SERVIDOR PÚBL…
+## $ situacao                              &lt;fct&gt; nao_eleito, nao_eleito, el…</code></pre>
+<pre class="r"><code>data %&gt;%
+  map_df(function(x) sum(is.na(x))) %&gt;%
+  gather(feature, num_nulls) %&gt;%
+  arrange(desc(num_nulls))</code></pre>
+<pre><code>## # A tibble: 24 x 2
+##    feature                               num_nulls
+##    &lt;chr&gt;                                     &lt;int&gt;
+##  1 ano                                           0
+##  2 sequencial_candidato                          0
+##  3 nome                                          0
+##  4 uf                                            0
+##  5 partido                                       0
+##  6 quantidade_doacoes                            0
+##  7 quantidade_doadores                           0
+##  8 total_receita                                 0
+##  9 media_receita                                 0
+## 10 recursos_de_outros_candidatos.comites         0
+## # … with 14 more rows</code></pre>
+</div>
+<div id="data-exploration" class="section level2">
+<h2>Data Exploration</h2>
+<div id="imbalance-on-class-distribution" class="section level3">
+<h3>Imbalance on class distribution</h3>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao)) +
+  geom_bar() +
+  labs(x=&quot;Situation&quot;, y=&quot;Absolute Frequency&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>data %&gt;%
+  group_by(situacao) %&gt;%
+  summarise(num = n()) %&gt;%
+  ungroup() %&gt;%
+  mutate(total = sum(num),
+         proportion = num/total)</code></pre>
+<pre><code>## # A tibble: 2 x 4
+##   situacao     num total proportion
+##   &lt;fct&gt;      &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1 eleito      1026  7622      0.135
+## 2 nao_eleito  6596  7622      0.865</code></pre>
+<p><br></p>
+<div id="theres-a-strong-imbalance-in-the-class-distribution-of-the-dataset-with-around-13-of-the-entries-in-the-class-eleito-elected." class="section level4">
+<h4>There’s a strong imbalance in the class distribution of the dataset with around 13% of the entries in the class “eleito” (elected).</h4>
+<ul>
+<li>This imbalance can lead to a bias in the model that will learn to overlook the less frequent classes. Such bias can have a negative impact in the model generalization and its performance.
+<ul>
+<li>We can restore balance by removing instances from the most frequent class <span class="math inline">\(undersampling\)</span>.</li>
+<li>We can restore balance by adding instances from the most frequent class <span class="math inline">\(oversampling\)</span>.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>data %&gt;% 
+  select(-ano,
+         -sequencial_candidato,
+         -nome) %&gt;%
+  select(
+    quantidade_doacoes,
+    quantidade_doadores,
+    total_receita,
+    media_receita,
+    recursos_de_outros_candidatos.comites,
+    recursos_de_pessoas_fisicas,
+    recursos_de_pessoas_juridicas,
+    recursos_proprios,
+    `recursos_de_partido_politico`) %&gt;%
+  na.omit() %&gt;%
+  ggcorr(palette = &quot;RdBu&quot;, label = TRUE,
+       hjust = 0.95, label_size = 3,size = 3,
+       nbreaks = 5, layout.exp = 5) +
+  ggtitle(&quot;Correlation plot for employed variables&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>Predictors such as quantidade_doacoes (Number of Donations) and quantidade_doadores (Number of Donors) are highly correlated and therefore redundant.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,recursos_proprios)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Revenue from personal resources (R$)&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             recursos_de_partido_politico)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Revenue from political party. (R$)&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>Candidates who were elected had overall more revenue form their political party</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             recursos_de_outros_candidatos.comites)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Revenue from other candidate’s committees (R$)&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             recursos_de_pessoas_fisicas)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Revenue from individuals (R$)&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<ul>
+<li>Candidates who were elected had overall more revenue form individuals.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             recursos_de_pessoas_juridicas)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Revenue from legal entities (R$)&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<ul>
+<li>Financial support from legal entities (such as companies) seems to have been a game changer on whether a candidate was elected or not.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             quantidade_doacoes)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Number of donations&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             quantidade_doadores)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Number of donators&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             media_receita)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Mean expenditure&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code>data %&gt;%
+  ggplot(aes(situacao,
+             total_receita)) +
+  geom_boxplot() + 
+  coord_flip() +
+  labs(y=&quot;Total expenditure&quot;, x=&quot;Situation&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>Who got elected spent a lot more, once again money seems to be the real gatekeeper.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+ggplot() +
+   geom_mosaic(aes(x = product(sexo, situacao),
+                   fill=sexo)) +
+   theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  guides(fill = guide_legend(title = &quot;Sex&quot;))  +
+  labs(x=&quot;Situation&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<ul>
+<li>Relatively, we see more men being elected.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+ggplot() +
+  geom_mosaic(aes(x = product(grau, situacao),
+                   fill=grau)) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  guides(fill = guide_legend(title = &quot;Level of education&quot;))  +
+  labs(x=&quot;Situation&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>Those with a better level of education seem to have had the upper hand in the elections.</li>
+</ul>
+<pre class="r"><code>data %&gt;%
+ggplot() +
+   geom_mosaic(aes(x = product(estado_civil, situacao),
+                   fill=estado_civil)) +
+   theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  guides(fill = guide_legend(title = &quot;Marital Status&quot;))  +
+  labs(x=&quot;Situation&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li>Relatively, married people are more likely to be elected in this group.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="preparing-data" class="section level2">
+<h2>Preparing data</h2>
+<div id="splitting-data" class="section level3">
+<h3>Splitting data</h3>
+<pre class="r"><code>set.seed(107)
+
+data$id &lt;- 1:nrow(data)
+
+data %&gt;% 
+  dplyr::sample_frac(.8) -&gt; train
+
+cat(&quot;#### Train Shape&quot;,
+    &quot;\n##### Observations: &quot;,nrow(train),
+    &quot;\n##### Variables: &quot;,ncol(train))</code></pre>
+<pre><code>## #### Train Shape 
+## ##### Observations:  6098 
+## ##### Variables:  25</code></pre>
+<pre class="r"><code>dplyr::anti_join(data, 
+                 train, 
+                 by = &#39;id&#39;) -&gt; test
+
+cat(&quot;#### Test Shape&quot;,
+    &quot;\n##### Observations: &quot;,nrow(test),
+    &quot;\n##### Variables: &quot;,ncol(test))</code></pre>
+<pre><code>## #### Test Shape 
+## ##### Observations:  1524 
+## ##### Variables:  25</code></pre>
+<pre class="r"><code>train %&gt;%
+    select(-ano,-nome,-id,-sequencial_candidato) -&gt; train
+
+test %&gt;%
+    select(-ano,-nome,-id,-sequencial_candidato) -&gt; test</code></pre>
+<pre class="r"><code>train %&gt;%
+  dplyr::select_if(.,is.numeric) -&gt; train.numeric
+
+train %&gt;%
+  dplyr::select_if(.,negate(is.numeric)) -&gt; train.categorical
+
+test %&gt;%
+  dplyr::select_if(.,is.numeric) -&gt; test.numeric
+
+test %&gt;%
+  dplyr::select_if(.,negate(is.numeric)) -&gt; test.categorical</code></pre>
+</div>
+<div id="scale-and-center" class="section level3">
+<h3>Scale and Center</h3>
+<pre class="r"><code>train.numeric %&gt;%
+  preProcess(.,method = c(&quot;center&quot;,&quot;scale&quot;)) -&gt; processParams
+
+processParams %&gt;%
+  predict(.,train.numeric) -&gt; train.numeric 
+
+processParams %&gt;% 
+  predict(.,test.numeric) -&gt; test.numeric 
+
+processParams</code></pre>
+<pre><code>## Created from 6098 samples and 13 variables
+## 
+## Pre-processing:
+##   - centered (13)
+##   - ignored (0)
+##   - scaled (13)</code></pre>
+</div>
+<div id="one-hot-encoding" class="section level3">
+<h3>One Hot Encoding</h3>
+<pre class="r"><code>train.numeric %&gt;%
+  dplyr::bind_cols(train.categorical) -&gt; train
+
+test.numeric %&gt;%
+  dplyr::bind_cols(test.categorical) -&gt; test</code></pre>
+<pre class="r"><code>encoding &lt;- build_encoding(dataSet = train,
+                          cols = c(&quot;uf&quot;,&quot;sexo&quot;,&quot;grau&quot;,&quot;ocupacao&quot;,
+                                   &quot;partido&quot;,&quot;estado_civil&quot;),
+                          verbose = F)
+
+train &lt;- one_hot_encoder(dataSet = train,
+                          encoding = encoding,
+                          drop = TRUE,
+                          verbose = F)
+
+cat(&quot;#### Train Shape&quot;,
+    &quot;\n##### Observations: &quot;,nrow(train),
+    &quot;\n##### Variables: &quot;,ncol(train))</code></pre>
+<div id="train-shape" class="section level4">
+<h4>Train Shape</h4>
+<div id="observations-6098" class="section level5">
+<h5>Observations: 6098</h5>
+</div>
+<div id="variables-263" class="section level5">
+<h5>Variables: 263</h5>
+<pre class="r"><code>test &lt;- one_hot_encoder(dataSet = test,
+                          encoding = encoding,
+                          drop = TRUE,
+                          verbose = F)
+
+cat(&quot;#### Data Shape&quot;,
+    &quot;\n##### Observations: &quot;,nrow(test),
+    &quot;\n##### Variables: &quot;,ncol(test))</code></pre>
+<pre><code>## #### Data Shape 
+## ##### Observations:  1524 
+## ##### Variables:  263</code></pre>
+</div>
+</div>
+</div>
+<div id="near-zero-variance-predictors" class="section level3">
+<h3>Near Zero Variance Predictors</h3>
+<pre class="r"><code>train %&gt;%
+  nearZeroVar(saveMetrics = TRUE) %&gt;%
+  tibble::rownames_to_column(&quot;variable&quot;) %&gt;%
+  filter(nzv == T) %&gt;% 
+  pull(variable) -&gt; near_zero_vars
+
+train %&gt;% 
+    select(-one_of(near_zero_vars)) -&gt; train
+
+test %&gt;%
+    select(-one_of(near_zero_vars)) -&gt; test
+
+
+near_zero_vars %&gt;% 
+  glimpse() </code></pre>
+<pre><code>##  chr [1:224] &quot;cargo&quot; &quot;uf.AC&quot; &quot;uf.AL&quot; &quot;uf.AM&quot; &quot;uf.AP&quot; &quot;uf.BA&quot; &quot;uf.CE&quot; ...</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="unbalanced-dataset" class="section level1">
+<h1>Unbalanced dataset</h1>
+<ul>
+<li>In this section we shall test the candidate models without applying any sort of undersampling or oversampling to the employed data</li>
+</ul>
+<p><br></p>
+<div id="logistic-regression" class="section level2">
+<h2>Logistic Regression</h2>
+<pre class="r"><code>f1 &lt;- function(data, lev = NULL, model = NULL) {
+  f1_val &lt;- F1_Score(y_pred = data$pred,
+                     y_true = data$obs,
+                     positive = lev[1])
+  c(F1 = f1_val)
+}
+
+F_Measure &lt;- function(expected, predicted, ...) {
+  data.frame(expected=expected,
+             prediction=predicted) %&gt;%
+      mutate(TP = ifelse(expected == &quot;eleito&quot; &amp; 
+                         prediction == &quot;eleito&quot;,1,0),
+             TN = ifelse(expected == &quot;nao_eleito&quot; &amp;
+                         prediction == &quot;nao_eleito&quot;,1,0),
+             FN = ifelse(expected == &quot;eleito&quot; &amp;
+                         prediction == &quot;nao_eleito&quot;,1,0),
+             FP = ifelse(expected == &quot;nao_eleito&quot; &amp;
+                         prediction == &quot;eleito&quot;,1,0)) -&gt; result
+  result  %&gt;%
+    summarize(TP = sum(TP),
+              TN = sum(TN),
+              FP = sum(FP),
+              FN = sum(FN)) %&gt;%
+    mutate(recall = TP / (TP + FN),
+           precision = TP / (TP + FP),
+           accuracy = (TP + TN)/(TP + TN + FP + FN),
+           f_measure = 2 * (precision * recall) / (precision + recall)) -&gt; result
+  
+  return(result)
+}</code></pre>
+<pre class="r"><code>rlGrid &lt;- expand.grid( cost = c(200,2,0.02),
+                       loss = c(&quot;L1&quot;, &quot;L2_dual&quot;, &quot;L2_primal&quot;),
+                       epsilon = c(0.001,0.01) )
+train %&gt;%
+  caret::train(situacao ~ .,
+               data= .,
+               method = &quot;regLogistic&quot;,
+               metric = &quot;F1&quot;,
+               trControl = trainControl(method = &quot;boot&quot;,
+                                        classProbs = TRUE,
+                                        summaryFunction = f1,
+                                        savePredictions = &quot;final&quot;),
+               tuneGrid = rlGrid) -&gt; model.rl</code></pre>
+<pre class="r"><code>model.rl</code></pre>
+<pre><code>## Regularized Logistic Regression 
+## 
+## 6098 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 6098, 6098, 6098, 6098, 6098, 6098, ... 
+## Resampling results across tuning parameters:
+## 
+##   cost   loss       epsilon  F1       
+##   2e-02  L1         0.001    0.5841929
+##   2e-02  L1         0.010    0.5850193
+##   2e-02  L2_dual    0.001    0.5994658
+##   2e-02  L2_dual    0.010    0.5994658
+##   2e-02  L2_primal  0.001    0.5994150
+##   2e-02  L2_primal  0.010    0.6000753
+##   2e+00  L1         0.001    0.6342838
+##   2e+00  L1         0.010    0.6359184
+##   2e+00  L2_dual    0.001    0.6333125
+##   2e+00  L2_dual    0.010    0.6333125
+##   2e+00  L2_primal  0.001    0.6332243
+##   2e+00  L2_primal  0.010    0.6335837
+##   2e+02  L1         0.001    0.6329757
+##   2e+02  L1         0.010    0.6355253
+##   2e+02  L2_dual    0.001    0.6445493
+##   2e+02  L2_dual    0.010    0.6487011
+##   2e+02  L2_primal  0.001    0.6330532
+##   2e+02  L2_primal  0.010    0.6344372
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final values used for the model were cost = 200, loss = L2_dual
+##  and epsilon = 0.01.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.rl %$%
+  results %&gt;%
+  mutate(cost=as.factor(cost)) %&gt;%
+  ggplot(aes(epsilon,F1,
+             color=cost)) +
+  geom_line() +
+  geom_point() +
+  labs(y= &quot;F1 (Bootstrap)&quot;, x=&quot;Tolerance&quot;) +
+  facet_wrap(. ~ loss, labeller = &quot;label_both&quot;) +
+  guides(color = guide_legend(title = &quot;Cost&quot;)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<ul>
+<li>The hyper-parameter <strong>Loss</strong> seems to be the particularly meaningful for the Logistic Regression performance in this problem.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>model.rl %&gt;%
+  varImp() %$%
+  importance %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(var=&quot;Feature&quot;) %&gt;%
+  mutate(Feature = tolower(Feature)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = reorder(Feature,eleito),y = eleito),
+           position = position_dodge(width=0.8),width=0.6) + 
+  labs(x=&quot;Feature&quot;, y=&quot;Overall Importance&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<ul>
+<li><strong>Total Receita</strong> (Total Revenue), <strong>Total Despesa</strong> (Total Expenditure) and <strong>Recursos de pessoas jurídicas</strong> (Revenue from Legal Entities) are together the three most important features in the model.</li>
+<li>Despite regularization a lot of features were employed, however many were considered less important.</li>
+</ul>
+<p><br></p>
+<div id="quality-metric" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.rl %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##     TP    TN   FP   FN    recall precision  accuracy f_measure
+## 1 4462 46905 1807 3006 0.5974826 0.7117563 0.9143289 0.6496324</code></pre>
+<ul>
+<li>A decent although uninspiring result.</li>
+</ul>
+</div>
+<div id="test" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.rl,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN FP FN    recall precision  accuracy f_measure
+## 1 115 1268 43 98 0.5399061 0.7278481 0.9074803 0.6199461</code></pre>
+<ul>
+<li>The test result is rather close to the train/validation results, this is a good sign. However, the model results are not particularly promising.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="k-nearest-neighbours" class="section level2">
+<h2>K nearest neighbours</h2>
+<pre class="r"><code>neighborsGrid &lt;- expand.grid(.k = seq(from=1, to=50, by=1))
+
+train %&gt;%
+  train(situacao ~ .,
+        data = .,
+        metric = &quot;F1&quot;,
+        method = &quot;knn&quot;,
+        na.action = na.omit,
+        tuneGrid = neighborsGrid,
+        trControl = trainControl(method = &quot;boot&quot;,
+                                 classProbs = TRUE,
+                                 summaryFunction = f1,
+                                 savePredictions = &quot;final&quot;)) -&gt; model.knn</code></pre>
+<pre class="r"><code>model.knn</code></pre>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 6098 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 6098, 6098, 6098, 6098, 6098, 6098, ... 
+## Resampling results across tuning parameters:
+## 
+##   k   F1       
+##    1  0.5824759
+##    2  0.5875895
+##    3  0.6007862
+##    4  0.6061060
+##    5  0.6144416
+##    6  0.6200697
+##    7  0.6241954
+##    8  0.6311975
+##    9  0.6356655
+##   10  0.6336647
+##   11  0.6366401
+##   12  0.6399036
+##   13  0.6392513
+##   14  0.6434043
+##   15  0.6464512
+##   16  0.6462525
+##   17  0.6458874
+##   18  0.6491884
+##   19  0.6477945
+##   20  0.6480499
+##   21  0.6472381
+##   22  0.6445113
+##   23  0.6465735
+##   24  0.6457208
+##   25  0.6461998
+##   26  0.6482132
+##   27  0.6486326
+##   28  0.6496663
+##   29  0.6500242
+##   30  0.6499457
+##   31  0.6499628
+##   32  0.6509105
+##   33  0.6506456
+##   34  0.6504918
+##   35  0.6509949
+##   36  0.6496751
+##   37  0.6487479
+##   38  0.6485889
+##   39  0.6476139
+##   40  0.6484988
+##   41  0.6487328
+##   42  0.6487954
+##   43  0.6478067
+##   44  0.6501784
+##   45  0.6495676
+##   46  0.6487787
+##   47  0.6490995
+##   48  0.6492741
+##   49  0.6478356
+##   50  0.6486335
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final value used for the model was k = 35.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.knn %$%
+  bestTune %$% 
+  k -&gt; bestParameter
+
+model.knn %$%
+  results %&gt;%
+  ggplot(aes(k,F1)) +
+  geom_vline(xintercept = bestParameter,
+             color = &quot;red&quot;) +
+  geom_point(color=&quot;#0D98E8&quot;) +
+  geom_line(color=&quot;#0D98E8&quot;) +
+  labs(x=&quot;#Neighbors&quot;,
+       y=&quot;F1 (Bootstrap)&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><br></p>
+<pre class="r"><code>model.knn %&gt;%
+  varImp() %$%
+  importance %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(var=&quot;Feature&quot;) %&gt;%
+  mutate(Feature = tolower(Feature)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = reorder(Feature,eleito),y = eleito),
+           position = position_dodge(width=0.8),width=0.6) + 
+  labs(x=&quot;Feature&quot;, y=&quot;Overall Importance&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<ul>
+<li><strong>Total Receita</strong> (Total Revenue), <strong>Total Despesa</strong> (Total Expenditure) and <strong>Recursos de pessoas jurídicas</strong> (Revenue from Legal Entities) are together the three most important features in this model as well.</li>
+<li>The KNN algorithm made use of almost all predictors, this may be a bad sign.</li>
+</ul>
+<p><br></p>
+<div id="quality-metric-1" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation-1" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.knn %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##     TP    TN   FP   FN    recall precision  accuracy f_measure
+## 1 4533 46832 2009 2845 0.6143941 0.6929074 0.9136591 0.6512931</code></pre>
+<ul>
+<li>Here we have slightly better results than those of the Logistic Regression.</li>
+</ul>
+</div>
+<div id="test-1" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.knn,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN FP FN  recall precision accuracy f_measure
+## 1 122 1259 52 91 0.57277 0.7011494 0.906168  0.630491</code></pre>
+<ul>
+<li>We have modest results, but they are consonant with those from train/test.
+<ul>
+<li>This suggests that the KNN model may be too simple for this particular instance, and bias would be the predominant component in the model error.</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="decision-tree" class="section level2">
+<h2>Decision Tree</h2>
+<pre class="r"><code>rpart.grid &lt;- expand.grid(.cp = seq(from=0, to=0.1, by=0.005))
+
+caret::train(x = select(train, -situacao),
+             y = train$situacao,
+             metric = &quot;F1&quot;,
+             method = &quot;rpart&quot;,
+             na.action = na.omit,
+             tuneGrid = rpart.grid,
+             trControl = trainControl(method = &quot;boot&quot;,
+                                      classProbs = TRUE,
+                                      summaryFunction = f1,
+                                      savePredictions = &quot;final&quot;)) -&gt; model.tree</code></pre>
+<pre class="r"><code>model.tree</code></pre>
+<pre><code>## CART 
+## 
+## 6098 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 6098, 6098, 6098, 6098, 6098, 6098, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp     F1       
+##   0.000  0.6222605
+##   0.005  0.6597754
+##   0.010  0.6730765
+##   0.015  0.6737400
+##   0.020  0.6684035
+##   0.025  0.6684085
+##   0.030  0.6668214
+##   0.035  0.6681258
+##   0.040  0.6681258
+##   0.045  0.6681258
+##   0.050  0.6661671
+##   0.055  0.6661671
+##   0.060  0.6712018
+##   0.065  0.6699034
+##   0.070  0.6700850
+##   0.075  0.6702300
+##   0.080  0.6717618
+##   0.085  0.6726706
+##   0.090  0.6632295
+##   0.095  0.6726590
+##   0.100  0.6660222
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.015.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.tree %$%
+  bestTune %$% 
+  cp -&gt; bestParameter
+
+model.tree %$%
+  results %&gt;%
+  ggplot(aes(cp,F1)) +
+  geom_vline(xintercept = bestParameter,
+             color = &quot;red&quot;) +
+  geom_point(color=&quot;#0D98E8&quot;) +
+  geom_line(color=&quot;#0D98E8&quot;) +
+  labs(x=&quot;Complexity Parameter&quot;,
+       y=&quot;F1 (Bootstrap)&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><br></p>
+<pre class="r"><code>model.tree %$%
+  finalModel %&gt;%
+  fancyRpartPlot(sub=&quot;&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<ul>
+<li>The best performing tree seems simple yet reasonable.
+<ul>
+<li>This tree may be in the border of an underfitting.</li>
+</ul></li>
+</ul>
+<p><br></p>
+<pre class="r"><code>model.tree %&gt;%
+  varImp() %$%
+  importance %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(var=&quot;Feature&quot;) %&gt;%
+  mutate(Feature = tolower(Feature)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = reorder(Feature,Overall),y = Overall),
+           position = position_dodge(width=0.8),width=0.6) + 
+  labs(x=&quot;Feature&quot;, y=&quot;Overall Importance&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<ul>
+<li><strong>Total Receita</strong> (Total Revenue), <strong>Total Despesa</strong> (Total Expenditure) and <strong>Recursos de pessoas jurídicas</strong> (Revenue from Legal Entities) are together the three most important features in this model as well.</li>
+<li>The tree used very few predictors which may indicate an underfitting, or simply that the tree captured the few meaningful predictors.</li>
+</ul>
+<p><br></p>
+<div id="quality-metric-2" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation-2" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.tree %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##     TP    TN   FP   FN    recall precision  accuracy f_measure
+## 1 4922 46495 2084 2667 0.6485703 0.7025407 0.9154145 0.6744776</code></pre>
+<ul>
+<li>Here we have surprisingly good results considering the simplicity of the tree.</li>
+</ul>
+</div>
+</div>
+<div id="test-2" class="section level3">
+<h3>Test</h3>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.tree,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN FP FN   recall precision  accuracy f_measure
+## 1 128 1252 59 85 0.600939  0.684492 0.9055118      0.64</code></pre>
+<ul>
+<li>We have slightly better results than those seen till now, on top of that they are consonant with those from train/test.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="adaboost" class="section level2">
+<h2>AdaBoost</h2>
+<pre class="r"><code>train(x = select(train, -situacao),
+      y = train$situacao,
+      metric = &quot;F1&quot;,
+      na.action = na.exclude,
+      method=&#39;adaboost&#39;,
+      tuneLength=2,
+      trControl = trainControl(savePredictions = &quot;final&quot;,
+                               summaryFunction = f1,
+                               classProbs = TRUE,
+                               method = &quot;boot&quot;)) -&gt; model.ada</code></pre>
+<pre class="r"><code>model.ada</code></pre>
+<pre><code>## AdaBoost Classification Trees 
+## 
+## 6098 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 6098, 6098, 6098, 6098, 6098, 6098, ... 
+## Resampling results across tuning parameters:
+## 
+##   nIter  method         F1       
+##    50    Adaboost.M1    0.6634637
+##    50    Real adaboost  0.6610069
+##   100    Adaboost.M1    0.6645724
+##   100    Real adaboost  0.6639414
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final values used for the model were nIter = 100 and method
+##  = Adaboost.M1.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.ada %$%
+  results %&gt;%
+  ggplot(aes(nIter,F1, 
+             color=as.factor(method))) +
+  geom_point(shape=1) +
+  geom_line() +
+  labs(x=&quot;# Trees&quot;,y=&quot;F1 (Bootstrap)&quot;) +
+  guides(color = guide_legend(title = &quot;Method&quot;))</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><br></p>
+<div id="train-and-validation-3" class="section level3">
+<h3>Train and Validation</h3>
+<pre class="r"><code>model.ada %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##     TP    TN   FP   FN    recall precision  accuracy f_measure
+## 1 4843 46233 2236 2644 0.6468545 0.6841362 0.9127886 0.6649732</code></pre>
+<ul>
+<li>Here we have better results than what we have seen so far.</li>
+</ul>
+</div>
+<div id="test-3" class="section level3">
+<h3>Test</h3>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.ada,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN FP FN    recall precision  accuracy f_measure
+## 1 136 1250 61 77 0.6384977 0.6903553 0.9094488 0.6634146</code></pre>
+<ul>
+<li>The loss in the quality metric going from train/validation to test was small enough.</li>
+<li>This suggest that the model did in fact fit the behavior of the problem and not noise.</li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="applying-oversample-smote" class="section level1">
+<h1>Applying Oversample (SMOTE)</h1>
+<pre class="r"><code>train %&gt;%
+  SMOTE(situacao ~ .,
+        data = ., 
+        perc.over = 200, 
+        perc.under=200) -&gt; oversampled
+
+cat(&quot;#### Train Shape&quot;,
+    &quot;\n##### Observations: &quot;,nrow(oversampled),
+    &quot;\n##### Variables: &quot;,ncol(oversampled))</code></pre>
+<pre><code>## #### Train Shape 
+## ##### Observations:  5691 
+## ##### Variables:  39</code></pre>
+<pre class="r"><code>oversampled %&gt;%
+  group_by(situacao) %&gt;%
+  summarise(num = n()) %&gt;%
+  ungroup() %&gt;%
+  mutate(total = sum(num),
+         proportion = num/total)</code></pre>
+<pre><code>## # A tibble: 2 x 4
+##   situacao     num total proportion
+##   &lt;fct&gt;      &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1 eleito      2439  5691      0.429
+## 2 nao_eleito  3252  5691      0.571</code></pre>
+<ul>
+<li>BY means of SMOTE we have reduce the class imbalance considerably</li>
+</ul>
+<p><br></p>
+<div id="logistic-regression-with-smote" class="section level2">
+<h2>Logistic Regression with SMOTE</h2>
+<pre class="r"><code>rlGrid &lt;- expand.grid( cost = c(0.02,0.1,2,20,100,200),
+                       loss = c(&quot;L1&quot;, &quot;L2_dual&quot;, &quot;L2_primal&quot;),
+                       epsilon = seq(from=0.001,to=0.1, by=0.005) )
+oversampled %&gt;%
+  caret::train(situacao ~ .,
+               data= .,
+               method = &quot;regLogistic&quot;,
+               metric = &quot;F1&quot;,
+               trControl = trainControl(method = &quot;boot&quot;,
+                                        classProbs = TRUE,
+                                        summaryFunction = f1,
+                                        savePredictions = &quot;final&quot;),
+               tuneGrid = rlGrid) -&gt; model.rl.smote</code></pre>
+<pre class="r"><code>model.rl.smote</code></pre>
+<pre><code>## Regularized Logistic Regression 
+## 
+## 5691 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 5691, 5691, 5691, 5691, 5691, 5691, ... 
+## Resampling results across tuning parameters:
+## 
+##   cost   loss       epsilon  F1       
+##   2e-02  L1         0.001    0.8609407
+##   2e-02  L1         0.006    0.8609313
+##   2e-02  L1         0.011    0.8611976
+##   2e-02  L1         0.016    0.8625802
+##   2e-02  L1         0.021    0.8626373
+##   2e-02  L1         0.026    0.8616010
+##   2e-02  L1         0.031    0.8630162
+##   2e-02  L1         0.036    0.8624694
+##   2e-02  L1         0.041    0.8631067
+##   2e-02  L1         0.046    0.8626822
+##   2e-02  L1         0.051    0.8635124
+##   2e-02  L1         0.056    0.8625129
+##   2e-02  L1         0.061    0.8616411
+##   2e-02  L1         0.066    0.8628480
+##   2e-02  L1         0.071    0.8607301
+##   2e-02  L1         0.076    0.8606394
+##   2e-02  L1         0.081    0.8599239
+##   2e-02  L1         0.086    0.8583560
+##   2e-02  L1         0.091    0.8594978
+##   2e-02  L1         0.096    0.8596137
+##   2e-02  L2_dual    0.001    0.8692919
+##   2e-02  L2_dual    0.006    0.8692919
+##   2e-02  L2_dual    0.011    0.8692919
+##   2e-02  L2_dual    0.016    0.8692919
+##   2e-02  L2_dual    0.021    0.8692919
+##   2e-02  L2_dual    0.026    0.8693178
+##   2e-02  L2_dual    0.031    0.8692919
+##   2e-02  L2_dual    0.036    0.8692919
+##   2e-02  L2_dual    0.041    0.8692919
+##   2e-02  L2_dual    0.046    0.8692919
+##   2e-02  L2_dual    0.051    0.8693178
+##   2e-02  L2_dual    0.056    0.8692919
+##   2e-02  L2_dual    0.061    0.8692659
+##   2e-02  L2_dual    0.066    0.8692245
+##   2e-02  L2_dual    0.071    0.8692917
+##   2e-02  L2_dual    0.076    0.8692504
+##   2e-02  L2_dual    0.081    0.8692655
+##   2e-02  L2_dual    0.086    0.8692659
+##   2e-02  L2_dual    0.091    0.8692506
+##   2e-02  L2_dual    0.096    0.8692299
+##   2e-02  L2_primal  0.001    0.8691731
+##   2e-02  L2_primal  0.006    0.8691530
+##   2e-02  L2_primal  0.011    0.8691018
+##   2e-02  L2_primal  0.016    0.8691217
+##   2e-02  L2_primal  0.021    0.8693620
+##   2e-02  L2_primal  0.026    0.8689987
+##   2e-02  L2_primal  0.031    0.8690268
+##   2e-02  L2_primal  0.036    0.8690268
+##   2e-02  L2_primal  0.041    0.8686480
+##   2e-02  L2_primal  0.046    0.8687025
+##   2e-02  L2_primal  0.051    0.8687291
+##   2e-02  L2_primal  0.056    0.8687746
+##   2e-02  L2_primal  0.061    0.8686967
+##   2e-02  L2_primal  0.066    0.8686967
+##   2e-02  L2_primal  0.071    0.8686967
+##   2e-02  L2_primal  0.076    0.8691729
+##   2e-02  L2_primal  0.081    0.8691489
+##   2e-02  L2_primal  0.086    0.8688481
+##   2e-02  L2_primal  0.091    0.8681732
+##   2e-02  L2_primal  0.096    0.8672731
+##   1e-01  L1         0.001    0.8702722
+##   1e-01  L1         0.006    0.8702344
+##   1e-01  L1         0.011    0.8697115
+##   1e-01  L1         0.016    0.8693376
+##   1e-01  L1         0.021    0.8687247
+##   1e-01  L1         0.026    0.8689375
+##   1e-01  L1         0.031    0.8677390
+##   1e-01  L1         0.036    0.8671255
+##   1e-01  L1         0.041    0.8672929
+##   1e-01  L1         0.046    0.8665229
+##   1e-01  L1         0.051    0.8660311
+##   1e-01  L1         0.056    0.8665171
+##   1e-01  L1         0.061    0.8661272
+##   1e-01  L1         0.066    0.8651477
+##   1e-01  L1         0.071    0.8654155
+##   1e-01  L1         0.076    0.8650495
+##   1e-01  L1         0.081    0.8649273
+##   1e-01  L1         0.086    0.8653474
+##   1e-01  L1         0.091    0.8638414
+##   1e-01  L1         0.096    0.8623133
+##   1e-01  L2_dual    0.001    0.8712078
+##   1e-01  L2_dual    0.006    0.8712078
+##   1e-01  L2_dual    0.011    0.8712078
+##   1e-01  L2_dual    0.016    0.8712078
+##   1e-01  L2_dual    0.021    0.8712078
+##   1e-01  L2_dual    0.026    0.8712078
+##   1e-01  L2_dual    0.031    0.8712078
+##   1e-01  L2_dual    0.036    0.8712078
+##   1e-01  L2_dual    0.041    0.8712078
+##   1e-01  L2_dual    0.046    0.8712078
+##   1e-01  L2_dual    0.051    0.8712078
+##   1e-01  L2_dual    0.056    0.8712078
+##   1e-01  L2_dual    0.061    0.8712078
+##   1e-01  L2_dual    0.066    0.8712078
+##   1e-01  L2_dual    0.071    0.8712078
+##   1e-01  L2_dual    0.076    0.8712078
+##   1e-01  L2_dual    0.081    0.8712078
+##   1e-01  L2_dual    0.086    0.8712078
+##   1e-01  L2_dual    0.091    0.8712078
+##   1e-01  L2_dual    0.096    0.8712078
+##   1e-01  L2_primal  0.001    0.8711552
+##   1e-01  L2_primal  0.006    0.8711150
+##   1e-01  L2_primal  0.011    0.8711812
+##   1e-01  L2_primal  0.016    0.8712198
+##   1e-01  L2_primal  0.021    0.8707716
+##   1e-01  L2_primal  0.026    0.8703000
+##   1e-01  L2_primal  0.031    0.8696542
+##   1e-01  L2_primal  0.036    0.8700200
+##   1e-01  L2_primal  0.041    0.8693244
+##   1e-01  L2_primal  0.046    0.8694353
+##   1e-01  L2_primal  0.051    0.8692169
+##   1e-01  L2_primal  0.056    0.8692094
+##   1e-01  L2_primal  0.061    0.8696062
+##   1e-01  L2_primal  0.066    0.8694090
+##   1e-01  L2_primal  0.071    0.8694090
+##   1e-01  L2_primal  0.076    0.8690325
+##   1e-01  L2_primal  0.081    0.8687058
+##   1e-01  L2_primal  0.086    0.8692854
+##   1e-01  L2_primal  0.091    0.8692854
+##   1e-01  L2_primal  0.096    0.8690005
+##   2e+00  L1         0.001    0.8746356
+##   2e+00  L1         0.006    0.8740411
+##   2e+00  L1         0.011    0.8728410
+##   2e+00  L1         0.016    0.8723746
+##   2e+00  L1         0.021    0.8714145
+##   2e+00  L1         0.026    0.8706518
+##   2e+00  L1         0.031    0.8689071
+##   2e+00  L1         0.036    0.8689696
+##   2e+00  L1         0.041    0.8689532
+##   2e+00  L1         0.046    0.8676027
+##   2e+00  L1         0.051    0.8673227
+##   2e+00  L1         0.056    0.8661709
+##   2e+00  L1         0.061    0.8661957
+##   2e+00  L1         0.066    0.8664264
+##   2e+00  L1         0.071    0.8660567
+##   2e+00  L1         0.076    0.8646124
+##   2e+00  L1         0.081    0.8657408
+##   2e+00  L1         0.086    0.8636237
+##   2e+00  L1         0.091    0.8639137
+##   2e+00  L1         0.096    0.8625814
+##   2e+00  L2_dual    0.001    0.8742088
+##   2e+00  L2_dual    0.006    0.8742088
+##   2e+00  L2_dual    0.011    0.8742088
+##   2e+00  L2_dual    0.016    0.8742088
+##   2e+00  L2_dual    0.021    0.8742088
+##   2e+00  L2_dual    0.026    0.8742088
+##   2e+00  L2_dual    0.031    0.8742088
+##   2e+00  L2_dual    0.036    0.8742088
+##   2e+00  L2_dual    0.041    0.8742088
+##   2e+00  L2_dual    0.046    0.8742088
+##   2e+00  L2_dual    0.051    0.8742088
+##   2e+00  L2_dual    0.056    0.8742088
+##   2e+00  L2_dual    0.061    0.8742088
+##   2e+00  L2_dual    0.066    0.8742088
+##   2e+00  L2_dual    0.071    0.8742088
+##   2e+00  L2_dual    0.076    0.8742088
+##   2e+00  L2_dual    0.081    0.8742088
+##   2e+00  L2_dual    0.086    0.8742088
+##   2e+00  L2_dual    0.091    0.8742088
+##   2e+00  L2_dual    0.096    0.8742088
+##   2e+00  L2_primal  0.001    0.8742170
+##   2e+00  L2_primal  0.006    0.8742319
+##   2e+00  L2_primal  0.011    0.8738665
+##   2e+00  L2_primal  0.016    0.8729702
+##   2e+00  L2_primal  0.021    0.8729764
+##   2e+00  L2_primal  0.026    0.8714440
+##   2e+00  L2_primal  0.031    0.8709580
+##   2e+00  L2_primal  0.036    0.8711832
+##   2e+00  L2_primal  0.041    0.8699631
+##   2e+00  L2_primal  0.046    0.8701907
+##   2e+00  L2_primal  0.051    0.8701876
+##   2e+00  L2_primal  0.056    0.8705059
+##   2e+00  L2_primal  0.061    0.8696873
+##   2e+00  L2_primal  0.066    0.8693919
+##   2e+00  L2_primal  0.071    0.8695266
+##   2e+00  L2_primal  0.076    0.8698145
+##   2e+00  L2_primal  0.081    0.8686913
+##   2e+00  L2_primal  0.086    0.8683922
+##   2e+00  L2_primal  0.091    0.8684254
+##   2e+00  L2_primal  0.096    0.8682589
+##   2e+01  L1         0.001    0.8745580
+##   2e+01  L1         0.006    0.8736286
+##   2e+01  L1         0.011    0.8727916
+##   2e+01  L1         0.016    0.8717122
+##   2e+01  L1         0.021    0.8701676
+##   2e+01  L1         0.026    0.8695923
+##   2e+01  L1         0.031    0.8690806
+##   2e+01  L1         0.036    0.8687552
+##   2e+01  L1         0.041    0.8679609
+##   2e+01  L1         0.046    0.8663741
+##   2e+01  L1         0.051    0.8668439
+##   2e+01  L1         0.056    0.8668653
+##   2e+01  L1         0.061    0.8646646
+##   2e+01  L1         0.066    0.8660074
+##   2e+01  L1         0.071    0.8660847
+##   2e+01  L1         0.076    0.8658802
+##   2e+01  L1         0.081    0.8650896
+##   2e+01  L1         0.086    0.8648814
+##   2e+01  L1         0.091    0.8624251
+##   2e+01  L1         0.096    0.8635525
+##   2e+01  L2_dual    0.001    0.8742803
+##   2e+01  L2_dual    0.006    0.8742283
+##   2e+01  L2_dual    0.011    0.8741022
+##   2e+01  L2_dual    0.016    0.8739156
+##   2e+01  L2_dual    0.021    0.8741278
+##   2e+01  L2_dual    0.026    0.8744320
+##   2e+01  L2_dual    0.031    0.8741314
+##   2e+01  L2_dual    0.036    0.8741704
+##   2e+01  L2_dual    0.041    0.8741996
+##   2e+01  L2_dual    0.046    0.8741575
+##   2e+01  L2_dual    0.051    0.8742618
+##   2e+01  L2_dual    0.056    0.8742495
+##   2e+01  L2_dual    0.061    0.8744625
+##   2e+01  L2_dual    0.066    0.8742406
+##   2e+01  L2_dual    0.071    0.8741768
+##   2e+01  L2_dual    0.076    0.8740363
+##   2e+01  L2_dual    0.081    0.8740933
+##   2e+01  L2_dual    0.086    0.8745186
+##   2e+01  L2_dual    0.091    0.8743439
+##   2e+01  L2_dual    0.096    0.8741347
+##   2e+01  L2_primal  0.001    0.8746332
+##   2e+01  L2_primal  0.006    0.8740344
+##   2e+01  L2_primal  0.011    0.8739427
+##   2e+01  L2_primal  0.016    0.8733666
+##   2e+01  L2_primal  0.021    0.8728611
+##   2e+01  L2_primal  0.026    0.8728737
+##   2e+01  L2_primal  0.031    0.8711912
+##   2e+01  L2_primal  0.036    0.8713603
+##   2e+01  L2_primal  0.041    0.8701687
+##   2e+01  L2_primal  0.046    0.8702919
+##   2e+01  L2_primal  0.051    0.8696415
+##   2e+01  L2_primal  0.056    0.8701910
+##   2e+01  L2_primal  0.061    0.8695907
+##   2e+01  L2_primal  0.066    0.8694454
+##   2e+01  L2_primal  0.071    0.8694498
+##   2e+01  L2_primal  0.076    0.8698452
+##   2e+01  L2_primal  0.081    0.8691737
+##   2e+01  L2_primal  0.086    0.8683964
+##   2e+01  L2_primal  0.091    0.8684826
+##   2e+01  L2_primal  0.096    0.8683419
+##   1e+02  L1         0.001    0.8747961
+##   1e+02  L1         0.006    0.8740808
+##   1e+02  L1         0.011    0.8730989
+##   1e+02  L1         0.016    0.8720363
+##   1e+02  L1         0.021    0.8706535
+##   1e+02  L1         0.026    0.8694996
+##   1e+02  L1         0.031    0.8693900
+##   1e+02  L1         0.036    0.8682950
+##   1e+02  L1         0.041    0.8687432
+##   1e+02  L1         0.046    0.8678579
+##   1e+02  L1         0.051    0.8682593
+##   1e+02  L1         0.056    0.8666340
+##   1e+02  L1         0.061    0.8658637
+##   1e+02  L1         0.066    0.8643461
+##   1e+02  L1         0.071    0.8653184
+##   1e+02  L1         0.076    0.8652160
+##   1e+02  L1         0.081    0.8648848
+##   1e+02  L1         0.086    0.8652328
+##   1e+02  L1         0.091    0.8625583
+##   1e+02  L1         0.096    0.8636464
+##   1e+02  L2_dual    0.001    0.8735782
+##   1e+02  L2_dual    0.006    0.8743992
+##   1e+02  L2_dual    0.011    0.8762816
+##   1e+02  L2_dual    0.016    0.8771906
+##   1e+02  L2_dual    0.021    0.8734902
+##   1e+02  L2_dual    0.026    0.8751710
+##   1e+02  L2_dual    0.031    0.8771324
+##   1e+02  L2_dual    0.036    0.8765101
+##   1e+02  L2_dual    0.041    0.8762089
+##   1e+02  L2_dual    0.046    0.8763395
+##   1e+02  L2_dual    0.051    0.8755316
+##   1e+02  L2_dual    0.056    0.8764582
+##   1e+02  L2_dual    0.061    0.8766696
+##   1e+02  L2_dual    0.066    0.8776571
+##   1e+02  L2_dual    0.071    0.8768497
+##   1e+02  L2_dual    0.076    0.8763817
+##   1e+02  L2_dual    0.081    0.8770739
+##   1e+02  L2_dual    0.086    0.8748551
+##   1e+02  L2_dual    0.091    0.8763467
+##   1e+02  L2_dual    0.096    0.8762860
+##   1e+02  L2_primal  0.001    0.8747178
+##   1e+02  L2_primal  0.006    0.8743040
+##   1e+02  L2_primal  0.011    0.8739057
+##   1e+02  L2_primal  0.016    0.8734077
+##   1e+02  L2_primal  0.021    0.8727917
+##   1e+02  L2_primal  0.026    0.8728422
+##   1e+02  L2_primal  0.031    0.8710756
+##   1e+02  L2_primal  0.036    0.8713290
+##   1e+02  L2_primal  0.041    0.8701370
+##   1e+02  L2_primal  0.046    0.8701484
+##   1e+02  L2_primal  0.051    0.8695808
+##   1e+02  L2_primal  0.056    0.8701845
+##   1e+02  L2_primal  0.061    0.8695842
+##   1e+02  L2_primal  0.066    0.8694133
+##   1e+02  L2_primal  0.071    0.8693913
+##   1e+02  L2_primal  0.076    0.8697867
+##   1e+02  L2_primal  0.081    0.8691152
+##   1e+02  L2_primal  0.086    0.8683379
+##   1e+02  L2_primal  0.091    0.8684241
+##   1e+02  L2_primal  0.096    0.8682834
+##   2e+02  L1         0.001    0.8747240
+##   2e+02  L1         0.006    0.8739685
+##   2e+02  L1         0.011    0.8730593
+##   2e+02  L1         0.016    0.8723867
+##   2e+02  L1         0.021    0.8706864
+##   2e+02  L1         0.026    0.8695797
+##   2e+02  L1         0.031    0.8693892
+##   2e+02  L1         0.036    0.8687407
+##   2e+02  L1         0.041    0.8686365
+##   2e+02  L1         0.046    0.8676183
+##   2e+02  L1         0.051    0.8672245
+##   2e+02  L1         0.056    0.8665443
+##   2e+02  L1         0.061    0.8673407
+##   2e+02  L1         0.066    0.8648855
+##   2e+02  L1         0.071    0.8660235
+##   2e+02  L1         0.076    0.8652041
+##   2e+02  L1         0.081    0.8643696
+##   2e+02  L1         0.086    0.8644364
+##   2e+02  L1         0.091    0.8629653
+##   2e+02  L1         0.096    0.8628978
+##   2e+02  L2_dual    0.001    0.8765658
+##   2e+02  L2_dual    0.006    0.8811486
+##   2e+02  L2_dual    0.011    0.8799032
+##   2e+02  L2_dual    0.016    0.8750217
+##   2e+02  L2_dual    0.021    0.8791582
+##   2e+02  L2_dual    0.026    0.8780612
+##   2e+02  L2_dual    0.031    0.8795644
+##   2e+02  L2_dual    0.036    0.8770973
+##   2e+02  L2_dual    0.041    0.8767054
+##   2e+02  L2_dual    0.046    0.8783195
+##   2e+02  L2_dual    0.051    0.8795830
+##   2e+02  L2_dual    0.056    0.8773854
+##   2e+02  L2_dual    0.061    0.8757164
+##   2e+02  L2_dual    0.066    0.8794158
+##   2e+02  L2_dual    0.071    0.8685439
+##   2e+02  L2_dual    0.076    0.8723872
+##   2e+02  L2_dual    0.081    0.8778647
+##   2e+02  L2_dual    0.086    0.8802145
+##   2e+02  L2_dual    0.091    0.8794552
+##   2e+02  L2_dual    0.096    0.8800537
+##   2e+02  L2_primal  0.001    0.8747401
+##   2e+02  L2_primal  0.006    0.8741731
+##   2e+02  L2_primal  0.011    0.8738627
+##   2e+02  L2_primal  0.016    0.8734084
+##   2e+02  L2_primal  0.021    0.8727540
+##   2e+02  L2_primal  0.026    0.8728422
+##   2e+02  L2_primal  0.031    0.8710756
+##   2e+02  L2_primal  0.036    0.8713024
+##   2e+02  L2_primal  0.041    0.8700386
+##   2e+02  L2_primal  0.046    0.8699287
+##   2e+02  L2_primal  0.051    0.8695808
+##   2e+02  L2_primal  0.056    0.8701845
+##   2e+02  L2_primal  0.061    0.8695842
+##   2e+02  L2_primal  0.066    0.8694133
+##   2e+02  L2_primal  0.071    0.8693913
+##   2e+02  L2_primal  0.076    0.8697867
+##   2e+02  L2_primal  0.081    0.8691152
+##   2e+02  L2_primal  0.086    0.8683379
+##   2e+02  L2_primal  0.091    0.8684241
+##   2e+02  L2_primal  0.096    0.8682834
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final values used for the model were cost = 200, loss = L2_dual
+##  and epsilon = 0.006.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.rl.smote %$%
+  results %&gt;%
+  mutate(cost=as.factor(cost)) %&gt;%
+  ggplot(aes(epsilon,F1,
+             color=cost)) +
+  geom_line() +
+  geom_point() +
+  labs(y= &quot;F1 (Bootstrap)&quot;, x=&quot;Tolerance&quot;) +
+  facet_wrap(. ~ loss, labeller = &quot;label_both&quot;) +
+  guides(color = guide_legend(title = &quot;Cost&quot;)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<ul>
+<li>The hyper-parameter <strong>Loss</strong> seems to be the particularly meaningful for the Logistic Regression performance in this problem.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>model.rl.smote %&gt;%
+  varImp() %$%
+  importance %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(var=&quot;Feature&quot;) %&gt;%
+  mutate(Feature = tolower(Feature)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = reorder(Feature,eleito),y = eleito),
+           position = position_dodge(width=0.8),width=0.6) + 
+  labs(x=&quot;Feature&quot;, y=&quot;Overall Importance&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<ul>
+<li><strong>Total Receita</strong> (Total Revenue), <strong>Total Despesa</strong> (Total Expenditure) and <strong>Recursos de pessoas jurídicas</strong> (Revenue from Legal Entities) are together the three most important features in this model as well.</li>
+<li>Despite regularization a lot of features were employed, however many were considered less important.</li>
+</ul>
+<div id="quality-metric-3" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation-4" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.rl.smote %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##      TP    TN   FP   FN    recall precision  accuracy f_measure
+## 1 19486 27803 2137 3116 0.8621361 0.9011701 0.9000228  0.881221</code></pre>
+<ul>
+<li>The results in train/validation are overly optimistic in reason of the imbalance correction and should not be taken seriously.</li>
+<li>Actual progress shall be assessed in the test stage</li>
+</ul>
+</div>
+<div id="test-4" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.rl.smote,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN  FP FN    recall precision  accuracy f_measure
+## 1 172 1208 103 41 0.8075117 0.6254545 0.9055118  0.704918</code></pre>
+<ul>
+<li>We can see a substantial improvement compared with our previous attempt using Logistic Regression.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="k-nearest-neighbours-with-smote" class="section level2">
+<h2>K nearest neighbours with SMOTE</h2>
+<pre class="r"><code>neighborsGrid &lt;- expand.grid(.k = seq(from=1, to=50, by=1))
+
+oversampled %&gt;%
+  train(situacao ~ .,
+        data = .,
+        metric = &quot;F1&quot;,
+        method = &quot;knn&quot;,
+        na.action = na.omit,
+        tuneGrid = neighborsGrid,
+        trControl = trainControl(method = &quot;boot&quot;,
+                                 classProbs = TRUE,
+                                 summaryFunction = f1,
+                                 savePredictions = &quot;final&quot;)) -&gt; model.knn.smote</code></pre>
+<pre class="r"><code>model.knn.smote</code></pre>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 5691 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 5691, 5691, 5691, 5691, 5691, 5691, ... 
+## Resampling results across tuning parameters:
+## 
+##   k   F1       
+##    1  0.9400352
+##    2  0.9210842
+##    3  0.9112566
+##    4  0.9039823
+##    5  0.9027858
+##    6  0.9017495
+##    7  0.9021683
+##    8  0.9018302
+##    9  0.9029096
+##   10  0.9019935
+##   11  0.9035711
+##   12  0.9030997
+##   13  0.9030650
+##   14  0.9028580
+##   15  0.9020533
+##   16  0.9012494
+##   17  0.9009073
+##   18  0.9002616
+##   19  0.8993930
+##   20  0.8989108
+##   21  0.8973953
+##   22  0.8971916
+##   23  0.8968455
+##   24  0.8961321
+##   25  0.8955172
+##   26  0.8951518
+##   27  0.8951354
+##   28  0.8951899
+##   29  0.8950664
+##   30  0.8944085
+##   31  0.8941358
+##   32  0.8945126
+##   33  0.8941868
+##   34  0.8937851
+##   35  0.8931989
+##   36  0.8930586
+##   37  0.8928066
+##   38  0.8923012
+##   39  0.8917445
+##   40  0.8920316
+##   41  0.8914990
+##   42  0.8915914
+##   43  0.8916725
+##   44  0.8912825
+##   45  0.8910341
+##   46  0.8907937
+##   47  0.8906945
+##   48  0.8903903
+##   49  0.8902061
+##   50  0.8895376
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final value used for the model was k = 1.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.knn.smote %$%
+  bestTune %$% 
+  k -&gt; bestParameter
+
+model.knn.smote %$%
+  results %&gt;%
+  ggplot(aes(k,F1)) +
+  geom_vline(xintercept = bestParameter,
+             color = &quot;red&quot;) +
+  geom_point(color=&quot;#0D98E8&quot;) +
+  geom_line(color=&quot;#0D98E8&quot;) +
+  labs(x=&quot;#Neighbors&quot;,
+       y=&quot;F1 (Bootstrap)&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<ul>
+<li>Our cross validation led to a knn with K=1, this may hint at a overfitting.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>model.knn.smote %&gt;%
+  varImp() %$%
+  importance %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(var=&quot;Feature&quot;) %&gt;%
+  mutate(Feature = tolower(Feature)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = reorder(Feature,eleito),y = eleito),
+           position = position_dodge(width=0.8),width=0.6) + 
+  labs(x=&quot;Feature&quot;, y=&quot;Overall Importance&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<ul>
+<li><strong>Total Receita</strong> (Total Revenue), <strong>Total Despesa</strong> (Total Expenditure) and <strong>Recursos de pessoas jurídicas</strong> (Revenue from Legal Entities) are together the three most important features in this model as well.</li>
+</ul>
+<p><br></p>
+<div id="quality-metric-4" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation-5" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.knn.smote %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##      TP    TN   FP  FN    recall precision  accuracy f_measure
+## 1 21659 27938 1943 818 0.9636072 0.9176765 0.9472669 0.9400812</code></pre>
+<ul>
+<li><p>The results in train/validation are overly optimistic in reason of the imbalance correction and should not be taken seriously.</p></li>
+<li>We have train/validation results incredibly good, in fact too good.
+<ul>
+<li>This adds up to the hypothesis of a overfitting.</li>
+</ul></li>
+</ul>
+</div>
+<div id="test-5" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.knn.smote,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN  FP FN    recall precision  accuracy f_measure
+## 1 168 1190 121 45 0.7887324 0.5813149 0.8910761 0.6693227</code></pre>
+<ul>
+<li>And here we have a <strong>steep</strong> decline in the test results, this is clear evidence that our KNN plus SMOTE overfitted.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="decision-tree-with-smote" class="section level2">
+<h2>Decision Tree with SMOTE</h2>
+<pre class="r"><code>rpart.grid &lt;- expand.grid(.cp = seq(from=0, to=0.1, by=0.005))
+
+caret::train(x = select(oversampled, -situacao),
+             y = oversampled$situacao,
+             metric = &quot;F1&quot;,
+             method = &quot;rpart&quot;,
+             na.action = na.omit,
+             tuneGrid = rpart.grid,
+             trControl = trainControl(method = &quot;boot&quot;,
+                                      classProbs = TRUE,
+                                      summaryFunction = f1,
+                                      savePredictions = &quot;final&quot;)) -&gt; model.tree.smote</code></pre>
+<pre class="r"><code>model.tree.smote</code></pre>
+<pre><code>## CART 
+## 
+## 5691 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 5691, 5691, 5691, 5691, 5691, 5691, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp     F1       
+##   0.000  0.8899765
+##   0.005  0.9000984
+##   0.010  0.8988393
+##   0.015  0.8984934
+##   0.020  0.8984934
+##   0.025  0.8984934
+##   0.030  0.8984934
+##   0.035  0.8984934
+##   0.040  0.8984934
+##   0.045  0.8984934
+##   0.050  0.8984934
+##   0.055  0.8984934
+##   0.060  0.8984934
+##   0.065  0.8984934
+##   0.070  0.8984934
+##   0.075  0.8984934
+##   0.080  0.8984934
+##   0.085  0.8984934
+##   0.090  0.8984934
+##   0.095  0.8984934
+##   0.100  0.8984934
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.005.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.tree.smote %$%
+  bestTune %$% 
+  cp -&gt; bestParameter
+
+model.tree.smote %$%
+  results %&gt;%
+  ggplot(aes(cp,F1)) +
+  geom_vline(xintercept = bestParameter,
+             color = &quot;red&quot;) +
+  geom_point(color=&quot;#0D98E8&quot;) +
+  geom_line(color=&quot;#0D98E8&quot;) +
+  labs(x=&quot;Complexity Parameter&quot;,
+       y=&quot;F1 (Bootstrap)&quot;) </code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><br></p>
+<pre class="r"><code>model.tree.smote %&gt;%
+  varImp() %$%
+  importance %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(var=&quot;Feature&quot;) %&gt;%
+  mutate(Feature = tolower(Feature)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = reorder(Feature,Overall),y = Overall),
+           position = position_dodge(width=0.8),width=0.6) + 
+  labs(x=&quot;Feature&quot;, y=&quot;Overall Importance&quot;) +
+  coord_flip()</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<ul>
+<li><strong>Total Receita</strong> (Total Revenue), <strong>Total Despesa</strong> (Total Expenditure) and <strong>Recursos de pessoas jurídicas</strong> (Revenue from Legal Entities) are together the three most important features in this model as well.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>model.tree.smote %$%
+  finalModel %&gt;%
+  fancyRpartPlot(sub=&quot;&quot;)</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<ul>
+<li>Here we have a tree of reasonable depth where the tree most important features have been integrated.</li>
+</ul>
+<p><br></p>
+<div id="quality-metric-5" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation-6" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.tree.smote %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##      TP    TN   FP   FN    recall precision accuracy f_measure
+## 1 21139 26432 3425 1263 0.9436211 0.8605683 0.910293 0.9001831</code></pre>
+<ul>
+<li>The results in train/validation are overly optimistic in reason of the imbalance correction and should not be taken seriously.</li>
+</ul>
+</div>
+<div id="test-6" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.tree.smote,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN  FP FN    recall precision  accuracy f_measure
+## 1 198 1154 157 15 0.9295775 0.5577465 0.8871391 0.6971831</code></pre>
+<ul>
+<li>A result similar to that of the Logistic Regression plus SMOTE</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="adaboost-with-smote" class="section level2">
+<h2>AdaBoost with SMOTE</h2>
+<pre class="r"><code>train(x = select(oversampled, -situacao),
+      y = oversampled$situacao,
+      metric = &quot;F1&quot;,
+      na.action = na.exclude,
+      method=&#39;adaboost&#39;,
+      tuneLength=2,
+      trControl = trainControl(savePredictions = &quot;final&quot;,
+                               summaryFunction = f1,
+                               classProbs = TRUE,
+                               method = &quot;boot&quot;)) -&gt; model.ada.smote</code></pre>
+<pre class="r"><code>model.ada.smote</code></pre>
+<pre><code>## AdaBoost Classification Trees 
+## 
+## 5691 samples
+##   38 predictors
+##    2 classes: &#39;eleito&#39;, &#39;nao_eleito&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 5691, 5691, 5691, 5691, 5691, 5691, ... 
+## Resampling results across tuning parameters:
+## 
+##   nIter  method         F1       
+##    50    Adaboost.M1    0.9424543
+##    50    Real adaboost  0.9427599
+##   100    Adaboost.M1    0.9428177
+##   100    Real adaboost  0.9434600
+## 
+## F1 was used to select the optimal model using the largest value.
+## The final values used for the model were nIter = 100 and method =
+##  Real adaboost.</code></pre>
+<p><br></p>
+<pre class="r"><code>model.ada.smote %$%
+  results %&gt;%
+  ggplot(aes(nIter,F1, 
+             color=as.factor(method))) +
+  geom_point(shape=1) +
+  geom_line() +
+  labs(x=&quot;# Trees&quot;,y=&quot;F1 (Bootstrap)&quot;) +
+  guides(color = guide_legend(title = &quot;Method&quot;))</code></pre>
+<p><img src="../../../post/kaggle_classification_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><br></p>
+<div id="quality-metric-6" class="section level3">
+<h3>Quality metric</h3>
+<div id="train-and-validation-7" class="section level4">
+<h4>Train and Validation</h4>
+<pre class="r"><code>model.ada.smote %$% 
+  pred %&gt;% 
+  F_Measure(expected = .$obs,
+            predicted = .$pred)</code></pre>
+<pre><code>##      TP    TN   FP  FN    recall precision  accuracy f_measure
+## 1 21949 27765 2011 621 0.9724856 0.9160684 0.9497192 0.9434343</code></pre>
+<ul>
+<li><p>The results in train/validation are overly optimistic in reason of the imbalance correction and should not be taken seriously.</p></li>
+<li><p>Actual progress shall be assessed in the test stage</p></li>
+</ul>
+</div>
+<div id="test-7" class="section level4">
+<h4>Test</h4>
+<pre class="r"><code>test %&gt;%
+  select(-situacao) %&gt;%
+  predict(object=model.ada.smote,.) %&gt;%
+  F_Measure(test$situacao,.)</code></pre>
+<pre><code>##    TP   TN  FP FN    recall precision accuracy f_measure
+## 1 190 1173 138 23 0.8920188 0.5792683 0.894357  0.702403</code></pre>
+<ul>
+<li>Results similar to those of the Logistic Regression plus SMOTE</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="../../../tags/predictive/">predictive</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/classification/">classification</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/binary/">binary</a>
+
+  <a class="tag tag--primary tag--small" href="../../../tags/elections/">elections</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/11/analysis-with-regularization-on-brazilian-elections/" data-tooltip="Analysis with Regularization on Brazilian elections">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Benardi Nunes. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2018/11/analysis-with-regularization-on-brazilian-elections/" data-tooltip="Analysis with Regularization on Brazilian elections">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F12%2Fclassification-of-candidates-in-brazilian-elections%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F12%2Fclassification-of-candidates-in-brazilian-elections%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fbenardi.github.io%2Fmyblog%2F2018%2F12%2Fclassification-of-candidates-in-brazilian-elections%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/7a84d495ef0ea797859a5e111d8ddf03?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Benardi Nunes</h4>
+    
+      <div id="about-card-bio"><strong>I&rsquo;ve been using Data Science to justify my coffe addiction.</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Computer Science Student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Brazil
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+                <h3 class="media-heading">Classification of candidates in Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis and Classification on a subset of data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal which originally encompassed approximately 7300 candidates.
+ 
+
+ Data Overview The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/11/analysis-with-regularization-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis with Regularization on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the lower house (Câmara Federal de Deputados). Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+Loading Data eleicoes_data &lt;- readr::read_csv( here::here(&#39;evidences/eleicoes_2006_e_2010.csv&#39;), progress = FALSE, local=readr::locale(&quot;br&quot;), col_types = cols( ano = col_integer(), sequencial_candidato = col_character(), quantidade_doacoes = col_integer(), quantidade_doadores = col_integer(), total_receita = col_double(), media_receita = col_double(), recursos_de_outros_candidatos.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/09/c.e.a.p-analysis-suppliers-and-weekend-expenses/">
+                <h3 class="media-heading">C.E.A.P analysis (suppliers and weekend expenses)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/c.e.a.p-analysis/">
+                <h3 class="media-heading">C.E.A.P Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This exploratory data analysis was made based on data provided by the Brazilian government about the expenses allowed to its parliamentarians or C.E.A.P. (Cota para o Exercício da Atividade Parlamentar / Quota for the Exercise of Parliamentary Activity). More information about it (in Portuguese) can be found in its official site
+ 
+
+ Data Overview data &lt;- read_csv(here::here(&quot;evidences/dadosCEAP.csv&quot;), progress = F, col_types = cols( nomeParlamentar = col_character(), idCadastro = col_integer(), sgUF = col_character(), sgPartido = col_character(), tipoDespesa = col_character(), especDespesa = col_character(), fornecedor = col_character(), CNPJCPF = col_character(), tipoDocumento = col_integer(), dataEmissao = col_character(), valorDocumento = col_double(), valorGlosa = col_integer(), valorLíquido = col_double())) data %&gt;% mutate(dataEmissao = parse_date_time(dataEmissao,&quot;%Y-%m-%d %H:%M:%S&quot;), year_month = paste(lubridate::year(dataEmissao), # extract year lubridate::month(dataEmissao), # extract month sep = &quot;-&quot;), tipoDespesa = toupper(tipoDespesa)) -&gt; data state_info &lt;- read_csv(here::here(&quot;/evidences/limiteMensalCEAP.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/08/multivariate-logistic-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate logistic regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business professors. Further information and the data itself can be found in this report repository.
+ 
+
+
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in reaching conclusions about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/multivariate-linear-regression-on-speed-dating-data/">
+                <h3 class="media-heading">Multivariate linear regression on speed dating data</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This report contains regression models created based on data describing 5000 speed dates of 4 minutes of duration involving 310 american young adults. The original data were collected by Columbia Business School professors. Further information and the data itself can be found in this report repository.
+ 
+Data Overview 
+The variables 
+The response variable is the variable that you are interested in reaching conclusions about.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-movielens-dataset-with-bootstrap/">
+                <h3 class="media-heading">Analysis on MovieLens dataset with bootstrap</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ This report is an analysis on the dataset movielens which can be found in full here. The code, data and a description of the variables used in this report can be found in the original repository
+ 
+
+ Data Overview readr::read_csv(here::here(&quot;evidences/lens_movies.csv&quot;), progress = FALSE, col_types = cols( movieId = col_integer(), title = col_character(), genres = col_character() )) %&gt;% group_by(movieId) %&gt;% mutate(year = as.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/analysis-on-github-commits-2016-2017/">
+                <h3 class="media-heading">Analysis on Github commits (2016-2017)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ The code and data employed here can be found at the original repository. The data employed on this report is a sample of the commits made on some of the repositories on Github each day from 2016 to 2017.
+ 
+ Data Overview 
+readr::read_csv(here::here(&quot;evidences/github-users-committing-filetypes.csv&quot;), progress = FALSE, col_types = cols( file_extension = col_character(), month_day = col_integer(), the_month = col_integer(), the_year = col_integer(), users = col_integer() )) -&gt; data data %&gt;% glimpse() ## Observations: 13,802 ## Variables: 5 ## $ file_extension &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;md&quot;, &quot;… ## $ month_day &lt;int&gt; 18, 17, 27, 16, 26, 21, 4, 22, 23, 1, 12, 3, 2, 2… ## $ the_month &lt;int&gt; 2, 2, 1, 2, 1, 3, 2, 2, 2, 2, 4, 2, 2, 2, 4, 3, 4… ## $ the_year &lt;int&gt; 2016, 2016, 2016, 2016, 2016, 2017, 2016, 2016, 2… ## $ users &lt;int&gt; 10279, 10208, 10118, 10045, 10020, 10015, 9991, 9…</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/07/case-based-reasoning-system-for-msrp-estimation/">
+                <h3 class="media-heading">Case Based Reasoning System for MSRP estimation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Employed data, scripts and a brief description can be found at the original repository. Further references can be found at the page of Prof. Ian Watson.
+ library(FNN) library(here) library(magrittr) library(tidyverse) source(here::here(&quot;code/calc_KNN_error.R&quot;)) theme_set(theme_bw()) 
+
+ Data Overview 
+Data has the following attributes:
+ Make: Make of the car; Model: Model of the car; Year: Manufacturing Date; Engine.Fuel.Type: Kind of fuel the engine runs on; Engine.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         17 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://benardi.github.io/myblog/images/cloudy-city.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/benardi.github.io\/myblog\/2018\/12\/classification-of-candidates-in-brazilian-elections\/';
+          
+            this.page.identifier = '\/2018\/12\/classification-of-candidates-in-brazilian-elections\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-benardi-github-io-myblog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+    <script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	  MathJax.Hub.Config({
+  	    messageStyle: 'none',
+  	    showProcessingMessages: false,
+	    tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']],
+		processEscapes: true
+	      }
+	  });
+	  MathJax.Hub.Queue(function() {
+	    var i, text, code, codes = document.getElementsByTagName('code');
+	    for (i = 0; i < codes.length;) {
+	      code = codes[i];
+	      if (code.parentNode.tagName !== 'PRE' &&
+		  code.childElementCount === 0) {
+		text = code.textContent;
+		if (/^\\\((.|\s)+\\\)$/.test(text) ||
+		    /^\$(.|\s)+\$$/.test(text) ||
+		    /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+		  code.outerHTML = code.innerHTML;  
+		  continue;
+		}
+	      }
+	      i++;
+	    }
+	    });
+	</script>
+  </body>
+</html>
+

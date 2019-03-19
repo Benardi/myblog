@@ -362,16 +362,16 @@ car_data %&gt;%
 <pre><code>## # A tibble: 10 x 16
 ##    Make[,1] Model[,1] Year[,1] `Engine Fuel Ty… `Engine HP`[,1]
 ##       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;
-##  1    0.626    0.0690   0.347           -0.0820           0.380
-##  2    1.12    -1.45    -0.0476          -0.755           -0.389
-##  3    0.976    0.497    0.742           -0.0820           0.554
-##  4   -0.984    1.05     0.874           -2.10             0.325
-##  5   -1.33    -1.29    -0.311           -0.0820           1.84 
-##  6   -1.26    -1.35    -0.0476          -0.0820           2.11 
-##  7   -0.634   -0.441   -0.838            0.591           -0.435
-##  8   -0.984    0.868   -0.969            0.591           -0.545
-##  9    1.47    -1.60     0.742            0.591            0.188
-## 10   -1.40     0.887    0.874           -0.0820           0.389
+##  1    0.556    -0.959   0.347           -0.0820          3.40  
+##  2    1.54      1.29    0.874           -0.755          -0.453 
+##  3    1.54      1.31    0.742           -4.79           -0.0870
+##  4    1.47      1.47    0.611            0.591          -0.627 
+##  5    1.54      0.827  -0.0476           0.591           0.0137
+##  6    0.906     0.354  -0.838            0.591          -0.591 
+##  7   -0.984     1.35    0.874            0.591           0.353 
+##  8    0.416    -0.760   0.742            0.591          -0.600 
+##  9   -0.634    -0.445   0.742            0.591           0.691 
+## 10   -0.984     1.05    0.874           -2.10            0.325 
 ## # … with 11 more variables: `Engine Cylinders`[,1] &lt;dbl&gt;, `Transmission
 ## #   Type`[,1] &lt;dbl&gt;, Driven_Wheels[,1] &lt;dbl&gt;, `Number of Doors`[,1] &lt;dbl&gt;,
 ## #   `Market Category`[,1] &lt;dbl&gt;, `Vehicle Size`[,1] &lt;dbl&gt;, `Vehicle
@@ -728,6 +728,51 @@ results</code></pre>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+                <h3 class="media-heading">Classification of candidates in Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis and Classification on a subset of data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal which originally encompassed approximately 7300 candidates.
+ 
+
+ Data Overview The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/11/analysis-with-regularization-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis with Regularization on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the lower house (Câmara Federal de Deputados). Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
                 <h3 class="media-heading">Analysis on Brazilian elections</h3>
               </a>
@@ -806,7 +851,7 @@ Loading Data eleicoes_data &lt;- readr::read_csv( here::here(&#39;evidences/elei
 
 Data Overview 
 The variables 
-The response variable is the variable that you are interested in learning something about.</div>
+The response variable is the variable that you are interested in reaching conclusions about.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -827,7 +872,7 @@ The response variable is the variable that you are interested in learning someth
  
 Data Overview 
 The variables 
-The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+The response variable is the variable that you are interested in reaching conclusions about.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -898,46 +943,6 @@ Data has the following attributes:
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
-                <h3 class="media-heading">Movie lines by gender</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Introduction 
- Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
- 
-
- Data Overview readr::read_csv(here(&quot;evidences/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/">
-                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
-Considerations In the analysis below we could:
- See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -945,7 +950,7 @@ Considerations In the analysis below we could:
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         15 posts found
+         17 posts found
       </p>
     </div>
   </div>

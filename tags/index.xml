@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Me &#43; coffe &#43; data : a love ∆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://benardi.github.io/myblog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Binary</title>
+      <link>https://benardi.github.io/myblog/tags/binary/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/binary/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Bootstrap</title>
@@ -39,6 +48,15 @@
     </item>
     
     <item>
+      <title>Classification</title>
+      <link>https://benardi.github.io/myblog/tags/classification/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Descriptive</title>
       <link>https://benardi.github.io/myblog/tags/descriptive/</link>
       <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
@@ -59,7 +77,7 @@
     <item>
       <title>Elections</title>
       <link>https://benardi.github.io/myblog/tags/elections/</link>
-      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/elections/</guid>
       <description></description>
@@ -167,7 +185,7 @@
     <item>
       <title>Predictive</title>
       <link>https://benardi.github.io/myblog/tags/predictive/</link>
-      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/predictive/</guid>
       <description></description>
@@ -176,9 +194,18 @@
     <item>
       <title>Regression</title>
       <link>https://benardi.github.io/myblog/tags/regression/</link>
-      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://benardi.github.io/myblog/tags/regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Regularization</title>
+      <link>https://benardi.github.io/myblog/tags/regularization/</link>
+      <pubDate>Fri, 02 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://benardi.github.io/myblog/tags/regularization/</guid>
       <description></description>
     </item>
     

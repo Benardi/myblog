@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/2018/11/analysis-with-regularization-on-brazilian-elections/</loc>
+    <lastmod>2018-11-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/</loc>
     <lastmod>2018-10-10T00:00:00+00:00</lastmod>
   </url>
@@ -82,6 +92,12 @@
   </url>
   
   <url>
+    <loc>https://benardi.github.io/myblog/tags/binary/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/tags/bootstrap/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -105,6 +121,12 @@
   </url>
   
   <url>
+    <loc>https://benardi.github.io/myblog/tags/classification/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://benardi.github.io/myblog/tags/descriptive/</loc>
     <lastmod>2018-09-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -118,7 +140,7 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/elections/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -177,7 +199,7 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -195,19 +217,25 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/post/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/predictive/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/regression/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://benardi.github.io/myblog/tags/regularization/</loc>
+    <lastmod>2018-11-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -219,7 +247,7 @@
   
   <url>
     <loc>https://benardi.github.io/myblog/tags/</loc>
-    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

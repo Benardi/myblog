@@ -347,11 +347,11 @@ data %&gt;%
 <pre><code>## # A tibble: 5 x 3
 ##   nomeParlamentar    tipoDespesa                        dataEmissao        
 ##   &lt;chr&gt;              &lt;chr&gt;                              &lt;dttm&gt;             
-## 1 MARCO MAIA         TELEPHONY                          2015-06-15 00:00:00
-## 2 JÉSSICA SALES      SUPPLY OF FOOD FOR PARLIAMENTARIAN 2016-04-10 00:00:00
-## 3 EDINHO BEZ         FUELS AND LUBRICANTS.              2015-12-08 00:00:00
-## 4 ODELMO LEÃO        SUPPLY OF FOOD FOR PARLIAMENTARIAN 2015-06-02 00:00:00
-## 5 ARTHUR OLIVEIRA M… MAINTENANCE OF OFFICE TO SUPPORT … 2016-12-14 00:00:00</code></pre>
+## 1 JULIO LOPES        TELEPHONY                          2015-05-12 00:00:00
+## 2 WELLINGTON ROBERTO DIVULGATION OF PARLIAMENTARY ACTI… 2017-06-23 00:00:00
+## 3 LEÔNIDAS CRISTINO  DIVULGATION OF PARLIAMENTARY ACTI… 2016-10-10 00:00:00
+## 4 TADEU ALENCAR      SUPPLY OF FOOD FOR PARLIAMENTARIAN 2017-04-27 00:00:00
+## 5 MARCO MAIA         FUELS AND LUBRICANTS.              2015-03-25 00:00:00</code></pre>
 <ul>
 <li>We now have each term in the column tipoDespesa translated.</li>
 </ul>
@@ -629,13 +629,13 @@ expense_month_year %&gt;%
          monthly_expense) %&gt;%
   sample_n(5)</code></pre>
 <pre><code>## # A tibble: 5 x 4
-##   nomeParlamentar  year_month limite_mensal monthly_expense
-##   &lt;chr&gt;            &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt;
-## 1 CÉLIO SILVEIRA   2016-8            35507.          40659.
-## 2 ROBERTO BALESTRA 2016-6            35507.          41849.
-## 3 JOZI ARAÚJO      2016-10           43375.          47672.
-## 4 PEDRO FERNANDES  2017-3            42152.          48936.
-## 5 LÁZARO BOTELHO   2015-10           39504.          62858.</code></pre>
+##   nomeParlamentar year_month limite_mensal monthly_expense
+##   &lt;chr&gt;           &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt;
+## 1 CAJAR NARDES    2016-9            40876.          56009.
+## 2 RÔMULO GOUVEIA  2016-1            42033.          50728.
+## 3 JUTAHY JUNIOR   2016-6            39011.          60907.
+## 4 WALDIR MARANHÃO 2016-12           42152.          82388.
+## 5 AELTON FREITAS  2015-10           36093.          48787.</code></pre>
 <ul>
 <li>We now have the monthly expense of the parliamentarians that violated their respective monthly allowance.</li>
 </ul>
@@ -1173,6 +1173,51 @@ expense_month_year %&gt;%
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/12/classification-of-candidates-in-brazilian-elections/">
+                <h3 class="media-heading">Classification of candidates in Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis and Classification on a subset of data about polls for the 2006 and 2010 elections in Brazil for the “Câmara Federal de Deputados”. Data was taken from the TSE portal which originally encompassed approximately 7300 candidates.
+ 
+
+ Data Overview The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/11/analysis-with-regularization-on-brazilian-elections/">
+                <h3 class="media-heading">Analysis with Regularization on Brazilian elections</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction 
+ Data Analysis with multivariate Linear Regression on data about polls for the 2006 and 2010 elections in Brazil for the lower house (Câmara Federal de Deputados). Data was taken from the TSE portal and encompasses approximately 7300 candidates.
+ 
+
+ Data Overview 
+The variables 
+The response variable is the variable that you are interested in reaching conclusions about. A predictor variable is a variable used to predict another variable.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/10/analysis-on-brazilian-elections/">
                 <h3 class="media-heading">Analysis on Brazilian elections</h3>
               </a>
@@ -1251,7 +1296,7 @@ Loading Data eleicoes_data &lt;- readr::read_csv( here::here(&#39;evidences/elei
 
 Data Overview 
 The variables 
-The response variable is the variable that you are interested in learning something about.</div>
+The response variable is the variable that you are interested in reaching conclusions about.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -1272,7 +1317,7 @@ The response variable is the variable that you are interested in learning someth
  
 Data Overview 
 The variables 
-The response variable is the variable that you are interesting in making measurements and conclusions on.</div>
+The response variable is the variable that you are interested in reaching conclusions about.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -1343,46 +1388,6 @@ Data has the following attributes:
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/06/movie-lines-by-gender/">
-                <h3 class="media-heading">Movie lines by gender</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Introduction 
- Data analysis with non-hierarchical clustering (algorithm k-means) on data about movie lines distribution. The analysis was made on the dataset Polygraph’s Film Dialogue. Information about the dataset and how it was generated can be found in its original repository.
- 
-
- Data Overview readr::read_csv(here(&quot;evidences/character_list5.csv&quot;), progress = FALSE, col_types = cols( script_id = col_integer(), imdb_character_name = col_character(), words = col_integer(), gender = col_character(), age = col_character() )) %&gt;% mutate(age = as.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://benardi.github.io/myblog/2018/05/jackson-do-pandeiro-the-king-of-rithm/">
-                <h3 class="media-heading">Jackson do Pandeiro - The king of rithm</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Employed dataset Exploratory data analysis on data from Spotify about the albums and musics of Jackson do Pandeiro. The original data come from this repository. The explanation about how the data were generated is available at the Spotify API documentation.
-Considerations In the analysis below we could:
- See how speech was not the real core of danceability of Jackson’s songs, which was to be expected from the King of rithm.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1390,7 +1395,7 @@ Considerations In the analysis below we could:
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         15 posts found
+         17 posts found
       </p>
     </div>
   </div>
